@@ -28,6 +28,11 @@ iString::iString(const iString& _str)
 	set(_str.str);
 }
 
+iString::~iString()
+{
+	delete str;
+}
+
 static char* tmp_str = NULL;
 static int tmp_strLen = -1;
 
@@ -110,5 +115,45 @@ void iString::set(const char* _str)
 		str = new char[strLength = len + 1];
 	}
 	strcpy(str, szText);
+}
+
+char** iString::getStringLine(const char* _str, int& lineNum, int d)
+{
+	int i, l, off, len = strlen(_str);
+	for (i = 0; i < len; i++)
+	{
+		if (_str[i] == d)
+			lineNum++;
+	}
+
+	char** line = new char* [lineNum];
+	for (i = 0, l = 0, off = 0; i < len; i++)
+	{
+		if (_str[i] == d)
+		{
+			int n = i - off;
+			char* s = new char[n + 1];
+			memcpy(s, &_str[off], n);
+			s[n] = 0;
+			line[l] = s;
+			l++;
+			off = i + 1;
+		}
+	}
+	int n = i - off;
+	char* s = new char[n + 1];
+	memcpy(s, &_str[off], n);
+	s[n] = 0;
+	line[l] = s;
+
+	return line;
+}
+void iString::freeStringLine(char** line, int& lineNum)
+{
+	for (int i = 0; i < lineNum; i++)
+	{
+		delete line[i];
+	}
+	delete line;
 }
 

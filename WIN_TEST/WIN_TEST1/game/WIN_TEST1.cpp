@@ -90,6 +90,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             return 0;
         }
         
+    case WM_CLOSE:
+    {
+        const char* s0[3] =
+        {
+            "나는 나다.",
+            "I am me",
+            "私は灘"
+        };
+
+        int language = 0; //kr : 0, en : 1, jp : 2
+
+        wchar_t* ws0 = utf8_to_utf16(s0[language]);
+        const wchar_t* ws1 = L"私は灘";
+
+        if (MessageBox(NULL, ws0, ws1, MB_YESNO) == IDYES)
+        {
+            runWnd = false;
+        }
+        
+        return 0;
+    }
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "iFPS.h"
+#include "iString.h"
+#include "iPoint.h"
+#include "iSort.h"
 
 // C 런타임 헤더 파일입니다.
 #include <stdio.h>

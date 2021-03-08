@@ -4,21 +4,23 @@
 
 class iFPS
 {
-public: 
+public:
 	static iFPS* instance();
 private:
 	iFPS();
-public:
-	float update();
 
+public:
+	virtual ~iFPS();
+	
 	void setSlowTime(float duration);
 
+	float update();
 #ifdef DISPLAY_FPS
 	int fps(bool apply = false);
 #endif //DISPLAY_FPS
-
 public:
 	unsigned long now;
+
 #ifdef DISPLAY_FPS
 	int num;
 	float tickDt;
