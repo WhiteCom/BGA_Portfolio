@@ -6,6 +6,13 @@ void startApp()
 
 }
 
+void freeArray(void* data)
+{
+    char* s = (char*)data;
+    printf("%s\n", s);
+    delete s;
+}
+
 void drawApp()
 {
     int f = iFPS::instance()->fps();
@@ -24,22 +31,23 @@ void drawApp()
         printf("%s\n", line[i]);
     }
 #endif
-
+#if 0
     struct AAA
     {
         const char* name;
         int score;
     };
     AAA aaa[5] = {
-        {"a1", 1},
-        {"a2", 2},
-        {"a3", 3},
-        {"a4", 4},
-        {"a5", 5}
+        {"en", 50},
+        {"ger", 80},
+        {"jp", 90},
+        {"chi", 85},
+        {"Fre", 60}
     };
 
     iSort s;
     s.init();
+
     for (int i = 0; i < 5; i++)
     {
         s.add(aaa[i].score);
@@ -49,10 +57,31 @@ void drawApp()
     for (int i = 0; i < 5; i++)
     {
         AAA* a = &aaa[s.get(i)];
-        printf("name : %s, score : %d\n", a->name, a->score);
+        printf("%s %d\n", a->name, a->score);
     }
+    printf("-----\n");
+#endif
 
+    iArray* a = new iArray(freeArray);
+
+    const char* str[3] = {
+        "Hello", "Game", "World"
+    };
+
+    for (int i = 0; i < 3; i++)
+    {
+        char* s = new char[64];
+        strcpy(s, str[i]);
+        a->addObject(s);
+    }
+    char *szText = (char*)"Game";
+    a->removeData(szText);
+    printf("--%s--\n", (char*)a->objectAtIndex(1));
+
+    delete a;
 }
+
+
 
 void freeApp()
 {

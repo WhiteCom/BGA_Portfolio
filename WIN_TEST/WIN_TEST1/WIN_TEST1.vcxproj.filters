@@ -39,6 +39,9 @@
     <ClInclude Include="std\iSort.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="std\iArray.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WIN_TEST1.rc">
@@ -73,6 +76,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="std\iSort.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="std\iArray.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

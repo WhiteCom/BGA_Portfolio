@@ -144,6 +144,7 @@
     <ClInclude Include="game\iWindow.h" />
     <ClInclude Include="game\WIN_TEST1.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="std\iArray.h" />
     <ClInclude Include="std\iFPS.h" />
     <ClInclude Include="std\iPoint.h" />
     <ClInclude Include="std\iSort.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="game\iWindow.cpp" />
     <ClCompile Include="game\WIN_TEST1.cpp" />
+    <ClCompile Include="std\iArray.cpp" />
     <ClCompile Include="std\iFPS.cpp" />
     <ClCompile Include="std\iPoint.cpp" />
     <ClCompile Include="std\iSort.cpp" />

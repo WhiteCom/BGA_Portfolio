@@ -4,6 +4,7 @@
 #include "iString.h"
 #include "iPoint.h"
 #include "iSort.h"
+#include "iArray.h"
 
 // C 런타임 헤더 파일입니다.
 #include <stdio.h>

@@ -14,15 +14,15 @@ public:
 
 	void init();
 
+	void update();
+
 	void add(int index, float y);
 	void add(float y);
-
-	void update();
 
 	int get(int index);
 public:
 	SortData* _sd;
 	SortData** sd;
 	int sdNum;
-
 };
+

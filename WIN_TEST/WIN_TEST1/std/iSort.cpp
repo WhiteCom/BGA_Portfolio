@@ -20,22 +20,6 @@ void iSort::init()
 	sdNum = 0;
 }
 
-void iSort::add(int index, float y)
-{
-	SortData* d = sd[sdNum];
-	d->index = index;
-	d->y = y;
-	sdNum++;
-}
-
-void iSort::add(float y)
-{
-	SortData* d = sd[sdNum];
-	d->index = sdNum;
-	d->y = y;
-	sdNum++;
-}
-
 void iSort::update()
 {
 	for (int i = 0; i < sdNum-1; i++)
@@ -50,6 +34,22 @@ void iSort::update()
 			}
 		}
 	}
+}
+
+void iSort::add(int index, float y)
+{
+	SortData* d = sd[sdNum];
+	d->index = index;
+	d->y = y;
+	sdNum++;
+}
+
+void iSort::add(float y)
+{
+	SortData* d = sd[sdNum];
+	d->index = sdNum;
+	d->y = y;
+	sdNum++;
 }
 
 int iSort::get(int index)
