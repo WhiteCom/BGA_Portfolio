@@ -1,5 +1,6 @@
 # WIN32_TEST
- 
+
+#If you uese this Proejct, First Change Directory Setting 
 
 #2021-03-08
 - iString, iFPS, iWindow, WIN_TEST1 update
