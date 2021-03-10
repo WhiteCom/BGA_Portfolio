@@ -1,9 +1,36 @@
 ﻿#include "iWindow.h"
 #include "iStd.h"
 
-void startApp()
-{
+Graphics* graphicsFromBmp;
+Graphics* graphicsFromHDC;
+Graphics* graphics;
 
+ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
+{
+    GdiplusStartupInput gdiplusStartupInput;
+    ULONG_PTR           gdiplusToken;
+
+    // Initialize GDI+.
+    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
+    devSize.width = DEV_WIDTH;
+    devSize.height = DEV_HEIGHT;
+
+    Bitmap* bmp = new Bitmap(devSize.width, devSize.height, PixelFormat32bppPARGB);
+    Graphics* g = Graphics::FromImage(bmp);
+    g->SetPageUnit(UnitPixel);
+    //g->SetPageScale(1.0f);
+    g->SetPixelOffsetMode(PixelOffsetModeHalf);
+    g->SetTextRenderingHint(TextRenderingHintClearTypeGridFit);
+    g->SetTextContrast(0xffffffff);
+    g->SetCompositingMode(CompositingModeSourceOver);
+    g->SetCompositingQuality(CompositingQualityAssumeLinear);
+    g->SetSmoothingMode(SmoothingModeAntiAlias8x8);
+    g->SetInterpolationMode(InterpolationModeHighQualityBicubic);
+    graphicsFromBmp = g;
+
+
+    return gdiplusToken;
 }
 
 void freeArray(void* data)
@@ -13,89 +40,43 @@ void freeArray(void* data)
     delete s;
 }
 
-void drawApp()
+void drawApp(FLOAT_METHOD m)
 {
     int f = iFPS::instance()->fps();
     float dt = iFPS::instance()->update();
     //if (dt > 0.001f)
     //    printf("%f %d\n", dt, f); 
-#if 0
-    iString s0, s1;
-    const char* str = "this\nis\ntest";
 
-    int l_num = 0;
-    char** line = iString::getStringLine(str, l_num);
-
-    for (int i = 0; i <= l_num; i++)
-    {
-        printf("%s\n", line[i]);
-    }
-#endif
-#if 0
-    struct AAA
-    {
-        const char* name;
-        int score;
-    };
-    AAA aaa[5] = {
-        {"en", 50},
-        {"ger", 80},
-        {"jp", 90},
-        {"chi", 85},
-        {"Fre", 60}
-    };
-
-    iSort s;
-    s.init();
-
-    for (int i = 0; i < 5; i++)
-    {
-        s.add(aaa[i].score);
-    }
-    s.update();
-
-    for (int i = 0; i < 5; i++)
-    {
-        AAA* a = &aaa[s.get(i)];
-        printf("%s %d\n", a->name, a->score);
-    }
-    printf("-----\n");
-#endif
-
-    iArray* a = new iArray(freeArray);
-
-    const char* str[3] = {
-        "Hello", "Game", "World"
-    };
-
-    for (int i = 0; i < 3; i++)
-    {
-        char* s = new char[64];
-        strcpy(s, str[i]);
-        a->addObject(s);
-    }
-    char *szText = (char*)"Game";
-    a->removeData(szText);
-    printf("--%s--\n", (char*)a->objectAtIndex(1));
-
-    delete a;
 }
-
-
 
 void freeApp()
 {
 
 }
 
-void endApp()
+void endApp(ULONG_PTR token, VOID_METHOD m)
 {
-
+    m();
+    //delete graphics;
+    delete graphicsFromBmp;
+    delete graphicsFromHDC;
+    GdiplusShutdown(token);
 }
 
 void resizeApp(int width, int height)
 {
 
+}
+
+void clearApp()
+{
+
+}
+
+iPoint coordinate(int x, int y)
+{
+    iPoint p = iPointZero;
+    return p;
 }
 
 wchar_t* utf8_to_utf16(const char* szFormat, ...)

@@ -21,7 +21,9 @@ public:
 	void removeData(void* data);
 	void removeAllObject();
 
+	void replaceAtIndex(int index, void* data, bool del = true);
 	void* objectAtIndex(int index);
+	
 private:
 	iNode* nodeAtIndex(int index);
 public:

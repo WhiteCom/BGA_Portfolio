@@ -3,12 +3,10 @@
 // Windows 헤더 파일
 #include <windows.h>
 
-typedef signed char int8;
-typedef unsigned char uint8;
-typedef signed short int16;
-typedef unsigned short uint16;
-typedef signed int int32;
-typedef unsigned int uint32;
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
+using namespace Gdiplus;
+
 
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
@@ -16,11 +14,15 @@ typedef unsigned int uint32;
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #endif
 
-void startApp();
-void drawApp();
+#include "iType.h"
+
+ULONG_PTR startApp(HDC hdc, VOID_METHOD m);
+void drawApp(FLOAT_METHOD m);
 void freeApp();
-void endApp();
+void endApp(ULONG_PTR token, VOID_METHOD m);
 void resizeApp(int width, int height);
+void clearApp();
+iPoint coordinate(int x, int y);
 
 wchar_t* utf8_to_utf16(const char* szFormat, ...);
 char* utf16_to_utf8(const wchar_t* str);

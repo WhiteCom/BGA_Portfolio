@@ -57,9 +57,23 @@ void iArray::removeObject(int index)
 {
 	if (index < 0)
 		index = 0;
-	else
+	
+	iNode* n = node;
+	iNode* tmp = NULL;
+	int last = count - 1;
+	for (int i = 0; n; i++)
 	{
-		
+		if (index == last - i)
+		{
+			tmp->prev = n->prev;
+			if (method)
+				method(n->prev);
+			delete n;
+			count--;
+			return;
+		}
+		tmp = n;
+		n = n->prev;
 	}
 }
 
@@ -69,7 +83,6 @@ void iArray::removeData(void* data)
 	iNode* p = NULL;
 	for (; n;)
 	{
-		
 		if (n->data == data)
 		{
 			p->prev = n->prev;
@@ -77,7 +90,7 @@ void iArray::removeData(void* data)
 				method(n->data);
 			delete n;
 			count--;
-			//return;
+			return;
 		}
 		p = n;
 		n = n->prev;
@@ -98,11 +111,38 @@ void iArray::removeAllObject()
 	}
 }
 
+void iArray::replaceAtIndex(int index, void* data, bool del)
+{
+	iNode* n = node;
+	int last = count - 1;
+
+	for (int i = 0; n; i++)
+	{
+		if (index == last - i)
+		{
+			if (del)
+			{
+				if (method)
+					method(n->data);
+
+			}
+			n->data = data;
+			return;
+		}
+		n = n->prev;
+	}
+}
+
 void* iArray::objectAtIndex(int index)
 {
 	iNode* n = node;
-	for (; n;)
+	int last = count - 1;
+	for (int i=0; n;i++)
 	{
+		if (index == last - i)
+		{
+			return n->data;
+		}
 		n = n->prev;
 	}
 	return NULL;
@@ -110,6 +150,16 @@ void* iArray::objectAtIndex(int index)
 
 iNode* iArray::nodeAtIndex(int index)
 {
-	iNode* n = NULL;
-	return n;
+	iNode* n = node;
+	int last = count - 1;
+
+	for (int i=0; n;i++)
+	{
+		if (index == last - i)
+		{
+			return n;
+		}
+		n = n->prev;
+	}
+	return NULL;
 }

@@ -3,7 +3,9 @@
 #define MAX_LOADSTRING 100
 
 bool runWnd = false;
-HINSTANCE hInst;                   
+HINSTANCE hInst;        
+HWND hWnd;
+HDC hdc;
 WCHAR szTitle[MAX_LOADSTRING] = TEXT("WIN_TEST");               
 WCHAR szWindowClass[MAX_LOADSTRING] = TEXT("WIN_TEST2");          
 
@@ -41,13 +43,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+    hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
     if (hWnd == NULL)
     {
         return FALSE;
     }
+    hdc = GetDC(hWnd);
+
+    //#NEED UPDATE
+    ULONG_PTR token = startApp(hdc, NULL);
 
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
@@ -64,10 +70,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            drawApp();
+            //#NEED UPDATE
+            drawApp(NULL);
         }
     }
-
+    //#NEDD UPDATE
+    endApp(token, NULL);
     return (int) msg.wParam;
 }
 
@@ -89,7 +97,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
             return 0;
         }
-        
+    case WM_KEYDOWN:
+    {
+        setKeyDown(iKeyStatBegan, wParam);
+        return 0;
+    }
+    case WM_KEYUP:
+    {
+        setKeyDown(iKeyStatEnded, wParam);
+        return 0;
+    }
     case WM_CLOSE:
     {
         const char* s0[3] =
