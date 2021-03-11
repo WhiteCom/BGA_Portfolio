@@ -13,3 +13,6 @@
 - separate typedef variable to iType, window method to iWindow 
 - iArray update
 - add iSize, iRect
+#2021-03-11
+- WIN_TEST1 update (WndProc)
+- add iColor, update iStd(about Image), update iWindow (GDI+), update iPoint

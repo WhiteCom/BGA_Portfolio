@@ -1,6 +1,7 @@
 ﻿#include "iWindow.h"
 #include "iStd.h"
 
+static Bitmap* bmpBack;
 Graphics* graphicsFromBmp;
 Graphics* graphicsFromHDC;
 Graphics* graphics;
@@ -16,8 +17,8 @@ ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
     devSize.width = DEV_WIDTH;
     devSize.height = DEV_HEIGHT;
 
-    Bitmap* bmp = new Bitmap(devSize.width, devSize.height, PixelFormat32bppPARGB);
-    Graphics* g = Graphics::FromImage(bmp);
+    bmpBack = new Bitmap(devSize.width, devSize.height, PixelFormat32bppPARGB);
+    Graphics* g = Graphics::FromImage(bmpBack);
     g->SetPageUnit(UnitPixel);
     //g->SetPageScale(1.0f);
     g->SetPixelOffsetMode(PixelOffsetModeHalf);
@@ -29,6 +30,9 @@ ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
     g->SetInterpolationMode(InterpolationModeHighQualityBicubic);
     graphicsFromBmp = g;
 
+    graphicsFromHDC = new Graphics(hdc);
+
+    graphics = graphicsFromBmp;
 
     return gdiplusToken;
 }
@@ -47,6 +51,25 @@ void drawApp(FLOAT_METHOD m)
     //if (dt > 0.001f)
     //    printf("%f %d\n", dt, f); 
 
+    graphics = graphicsFromBmp;
+    //m(dt);
+    igImage* bg = createImage("assets/intro.jpg");
+    
+    setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
+    clearRect();
+    drawImage(bg, 0, 0, TOP | LEFT);
+
+    freeImage(bg);
+
+    float w = igImageWidth(bmpBack);
+    float h = igImageHeight(bmpBack);
+    graphics = graphicsFromHDC;
+    drawImage(bmpBack, viewport.origin.x, viewport.origin.y, TOP | LEFT,
+        0, 0, w, h,
+        viewport.size.width / w, viewport.size.height / h, 2, 0);
+
+    extern HDC hdc;
+    SwapBuffers(hdc);
 }
 
 void freeApp()
@@ -56,21 +79,41 @@ void freeApp()
 
 void endApp(ULONG_PTR token, VOID_METHOD m)
 {
-    m();
+    //m();
     //delete graphics;
     delete graphicsFromBmp;
+    delete bmpBack;
     delete graphicsFromHDC;
     GdiplusShutdown(token);
 }
 
 void resizeApp(int width, int height)
 {
+    float rx = width / devSize.width;
+    float ry = height / devSize.height;
+    if (rx < ry)
+    {
+        viewport.origin.x = 0;
+        viewport.size.width = width;
 
+        viewport.size.height = devSize.height * rx;
+        viewport.origin.y = (height - viewport.size.height) / 2;
+    }
+    else
+    {
+        viewport.origin.y = 0;
+        viewport.size.height = height;
+
+        viewport.size.width = devSize.width * ry;
+        viewport.origin.x = (width - viewport.size.width) / 2;
+    }
 }
 
 void clearApp()
 {
-
+    graphics = graphicsFromHDC;
+    setRGBA(0, 0, 0, 1);
+    clearRect();
 }
 
 iPoint coordinate(int x, int y)

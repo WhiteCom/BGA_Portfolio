@@ -16,6 +16,8 @@ using namespace Gdiplus;
 
 #include "iType.h"
 
+extern Graphics* graphics;
+
 ULONG_PTR startApp(HDC hdc, VOID_METHOD m);
 void drawApp(FLOAT_METHOD m);
 void freeApp();

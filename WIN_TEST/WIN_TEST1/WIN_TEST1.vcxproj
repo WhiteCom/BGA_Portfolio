@@ -145,6 +145,7 @@
     <ClInclude Include="game\WIN_TEST1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="std\iArray.h" />
+    <ClInclude Include="std\iColor.h" />
     <ClInclude Include="std\iFPS.h" />
     <ClInclude Include="std\iPoint.h" />
     <ClInclude Include="std\iRect.h" />
@@ -165,6 +166,7 @@
     <ClCompile Include="game\iWindow.cpp" />
     <ClCompile Include="game\WIN_TEST1.cpp" />
     <ClCompile Include="std\iArray.cpp" />
+    <ClCompile Include="std\iColor.cpp" />
     <ClCompile Include="std\iFPS.cpp" />
     <ClCompile Include="std\iPoint.cpp" />
     <ClCompile Include="std\iRect.cpp" />

@@ -36,3 +36,6 @@ float iPointDot(iPoint p1, iPoint p2);
 float iPointDistance(iPoint p1, iPoint p2);
 float iPointDistance2(iPoint p1, iPoint p2);
 float iPointLength(iPoint p);
+
+float iPointAngle(const iPoint& v1, const iPoint& v2, const iPoint& v3);
+iPoint iPointRotate(iPoint p, iPoint t, float degree);

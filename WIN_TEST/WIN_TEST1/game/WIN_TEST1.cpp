@@ -89,14 +89,43 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         return 0;
     }
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            EndPaint(hWnd, &ps);
-            return 0;
-        }
+    
+    case WM_SIZING:
+    case WM_MOVE:
+    {
+        clearApp();
+#if 0
+        int width = LOWORD(lParam);
+        int height = HIWORD(lParam);
+#else
+        RECT rt;
+        GetClientRect(hWnd, &rt);
+        int width = rt.right - rt.left;
+        int height = rt.bottom - rt.top;
+#endif
+        resizeApp(width, height);
+        drawApp(NULL);
+        return 0;// break;
+    }
+    
+
+    case WM_SIZE:
+    {
+        clearApp();
+#if 0
+        int width = LOWORD(lParam);
+        int height = HIWORD(lParam);
+#else
+        RECT rt;
+        GetClientRect(hWnd, &rt);
+        int width = rt.right - rt.left;
+        int height = rt.bottom - rt.top;
+#endif
+        resizeApp(width, height);
+        drawApp(NULL);
+        return 0;// break;
+    }
+
     case WM_KEYDOWN:
     {
         setKeyDown(iKeyStatBegan, wParam);
