@@ -1,5 +1,6 @@
 ﻿#include "iWindow.h"
 #include "iStd.h"
+#include "Loading.h"
 
 static Bitmap* bmpBack;
 Graphics* graphicsFromBmp;
@@ -53,7 +54,7 @@ void drawApp(FLOAT_METHOD m)
 
     graphics = graphicsFromBmp;
     //m(dt);
-    igImage* bg = createImage("assets/intro.jpg");
+    igImage* bg = createImage("assets/map.jpg");
     
     setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
     clearRect();
@@ -67,6 +68,13 @@ void drawApp(FLOAT_METHOD m)
     drawImage(bmpBack, viewport.origin.x, viewport.origin.y, TOP | LEFT,
         0, 0, w, h,
         viewport.size.width / w, viewport.size.height / h, 2, 0);
+    if (getKeyDown() & keysSpace)
+    {
+        setLoading(gs_loading, NULL, NULL);
+        drawLoading(dt);
+    }
+
+    
 
     extern HDC hdc;
     SwapBuffers(hdc);

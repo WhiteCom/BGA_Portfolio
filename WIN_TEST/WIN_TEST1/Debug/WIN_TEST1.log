@@ -1,4 +1,17 @@
-﻿  WIN_TEST1.cpp
+﻿  Loading.cpp
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xda 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\Loading.cpp(66,71): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\Loading.cpp(66,44): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  WIN_TEST1.cpp
 D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
 D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
 D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
@@ -14,4 +27,103 @@ D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warni
 D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
 D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
 D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(94,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(93,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(104,38): warning C4552: '*': 식의 결과가 사용되지 않습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(105,38): warning C4552: '*': 식의 결과가 사용되지 않습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(105,43): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(114,22): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(115,23): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(234,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(236,32): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(284,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(295,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(309,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(315,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(329,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(335,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(347,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(353,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(367,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\WIN_TEST1.cpp(373,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iWindow.cpp
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xda 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.cpp(21,48): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.cpp(21,33): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.cpp(65,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.cpp(66,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.cpp(105,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.cpp(113,32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iArray.cpp
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xda 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  iPoint.cpp
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xda 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iPoint.cpp(146,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iPoint.cpp(159,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iPoint.cpp(167,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iStd.cpp
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xda 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.cpp(48,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.cpp(57,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.cpp(61,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.cpp(265,40): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.cpp(265,22): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iString.cpp
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xd8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xda 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xdf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  코드를 생성하고 있습니다...
   WIN_TEST1.vcxproj -> D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\Debug\WIN_TEST1.exe

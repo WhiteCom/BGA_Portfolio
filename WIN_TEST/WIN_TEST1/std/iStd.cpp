@@ -115,6 +115,62 @@ void clearRect()
 	));
 }
 
+void drawRect(iRect rt, float radius)
+{
+	drawRect(rt.origin.x, rt.origin.y, rt.size.width, rt.size.height, radius);
+}
+void drawRect(float x, float y, float width, float height, float radius)
+{
+	Pen pen(Color(
+		floatToUint8(_a),
+		floatToUint8(_r),
+		floatToUint8(_g),
+		floatToUint8(_b)
+	));
+
+	pen.SetWidth(1.0f);
+
+	GraphicsPath path;
+	path.AddLine(x + radius, y, x + width - (radius * 2), y);
+	path.AddArc(x + width - (radius * 2), y, radius * 2, radius * 2, 270, 90);
+	path.AddLine(x + width, y + radius, x + width, y + height - (radius * 2));
+	path.AddArc(x + width - (radius * 2), y + height - (radius * 2), radius * 2, radius * 2, 0, 90);
+	path.AddLine(x + width - (radius * 2), y + height, x + radius, y + height);
+	path.AddArc(x, y + height - (radius * 2), radius * 2, radius * 2, 90, 90);
+	path.AddLine(x, y + height - (radius * 2), x, y + radius);
+	path.AddArc(x, y, radius * 2, radius * 2, 180, 90);
+	path.CloseFigure();
+
+	graphics->DrawPath(&pen, &path);
+}
+
+void fillRect(iRect rt, float radius)
+{
+	fillRect(rt.origin.x, rt.origin.y, rt.size.width, rt.size.height, radius);
+}
+void fillRect(float x, float y, float width, float height, float radius)
+{
+	SolidBrush brush(Color(
+		floatToUint8(_a),
+		floatToUint8(_r),
+		floatToUint8(_g),
+		floatToUint8(_b)
+	));
+
+	GraphicsPath path;
+	path.AddLine(x + radius, y, x + width - (radius * 2), y);
+	path.AddArc(x + width - (radius * 2), y, radius * 2, radius * 2, 270, 90);
+	path.AddLine(x + width, y + radius, x + width, y + height - (radius * 2));
+	path.AddArc(x + width - (radius * 2), y + height - (radius * 2), radius * 2, radius * 2, 0, 90);
+	path.AddLine(x + width - (radius * 2), y + height, x + radius, y + height);
+	path.AddArc(x, y + height - (radius * 2), radius * 2, radius * 2, 90, 90);
+	path.AddLine(x, y + height - (radius * 2), x, y + radius);
+	path.AddArc(x, y, radius * 2, radius * 2, 180, 90);
+	path.CloseFigure();
+
+	graphics->FillPath(&brush, &path);
+}
+
 int igImageWidth(igImage* ig)
 {
 	return ((Image*)ig)->GetWidth();

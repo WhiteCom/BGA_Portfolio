@@ -22,8 +22,9 @@
 #include <memory.h>
 #include <tchar.h>
 
-#define DEV_WIDTH 1920
-#define DEV_HEIGHT 1080
+#define DEV_WIDTH 640
+#define DEV_HEIGHT 480
+#define RATE_MONITOR 0.3f
 extern iSize devSize;
 extern iRect viewport;
 
@@ -51,6 +52,12 @@ void setRGBA(float r, float g, float b, float a);
 void getRGBA(float& r, float& g, float& b, float& a);
 
 void clearRect();
+
+void drawRect(iRect rt, float radius = 0.0f);
+void drawRect(float x, float y, float width, float height, float radius = 0.0f);
+
+void fillRect(iRect rt, float ridius = 0.0f);
+void fillRect(float x, float y, float width, float height, float radius = 0.0f);
 
 int igImageWidth(igImage* ig);
 int igImageHeight(igImage* ig);
