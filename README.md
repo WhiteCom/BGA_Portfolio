@@ -29,4 +29,4 @@
 #2021-03-11
 - WIN_TEST1 update (WndProc)
 - add iColor, update iStd(about Image), update iWindow (GDI+), update iPoint
->>>>>>> fc6eec64d531508602f188d96e37431976c920a9
+
