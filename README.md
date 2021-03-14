@@ -16,3 +16,6 @@
 #2021-03-11
 - WIN_TEST1 update (WndProc)
 - add iColor, update iStd(about Image), update iWindow (GDI+), update iPoint
+#2021-03-14
+- WIN_TEST1 update(fullScreen, WndProc)
+- add fullScreen function, enforceResolution
