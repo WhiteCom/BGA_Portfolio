@@ -56,29 +56,29 @@ void freeArray(void* data)
 
 void makeTile()
 {
-    static Texture* tex = createImage("assets/tile1.bmp");
+    static Texture* tex = createImage("assets/Image/tile1.bmp");
 
     iRect tile;
-    int tileW = 10;
-    int tileH = 10;
-    int tileIndex[100] = {
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
-        1, 1, 1, 1, 1, 1, 8, 8, 8, 1,
+    int W = 16;
+    int H = 12;
+    int tileIndex[16 * 12] = {
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1, 
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
     };
 
     for (int j = 0; j < tileH; j++)
     {
         for (int i = 0; i < tileW; i++)
         {
-            tile = iRectMake(32*i, 32*j, 32-1, 32-1);
+            tile = iRectMake(32*i + 32, 32*j + 32, 32-1, 32-1);
             setRGBA(1, 0, 0, 1);
             drawRect(tile);
             //setRGBA(0, 1, 0, 1);
@@ -89,7 +89,7 @@ void makeTile()
             int x = ti%8, y = ti/8;
             //drawImage(tex, tile.origin.x - 32 * x, tile.origin.y - 32 * y, TOP | LEFT);
             //graphics->SetClip(Rect(0, 0, devSize.width, devSize.height));
-            //drawImage(tex, 32 * i, 32 * j, TOP | LEFT, 0, 0, 32, 32, 1.0f, 1.0f, 2, 0);
+            drawImage(tex, 32 * i + 32, 32 * j + 32, TOP | LEFT, 32 * x, 32 * y, 32, 32, 1.0f, 1.0f, 2, 0);
         }
         
     }
@@ -111,14 +111,16 @@ void drawApp(FLOAT_METHOD m)
     clearRect();
     drawImage(bg, 0, 0, TOP | LEFT);
 
-    Texture* test = createImage("assets/tile1.bmp");
-    //clearRect();
-    drawImage(test, 32, 32, TOP | LEFT, 0, 0, 32, 32, 1.0f, 1.0f, 2, 0);
-    drawImage(test, 64, 32, TOP | LEFT, 0, 64, 32, 32, 1.0f, 1.0f, 2, 0);
-
     freeImage(bg);
 
     //makeTile();
+    TileMap t;
+
+    //index는 typeNum보다 적게
+    int index = 0;
+    t.setTile(index, "field");
+    t.setTile(++index, "wall");
+    t.drawTile();
 
 #if 1
     extern void drawCursor(float dt);

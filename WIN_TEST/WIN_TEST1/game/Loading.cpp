@@ -63,7 +63,7 @@ void drawLoading(float dt)
 	setRGBA(0, 0, 0, a);
 	fillRect(0, 0, devSize.width, devSize.height);
 	drawImage(texLoading, devSize.width / 2, devSize.height / 2,
-		VERTICAL | HORIZONTAL, 0, 0, texLoading->width, texLoading->height,
+		VCENTER | HCENTER, 0, 0, texLoading->width, texLoading->height,
 		1.0f, 1.0f, 2, 0);
 	setRGBA(1, 1, 1, 1);
 }

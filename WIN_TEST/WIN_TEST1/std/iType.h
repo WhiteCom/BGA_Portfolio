@@ -38,8 +38,8 @@ typedef void (*KEY_METHOD)(iKeyStat, iPoint);
 //anc
 #define LEFT			1
 #define RIGHT			2
-#define HORIZONTAL		4
+#define HCENTER		4
 
 #define TOP				8
 #define BOTTOM			16
-#define VERTICAL		32
+#define VCENTER		32

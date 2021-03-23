@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GDIPVER=0x0110;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Github\WIN32_TEST\WIN32_TEST\WIN_TEST\WIN_TEST1\game;D:\Github\WIN32_TEST\WIN32_TEST\WIN_TEST\WIN_TEST1\std;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\game;D:\My_github\WIN32_Test\WIN32_TEST\WIN_TEST\WIN_TEST1\std;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -144,6 +144,7 @@
     <ClInclude Include="game\iWindow.h" />
     <ClInclude Include="game\Loading.h" />
     <ClInclude Include="game\Test.h" />
+    <ClInclude Include="game\Tile.h" />
     <ClInclude Include="game\WIN_TEST1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="std\iArray.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="game\iWindow.cpp" />
     <ClCompile Include="game\Loading.cpp" />
     <ClCompile Include="game\Test.cpp" />
+    <ClCompile Include="game\Tile.cpp" />
     <ClCompile Include="game\WIN_TEST1.cpp" />
     <ClCompile Include="std\iArray.cpp" />
     <ClCompile Include="std\iColor.cpp" />

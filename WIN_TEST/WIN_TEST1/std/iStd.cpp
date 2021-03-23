@@ -222,15 +222,15 @@ void drawImage(Texture* tex, float x, float y, int anc,
 	{
 	case TOP | LEFT:										break;
 	case TOP | RIGHT:			x -= w;						break;
-	case TOP | HORIZONTAL:		x -= w / 2;					break;
+	case TOP | HCENTER:		x -= w / 2;					break;
 
 	case BOTTOM | LEFT:						y -= h;			break;
 	case BOTTOM | RIGHT:		x -= w;		y -= h;			break;
-	case BOTTOM | HORIZONTAL:	x -= w / 2; y -= h;			break;
+	case BOTTOM | HCENTER:	x -= w / 2; y -= h;			break;
 
-	case VERTICAL | LEFT:					y -= h / 2;		break;
-	case VERTICAL | RIGHT:		x -= w;		y -= h / 2;		break;
-	case VERTICAL | HORIZONTAL:	x -= w / 2;	y -= h / 2;		break;
+	case VCENTER | LEFT:					y -= h / 2;		break;
+	case VCENTER | RIGHT:		x -= w;		y -= h / 2;		break;
+	case VCENTER | HCENTER:	x -= w / 2;	y -= h / 2;		break;
 	}
 
 	iPoint dstPoint[3] = {
