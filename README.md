@@ -30,5 +30,7 @@
 - add iColor, update iStd(about Image), update iWindow (GDI+), update iPoint
 
 #2021-03-23
-- add tilemap
+- add tilemap func
 
+#2021-03-24
+- create TileMap class
