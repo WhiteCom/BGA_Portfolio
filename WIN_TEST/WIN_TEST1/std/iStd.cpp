@@ -180,7 +180,7 @@ int igImageHeight(igImage* ig)
 	return ((Image*)ig)->GetHeight();
 }
 
-igImage* createImage(const char* szFormat, ...)
+Texture* createImage(const char* szFormat, ...)
 {
 	char szText[1024];
 	va_start_end(szText, szFormat);
@@ -189,20 +189,34 @@ igImage* createImage(const char* szFormat, ...)
 	Image* img = Image::FromFile(ws, false);
 	delete ws;
 
-	return img;
-}
-void freeImage(igImage* img)
-{
-	delete (Image*)img;
+	Texture* tex = new Texture;
+	tex->texID = img;
+	tex->width = img->GetWidth();
+	tex->height = img->GetHeight();
+	tex->potWidth = tex->width;
+	tex->potHeight = tex->height;
+	return tex;
 }
 
-void drawImage(igImage* _img, float x, float y, int anc,
+void freeImage(Texture* tex)
+{
+	if (tex->retainCount > 1)
+	{
+		tex->retainCount--;
+		return;
+	}
+	delete (Image*)tex->texID;
+	delete tex;
+}
+
+void drawImage(Texture* tex, float x, float y, int anc,
 	float ix, float iy, float iw, float ih,
 	float rx, float ry,
 	int xyz, float degree)
 {
-	Image* img = (Image*)_img;
-	float w = img->GetWidth() * rx, h = img->GetHeight() * ry;
+	//Image* img = (Image*)_img;
+	//float w = tex->width * rx, h = tex->height * ry;
+	float w = iw * rx, h = ih * ry;
 
 	switch (anc)
 	{
@@ -253,16 +267,16 @@ void drawImage(igImage* _img, float x, float y, int anc,
 	attr.SetColorMatrix(&matrix,
 		ColorMatrixFlagsDefault, ColorAdjustTypeBitmap);
 
-	graphics->DrawImage(img, (PointF*)dstPoint, 3,
+	graphics->DrawImage((Image*)tex->texID, (PointF*)dstPoint, 3,
 		ix, iy, iw, ih, UnitPixel, &attr);
 
 }
-void drawImage(igImage* _img, float x, float y, int anc)
+void drawImage(Texture* tex, float x, float y, int anc)
 {
-	Image* img = (Image*)_img;
+	//Image* img = (Image*)_img;
 
-	drawImage(img, x, y, anc,
-		0, 0, img->GetWidth(), img->GetHeight(),
+	drawImage(tex, x, y, anc,
+		0, 0, tex->width, tex->height,
 		1.0f, 1.0f,
 		2, 0);
 }

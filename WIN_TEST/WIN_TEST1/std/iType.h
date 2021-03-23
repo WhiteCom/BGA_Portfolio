@@ -11,6 +11,13 @@ typedef void (*VOID_METHOD)();
 typedef void (*FLOAT_METHOD)(float );
 
 typedef void igImage;
+struct Texture
+{
+	igImage* texID;
+	int width, height;
+	int potWidth, potHeight;
+	int retainCount;
+};
 
 enum iKeyStat
 {

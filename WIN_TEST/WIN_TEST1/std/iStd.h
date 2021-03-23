@@ -62,10 +62,10 @@ void fillRect(float x, float y, float width, float height, float radius = 0.0f);
 int igImageWidth(igImage* ig);
 int igImageHeight(igImage* ig);
 
-igImage* createImage(const char* szFormat, ...);
-void freeImage(igImage* img);
-void drawImage(igImage* img, float x, float y, int anc,
+Texture* createImage(const char* szFormat, ...);
+void freeImage(Texture* img);
+void drawImage(Texture* img, float x, float y, int anc,
 	float ix, float iy, float iw, float ih,
 	float rx, float ry,
 	int xyz, float degree);
-void drawImage(igImage* img, float x, float y, int anc);
+void drawImage(Texture* img, float x, float y, int anc);

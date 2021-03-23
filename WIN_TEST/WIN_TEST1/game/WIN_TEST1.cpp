@@ -56,7 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     //#NEED UPDATE
     ULONG_PTR token = startApp(hdc, NULL);
-
+    loadCursor();
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
@@ -76,6 +76,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             drawApp(NULL);
         }
     }
+
+    freeCursor();
     //#NEDD UPDATE
     endApp(token, NULL);
     return (int) msg.wParam;
@@ -172,11 +174,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_LBUTTONDOWN:
     {
-        iPoint p = coordinate(LOWORD(lParam), HIWORD(lParam));
-        
+        cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
+        return 0;
+    }
+    case WM_MOUSEMOVE:
+    {
+        cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
         return 0;
     }
 
+    case WM_LBUTTONUP:
+    {
+        cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
+        return 0;
+    }
     case WM_KEYDOWN:
     {
         setKeyDown(iKeyStatBegan, wParam);
@@ -191,6 +202,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         setKeyDown(iKeyStatEnded, wParam);
         return 0;
+    }
+
+    case WM_SETCURSOR:
+    {
+        bool b = false;
+        if (LOWORD(lParam) == HTCLIENT)
+            b = true;
+        if (updateCursor(b))
+            return true;
+        break;
     }
     case WM_CLOSE:
     {
@@ -377,4 +398,52 @@ void enforceResolution(int edge, RECT& rect, int win_border_width, int win_borde
     }
     break;
     }
+}
+
+Texture* texCursor;
+iPoint cursor;
+bool bCursor;
+void loadCursor()
+{
+    texCursor = createImage("assets/cursor.png");
+
+    cursor = iPointZero;
+    bCursor = false;
+}
+void freeCursor()
+{
+    freeImage(texCursor);
+}
+void drawCursor(float dt)
+{
+    if (bCursor)
+        drawImage(texCursor, cursor.x, cursor.y, TOP | LEFT);
+}
+bool updateCursor(bool inClient)
+{
+    if (bCursor == inClient)
+        return false;
+
+    bCursor = inClient;
+#if 0 
+    ShowCursor(bCursor ? FALSE : TRUE);
+#else
+    if (bCursor)
+    {
+        for (;;)
+        {
+            int n = ShowCursor(FALSE);
+            if (n < 0) break;
+        }
+    }
+    else
+    {
+        for (;;)
+        {
+            int n = ShowCursor(TRUE);
+            if (n > -1) break;
+        }
+    }
+#endif
+    return true;
 }

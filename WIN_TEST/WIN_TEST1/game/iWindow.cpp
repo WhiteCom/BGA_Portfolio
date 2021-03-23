@@ -2,7 +2,7 @@
 #include "iStd.h"
 #include "Loading.h"
 
-static Bitmap* bmpBack;
+static Texture* texBack;
 Graphics* graphicsFromBmp;
 Graphics* graphicsFromHDC;
 Graphics* graphics;
@@ -18,8 +18,8 @@ ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
     devSize.width = DEV_WIDTH;
     devSize.height = DEV_HEIGHT;
 
-    bmpBack = new Bitmap(devSize.width, devSize.height, PixelFormat32bppPARGB);
-    Graphics* g = Graphics::FromImage(bmpBack);
+    Bitmap* bmp = new Bitmap(devSize.width, devSize.height, PixelFormat32bppPARGB);
+    Graphics* g = Graphics::FromImage(bmp);
     g->SetPageUnit(UnitPixel);
     //g->SetPageScale(1.0f);
     g->SetPixelOffsetMode(PixelOffsetModeHalf);
@@ -30,6 +30,15 @@ ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
     g->SetSmoothingMode(SmoothingModeAntiAlias8x8);
     g->SetInterpolationMode(InterpolationModeHighQualityBicubic);
     graphicsFromBmp = g;
+
+    Texture* t = new Texture;
+    t->texID = bmp;
+    t->width = bmp->GetWidth();
+    t->height = bmp->GetHeight();
+    t->potWidth = t->width;
+    t->potHeight = t->height;
+    t->retainCount = 1;
+    texBack = t;
 
     graphicsFromHDC = new Graphics(hdc);
 
@@ -45,6 +54,47 @@ void freeArray(void* data)
     delete s;
 }
 
+void makeTile()
+{
+    static Texture* tex = createImage("assets/tile1.bmp");
+
+    iRect tile;
+    int tileW = 10;
+    int tileH = 10;
+    int tileIndex[100] = {
+        1, 8, 1, 1, 1, 1, 8, 8, 8, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 3, 1, 1, 1, 1, 8, 8, 3, 1,
+        1, 1, 1, 1, 1, 1, 8, 8, 8, 1,
+    };
+
+    for (int j = 0; j < tileH; j++)
+    {
+        for (int i = 0; i < tileW; i++)
+        {
+            tile = iRectMake(32*i, 32*j, 32-1, 32-1);
+            setRGBA(1, 0, 0, 1);
+            drawRect(tile);
+            //setRGBA(0, 1, 0, 1);
+            //fillRect(tile);
+
+            //graphics->SetClip(Rect(32 * i, 32 * j, 32, 32));
+            int ti = tileIndex[j * 10 + i];
+            int x = ti%8, y = ti/8;
+            //drawImage(tex, tile.origin.x - 32 * x, tile.origin.y - 32 * y, TOP | LEFT);
+            //graphics->SetClip(Rect(0, 0, devSize.width, devSize.height));
+            //drawImage(tex, 32 * i, 32 * j, TOP | LEFT, 0, 0, 32, 32, 1.0f, 1.0f, 2, 0);
+        }
+        
+    }
+}
+
 void drawApp(FLOAT_METHOD m)
 {
     int f = iFPS::instance()->fps();
@@ -54,27 +104,35 @@ void drawApp(FLOAT_METHOD m)
 
     graphics = graphicsFromBmp;
     //m(dt);
-    igImage* bg = createImage("assets/map.jpg");
-    
+
+    Texture* bg = createImage("assets/map.jpg");
+
     setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
     clearRect();
     drawImage(bg, 0, 0, TOP | LEFT);
 
+    Texture* test = createImage("assets/tile1.bmp");
+    //clearRect();
+    drawImage(test, 32, 32, TOP | LEFT, 0, 0, 32, 32, 1.0f, 1.0f, 2, 0);
+    drawImage(test, 64, 32, TOP | LEFT, 0, 64, 32, 32, 1.0f, 1.0f, 2, 0);
+
     freeImage(bg);
 
-    float w = igImageWidth(bmpBack);
-    float h = igImageHeight(bmpBack);
+    //makeTile();
+
+#if 1
+    extern void drawCursor(float dt);
+    drawCursor(iFPS::instance()->lastDt);
+#endif
     graphics = graphicsFromHDC;
-    drawImage(bmpBack, viewport.origin.x, viewport.origin.y, TOP | LEFT,
-        0, 0, w, h,
-        viewport.size.width / w, viewport.size.height / h, 2, 0);
+    drawImage(texBack, viewport.origin.x, viewport.origin.y, TOP | LEFT,
+        0, 0, texBack->width, texBack->height,
+        viewport.size.width / texBack->width, viewport.size.height / texBack->height, 2, 0);
     if (getKeyDown() & keysSpace)
     {
         setLoading(gs_loading, NULL, NULL);
         drawLoading(dt);
     }
-
-    
 
     extern HDC hdc;
     SwapBuffers(hdc);
@@ -90,7 +148,8 @@ void endApp(ULONG_PTR token, VOID_METHOD m)
     //m();
     //delete graphics;
     delete graphicsFromBmp;
-    delete bmpBack;
+    delete (Bitmap*)texBack->texID;
+    delete texBack;
     delete graphicsFromHDC;
     GdiplusShutdown(token);
 }
@@ -126,7 +185,12 @@ void clearApp()
 
 iPoint coordinate(int x, int y)
 {
-    iPoint p = iPointZero;
+    float r = devSize.width / viewport.size.width;
+    //float r = devSize.height / viewport.size.height;
+    iPoint p;
+    p.x = (x - viewport.origin.x) * r;
+    p.y = (y - viewport.origin.y) * r;
+
     return p;
 }
 

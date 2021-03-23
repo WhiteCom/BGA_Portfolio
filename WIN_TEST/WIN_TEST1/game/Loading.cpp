@@ -6,7 +6,7 @@ float loadingDt;
 
 #define _loadingDt 0.5f
 
-static igImage* imgLoading;
+static Texture* texLoading;
 
 void setLoading(int gameState, MethodLoad free, MethodLoad load)
 {
@@ -18,7 +18,7 @@ void setLoading(int gameState, MethodLoad free, MethodLoad load)
 	methodLoad = load;
 	loadingDt = 0.0000001f;
 
-	imgLoading = createImage("assets/loading/loading.jpg");
+	texLoading = createImage("assets/loading/loading.jpg");
 }
 void drawLoading(float dt)
 {
@@ -53,7 +53,7 @@ void drawLoading(float dt)
 		if (loadingDt > _loadingDt * 2)
 		{
 			loadingDt = 0.0f;
-			freeImage(imgLoading);
+			freeImage(texLoading);
 			return;
 		}
 		
@@ -62,8 +62,8 @@ void drawLoading(float dt)
 
 	setRGBA(0, 0, 0, a);
 	fillRect(0, 0, devSize.width, devSize.height);
-	drawImage(imgLoading, devSize.width / 2, devSize.height / 2,
-		VERTICAL | HORIZONTAL, 0, 0, igImageWidth(imgLoading), igImageHeight(imgLoading),
+	drawImage(texLoading, devSize.width / 2, devSize.height / 2,
+		VERTICAL | HORIZONTAL, 0, 0, texLoading->width, texLoading->height,
 		1.0f, 1.0f, 2, 0);
 	setRGBA(1, 1, 1, 1);
 }

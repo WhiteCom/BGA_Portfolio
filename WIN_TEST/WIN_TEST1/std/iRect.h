@@ -13,3 +13,4 @@ struct iRect
 #define iRectOne iRectMake(1,1,1,1)
 iRect iRectMake(iPoint p, iSize s);
 iRect iRectMake(float x, float y, float width, float height);
+
