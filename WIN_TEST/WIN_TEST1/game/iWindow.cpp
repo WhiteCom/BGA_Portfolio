@@ -116,7 +116,12 @@ void drawApp(FLOAT_METHOD m)
 
     MapTile t;
     t.init();
+    t.makeMap(NULL);
     t.drawTile();
+    
+
+
+    
 #if 0
     //makeTile();
     TileMap t;

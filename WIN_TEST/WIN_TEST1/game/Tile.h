@@ -3,11 +3,13 @@
 #include "iRect.h"
 #include "iType.h"
 
-#define tileW 16
-#define tileH 12
-#define tileWSize 32
-#define tileHSize 32
-#define typeNum 2
+#define tileW		16
+#define tileH		12
+#define tileWSize	32
+#define tileHSize	32
+#define typeNum		2
+
+#define INF			99
 
 #define tileMapSize iSizeMake(tileWSize, tileHSize) //32x32
 

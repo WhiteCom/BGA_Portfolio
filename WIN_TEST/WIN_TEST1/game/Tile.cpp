@@ -101,12 +101,52 @@ void MapTile::setTile(Tile& _tile, Texture* _tex, int _layer, int _value) //타�
 
 void MapTile::makeMap(Tile* ti)
 {
-	Tile field[4] = {
-		{}, //초원
-		{}, //황야
-		{}, //얼음
-		{}, //불
+	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
+	Tile field[5] = { //제일 아래 레이어, 지나가도록 가중치 0
+		{tile_texs[ForestIndex[0]], 0, 0}, //초원
+		{tile_texs[DesertIndex[0]], 0, 0}, //황야
+		{tile_texs[IceIndex[0]], 0, 0}, //얼음
+		{tile_texs[FireIndex[0]], 0, 0}, //불
+		{tile_texs[Boss[0]], 0, 0},
 	};
+
+	Tile wall[4] = { //바닥보다 위 레이어, 지나갈수없도록 가중치 1
+		{tile_texs[ForestWallIndex[0]], 1, 1}, //초원
+		{tile_texs[DesertWallIndex[0]], 1, 1}, //황야
+		{tile_texs[IceWallIndex[0]], 1, 1}, //얼음
+		{tile_texs[FireWallIndex[0]], 1, 1}, //불
+	};
+
+	Tile warp;
+	warp.tex = tile_texs[Warp];
+	warp.layer = 1;
+	warp.value = 0;
+
+	Tile none; //아무도 갈수없는영역
+	none.tex = tile_texs[NoneSection];
+	none.layer = INF;
+	none.value = INF;
+
+	field[0];
+	wall[0];
+
+	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
+	Tile* map = new Tile[tileW * tileH]{
+		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], warp,
+		none, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		warp, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
+		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+	};
+
+	tile_map = map;
 }
 
 void MapTile::drawTile()
