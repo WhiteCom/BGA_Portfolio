@@ -95,6 +95,7 @@ void makeTile()
     }
 }
 
+
 void drawApp(FLOAT_METHOD m)
 {
     int f = iFPS::instance()->fps();
@@ -113,6 +114,10 @@ void drawApp(FLOAT_METHOD m)
 
     freeImage(bg);
 
+    MapTile t;
+    t.init();
+    t.drawTile();
+#if 0
     //makeTile();
     TileMap t;
 
@@ -121,6 +126,7 @@ void drawApp(FLOAT_METHOD m)
     t.setTile(index, "field");
     t.setTile(++index, "wall");
     t.drawTile();
+#endif
 
 #if 1
     extern void drawCursor(float dt);

@@ -180,6 +180,68 @@ int igImageHeight(igImage* ig)
 	return ((Image*)ig)->GetHeight();
 }
 
+Texture** createImageDivide(int numX, int numY, const char* szFormat, ...)
+{
+	char szText[1024];
+	va_start_end(szText, szFormat);
+
+	wchar_t* ws = utf8_to_utf16(szText);
+	Bitmap* bmp = Bitmap::FromFile(ws, false);
+	delete ws;
+
+	// lock
+	int width = bmp->GetWidth();
+	int height = bmp->GetHeight();
+	Rect rect(0, 0, width, height);
+	BitmapData bmpData;
+	bmp->LockBits(&rect, ImageLockModeRead, PixelFormat32bppARGB, &bmpData);
+
+	int stride = bmpData.Stride / 4;
+	uint32* rgba = (uint32*)bmpData.Scan0;
+
+	// to do...
+	int numXY = numX * numY;
+	Texture** texs = new Texture * [numXY];
+	int w = width / numX;
+	int h = height / numY;
+	for (int i = 0; i < numXY; i++)
+	{
+		int x = i % numX;
+		int y = i / numX;
+
+		Bitmap* b = new Bitmap(w, h, PixelFormat32bppARGB);
+		Rect rt(0, 0, w, h);
+		BitmapData bd;
+		b->LockBits(&rt, ImageLockModeWrite, PixelFormat32bppARGB, &bd);
+
+		int srd = bd.Stride / 4;
+		uint32* color = (uint32*)bd.Scan0;
+		for (int j = 0; j < h; j++)
+		{
+			memcpy(&color[srd * j],
+				&rgba[stride * (h * y + j) + w * x],
+				sizeof(uint32) * w);
+		}
+
+		b->UnlockBits(&bd);
+
+		Texture* tex = new Texture;
+		tex->texID = b;
+		tex->width = w;
+		tex->height = h;
+		tex->potWidth = w;
+		tex->potHeight = h;
+		tex->retainCount = 1;
+
+		texs[i] = tex;
+	}
+
+	// unlock
+	bmp->UnlockBits(&bmpData);
+
+	return texs;
+}
+
 Texture* createImage(const char* szFormat, ...)
 {
 	char szText[1024];

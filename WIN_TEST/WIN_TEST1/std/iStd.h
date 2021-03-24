@@ -62,6 +62,7 @@ void fillRect(float x, float y, float width, float height, float radius = 0.0f);
 int igImageWidth(igImage* ig);
 int igImageHeight(igImage* ig);
 
+Texture** createImageDivide(int numX, int numY, const char* szFormat, ...);
 Texture* createImage(const char* szFormat, ...);
 void freeImage(Texture* img);
 void drawImage(Texture* img, float x, float y, int anc,

@@ -1,103 +1,128 @@
 ﻿#include "Tile.h"
 #include "iStd.h"
 
-TileMap::TileMap()
+//타입 : 필드 - 벽 & 구멍 - 워프 이미지 - 아이템 - 적
+
+//----------------------------------------
+//Tile1.bmp 내의 필드종류
+//#need update
+//----------------------------------------
+static int ForestIndex[4] = {
+	20, 76, 86,
+};
+
+static int DesertIndex[4] = {
+	27, 84,
+};
+
+static int IceIndex[4] = {
+	71, 179, 181, 
+};
+
+static int FireIndex[4] = {
+	14, 15,
+};
+
+static int Boss[4] = {
+	129, 231,
+};
+
+//공간아닌곳
+static int NoneSection = 128, Warp = 132; //warp : 132
+
+//----------------------------------------
+//Tile1.bmp 내의 벽 종류 (통행불가 지역)
+//#need update
+//----------------------------------------
+static int ForestWallIndex[4] = {
+	18, 116
+};
+
+static int DesertWallIndex[4] = {
+	26, 121, 
+};
+
+static int IceWallIndex[4] = {
+	42, 187, 131, 189
+};
+
+static int FireWallIndex[4] = {
+	89, 126,
+};
+
+MapTile::MapTile()
 {
-	tileType = new Tile[typeNum];
-	for (int i = 0; i < typeNum; i++)
-	{
-		tileType[i].size = tileMapSize;
-		tileType[i].tile = 0;
-		tileType[i].value = 0;
-	}
-	typeCount = 0;
+	tile_texs = createImageDivide(8, 32, "assets/Image/Tile1.bmp");
+
+	Tile tmp;
+	tmp.tex = tile_texs[NoneSection];
+	tmp.layer = 0;
+	tmp.value = 0;
+
+	tile_map = new Tile[tileW * tileH]; //16x12
+	for (int i = 0; i < tileW * tileH; i++)
+		tile_map[i] = tmp;
+
 }
-TileMap::~TileMap()
+MapTile::~MapTile()
 {
-	delete tileType;
+	delete tile_map;
 }
 
-void TileMap::init()
+void MapTile::init()
 {
-	 
+	Tile tmp;
+	tmp.tex = tile_texs[Warp];
+	tmp.layer = 0;
+	tmp.value = 0;
+	
+	Tile* another_map = new Tile[tileW * tileH]{
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
+	};
+
+	tile_map = another_map;
 }
 
-void TileMap::setTile(int& ti, const char* str) //타일 세팅
+void MapTile::setTile(Tile& _tile, Texture* _tex, int _layer, int _value) //타일 세팅
+{
+	
+}
+
+void MapTile::makeMap(Tile* ti)
 {
 	Tile field[4] = {
-		{tileMapSize, ForestIndex[0], 1}, //초원
-		{tileMapSize, DesertIndex[0], 1}, //황야
-		{tileMapSize, IceIndex[0], 1}, //얼음
-		{tileMapSize, FireIndex[0], 1}, //불
+		{}, //초원
+		{}, //황야
+		{}, //얼음
+		{}, //불
 	};
-
-	Tile wall[4] = {
-		{tileMapSize, ForestWallIndex[0], 2}, //초원
-		{tileMapSize, DesertWallIndex[0], 2}, //황야
-		{tileMapSize, IceWallIndex[0], 2}, //얼음
-		{tileMapSize, FireWallIndex[0], 2}, //불
-	};
-
-	Tile warp; 
-
-	Tile tmp = field[0];
-	
-	if (str == "field")
-		tmp = field[ti];
-	else if (str == "wall")
-		tmp = wall[ti];
-	else if (str == "warp");
-		//tmp = warp;
-
-	if (typeCount < typeNum)
-	{
-		tileType[typeCount] = tmp;
-		typeCount++;
-	}
-	
 }
 
-void TileMap::makeMap(Tile* ti)
+void MapTile::drawTile()
 {
-	
-}
+	iPoint off = iPointMake(32, 32);
 
-void TileMap::drawTile()
-{
-	static Texture* tex = createImage("assets/Image/Tile1.bmp");
-
-	//16x12
-	Tile a = tileType[0];
-	Tile b = tileType[1];
-	Tile tileMap[tileW * tileH] =
-	{
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-		a, b, a, b, a, b, a, b, a, b, a, b, a, b, a, b,
-	};
-	
 	for (int j = 0; j < tileH; j++)
 	{
 		for (int i = 0; i < tileW; i++)
 		{
-			setRGBA(1, 0, 0, 1);
-			iRect rect = iRectMake(tileWSize * i, tileHSize * j, tileWSize, tileHSize);
-			drawRect(rect);
-			int x = tileMap[tileW * j + i].tile % 8;
-			int y = tileMap[tileW * j + i].tile / 8;
+			int k = j * tileW + i;
+			drawImage(tile_map[k].tex, off.x + 32 * i, off.y + 32 * j, TOP | LEFT);
 
-			drawImage(tex, 32 * i, 32 * j, TOP | LEFT,
-				32 * x, 32 * y, 32, 32, 1.0f, 1.0f, 2, 0);
+			setRGBA(0.5, 0, 0, 1);
+			iRect rt = iRectMake(off.x + 32 * i, off.y + 32 * j, 32, 32);
+			drawRect(rt);
 		}
 	}
-	
 }
