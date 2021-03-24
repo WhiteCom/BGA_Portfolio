@@ -34,3 +34,6 @@
 
 #2021-03-24
 - create TileMap class
+
+#2021-03-25
+- update TileMap Class -> MapTile Class
