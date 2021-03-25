@@ -7,10 +7,12 @@
 
 enum Behavior
 {
-	BehaveLeft = 0,
-	BehaveRight,
-	BehaveUp,
-	BehaveDown,
+	BehaveWait = 0,
+
+	BehaveWalkLeft,
+	BehaveWalkRight,
+	BehaveWalkUp,
+	BehaveWalkDown,
 
 	BehaveMax,
 };
@@ -25,7 +27,6 @@ public:
 		Texture** texs = createImageDivide(12, 8, "assets/Image/character%d.png", type);
 		//24 * 32 캐릭 이미지를 들고와야함.
 	
-
 		Texture* hero[12];
 
 		//king, queen, jack, maid, jack2, knight, hero1, hero2
@@ -43,19 +44,67 @@ public:
 			}
 		}
 
-		for (int i = 0; i < 12; i++)
+		for (i = 0; i < 12; i++)
 			hero[i] = texs[heroIndex[i]];
 
 		imgs = new iImage * [BehaveMax];
 
 		iImage* img = new iImage();
-		//#need update
+		img->addObject(hero[7]);
+		img->_delta = 0.018f;
+		img->position = iPointZero;
+		img->startAnimation(); //1장이라 없어도 될듯...
+		imgs[BehaveWait] = img;
+
+		int walkLeftIndex[4] = {9,10,11,10};
+		img = new iImage();
+		for (i = 0; i < 4; i++)
+			img->addObject(texs[walkLeftIndex[i]]);
+		img->_delta = 0.018f;
+		img->position = iPointZero;
+		img->startAnimation();
+		imgs[BehaveWalkLeft] = img;
+		imgs[BehaveWalkRight] = imgs[BehaveWalkLeft]->copy();
+		imgs[BehaveWalkRight]->reverse = REVERSE_WIDTH;
+		
+		int walkUpIndex[4] = { 0,1,2,1 };
+		img = new iImage();
+		for (i = 0; i < 4; i++)
+			img->addObject(texs[walkUpIndex[i]]);
+		img->_delta = 0.018f;
+		img->position = iPointZero;
+		img->startAnimation();
+		imgs[BehaveWalkUp] = img;
+
+		int walkDownIndex[4] = { 6,7,8,7 };
+		img = new iImage();
+		for (i = 0; i < 4; i++)
+			img->addObject(texs[walkUpIndex[i]]);
+		img->_delta = 0.018f;
+		img->position = iPointZero;
+		img->startAnimation();
+		imgs[BehaveWalkDown] = img;
+
+		for (i = 0; i < 12; i++)
+			freeImage(hero[i]);
+
+		be = BehaveWait;
+		//leftRigt = 0;
+		imgCurr = imgs[be];
 		
 	}
-	~Character()
+	virtual ~Character()
 	{
+		for (int i = 0; i < BehaveMax; i++)
+			delete imgs[i];
 		delete imgs;
-		delete imgCurr;
+	}
+
+	void paint(float dt)
+	{
+		imgCurr->paint(dt, position, iPointOne);
+
+		
 	}
 
 public:
@@ -68,6 +117,18 @@ public:
 
 };
 
+void drawHero()
+{
+
+}
+void freeHero()
+{
+
+}
+bool moveCheck(MapTile* map) //맵의 가중치를 보고 움직일수없다 여부 판단
+{
+	return false;
+}
 
 
 

@@ -28,8 +28,8 @@ struct iPoint
 	iPoint& operator /= (const float p);
 };
 
-#define iPointZero iPointMake(0, 0);
-#define iPointOne iPointMake(1, 1);
+#define iPointZero iPointMake(0, 0)
+#define iPointOne iPointMake(1, 1)
 
 iPoint iPointMake(float _x, float _y);
 float iPointDot(iPoint p1, iPoint p2);
