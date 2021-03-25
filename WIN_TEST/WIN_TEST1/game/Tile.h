@@ -7,7 +7,7 @@
 #define tileH		12
 #define tileWSize	32
 #define tileHSize	32
-#define typeNum		2
+#define typeNum		5
 
 #define INF			99
 
@@ -29,12 +29,28 @@ public:
 
 	//타일을 만드는 함수
 	void init(); //타일 초기세팅
-	void setTile(Tile& _tile, Texture* _tex, int _layer, int _value); //타일 세팅
 
-	void makeMap(Tile* ti); //맵 만들기
+	void makeMap(const char* str); //맵 만들기
 	void drawTile();
+
+	Tile* grassMap(); //초원
+	Tile* wildnessMap(); //황야
+	Tile* iceMap(); //얼음
+	Tile* fireMap(); //불
+	Tile* bossMap(); //보스
+
+private:
+	//내부적으로 쓸 타일변수들
+	Tile* field;
+	Tile* wall;
+	Tile warp;
+	Tile none;
 
 public:
 	Texture** tile_texs; //다양한 타일셋들
 	Tile* tile_map; //현재 생성된 맵
+	
+
 };
+
+

@@ -34,8 +34,9 @@ va_start(args, szFormat); \
 vsnprintf(szText, sizeof(szText), szFormat, args); \
 va_end(args)
 
-void setKeyDown(iKeyStat stat, int c);
-int getKeyDown();
+extern int keyStat, keyDown; //stat : 계속 누름, down : 한번 누름
+void setKeyStat(iKeyStat stat, unsigned int c);
+void setKeyDown(iKeyStat stat, unsigned int c);
 
 void appInitialize();
 int random();
@@ -68,5 +69,5 @@ void freeImage(Texture* img);
 void drawImage(Texture* img, float x, float y, int anc,
 	float ix, float iy, float iw, float ih,
 	float rx, float ry,
-	int xyz, float degree);
+	int xyz, float degree, int reverse = REVERSE_NONE);
 void drawImage(Texture* img, float x, float y, int anc);

@@ -41,8 +41,9 @@ ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
     texBack = t;
 
     graphicsFromHDC = new Graphics(hdc);
-
     graphics = graphicsFromBmp;
+
+    appInitialize();
 
     return gdiplusToken;
 }
@@ -53,48 +54,6 @@ void freeArray(void* data)
     printf("%s\n", s);
     delete s;
 }
-
-void makeTile()
-{
-    static Texture* tex = createImage("assets/Image/tile1.bmp");
-
-    iRect tile;
-    int W = 16;
-    int H = 12;
-    int tileIndex[16 * 12] = {
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1, 
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-        1, 8, 1, 1, 1, 1, 8, 8, 8, 1, 1, 8, 1, 1, 1, 1,
-    };
-
-    for (int j = 0; j < tileH; j++)
-    {
-        for (int i = 0; i < tileW; i++)
-        {
-            tile = iRectMake(32*i + 32, 32*j + 32, 32-1, 32-1);
-            setRGBA(1, 0, 0, 1);
-            drawRect(tile);
-            //setRGBA(0, 1, 0, 1);
-            //fillRect(tile);
-
-            //graphics->SetClip(Rect(32 * i, 32 * j, 32, 32));
-            int ti = tileIndex[j * 10 + i];
-            int x = ti%8, y = ti/8;
-            //drawImage(tex, tile.origin.x - 32 * x, tile.origin.y - 32 * y, TOP | LEFT);
-            //graphics->SetClip(Rect(0, 0, devSize.width, devSize.height));
-            drawImage(tex, 32 * i + 32, 32 * j + 32, TOP | LEFT, 32 * x, 32 * y, 32, 32, 1.0f, 1.0f, 2, 0);
-        }
-        
-    }
-}
-
 
 void drawApp(FLOAT_METHOD m)
 {
@@ -115,24 +74,25 @@ void drawApp(FLOAT_METHOD m)
     freeImage(bg);
 
     MapTile t;
-    t.init();
-    t.makeMap(NULL);
+    t.makeMap("wildness");
     t.drawTile();
-    
 
+    keyDown = 0;
 
-    
-#if 0
-    //makeTile();
-    TileMap t;
+    int idxW = 0, idxH = 0; //이거에 따라 캐릭이 바뀜
+    int heroIndex[12], num = 0;
 
-    //index는 typeNum보다 적게
-    int index = 0;
-    t.setTile(index, "field");
-    t.setTile(++index, "wall");
-    t.drawTile();
-#endif
+    for (int j = idxH; j < idxH * 4 + 4; j++)
+    {
+        if (num >= 12) break;
+        for (int i = idxW; i < idxW * 3 + 3; i++)
+        {
+            heroIndex[num] = i + j * 12;
+            num++;
+        }
+    }
 
+    int test = 0;
 #if 1
     extern void drawCursor(float dt);
     drawCursor(iFPS::instance()->lastDt);
@@ -141,11 +101,8 @@ void drawApp(FLOAT_METHOD m)
     drawImage(texBack, viewport.origin.x, viewport.origin.y, TOP | LEFT,
         0, 0, texBack->width, texBack->height,
         viewport.size.width / texBack->width, viewport.size.height / texBack->height, 2, 0);
-    if (getKeyDown() & keysSpace)
-    {
-        setLoading(gs_loading, NULL, NULL);
-        drawLoading(dt);
-    }
+  
+    
 
     extern HDC hdc;
     SwapBuffers(hdc);

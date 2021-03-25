@@ -2,22 +2,54 @@
 
 #include "iWindow.h"
 
-static int keys = 0;
 
 iSize devSize;
 iRect viewport;
 
-void setKeyDown(iKeyStat stat, int c)
+bool* keyBuf;
+
+void appInitialize()
+{
+	srand(time(NULL));
+	keyBuf = new bool[256];
+	memset(keyBuf, 0xff, 256);
+}
+
+int keyStat = 0, keyDown = 0; //stat : 계속 누름, down : 한번누름
+void setKeys(int& keys, iKeyStat stat, unsigned int c);
+
+void setKeyStat(iKeyStat stat, unsigned int c)
+{
+	setKeys(keyStat, stat, c);
+}
+
+void setKeyDown(iKeyStat stat, unsigned int c)
+{
+	//just one time
+	if (stat == iKeyStatBegan)
+	{
+		if (keyBuf[c])
+			return;
+		keyBuf[c] = true;
+		setKeys(keyDown, stat, c);
+	}
+	else
+	{
+		keyBuf[c] = false;
+	}
+}
+
+void setKeys(int& keys, iKeyStat stat, unsigned int c)
 {
 	if (stat == iKeyStatBegan)
 	{
-		if (c == 'a' || c == 'A')
+		if (c == 'a' || c == 'A' || c == VK_LEFT)
 			keys |= keysA;
-		else if (c == 's' || c == 'S')
+		else if (c == 's' || c == 'S' || c == VK_DOWN)
 			keys |= keysS;
-		else if (c == 'd' || c == 'D')
+		else if (c == 'd' || c == 'D' || c == VK_RIGHT)
 			keys |= keysD;
-		else if (c == 'w' || c == 'W')
+		else if (c == 'w' || c == 'W' || c == VK_UP)
 			keys |= keysW;
 		else if (c == ' ')
 			keys |= keysSpace;
@@ -25,28 +57,19 @@ void setKeyDown(iKeyStat stat, int c)
 	
 	else if (stat == iKeyStatEnded)
 	{
-		if (c == 'a' || c == 'A')
+		if (c == 'a' || c == 'A' || c == VK_LEFT)
 			keys &= ~keysA;
-		else if (c == 's' || c == 'S')
+		else if (c == 's' || c == 'S' || c == VK_DOWN)
 			keys &= ~keysS;
-		else if (c == 'd' || c == 'D')
+		else if (c == 'd' || c == 'D' || c == VK_RIGHT)
 			keys &= ~keysD;
-		else if (c == 'w' || c == 'W')
+		else if (c == 'w' || c == 'W' || c == VK_UP)
 			keys &= ~keysW;
 		else if (c == ' ')
 			keys &= ~keysSpace;
 	}
 }
 
-int getKeyDown()
-{
-	return keys;
-}
-
-void appInitialize()
-{
-	srand(time(NULL));
-}
 int random()
 {
 	return rand();
@@ -274,10 +297,9 @@ void freeImage(Texture* tex)
 void drawImage(Texture* tex, float x, float y, int anc,
 	float ix, float iy, float iw, float ih,
 	float rx, float ry,
-	int xyz, float degree)
+	int xyz, float degree, int reverse)
 {
 	//Image* img = (Image*)_img;
-	//float w = tex->width * rx, h = tex->height * ry;
 	float w = iw * rx, h = ih * ry;
 
 	switch (anc)
@@ -317,6 +339,31 @@ void drawImage(Texture* tex, float x, float y, int anc,
 		for (int i = 0; i < 3; i++)
 			dstPoint[i] = iPointRotate(dstPoint[i], t, degree);
 	}
+
+	if (reverse == REVERSE_NONE);
+	else if (reverse == REVERSE_WIDTH) //좌우 반전
+	{
+		//dstPoint[0]	dstPoint[1]
+		//dstPoint[2]	dstPoint[3]
+
+		float t = dstPoint[0].x;
+		dstPoint[0].x = dstPoint[1].x;
+		dstPoint[1].x = t;
+
+		dstPoint[2].x += w;
+	}
+
+	else if (reverse == REVERSE_HEIGHT) //상하 반전
+	{
+		//dstPoint[0]	dstPoint[1]
+		//dstPoint[2]	dstPoint[3]
+		float t = dstPoint[0].y;
+		dstPoint[0].y = dstPoint[2].y;
+		dstPoint[2].y = t;
+
+		dstPoint[1].y += h;	
+	}
+
 
 	ColorMatrix matrix = {
 		1.0f, 0.0f, 0.0f, 0.0f, 0.0f,

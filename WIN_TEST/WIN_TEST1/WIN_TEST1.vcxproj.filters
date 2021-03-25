@@ -63,6 +63,15 @@
     <ClInclude Include="game\Tile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="std\iImage.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="game\TileType.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Character.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WIN_TEST1.rc">
@@ -118,6 +127,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="game\Tile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="std\iImage.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Character.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

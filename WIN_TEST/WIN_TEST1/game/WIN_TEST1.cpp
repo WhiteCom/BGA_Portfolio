@@ -133,41 +133,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             rect.bottom - rect.top - win_border_height);
         drawApp(NULL);
         return 0;
-        /*
-        clearApp();
-        
-#if 0
-        int width = LOWORD(lParam);
-        int height = HIWORD(lParam);
-#else
-        RECT rt;
-        GetClientRect(hWnd, &rt);
-        int width = rt.right - rt.left;
-        int height = rt.bottom - rt.top;
-#endif
-        resizeApp(width, height);
-        drawApp(NULL);
-        return 0;// break;
-        */
     }
     
 
     case WM_SIZE:
     {
-        /*
-        clearApp();
-#if 0
-        int width = LOWORD(lParam);
-        int height = HIWORD(lParam);
-#else
-        RECT rt;
-        GetClientRect(hWnd, &rt);
-        int width = rt.right - rt.left;
-        int height = rt.bottom - rt.top;
-#endif
-*/
         resizeApp(LOWORD(lParam), HIWORD(lParam));
-
         drawApp(NULL);
         return 0;// break;
 
@@ -190,6 +161,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_KEYDOWN:
     {
+        setKeyStat(iKeyStatBegan, wParam);
         setKeyDown(iKeyStatBegan, wParam);
         return 0;
     }
@@ -200,6 +172,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             goFullscreen();
             return 0;
         }
+        setKeyStat(iKeyStatEnded, wParam);
         setKeyDown(iKeyStatEnded, wParam);
         return 0;
     }
