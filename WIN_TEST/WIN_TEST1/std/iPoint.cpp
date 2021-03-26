@@ -155,9 +155,16 @@ float iPointDistance2(iPoint p1, iPoint p2)
 
 float iPointLength(iPoint p)
 {
-	float len = p.x * p.x + p.y * p.y;
-	return sqrt(len);
+	return sqrt(p.x * p.x + p.y * p.y);
 }
+iPoint iPointVector(iPoint p)
+{
+	float len = sqrt(p.x * p.x + p.y * p.y);
+	if (len == 0.0f)
+		return iPointZero;
+	return p / len;
+}
+
 
 float iPointAngle(const iPoint& v1, const iPoint& v2, const iPoint& v3)
 {

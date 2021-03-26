@@ -1,6 +1,6 @@
 ﻿#include "iWindow.h"
 #include "iStd.h"
-#include "Loading.h"
+#include "Game.h"
 
 static Texture* texBack;
 Graphics* graphicsFromBmp;
@@ -73,26 +73,29 @@ void drawApp(FLOAT_METHOD m)
 
     freeImage(bg);
 
-    MapTile t;
-    t.makeMap("wildness");
-    t.drawTile();
+    static MapTile* t;
+    t->makeMap("wildness");
+    t->drawTile();
+
+    static bool test = true;
+    iPoint off = iPointZero;
+
+    if (test)
+    {
+        test = false;
+        if (off == iPointZero)
+            off = iPointMake(64, 64); //초기씬에서
+        else
+        {
+            //씬 전환시 워프좌표 이동해야함.
+        }
+        loadCharacter(off);
+    }
+    
+    drawCharacter(dt, t);
 
     keyDown = 0;
 
-    int idxW = 0, idxH = 0; //이거에 따라 캐릭이 바뀜
-    int heroIndex[12], num = 0;
-
-    for (int j = idxH; j < idxH * 4 + 4; j++)
-    {
-        if (num >= 12) break;
-        for (int i = idxW; i < idxW * 3 + 3; i++)
-        {
-            heroIndex[num] = i + j * 12;
-            num++;
-        }
-    }
-
-    int test = 0;
 #if 1
     extern void drawCursor(float dt);
     drawCursor(iFPS::instance()->lastDt);
@@ -110,7 +113,7 @@ void drawApp(FLOAT_METHOD m)
 
 void freeApp()
 {
-
+    
 }
 
 void endApp(ULONG_PTR token, VOID_METHOD m)

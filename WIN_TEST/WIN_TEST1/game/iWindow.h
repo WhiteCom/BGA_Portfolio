@@ -15,7 +15,7 @@ using namespace Gdiplus;
 #endif
 
 #include "iType.h"
-#include "Tile.h" 
+
 
 extern Graphics* graphics;
 

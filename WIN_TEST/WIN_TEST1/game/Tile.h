@@ -16,7 +16,9 @@
 //16 x 12 타일맵 생성
 struct Tile 
 {
-	Texture* tex; //타일 이미지
+	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
+	int index; //타일 이미지 index
+	//iPoint pos;
 	int layer; 
 	int value; //가중치
 };
@@ -39,18 +41,12 @@ public:
 	Tile* fireMap(); //불
 	Tile* bossMap(); //보스
 
-private:
-	//내부적으로 쓸 타일변수들
-	Tile* field;
-	Tile* wall;
-	Tile warp;
-	Tile none;
-
 public:
 	Texture** tile_texs; //다양한 타일셋들
 	Tile* tile_map; //현재 생성된 맵
-	
+	int tileNum;
 
 };
+
 
 

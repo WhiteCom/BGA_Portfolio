@@ -3,6 +3,11 @@
 
 #include "TileType.h"
 
+//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
+#define none		{0, 0, 0}
+#define warp		{1, 0, 0}
+#define field(n)	{n, 0, 0}
+#define wall(n)		{n, 0, 0}
 
 MapTile::MapTile()
 {
@@ -16,6 +21,8 @@ MapTile::MapTile()
 	tile_map = new Tile[tileW * tileH]; //16x12
 	for (int i = 0; i < tileW * tileH; i++)
 		tile_map[i] = tmp;
+
+	tileNum = tileW * tileH; //타일 개수
 
 	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
 	field = new Tile[typeNum]{
@@ -92,6 +99,7 @@ void MapTile::makeMap(const char* str)
 
 }
 
+
 void MapTile::drawTile()
 {
 	iPoint off = iPointMake(32, 32);
@@ -101,7 +109,8 @@ void MapTile::drawTile()
 		for (int i = 0; i < tileW; i++)
 		{
 			int k = j * tileW + i;
-			drawImage(tile_map[k].tex, off.x + 32 * i, off.y + 32 * j, TOP | LEFT);
+			Texture* tex = tile_texs[tile_map[k].index];
+			drawImage(tex, off.x + 32 * i, off.y + 32 * j, TOP | LEFT);
 
 			setRGBA(0.5, 0, 0, 1);
 			iRect rt = iRectMake(off.x + 32 * i, off.y + 32 * j, 32, 32);
@@ -136,25 +145,23 @@ Tile* MapTile::grassMap() //초원
 
 	return map;
 }
+
 Tile* MapTile::wildnessMap() //황야
 {
-	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-	field[1];
-	wall[1];
 
 	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
 	Tile* map = new Tile[tileW * tileH]{
 		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
-		none, field[1], field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], warp,
-		none, field[1], wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		warp, field[1], wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field[1], wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], warp,
+		none, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		warp, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
+		none, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
 		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
 	};
 

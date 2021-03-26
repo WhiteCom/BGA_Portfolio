@@ -146,17 +146,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_LBUTTONDOWN:
     {
         cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
+        keyGame(iKeyStatBegan, cursor);
         return 0;
     }
     case WM_MOUSEMOVE:
     {
         cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
+        keyGame(iKeyStatMoved, cursor);
         return 0;
     }
 
     case WM_LBUTTONUP:
     {
         cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
+        keyGame(iKeyStatEnded, cursor);
         return 0;
     }
     case WM_KEYDOWN:

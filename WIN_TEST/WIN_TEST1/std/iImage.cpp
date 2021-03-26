@@ -82,27 +82,34 @@ void iImage::paint(float dt, float x, float y, float rx, float ry)
 	{
 		delta += dt;
 
-		frame++;
-		if (frame > arrayTex->count - 1)
+		if (delta > _delta) //이번 프레임 끝
 		{
-			frame = 0;
-			if (repeatNum == 0)
+			delta = 0.0f;
+			
+			frame++;
+			if (frame > arrayTex->count - 1)
 			{
-				//infinite
-			}
-			else
-			{
-				repeatIdx++;
-				if (repeatIdx == repeatNum)
+				frame = 0;
+				if (repeatNum == 0) //infinite
 				{
-					if (method)
-						method(parm);
-					ani = false;
-					if (lastframe)
-						frame = arrayTex->count - 1;
+
+				}
+				else
+				{
+					repeatIdx++;
+					if (repeatIdx == repeatNum)
+					{
+						if (method)
+							method(parm);
+						ani = false;
+						if (lastframe)
+							frame = arrayTex->count - 1;
+					}
 				}
 			}
 		}
+
+		
 	}
 
 	tex = (Texture*)arrayTex->objectAtIndex(frame);
@@ -116,6 +123,7 @@ iImage* iImage::copy()
 {
 	iImage* img = new iImage();
 	iArray* a = img->arrayTex;
+
 	memcpy(img, this, sizeof(iImage));
 	img->arrayTex = a;
 	for (int i = 0; i < arrayTex->count; i++)

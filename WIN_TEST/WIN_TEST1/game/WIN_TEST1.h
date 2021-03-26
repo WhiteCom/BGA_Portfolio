@@ -4,6 +4,7 @@
 
 #include "iStd.h"
 #include "iWindow.h"
+#include "Game.h"
 
 void goFullscreen();
 void enforceResolution(int edge, RECT& rt, int win_border_width, int win_border_height);
