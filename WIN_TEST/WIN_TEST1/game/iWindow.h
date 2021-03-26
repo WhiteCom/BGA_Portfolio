@@ -21,7 +21,6 @@ extern Graphics* graphics;
 
 ULONG_PTR startApp(HDC hdc, VOID_METHOD m);
 void drawApp(FLOAT_METHOD m);
-void freeApp();
 void endApp(ULONG_PTR token, VOID_METHOD m);
 void resizeApp(int width, int height);
 void clearApp();

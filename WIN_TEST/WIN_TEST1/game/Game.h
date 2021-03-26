@@ -2,9 +2,7 @@
 
 #include "iStd.h"
 
-#include "Tile.h"
-#include "Character.h"
-#include "Loading.h"
-
+void loadGame();
 void drawGame(float dt);
+void freeGame();
 void keyGame(iKeyStat stat, iPoint p);

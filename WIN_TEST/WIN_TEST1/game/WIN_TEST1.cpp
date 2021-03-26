@@ -1,4 +1,5 @@
 ﻿#include "WIN_TEST1.h"
+#include "Game.h"
 
 #define MAX_LOADSTRING 100
 
@@ -55,7 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     hdc = GetDC(hWnd);
 
     //#NEED UPDATE
-    ULONG_PTR token = startApp(hdc, NULL);
+    ULONG_PTR token = startApp(hdc, loadGame);
     loadCursor();
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
@@ -72,14 +73,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            //#NEED UPDATE
-            drawApp(NULL);
+            drawApp(drawGame);
         }
     }
 
     freeCursor();
-    //#NEDD UPDATE
-    endApp(token, NULL);
+    endApp(token, freeGame);
     return (int) msg.wParam;
 }
 
@@ -131,7 +130,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         enforceResolution((int)wParam, rect, win_border_width, win_border_height);
         resizeApp(rect.right - rect.left - win_border_width,
             rect.bottom - rect.top - win_border_height);
-        drawApp(NULL);
+        drawApp(drawGame);
         return 0;
     }
     
@@ -139,7 +138,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
     {
         resizeApp(LOWORD(lParam), HIWORD(lParam));
-        drawApp(NULL);
+        drawApp(drawGame);
         return 0;// break;
 
     }

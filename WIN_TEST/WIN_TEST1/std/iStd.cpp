@@ -2,7 +2,6 @@
 
 #include "iWindow.h"
 
-
 iSize devSize;
 iRect viewport;
 

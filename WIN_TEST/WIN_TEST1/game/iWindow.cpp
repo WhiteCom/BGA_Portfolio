@@ -44,6 +44,7 @@ ULONG_PTR startApp(HDC hdc, VOID_METHOD m)
     graphics = graphicsFromBmp;
 
     appInitialize();
+    m(); //loadGame()
 
     return gdiplusToken;
 }
@@ -63,36 +64,7 @@ void drawApp(FLOAT_METHOD m)
     //    printf("%f %d\n", dt, f); 
 
     graphics = graphicsFromBmp;
-    //m(dt);
-
-    Texture* bg = createImage("assets/map.jpg");
-
-    setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
-    clearRect();
-    drawImage(bg, 0, 0, TOP | LEFT);
-
-    freeImage(bg);
-
-    static MapTile* t;
-    t->makeMap("wildness");
-    t->drawTile();
-
-    static bool test = true;
-    iPoint off = iPointZero;
-
-    if (test)
-    {
-        test = false;
-        if (off == iPointZero)
-            off = iPointMake(64, 64); //초기씬에서
-        else
-        {
-            //씬 전환시 워프좌표 이동해야함.
-        }
-        loadCharacter(off);
-    }
-    
-    drawCharacter(dt, t);
+    m(dt); //drawGame()
 
     keyDown = 0;
 
@@ -104,22 +76,15 @@ void drawApp(FLOAT_METHOD m)
     drawImage(texBack, viewport.origin.x, viewport.origin.y, TOP | LEFT,
         0, 0, texBack->width, texBack->height,
         viewport.size.width / texBack->width, viewport.size.height / texBack->height, 2, 0);
-  
-    
 
     extern HDC hdc;
     SwapBuffers(hdc);
 }
 
-void freeApp()
-{
-    
-}
-
 void endApp(ULONG_PTR token, VOID_METHOD m)
 {
-    //m();
-    //delete graphics;
+    m(); //freeGame
+
     delete graphicsFromBmp;
     delete (Bitmap*)texBack->texID;
     delete texBack;

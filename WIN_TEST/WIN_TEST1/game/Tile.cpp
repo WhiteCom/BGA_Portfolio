@@ -3,63 +3,49 @@
 
 #include "TileType.h"
 
+#define NoneSection				{NoneIdx, INF, INF}
+#define WarpSection				{WarpIdx, 0, 0}
+
 //0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-#define none		{0, 0, 0}
-#define warp		{1, 0, 0}
-#define field(n)	{n, 0, 0}
-#define wall(n)		{n, 0, 0}
+#define ForestField(n)			{ForestIdx[n], 0, 0}
+#define DesertField(n)			{DesertIdx[n], 0, 0}
+#define IceField(n)				{IceIdx[n], 0, 0}
+#define FireField(n)			{FireIdx[n], 0, 0}
+#define BossField(n)			{BossIdx[n], 0, 0}
+
+#define ForestWall(n)			{ForestWallIdx[n], 1, 1}
+#define DesertWall(n)			{DesertWallIdx[n], 1, 1}
+#define IceWall(n)				{IceWallIdx[n], 1, 1}
+#define FireWall(n)				{FireWallIdx[n], 1, 1}
+#define BossWall(n)				{BossWallIdx[n], 1, 1}
+
+static int texW = 8, texH = 32;
 
 MapTile::MapTile()
 {
-	tile_texs = createImageDivide(8, 32, "assets/Image/Tile1.bmp");
+	tile_texs = createImageDivide(texW, texH, "assets/Image/Tile1.bmp");
 
-	Tile tmp;
-	tmp.tex = tile_texs[NoneSection];
-	tmp.layer = 0;
-	tmp.value = 0;
-
+	Tile tmp = NoneSection;
+	
 	tile_map = new Tile[tileW * tileH]; //16x12
 	for (int i = 0; i < tileW * tileH; i++)
 		tile_map[i] = tmp;
 
 	tileNum = tileW * tileH; //타일 개수
-
-	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-	field = new Tile[typeNum]{
-		{tile_texs[ForestIndex[0]], 0, 0}, //초원
-		{tile_texs[DesertIndex[0]], 0, 0}, //황야
-		{tile_texs[IceIndex[0]], 0, 0}, //얼음
-		{tile_texs[FireIndex[0]], 0, 0}, //불
-		{tile_texs[BossIndex[0]], 0, 0}, //보스
-	};
-
-	wall = new Tile[typeNum]{
-		{tile_texs[ForestWallIndex[0]], 1, 1}, //초원
-		{tile_texs[DesertWallIndex[0]], 1, 1}, //황야
-		{tile_texs[IceWallIndex[0]], 1, 1}, //얼음
-		{tile_texs[FireWallIndex[0]], 1, 1}, //불
-		{tile_texs[BossWallIndex[0]], 1, 1}, //보스
-	};
-
-	warp.tex = tile_texs[Warp];
-	warp.layer = 0;
-	warp.value = 0;
-
-	none.tex = tile_texs[NoneSection];
-	none.layer = INF;
-	none.value = INF;
 }
+
 MapTile::~MapTile()
 {
 	delete tile_map;
+	//#maybe issue
+	for (int i = 0; i < texW * texH; i++)
+		delete tile_texs[i];
+	delete tile_texs;
 }
 
 void MapTile::init()
 {
-	Tile tmp;
-	tmp.tex = tile_texs[Warp];
-	tmp.layer = 0;
-	tmp.value = 0;
+	Tile tmp = NoneSection;
 	
 	Tile* another_map = new Tile[tileW * tileH]{
 		tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp, tmp,
@@ -83,19 +69,19 @@ void MapTile::makeMap(const char* str)
 {
 	
 	if (str == "grass" || str == "Grass" || str == "GRASS")
-		tile_map = grassMap();
+		grassMap();
 
 	else if (str == "wildness" || str == "Wildness" || str == "WILDNESS")
-		tile_map = wildnessMap();
+		wildnessMap();
 
 	else if (str == "ice" || str == "Ice" || str == "ICE")
-		tile_map = iceMap();
+		iceMap();
 
 	else if (str == "fire" || str == "Fire" || str == "FIRE")
-		tile_map = fireMap();
+		fireMap();
 
 	else //if(str == "boss" || str == "Boss" || str == "BOSS")
-		tile_map = bossMap();
+		bossMap();
 
 }
 
@@ -119,123 +105,121 @@ void MapTile::drawTile()
 	}
 }
 
+static Tile no = NoneSection;
+static Tile fi = ForestField(0);
+static Tile wp = WarpSection;
+static Tile wa = ForestWall(0);
 
-
-Tile* MapTile::grassMap() //초원
+void MapTile::grassMap() //초원
 {
-	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-	field[0];
-	wall[0];
-
-	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
-	Tile* map = new Tile[tileW * tileH]{
-		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
-		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], warp,
-		none, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], field[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		warp, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, field[0], wall[0],	field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], field[0], none,
-		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+	fi = ForestField(0);
+	wa = ForestWall(0);
+	
+	Tile* map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
 	};
 
-	return map;
+	tile_map = map;
 }
 
-Tile* MapTile::wildnessMap() //황야
+void MapTile::wildnessMap() //황야
 {
+	fi = DesertField(0);
+	wa = DesertWall(0);
 
-	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
-	Tile* map = new Tile[tileW * tileH]{
-		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
-		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], warp,
-		none, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), field[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		warp, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, field(1), wall[1],	field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], field[1], none,
-		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+	Tile* map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
 	};
 
-	return map;
+	tile_map = map;
 }
-Tile* MapTile::iceMap() //얼음
-{
-	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-	field[2];
-	wall[2];
 
-	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
-	Tile* map = new Tile[tileW * tileH]{
-		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
-		none, field[2], field[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], wall[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], warp,
-		none, field[2], wall[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], field[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], field[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], field[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], field[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], field[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		warp, field[2], wall[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, field[2], wall[2],	field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], field[2], none,
-		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+void MapTile::iceMap() //얼음
+{
+	fi = IceField(0);
+	wa = IceWall(0);
+
+	Tile* map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
 	};
 
-	return map;
+	tile_map = map;
 }
-Tile* MapTile::fireMap() //불
-{
-	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-	field[3];
-	wall[3];
 
-	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
-	Tile* map = new Tile[tileW * tileH]{
-		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
-		none, field[3], field[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], wall[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], warp,
-		none, field[3], wall[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], field[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], field[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], field[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], field[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], field[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		warp, field[3], wall[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, field[3], wall[3],	field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], field[3], none,
-		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+void MapTile::fireMap() //불
+{
+	fi = FireField(0);
+	wa = FireWall(0);
+
+	Tile* map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
 	};
 
-	return map;
+	tile_map = map;
 }
-Tile* MapTile::bossMap() //보스
+void MapTile::bossMap() //보스
 {
-	//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-	field[4];
-	wall[4];
+	fi = BossField(0);
+	wa = BossWall(0);
 
-	//#need update 이따구로 쓰면 맵 생성때마다 계속 이지랄해야함.
-	Tile* map = new Tile[tileW * tileH]{
-		none,	none,	none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
-		none, field[4], field[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], wall[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], warp,
-		none, field[4], wall[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], field[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], field[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], field[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], field[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], field[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		warp, field[4], wall[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, field[4], wall[4],	field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], field[4], none,
-		none, none,		none,		none,	  none,		none,	  none,		warp,	  none,		none,	  none,		none,	  none,		none,	  none,		none,
+	Tile* map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
 	};
 
-	return map;
+	tile_map = map;
 }

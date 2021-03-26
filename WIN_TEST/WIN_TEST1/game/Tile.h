@@ -35,17 +35,16 @@ public:
 	void makeMap(const char* str); //맵 만들기
 	void drawTile();
 
-	Tile* grassMap(); //초원
-	Tile* wildnessMap(); //황야
-	Tile* iceMap(); //얼음
-	Tile* fireMap(); //불
-	Tile* bossMap(); //보스
+	void grassMap(); //초원
+	void wildnessMap(); //황야
+	void iceMap(); //얼음
+	void fireMap(); //불
+	void bossMap(); //보스
 
 public:
 	Texture** tile_texs; //다양한 타일셋들
 	Tile* tile_map; //현재 생성된 맵
 	int tileNum;
-
 };
 
 
