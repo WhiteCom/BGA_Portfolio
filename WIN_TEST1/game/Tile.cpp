@@ -3,22 +3,6 @@
 
 #include "TileType.h"
 
-#define NoneSection				{NoneIdx, INF, INF}
-#define WarpSection				{WarpIdx, 0, 0}
-
-//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
-#define ForestField(n)			{ForestIdx[n], 0, 0}
-#define DesertField(n)			{DesertIdx[n], 0, 0}
-#define IceField(n)				{IceIdx[n], 0, 0}
-#define FireField(n)			{FireIdx[n], 0, 0}
-#define BossField(n)			{BossIdx[n], 0, 0}
-
-#define ForestWall(n)			{ForestWallIdx[n], 1, 1}
-#define DesertWall(n)			{DesertWallIdx[n], 1, 1}
-#define IceWall(n)				{IceWallIdx[n], 1, 1}
-#define FireWall(n)				{FireWallIdx[n], 1, 1}
-#define BossWall(n)				{BossWallIdx[n], 1, 1}
-
 static int texW = 8, texH = 32;
 
 MapTile::MapTile()
@@ -32,6 +16,8 @@ MapTile::MapTile()
 		tile_map[i] = tmp;
 
 	tileNum = tileW * tileH; //타일 개수
+	
+	off = iPointMake(tileWSize, tileHSize);
 }
 
 MapTile::~MapTile()
@@ -65,41 +51,38 @@ void MapTile::init()
 	tile_map = another_map;
 }
 
-void MapTile::makeMap(const char* str)
+void MapTile::makeMap(const char* str, int n)
 {
 	
 	if (str == "grass" || str == "Grass" || str == "GRASS")
-		grassMap();
+		grassMap(n);
 
 	else if (str == "wildness" || str == "Wildness" || str == "WILDNESS")
-		wildnessMap();
+		wildnessMap(n);
 
 	else if (str == "ice" || str == "Ice" || str == "ICE")
-		iceMap();
+		iceMap(n);
 
 	else if (str == "fire" || str == "Fire" || str == "FIRE")
-		fireMap();
+		fireMap(n);
 
 	else //if(str == "boss" || str == "Boss" || str == "BOSS")
-		bossMap();
+		bossMap(n);
 
 }
 
-
 void MapTile::drawTile()
 {
-	iPoint off = iPointMake(32, 32);
-
 	for (int j = 0; j < tileH; j++)
 	{
 		for (int i = 0; i < tileW; i++)
 		{
 			int k = j * tileW + i;
 			Texture* tex = tile_texs[tile_map[k].index];
-			drawImage(tex, off.x + 32 * i, off.y + 32 * j, TOP | LEFT);
+			drawImage(tex, off.x + tileWSize * i, off.y + tileHSize * j, TOP | LEFT);
 
 			setRGBA(0.5, 0, 0, 1);
-			iRect rt = iRectMake(off.x + 32 * i, off.y + 32 * j, 32, 32);
+			iRect rt = iRectMake(off.x + tileWSize * i, off.y + tileHSize * j, 32, 32);
 			drawRect(rt);
 		}
 	}
@@ -110,116 +93,399 @@ static Tile fi = ForestField(0);
 static Tile wp = WarpSection;
 static Tile wa = ForestWall(0);
 
-void MapTile::grassMap() //초원
+void MapTile::grassMap(int n) //초원
 {
-	fi = ForestField(0);
-	wa = ForestWall(0);
+	fi = ForestField(n);
+	wa = ForestWall(n);
 	
-	Tile* map = new Tile[tileW * tileH]{ //16x12
+	Tile* map;
+
+	if (n == 0) //top-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+
+	else if (n == 1) //top-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else if (n == 2) //bottom-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
 		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
 		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
-		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
 		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
-		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
-	};
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else //if (n == 3) //bottom-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
 
 	tile_map = map;
 }
 
-void MapTile::wildnessMap() //황야
+void MapTile::wildnessMap(int n) //황야
 {
-	fi = DesertField(0);
-	wa = DesertWall(0);
+	fi = DesertField(n);
+	wa = DesertWall(n);
 
-	Tile* map = new Tile[tileW * tileH]{ //16x12
+	Tile* map;
+
+	if (n == 0) //top-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+
+	else if (n == 1) //top-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else if (n == 2) //bottom-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
 		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
 		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
-		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
 		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
-		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
-	};
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else //if (n == 3) //bottom-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	tile_map = map;
+}
+
+void MapTile::iceMap(int n) //얼음
+{
+	fi = IceField(n);
+	wa = IceWall(n);
+
+	Tile* map;
+
+	if (n == 0) //top-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+
+	else if (n == 1) //top-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else if (n == 2) //bottom-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else //if (n == 3) //bottom-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
 
 	tile_map = map;
 }
 
-void MapTile::iceMap() //얼음
+void MapTile::fireMap(int n) //불
 {
-	fi = IceField(0);
-	wa = IceWall(0);
+	fi = FireField(n);
+	wa = FireWall(n);
 
-	Tile* map = new Tile[tileW * tileH]{ //16x12
+	Tile* map;
+
+	if (n == 0) //top-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+
+	else if (n == 1) //top-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else if (n == 2) //bottom-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
 		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
 		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
-		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
 		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
-		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
-	};
-
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else //if (n == 3) //bottom-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
 	tile_map = map;
 }
-
-void MapTile::fireMap() //불
+void MapTile::bossMap(int n) //보스
 {
-	fi = FireField(0);
-	wa = FireWall(0);
+	fi = BossField(n);
+	wa = BossWall(n);
 
-	Tile* map = new Tile[tileW * tileH]{ //16x12
+	Tile* map;
+
+	if (n == 0) //top-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+
+	else if (n == 1) //top-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
+			no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+			no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+			wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
+			no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else if (n == 2) //bottom-left
+	{
+		map = new Tile[tileW * tileH]{ //16x12
 		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
 		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
-		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
 		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
-		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
-	};
-
-	tile_map = map;
-}
-void MapTile::bossMap() //보스
-{
-	fi = BossField(0);
-	wa = BossWall(0);
-
-	Tile* map = new Tile[tileW * tileH]{ //16x12
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
+	else //if (n == 3) //bottom-right
+	{
+		map = new Tile[tileW * tileH]{ //16x12
 		no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
 		no, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
 		no, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
-		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
-		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, no,
+		wp, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, wa, wa, fi, fi, fi, fi, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, wa, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
 		no, fi, fi, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, no,
-		no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no, no,
-	};
+		no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+		};
+	}
 
 	tile_map = map;
 }

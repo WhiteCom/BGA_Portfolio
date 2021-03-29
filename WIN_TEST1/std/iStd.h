@@ -10,6 +10,7 @@
 #include "iSize.h"
 #include "iRect.h"
 #include "iColor.h"
+#include "iImage.h"
 
 // C 런타임 헤더 파일입니다.
 #include <stdio.h>

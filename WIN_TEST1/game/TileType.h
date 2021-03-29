@@ -1,6 +1,21 @@
 #pragma once
 
 //타입 : 필드 - 벽 & 구멍 - 워프 이미지 - 아이템 - 적
+#define NoneSection				{NoneIdx, INF, INF}
+#define WarpSection				{WarpIdx, 0, 1}
+
+//0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
+#define ForestField(n)			{ForestIdx[n], 0, 0}
+#define DesertField(n)			{DesertIdx[n], 0, 0}
+#define IceField(n)				{IceIdx[n], 0, 0}
+#define FireField(n)			{FireIdx[n], 0, 0}
+#define BossField(n)			{BossIdx[n], 0, 0}
+
+#define ForestWall(n)			{ForestWallIdx[n], 1, 2}
+#define DesertWall(n)			{DesertWallIdx[n], 1, 2}
+#define IceWall(n)				{IceWallIdx[n], 1, 2}
+#define FireWall(n)				{FireWallIdx[n], 1, 2}
+#define BossWall(n)				{BossWallIdx[n], 1, 2}
 
 //----------------------------------------
 //Tile1.bmp 내의 필드종류

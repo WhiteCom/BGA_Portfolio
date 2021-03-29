@@ -20,6 +20,7 @@ void setLoading(int gameState, MethodLoad free, MethodLoad load)
 
 	texLoading = createImage("assets/loading/loading.jpg");
 }
+
 void drawLoading(float dt)
 {
 	if (loadingDt == 0.0f)
@@ -45,7 +46,7 @@ void drawLoading(float dt)
 			methodLoad();
 		gameState = toGameState;
 
-		a = 1.0f;
+		a = 1.0f; //완전까맣게
 	}
 	else if (loadingDt < _loadingDt * 2)
 	{
@@ -57,7 +58,7 @@ void drawLoading(float dt)
 			return;
 		}
 		
-		a = 1.0f - (loadingDt - _loadingDt) / _loadingDt;
+		a = 1.0f - (loadingDt - _loadingDt) / _loadingDt; //점점 밝아진다.
 	}
 
 	setRGBA(0, 0, 0, a);

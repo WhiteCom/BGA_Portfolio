@@ -1,54 +1,47 @@
 #include "Game.h"
 
-#include "Tile.h"
-#include "Character.h"
+#include "Intro.h"
+#include "Map.h"
+#include "Ending.h"
+
 #include "Loading.h"
 
-MapTile* t;
+
 
 void loadGame()
 {
-    t = new MapTile();
+    loadIntro(); 
+    gameState = gs_intro;
 }
 
 void drawGame(float dt)
 {
-    Texture* bg = createImage("assets/map.jpg");
-
-    setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
-    clearRect();
-    drawImage(bg, 0, 0, TOP | LEFT);
-
-    freeImage(bg);
-
-    t->makeMap("boss");
-    t->drawTile();
-
-    static bool test = true;
-    iPoint off = iPointZero;
-
-    if (test)
+    switch (gameState)
     {
-        test = false;
-        if (off == iPointZero)
-            off = iPointMake(64, 64); //초기씬에서
-        else
-        {
-            //씬 전환시 워프좌표 이동해야함.
-        }
-        loadCharacter(off);
+    case gs_intro: drawIntro(dt); break;
+    case gs_map: drawMap(dt, "grass"); break;
+    case gs_ending: drawEnding(dt); break;
     }
 
-    drawCharacter(dt, t);
+    drawLoading(dt);
 }
 
 void freeGame()
 {
-    delete t;
+    switch (gameState)
+    {
+    case gs_intro: freeIntro(); break;
+    case gs_map: freeMap(); break;
+    case gs_ending: freeEnding(); break;
+    }
 }
 
 void keyGame(iKeyStat stat, iPoint p)
 {
-	//keyCharacter(stat, p);
-	//return;
+    switch (gameState)
+    {
+    case gs_intro: keyIntro(stat, p); break;
+    case gs_map: keyIntro(stat, p); break;
+    case gs_ending: keyIntro(stat, p); break;
+    }
 }

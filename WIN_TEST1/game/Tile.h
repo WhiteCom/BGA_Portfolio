@@ -32,19 +32,21 @@ public:
 	//타일을 만드는 함수
 	void init(); //타일 초기세팅
 
-	void makeMap(const char* str); //맵 만들기
+	void makeMap(const char* str, int n); //맵 만들기
 	void drawTile();
 
-	void grassMap(); //초원
-	void wildnessMap(); //황야
-	void iceMap(); //얼음
-	void fireMap(); //불
-	void bossMap(); //보스
+	void grassMap(int n); //초원
+	void wildnessMap(int n); //황야
+	void iceMap(int n); //얼음
+	void fireMap(int n); //불
+	void bossMap(int n); //보스
 
 public:
 	Texture** tile_texs; //다양한 타일셋들
 	Tile* tile_map; //현재 생성된 맵
 	int tileNum;
+
+	iPoint off;
 };
 
 
