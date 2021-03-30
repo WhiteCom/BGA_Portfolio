@@ -6,8 +6,6 @@
 
 #include "Loading.h"
 
-
-
 void loadGame()
 {
     loadIntro(); 

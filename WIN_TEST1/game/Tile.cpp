@@ -1,4 +1,5 @@
-﻿#include "Tile.h"
+﻿#if 0
+#include "Tile.h"
 #include "iStd.h"
 
 #include "TileType.h"
@@ -54,16 +55,27 @@ void MapTile::init()
 void MapTile::makeMap(const char* str, int n)
 {
 	
-	if (str == "grass" || str == "Grass" || str == "GRASS")
+	if (strcmp(str, "grass")==0 ||
+		strcmp(str, "Grass")==0 ||
+		strcmp(str, "GRASS")==0)
 		grassMap(n);
 
-	else if (str == "wildness" || str == "Wildness" || str == "WILDNESS")
+	else if (
+		strcmp(str, "wildness")==0 ||
+		strcmp(str, "Wildness")==0 ||
+		strcmp(str, "WILDNESS")==0)
 		wildnessMap(n);
 
-	else if (str == "ice" || str == "Ice" || str == "ICE")
+	else if (
+		str == "ice" ||
+		str == "Ice" ||
+		str == "ICE")
 		iceMap(n);
 
-	else if (str == "fire" || str == "Fire" || str == "FIRE")
+	else if (
+		str == "fire" ||
+		str == "Fire" ||
+		str == "FIRE")
 		fireMap(n);
 
 	else //if(str == "boss" || str == "Boss" || str == "BOSS")
@@ -489,3 +501,4 @@ void MapTile::bossMap(int n) //보스
 
 	tile_map = map;
 }
+#endif

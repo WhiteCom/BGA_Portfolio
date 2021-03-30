@@ -1,5 +1,14 @@
 #pragma once
 
+#define tileW		16
+#define tileH		12
+#define tileWSize	32
+#define tileHSize	32
+#define typeNum		5
+
+#define INF			99
+
+#if 0
 //타입 : 필드 - 벽 & 구멍 - 워프 이미지 - 아이템 - 적
 #define NoneSection				{NoneIdx, INF, INF}
 #define WarpSection				{WarpIdx, 0, 1}
@@ -22,11 +31,11 @@
 //#need update
 //----------------------------------------
 int ForestIdx[4] = {
-	20, 76, 86, 
+	20, 76, 86,
 };
 
 int DesertIdx[4] = {
-	27, 84, 
+	27, 84,
 };
 
 int IceIdx[4] = {
@@ -34,7 +43,7 @@ int IceIdx[4] = {
 };
 
 int FireIdx[4] = {
-	14, 15, 
+	14, 15,
 };
 
 int BossIdx[4] = {
@@ -65,5 +74,6 @@ int FireWallIdx[4] = {
 };
 
 int BossWallIdx[4] = {
-	129, 
+	129,
 };
+#endif

@@ -1,5 +1,6 @@
 #pragma once
 
+#if 0
 #include "iRect.h"
 #include "iType.h"
 
@@ -49,5 +50,5 @@ public:
 	iPoint off;
 };
 
-
+#endif
 

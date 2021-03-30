@@ -40,5 +40,7 @@
 extern int gameState;
 
 typedef void(*MethodLoad)();
-void setLoading(int gameState, MethodLoad free, MethodLoad load);
+typedef void(*MethodTime)(float dt);
+
+void setLoading(int gameState, MethodLoad free, MethodLoad load, MethodTime time=NULL);
 void drawLoading(float dt);

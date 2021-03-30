@@ -2,13 +2,14 @@
 
 int gameState = gs_intro, toGameState;
 MethodLoad methodFree, methodLoad;
+MethodTime methodTime;
 float loadingDt;
 
 #define _loadingDt 0.5f
 
 static Texture* texLoading;
 
-void setLoading(int gameState, MethodLoad free, MethodLoad load)
+void setLoading(int gameState, MethodLoad free, MethodLoad load, MethodTime time)
 {
 	if (loadingDt)
 		return;
@@ -16,6 +17,7 @@ void setLoading(int gameState, MethodLoad free, MethodLoad load)
 	toGameState = gameState;
 	methodFree = free;
 	methodLoad = load;
+	methodTime = time;
 	loadingDt = 0.0000001f;
 
 	texLoading = createImage("assets/loading/loading.jpg");
@@ -44,6 +46,7 @@ void drawLoading(float dt)
 			methodFree();
 		if (methodLoad)
 			methodLoad();
+
 		gameState = toGameState;
 
 		a = 1.0f; //완전까맣게
@@ -67,4 +70,8 @@ void drawLoading(float dt)
 		VCENTER | HCENTER, 0, 0, texLoading->width, texLoading->height,
 		1.0f, 1.0f, 2, 0);
 	setRGBA(1, 1, 1, 1);
+	
+	if (methodTime)
+		methodTime(dt);
+	
 }

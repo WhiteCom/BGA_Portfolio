@@ -1,6 +1,9 @@
 ﻿#include "Character.h"
 
 #include "iImage.h"
+#include "Map.h"
+
+extern bool warpEvent;
 
 //먼저는 이미지만 그려보자. 
 //후에 Hero 파일같이 스프라이트 애니메이션 작업 ㄱ
@@ -127,27 +130,29 @@ void loadCharacter(iPoint off)
 	mainCharacter->position += off;
 }
 
-void drawCharacter(float dt, MapTile* currMap)
+void drawCharacter(float dt)//(float dt, MapTile* currMap)
 {
 
-	MapTile* map = currMap;
+	//MapTile* map = currMap;
 
 	iPoint v = iPointZero;
 
-	int x = mainCharacter->position.x - map->off.x; x /= tileWSize;
-	int y = mainCharacter->position.y - map->off.y; y /= tileHSize;
-	int xy = tileW * y + x;
+	//int x = mainCharacter->position.x - map->off.x; x /= tileWSize;
+	//int y = mainCharacter->position.y - map->off.y; y /= tileHSize;
+	//int x = mainCharacter->position.x - 
+	//int xy = tileW * y + x;
 
 	int check, wpCheck;
 	if (keyStat & keysA)
 	{
 		printf("left\n");
-		check = map->tile_map[xy - 1].value;
-		if (x > 0 && (check == 0 || check == 1))
+		//check = map->tile_map[xy - 1].value;
+		//if (x > 0 && (check == 0 || check == 1))
+		//if (x > 0)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
-			if (check == 1) 
-				keyStat |= keysSpace;
+			//if (check == 1)
+			//	warpEvent = true;
 
 			v.x = -1;
 			mainCharacter->be = BehaveWalkLeft;
@@ -159,12 +164,13 @@ void drawCharacter(float dt, MapTile* currMap)
 	else if (keyStat & keysD)
 	{
 		printf("right\n");
-		check = map->tile_map[xy + 1].value;
-		if (x < tileW - 1 && (check == 0 || check == 1))
+		//check = map->tile_map[xy + 1].value;
+		//if (x < tileW - 1 && (check == 0 || check == 1))
+		//if (x < tileW - 1)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
-			if (check == 1)
-				keyStat |= keysSpace;
+			//if (check == 1)
+			//	warpEvent = true;
 
 			v.x = 1;
 			mainCharacter->be = BehaveWalkRight;
@@ -176,12 +182,13 @@ void drawCharacter(float dt, MapTile* currMap)
 	else if (keyStat & keysW)
 	{
 		printf("Up\n");
-		check = map->tile_map[xy - tileW].value;
-		if (y > 0 && (check == 0 || check == 1))
+		//check = map->tile_map[xy - tileW].value;
+		//if (y > 0 && (check == 0 || check == 1))
+		//if (y > 0)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
-			if (check == 1)
-				keyStat |= keysSpace;
+			//if (check == 1)
+			//	warpEvent = true;
 
 			v.y = -1;
 			mainCharacter->be = BehaveWalkUp;
@@ -192,12 +199,13 @@ void drawCharacter(float dt, MapTile* currMap)
 	else if (keyStat & keysS)
 	{
 		printf("Down\n");
-		check = map->tile_map[xy + tileW].value;
-		if (y < tileH - 1 && (check == 0 || check == 1))
+		//check = map->tile_map[xy + tileW].value;
+		//if (y < tileH - 1 && (check == 0 || check == 1))
+		//if (y < tileH - 1)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
-			if (check == 1)
-				keyStat |= keysSpace;
+			//if (check == 1)
+			//	warpEvent = true;
 
 			v.y = 1;
 			mainCharacter->be = BehaveWalkDown;
@@ -208,7 +216,6 @@ void drawCharacter(float dt, MapTile* currMap)
 	if (v != iPointZero) //move
 	{
 		v /= iPointLength(v);
-		if(currMap->tile_map)
 		mainCharacter->position += v * 32; //타일크기만큼 움직이므로 dt 영향 x
 		printf("now charcter pos : %.2f %.2f\n", mainCharacter->position.x, mainCharacter->position.y);
 	}
@@ -225,10 +232,7 @@ void freeCharacter()
 	delete mainCharacter;
 	
 }
-bool moveCheck(MapTile* map) //맵의 가중치를 보고 움직일수없다 여부 판단
-{
-	return false;
-}
+
 
 void keyCharacter(iKeyStat stat, iPoint point)
 {
