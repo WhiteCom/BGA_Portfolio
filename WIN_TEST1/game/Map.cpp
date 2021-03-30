@@ -139,8 +139,8 @@ void keyMap(iKeyStat stat, iPoint point)
 #else
 
 //타입 : 필드 - 벽 & 구멍 - 워프 이미지 - 아이템 - 적
-#define NoneSection				{NoneIdx, INF, INF}
-#define WarpSection				{WarpIdx, 0, 1}
+#define NoneSection				{NoneIdx, INF, 1}
+#define WarpSection				{WarpIdx, 0, 2}
 
 //0 : 초원, 1 : 황야, 2 : 얼음, 3 : 불, 4 : 보스
 #define ForestField(n)			{ForestIdx[n], 0, 0}
@@ -149,11 +149,11 @@ void keyMap(iKeyStat stat, iPoint point)
 #define FireField(n)			{FireIdx[n], 0, 0}
 #define BossField(n)			{BossIdx[n], 0, 0}
 
-#define ForestWall(n)			{ForestWallIdx[n], 1, 2}
-#define DesertWall(n)			{DesertWallIdx[n], 1, 2}
-#define IceWall(n)				{IceWallIdx[n], 1, 2}
-#define FireWall(n)				{FireWallIdx[n], 1, 2}
-#define BossWall(n)				{BossWallIdx[n], 1, 2}
+#define ForestWall(n)			{ForestWallIdx[n], 1, 3}
+#define DesertWall(n)			{DesertWallIdx[n], 1, 0}
+#define IceWall(n)				{IceWallIdx[n], 1, 0}
+#define FireWall(n)				{FireWallIdx[n], 1, 0}
+#define BossWall(n)				{BossWallIdx[n], 1, 0}
 
 //----------------------------------------
 //Tile1.bmp 내의 필드종류
@@ -211,43 +211,53 @@ bool warpEvent;// delete !!!!!
 Texture* texBg;
 
 Texture** texTile;
+//Texture** texTile2;
 Texture** texDataObj;
 Texture** texObject;
 
-// assets/obj/obj%d.png
-MObject dataObj[3] = {
-    { "assets/tree.png", {0, 0} },
-    { "assets/stone.png", {0, 0} },
-};
 
-MTile dataTile[tileW * tileH] = {
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 9, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 9, 0},{0, 9, 1},{0, 9, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 9, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 9, 2},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-    {0, 1, 0},{0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},{0, 1, 0}, {0, 1, 0},
-};
+//MTile dataTile[tileW * tileH];
+MTile *dataTile;
+MObject* dataObj;
 
-
-struct FObject
+void TileInit()
 {
-    uint8 index;
-    iPoint position;
+    MTile no = NoneSection;
+    MTile wp = WarpSection;
+    MTile fi = ForestField(0);
+    MTile wa = ForestWall(0);
+    MTile tr = {ForestIdx[0], 1, 4};
 
-    void paint(float dt)
-    {
-        Texture* tex = texObject[index];
-        MObject* mo = &dataObj[index];
-        drawImage(tex, position.x + mo->position.x, position.y + mo->position.y, TOP | LEFT);
-    }
-};
+    dataTile = new MTile[tileW * tileH] {
+    no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, tr, tr, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, wp,
+    no, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, wa, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, fi, no,
+    no, no, no, no, no, no, no, wp, no, no, no, no, no, no, no, no,
+    };
+
+    dataObj = new MObject[typeNum]{ 
+        {"assets/Image/none.png", iPointZero},
+        {"assets/Image/warp.png", iPointZero},
+        {"assets/Image/wall.png", iPointZero},
+        {"assets/Image/tree.png", iPointZero},
+        {"assets/Image/box.png", iPointZero},
+    };
+}
+
+void FObject::paint(float dt)
+{
+    Texture* tex = texObject[index];
+    MObject* mo = &dataObj[index];
+    drawImage(tex, position.x + mo->position.x, position.y + mo->position.y, TOP | LEFT);
+}
 
 FObject* fobj;
 int fobjNum;
@@ -259,6 +269,9 @@ void loadMap()
     int i, j;
 
     texTile = createImageDivide(8, 32, "assets/Image/tile1.bmp");
+    //texTile2 = createImageDivide(8, 32, "assets/Image/tile2.bmp");
+
+    TileInit();
 
     // 10 x 10
     fobjNum = 0;
@@ -279,7 +292,6 @@ void loadMap()
         }
     }
 
-
     fobj = new FObject[fobjNum];
     texObject = new Texture * [fobjNum];
     memset(texObject, 0x00, sizeof(Texture*) * fobjNum);
@@ -287,7 +299,7 @@ void loadMap()
     for (i = 0; i < fobjNum; i++)
     {
         fobj[i].index = fobjIndex[i];
-        fobj[i].position = iPointMake(32 * fobjX[i] + 16, 32 * fobjY[i] + 16);
+        fobj[i].position = iPointMake(tileWSize * fobjX[i], tileHSize * fobjY[i]);
 
         texObject[fobjIndex[i]] = createImage(dataObj[fobjIndex[i]].strPath);
     }
@@ -302,6 +314,9 @@ void freeMap()
     for (i = 0; i < 256; i++)
         freeImage(texTile[i]);
     delete texTile;
+
+    delete dataTile;
+    delete dataObj;
 
     delete fobj;
 
@@ -322,6 +337,7 @@ void drawMap(float dt, const char* str)
 
     int i;
 
+    //drawTile
     for (i = 0; i < tileW * tileH; i++)
     {
         MTile* mt = &dataTile[i];
@@ -330,7 +346,7 @@ void drawMap(float dt, const char* str)
         int y = i / tileW * tileHSize;
         drawImage(tex, x, y, TOP | LEFT);
 
-        if (mt->weight == 9)
+        if (mt->weight > 1)
         {
             setRGBA(1, 0, 0, 0.3f);
             fillRect(x, y, tileWSize, tileHSize);
@@ -340,17 +356,9 @@ void drawMap(float dt, const char* str)
 
     // obj + hero : sorting
 
-    for (i = 0; i < fobjNum; i++)
-    {
-        FObject* o = &fobj[i];
-        Texture* tex = texObject[o->index];
-        drawImage(tex, o->position.x, o->position.y, TOP | LEFT);
-    }
-
-    //drawCharacter
     static bool test = true;
     iPoint off = iPointZero;
-    
+
     if (test)
     {
         test = false;
@@ -363,8 +371,17 @@ void drawMap(float dt, const char* str)
         }
         loadCharacter(off);
     }
+    //drawCharacter
+    drawCharacter(dt, fobj);
 
-    drawCharacter(dt);
+    //drawObj
+    for (i = 0; i < fobjNum; i++)
+    {
+        FObject* o = &fobj[i];
+        Texture* tex = texObject[o->index];
+        drawImage(tex, o->position.x, o->position.y, TOP | LEFT);
+    }
+
 
 }
 

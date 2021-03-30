@@ -19,6 +19,7 @@ void keyMap(iKeyStat stat, iPoint point);
 struct MObject
 {
 	const char* strPath;
+	//uint16 img;
 	iPoint position;
 };
 
@@ -29,6 +30,13 @@ struct MTile
 	uint8 obj;// 0:none 1:tree 2:stone 3:
 };
 
+struct FObject
+{
+    uint8 index;
+    iPoint position;
+
+	void paint(float dt);
+};
 
 void loadMap();
 void freeMap();

@@ -130,7 +130,7 @@ void loadCharacter(iPoint off)
 	mainCharacter->position += off;
 }
 
-void drawCharacter(float dt)//(float dt, MapTile* currMap)
+void drawCharacter(float dt, FObject* fObj)//(float dt, MapTile* currMap)
 {
 
 	//MapTile* map = currMap;
@@ -139,8 +139,13 @@ void drawCharacter(float dt)//(float dt, MapTile* currMap)
 
 	//int x = mainCharacter->position.x - map->off.x; x /= tileWSize;
 	//int y = mainCharacter->position.y - map->off.y; y /= tileHSize;
-	//int x = mainCharacter->position.x - 
-	//int xy = tileW * y + x;
+
+	//#issue
+	//fObj를 받아왔으면 배열의 인덱스에 해당하는 오브젝트의 위치가 필요함. 
+	//현재 인덱스가 없이 그냥 포인터의 위치를 계산하는 중
+	int x = mainCharacter->position.x - fObj->position.x; x /= tileWSize;
+	int y = mainCharacter->position.y - fObj->position.y; y /= tileHSize;
+	int xy = tileW * y + x;
 
 	int check, wpCheck;
 	if (keyStat & keysA)
@@ -148,7 +153,7 @@ void drawCharacter(float dt)//(float dt, MapTile* currMap)
 		printf("left\n");
 		//check = map->tile_map[xy - 1].value;
 		//if (x > 0 && (check == 0 || check == 1))
-		//if (x > 0)
+		if (x > 0)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)
@@ -166,7 +171,7 @@ void drawCharacter(float dt)//(float dt, MapTile* currMap)
 		printf("right\n");
 		//check = map->tile_map[xy + 1].value;
 		//if (x < tileW - 1 && (check == 0 || check == 1))
-		//if (x < tileW - 1)
+		if (x < tileW - 1)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)
@@ -184,7 +189,7 @@ void drawCharacter(float dt)//(float dt, MapTile* currMap)
 		printf("Up\n");
 		//check = map->tile_map[xy - tileW].value;
 		//if (y > 0 && (check == 0 || check == 1))
-		//if (y > 0)
+		if (y > 0)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)
@@ -201,7 +206,7 @@ void drawCharacter(float dt)//(float dt, MapTile* currMap)
 		printf("Down\n");
 		//check = map->tile_map[xy + tileW].value;
 		//if (y < tileH - 1 && (check == 0 || check == 1))
-		//if (y < tileH - 1)
+		if (y < tileH - 1)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)

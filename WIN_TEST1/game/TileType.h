@@ -4,7 +4,7 @@
 #define tileH		12
 #define tileWSize	32
 #define tileHSize	32
-#define typeNum		5
+#define typeNum		7
 
 #define INF			99
 
