@@ -37,3 +37,7 @@
 
 #2021-03-25
 - update TileMap Class -> MapTile Class
+
+#2021-03-30
+- update TileType, map, Character
+- add Obj img(assets/Image)
