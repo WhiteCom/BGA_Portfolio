@@ -39,7 +39,7 @@ void keyGame(iKeyStat stat, iPoint p)
     switch (gameState)
     {
     case gs_intro: keyIntro(stat, p); break;
-    case gs_map: keyIntro(stat, p); break;
-    case gs_ending: keyIntro(stat, p); break;
+    case gs_map: keyMap(stat, p); break;
+    case gs_ending: keyEnding(stat, p); break;
     }
 }

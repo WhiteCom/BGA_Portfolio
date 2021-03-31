@@ -408,6 +408,7 @@ bool updateCursor(bool inClient)
         for (;;)
         {
             int n = ShowCursor(FALSE);
+
             if (n < 0) break;
         }
     }

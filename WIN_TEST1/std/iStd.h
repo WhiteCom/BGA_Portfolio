@@ -23,8 +23,8 @@
 #include <memory.h>
 #include <tchar.h>
 
-#define DEV_WIDTH 640
-#define DEV_HEIGHT 480
+#define DEV_WIDTH 1280
+#define DEV_HEIGHT 720
 #define RATE_MONITOR 0.3f
 extern iSize devSize;
 extern iRect viewport;
@@ -54,6 +54,7 @@ void setRGBA(float r, float g, float b, float a);
 void getRGBA(float& r, float& g, float& b, float& a);
 
 void clearRect();
+void setClip(float x, float y, float width, float height);
 
 void drawRect(iRect rt, float radius = 0.0f);
 void drawRect(float x, float y, float width, float height, float radius = 0.0f);
@@ -72,3 +73,24 @@ void drawImage(Texture* img, float x, float y, int anc,
 	float rx, float ry,
 	int xyz, float degree, int reverse = REVERSE_NONE);
 void drawImage(Texture* img, float x, float y, int anc);
+
+//otf, ttf
+const char* getStringName();
+void setStringName(const char* str);
+
+float getStringSize();
+void setStringSize(float size);
+
+void getStringRGBA(float& r, float& g, float& b, float& a);
+void setStringRGBA(float r, float g, float b, float a);
+
+float getStringBorder();
+void setStringBorder(float border);
+
+void getStringBorderRGBA(float& r, float& g, float& b, float& a);
+void setStringBorderRGBA(float r, float g, float b, float a);
+
+void drawString(float x, float y, int anc, const char* szFormat, ...);
+
+iRect rectOfString(const char* szFormat, ...);
+

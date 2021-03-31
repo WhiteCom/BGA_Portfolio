@@ -1,109 +1,647 @@
 ﻿  Character.cpp
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fc 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x309 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x97 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x98 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xab 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xaf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xbd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xbe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x126 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x128 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x129 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x132 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x133 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x13a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x13b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x144 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x145 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x360 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x362 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x363 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x366 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x367 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x466 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x467 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x468 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x469 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x46a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x46f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4dc 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4dd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4de 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4df 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ec 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ee 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x60 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x61 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x63 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x65 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x68 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x69 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(142,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(143,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(146,13): warning C4101: 'wpCheck' :참조되지 않은 지역 변수입니다.
-D:\My_github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(146,6): warning C4101: 'check' :참조되지 않은 지역 변수입니다.
-  WIN_TEST1.vcxproj -> D:\My_github\WINAPI_Portfolio\WIN_TEST1\Debug\WIN_TEST1.exe
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x97 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x98 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xab 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xaf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xbd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xbe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x126 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x128 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x129 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x132 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x133 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x13a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x13b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x144 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x145 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x360 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x362 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x363 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x366 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x367 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x466 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x467 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x468 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x469 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x46a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x46f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4dc 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4dd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4de 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4df 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ec 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ee 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x60 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x61 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x63 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x65 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x68 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x69 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(145,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(146,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Character.cpp(149,13): warning C4101: 'wpCheck' :참조되지 않은 지역 변수입니다.
+  Ending.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  Game.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x60 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x61 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x63 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x65 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x68 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x69 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  Intro.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x60 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x61 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x63 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x65 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x68 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x69 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  Loading.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Loading.cpp(70,57): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Loading.cpp(70,38): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Map.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x5e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x60 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x61 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x63 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x65 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x68 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x69 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0x6c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xa7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x97 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x98 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x9f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xa9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xaa 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xab 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xaf 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xb9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xbd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xbe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0xc7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x126 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x128 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x129 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x132 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x133 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x13a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x13b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x144 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x145 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x14f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x35e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x360 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x362 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x363 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x366 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x367 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x466 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x467 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x468 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x469 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x46a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x46f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4dc 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4dd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4de 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4df 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4e7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ec 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4ee 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f3 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\TileType.h(1,1): warning C4828: 파일에 0x4f4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(226,16): warning C4838: 'int'에서 'uint16'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(227,16): warning C4838: 'int'에서 'uint16'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(228,16): warning C4838: 'int'에서 'uint16'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(229,16): warning C4838: 'int'에서 'uint16'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(230,28): warning C4838: 'int'에서 'uint16'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(304,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(304,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(306,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\Map.cpp(306,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MapEditor.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(132,9): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(133,9): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(136,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(136,18): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(142,33): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(143,33): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(144,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(144,18): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(128,10): warning C4101: 'tw' :참조되지 않은 지역 변수입니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(290,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(291,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(312,63): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(312,43): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(313,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(313,72): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(313,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(314,115): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(314,99): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(314,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(314,43): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(315,120): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(315,104): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(315,80): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(315,44): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(328,72): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(328,56): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(328,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(332,74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\MapEditor.cpp(332,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  WIN_TEST1.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(95,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(94,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(105,38): warning C4552: '*': 식의 결과가 사용되지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(106,38): warning C4552: '*': 식의 결과가 사용되지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(106,43): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(115,22): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(116,23): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(230,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(232,32): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(280,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(291,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(305,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(311,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(325,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(331,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(343,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(349,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(363,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\WIN_TEST1.cpp(369,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iWindow.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.cpp(21,52): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.cpp(21,37): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.cpp(77,38): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.cpp(77,22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.cpp(102,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.cpp(110,32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iArray.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  iImage.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iImage.cpp(53,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iImage.cpp(53,25): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iImage.cpp(118,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iImage.cpp(118,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iPoint.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iPoint.cpp(146,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iPoint.cpp(158,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iPoint.cpp(162,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iPoint.cpp(174,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iStd.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1b 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x1e 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x22 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\game\iWindow.h(1,1): warning C4828: 파일에 0x23 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(12,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(79,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(83,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(143,54): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(143,39): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(145,39): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(145,32): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(145,29): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(145,26): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(396,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(396,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(585,42): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(585,27): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(631,41): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(631,26): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(640,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(643,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(662,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(683,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(686,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(706,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(728,52): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(728,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(728,26): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.cpp(728,20): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iString.cpp
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe6 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xe7 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xea 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xeb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xed 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xef 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf0 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf4 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xf5 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0xfb 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f8 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2f9 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2fe 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x2ff 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x300 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30a 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30c 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30d 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x30f 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x310 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x311 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+D:\Github\WINAPI_Portfolio\WIN_TEST1\std\iStd.h(1,1): warning C4828: 파일에 0x312 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 65001).
+  코드를 생성하고 있습니다...
+  WIN_TEST1.vcxproj -> D:\Github\WINAPI_Portfolio\WIN_TEST1\Debug\WIN_TEST1.exe

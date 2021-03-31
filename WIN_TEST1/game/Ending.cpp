@@ -12,3 +12,8 @@ void freeEnding()
 {
 
 }
+
+void keyEnding(iKeyStat stat, iPoint point)
+{
+
+}

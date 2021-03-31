@@ -1,2 +1,4 @@
 D:\My_github\WINAPI_Portfolio\WIN_TEST1\Debug\WIN_TEST1.exe
 D:\My_github\WINAPI_Portfolio\WIN_TEST1\Debug\WIN_TEST1.pdb
+D:\Github\WINAPI_Portfolio\WIN_TEST1\Debug\WIN_TEST1.exe
+D:\Github\WINAPI_Portfolio\WIN_TEST1\Debug\WIN_TEST1.pdb

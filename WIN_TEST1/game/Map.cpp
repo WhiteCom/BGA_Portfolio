@@ -1,6 +1,7 @@
 ﻿#include "Map.h"
 #include "TileType.h"
 #include "Character.h"
+#include "MapEditor.h"
 
 #if 0
 #include "Loading.h"
@@ -299,7 +300,10 @@ void loadMap()
     for (i = 0; i < fobjNum; i++)
     {
         fobj[i].index = fobjIndex[i];
-        fobj[i].position = iPointMake(tileWSize * fobjX[i], tileHSize * fobjY[i]);
+        if(i == 3) //tree
+            fobj[i].position = iPointMake(tileWSize * fobjX[i], tileHSize * fobjY[i] - tileWSize * tileW);
+        else
+            fobj[i].position = iPointMake(tileWSize * fobjX[i], tileHSize * fobjY[i]);
 
         texObject[fobjIndex[i]] = createImage(dataObj[fobjIndex[i]].strPath);
     }
@@ -328,8 +332,22 @@ void freeMap()
     delete texObject;
 }
 
+MapEditor t;
+
 void drawMap(float dt, const char* str)
 {
+    //draw Bg
+    //setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
+    //clearRect();
+    //drawImage(texBg, 0, 0, TOP | LEFT);
+    clearRect();
+    
+    drawToolRect();
+
+   
+  
+
+#if 0
     //draw Bg
     setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
     clearRect();
@@ -363,7 +381,7 @@ void drawMap(float dt, const char* str)
     {
         test = false;
         if (off == iPointZero)
-            off = iPointMake(tileWSize * 2, tileHSize * 2); //초기씬에서
+            off = iPointMake(tileWSize, tileHSize); //초기씬에서
         else
         {
             //#need update
@@ -372,7 +390,7 @@ void drawMap(float dt, const char* str)
         loadCharacter(off);
     }
     //drawCharacter
-    drawCharacter(dt, fobj);
+    drawCharacter(dt, dataTile);
 
     //drawObj
     for (i = 0; i < fobjNum; i++)
@@ -381,15 +399,17 @@ void drawMap(float dt, const char* str)
         Texture* tex = texObject[o->index];
         drawImage(tex, o->position.x, o->position.y, TOP | LEFT);
     }
-
-
+#endif
 }
+
+
 
 void keyMap(iKeyStat stat, iPoint point)
 {
     switch (stat)
     {
     case iKeyStatBegan:
+        //t.openObject("test");
         break;
 
     case iKeyStatMoved:

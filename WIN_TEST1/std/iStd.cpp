@@ -137,6 +137,15 @@ void clearRect()
 	));
 }
 
+void setClip(float x, float y, float width, float height)
+{
+	if (width == 0.0f || height == 0.0f)
+		graphics->SetClip(Rect(0, 0, devSize.width, devSize.height));
+	else
+		graphics->SetClip(Rect(x, y, width, height));
+
+}
+
 void drawRect(iRect rt, float radius)
 {
 	drawRect(rt.origin.x, rt.origin.y, rt.size.width, rt.size.height, radius);
@@ -387,4 +396,348 @@ void drawImage(Texture* tex, float x, float y, int anc)
 		0, 0, tex->width, tex->height,
 		1.0f, 1.0f,
 		2, 0);
+}
+
+static char* stringName = NULL;
+static float stringSize = 20.f;
+static float stringR = 1.0f, stringG = 1.0f, stringB = 1.0f, stringA = 1.0f;
+static float stringBorder = 0.0f;
+static float stringBorderR = 1.0f, stringBorderG = 1.0f, stringBorderB = 1.0f, stringBorderA = 1.0f;
+
+const char* getStringName()
+{
+	return stringName;
+}
+void setStringName(const char* str)
+{
+	if (stringName)
+	{
+		if (strcmp(stringName, str) == 0)
+			return;
+
+		delete stringName;
+	}
+
+	stringName = new char[strlen(str) + 1];
+	strcpy(stringName, str);
+}
+
+float getStringSize()
+{
+	return stringSize;
+}
+void setStringSize(float size)
+{
+	stringSize = size;
+}
+
+void getStringRGBA(float& r, float& g, float& b, float& a)
+{
+	stringR = r;
+	stringG = g;
+	stringB = b;
+	stringA = a;
+}
+
+void setStringRGBA(float r, float g, float b, float a)
+{
+	stringBorderR = r;
+	stringBorderG = g;
+	stringBorderB = b;
+	stringBorderA = a;
+}
+
+float getStringBorder()
+{
+	return stringBorder;
+}
+void setStringBorder(float border)
+{
+	stringBorder = border;
+}
+
+void getStringBorderRGBA(float& r, float& g, float& b, float& a)
+{
+	r = stringBorderR;
+	g = stringBorderG;
+	b = stringBorderB;
+	a = stringBorderA;
+}
+
+void setStringBorderRGBA(float r, float g, float b, float a)
+{
+	stringBorderR = r;
+	stringBorderG = g;
+	stringBorderB = b;
+	stringBorderA = a;
+}
+
+void checkFontFamily(FontFamily* ff, int& fontStyle)
+{
+	const char* path = getStringName();
+	if (path[0] != 'a' || path[1] != 's' || path[2] != 's') //assets
+	{
+		wchar_t* wstr = utf8_to_utf16(path);
+		FontFamily f(wstr);
+		delete wstr;
+		fontStyle = FontStyleRegular;
+
+		memcpy(ff, &f, sizeof(FontFamily));
+	}
+	else
+	{
+		PrivateFontCollection* pfc = new PrivateFontCollection();
+
+		wchar_t* wstr = utf8_to_utf16(getStringName());
+		pfc->AddFontFile(wstr);
+		delete wstr;
+
+		int count = pfc->GetFamilyCount();
+		int found;
+		pfc->GetFamilies(count, ff, &found);
+
+		delete pfc;
+
+		for (int i = 0; i < found; i++)
+		{
+			//ff->IsAvilable();
+			if (ff->IsStyleAvailable(FontStyleRegular))
+			{
+				fontStyle = FontStyleRegular;
+				return;
+			}
+			else if (ff->IsStyleAvailable(FontStyleBold))
+			{
+				fontStyle = FontStyleBold;
+				return;
+			}
+		}
+	}
+}
+
+void drawString(float x, float y, int anc, const char* szFormat, ...)
+{
+	char szText[1024];
+	va_start_end(szText, szFormat);
+
+	iRect r = rectOfString(szText);
+	x -= r.origin.x;
+	y -= r.origin.y;
+
+	switch (anc)
+	{
+	case TOP | LEFT:														break;
+	case TOP | RIGHT:		x -= r.size.width;								break;
+	case TOP | HCENTER:		x -= r.size.width / 2;							break;
+
+	case BOTTOM | LEFT:								y -= r.size.height;		break;
+	case BOTTOM | RIGHT:	x -= r.size.width;		y -= r.size.height;		break;
+	case BOTTOM | HCENTER:	x -= r.size.width / 2;	y -= r.size.height;		break;
+
+	case VCENTER | LEFT:							y -= r.size.height / 2;	break;
+	case VCENTER | RIGHT:	x -= r.size.width;		y -= r.size.height / 2;	break;
+	case VCENTER | HCENTER:	x -= r.size.width / 2;	y -= r.size.height / 2;	break;
+	}
+
+	PointF position(x, y);
+
+	FontFamily ff;
+	int fontStyle;
+	checkFontFamily(&ff, fontStyle);
+	StringFormat sf;
+
+	GraphicsPath path;
+	wchar_t* wstr = utf8_to_utf16(szText);
+	path.AddString(wstr, wcslen(wstr), &ff, fontStyle, getStringSize(), position, &sf);
+	delete wstr;
+
+	float fr, fg, fb, fa;
+
+	if (getStringBorder())
+	{
+		getStringBorderRGBA(fr, fg, fb, fa);
+
+		Pen pen(Color(floatToUint8(fa),
+			floatToUint8(fr),
+			floatToUint8(fg),
+			floatToUint8(fb)), stringBorder);
+
+		pen.SetLineJoin(LineJoinRound);
+		graphics->DrawPath(&pen, &path);
+	}
+	getStringRGBA(fr, fg, fb, fa);
+	SolidBrush brush(Color(floatToUint8(fa),
+		floatToUint8(fr),
+		floatToUint8(fg),
+		floatToUint8(fb)));
+
+	graphics->FillPath(&brush, &path);
+}
+
+class StringSize
+{
+public:
+	Bitmap* bmp;
+	Graphics* g;
+public:
+	StringSize()
+	{
+		bmp = new Bitmap(devSize.width, devSize.height, PixelFormat32bppARGB);
+		g = Graphics::FromImage(bmp);
+	}
+	virtual ~StringSize()
+	{
+		delete bmp;
+		delete g;
+	}
+
+	iRect rect(const char* szText)
+	{
+		g->Clear(Color(0, 0, 0, 0));
+
+		PointF position(0, 0);
+
+		FontFamily ff;
+		int fontStyle;
+		checkFontFamily(&ff, fontStyle);
+		StringFormat sf;
+
+		GraphicsPath path;
+		wchar_t* wstr = utf8_to_utf16(szText);
+		path.AddString(wstr, wcslen(wstr), &ff, fontStyle, getStringSize(), position, &sf);
+		delete wstr;
+
+		float fr, fg, fb, fa;
+		if (getStringBorder())
+		{
+			getStringBorderRGBA(fr, fg, fb, fa);
+
+			Pen pen(Color(floatToUint8(fa),
+				floatToUint8(fr),
+				floatToUint8(fg),
+				floatToUint8(fb)), stringBorder);
+
+			pen.SetLineJoin(LineJoinRound);
+
+		}
+		getStringRGBA(fr, fg, fb, fa);
+		SolidBrush brush(Color(floatToUint8(fa),
+			floatToUint8(fr),
+			floatToUint8(fg),
+			floatToUint8(fb)));
+
+		g->FillPath(&brush, &path);
+
+		Rect rect(0, 0, devSize.width, devSize.height);
+		BitmapData bmpData;
+		bmp->LockBits(&rect, ImageLockModeRead, PixelFormat32bppARGB, &bmpData);
+
+		bmpData.Stride;
+		//uint32* pixels = (uint32*)bmpData.Scan0;
+		uint8* rgba = (uint8*)bmpData.Scan0;
+		// 0 ====> width - 1
+		int left = bmpData.Width;
+		for (int i = 0; i < bmpData.Width; i++)
+		{
+			bool exist = false;
+			for (int j = 0; j < bmpData.Height; j++)
+			{
+				if (rgba[bmpData.Stride * j + 4 * i + 3])
+				{
+					exist = true;
+					break;
+				}
+			}
+			if (exist)
+			{
+				left = i;
+				break;
+			}
+		}
+		// 0 <===== width - 1 
+		int right = -1;
+		for (int i = bmpData.Width - 1; i > -1; i--)
+		{
+			bool exist = false;
+			for (int j = 0; j < bmpData.Height; j++)
+			{
+				if (rgba[bmpData.Stride * j + 4 * i + 3])
+				{
+					exist = true;
+					break;
+				}
+			}
+			if (exist)
+			{
+				right = i;
+				break;
+			}
+		}
+		if (right < left)
+		{
+			bmp->UnlockBits(&bmpData);
+			return iRectMake(0, 0, 0, 0);
+		}
+
+		int top;
+		for (int j = 0; j < bmpData.Height; j++)
+		{
+			bool exist = false;
+			for (int i = 0; i < bmpData.Width; i++)
+			{
+				if (rgba[bmpData.Stride * j + 4 * i + 3])
+				{
+					exist = true;
+					break;
+				}
+			}
+
+			if (exist)
+			{
+				top = j;
+				break;
+			}
+		}
+
+		int bottom;
+		for (int j = bmpData.Height - 1; j > -1; j--)
+		{
+			bool exist = false;
+			for (int i = 0; i < bmpData.Width; i++)
+			{
+				if (rgba[bmpData.Stride * j + 4 * i + 3])
+				{
+					exist = true;
+					break;
+				}
+			}
+
+			if (exist)
+			{
+				bottom = j;
+				break;
+			}
+		}
+
+		bmp->UnlockBits(&bmpData);
+		if (bottom < top)
+		{
+			return iRectMake(0, 0, 0, 0);
+		}
+
+		return iRectMake(left, top, right - left, bottom - top);
+	}
+};
+
+static StringSize* ss = NULL;
+
+iRect rectOfString(const char* szFormat, ...)
+{
+	if (ss == NULL)
+		ss = new StringSize();
+
+	char szText[1024];
+	va_start_end(szText, szFormat);
+
+	return ss->rect(szText);
 }
