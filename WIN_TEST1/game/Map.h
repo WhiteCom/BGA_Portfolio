@@ -3,6 +3,8 @@
 #include "iStd.h"
 
 #if 0
+
+#if 0
 #include "Tile.h"
 #include "Character.h"
 
@@ -42,5 +44,7 @@ void loadMap();
 void freeMap();
 void drawMap(float dt, const char* str);
 void keyMap(iKeyStat stat, iPoint point);
+
+#endif
 
 #endif

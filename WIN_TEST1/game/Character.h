@@ -2,10 +2,10 @@
 
 #include "iStd.h"
 #include "TileType.h"
-#include "Map.h"
+#include "Map2.h"
 
 void loadCharacter(iPoint off);
 //void drawCharacter(float dt, MapTile* currMap);
-void drawCharacter(float dt, MTile* dataTile);
+void drawCharacter(float dt);
 void freeCharacter();
 void keyCharacter(iKeyStat stat, iPoint point);

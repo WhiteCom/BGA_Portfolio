@@ -1,5 +1,6 @@
 #pragma once
 
+#if 0
 #include "iType.h"
 
 class MapEditor
@@ -13,6 +14,8 @@ public:
 	void openObject(const char* szFormat, ...);
 
 	void draw(float dt, iPoint off);
+
+	void init(int x, int y, int w, int h);
 
 	void load(const char* szFormat, ...);
 	void save(const char* str);
@@ -34,5 +37,7 @@ public:
 	int selectedTile, selectedAttr, selectedObject;
 };
 
-void drawToolRect();
+void loadMapEditor();
+void drawMapEditor(float dt);
 void freeMapEditor();
+#endif

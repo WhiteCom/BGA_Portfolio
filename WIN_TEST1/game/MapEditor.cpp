@@ -2,7 +2,7 @@
 
 #include "iStd.h"
 #include "iWindow.h"
-
+#if 0
 MapEditor::MapEditor()
 {
 	tileX = 0;
@@ -145,6 +145,23 @@ void MapEditor::draw(float dt, iPoint off)
 	}
 }
 
+void MapEditor::init(int x, int y, int w, int h)
+{
+	tileX = 16;
+	tileY = 12;
+	tileWidth = 32;
+	tileHeight = 32;
+
+	int tileXY = tileX * tileY;
+	tileIndex = new int[tileXY];
+	tileWeight = new int[tileXY];
+	objIndex = new int[tileXY];
+
+	numTiles = 8 * 32;
+
+	mode = 0;
+
+}
 
 void MapEditor::load(const char* szFormat, ...)
 {
@@ -305,45 +322,22 @@ void MapEditor::insert(iPoint point)
 	}
 }
 
-void drawToolRect()
+MapEditor t;
+
+void loadMapEditor()
 {
-	int tileWidth = 32, tileHeight = 32, tileW = 16, tileH = 12;
+	t.init(16, 12, 32, 32);
+	iPoint point = iPointMake(32, 32);
+	t.insert(point);
 
-	iRect EditRT = iRectMake(0, 0, tileWidth * tileW, tileHeight * tileH);
-	iRect TileRT = iRectMake(0, tileHeight * tileH + tileHeight, tileWidth*8, tileHeight*8);
-	iRect WeightRT = iRectMake(tileWidth * 8 + tileWidth, tileHeight * tileH + tileHeight, tileWidth * 8, tileHeight * 8);
-	iRect ObjRT = iRectMake(tileWidth * 8 * 2 + tileWidth * 2, tileHeight * tileH + tileHeight, tileWidth * 8, tileHeight * 8);
 
-	setRGBA(1, 0, 0, 1);
-	drawRect(EditRT);
-	drawRect(TileRT);
-	drawRect(WeightRT);
-	drawRect(ObjRT);
-	setRGBA(1, 1, 1, 1);
-
-	Texture** tex = createImageDivide(8, 32, "assets/Image/tile1.bmp");
-	
-	int i;
-
-	setClip(0, tileHeight * tileH + tileHeight, tileWidth * 8, tileHeight * 8);
-	
-	//클리핑 된 영역을 마우스 스크롤 될 수 있도록 해보자. 
-	//그리고 타일을 선택하면 이게 선택되었다고 표기가 될 수 있어야 한다.
-	//예) mode == 0 -> selectedTile => ? 이게 되도록 (즉 selectedTile에 값이 들어가도록 해주기)
-	for (i = 0; i < 256; i++)
-	{
-		drawImage(tex[i], tileWidth * (i%8), (tileHeight * tileH + tileHeight) + (i/8) * tileHeight, TOP|LEFT);
-	}
-
-	setClip(0, 0, 0, 0);
-
-	for (i = 0; i < 256; i++)
-		delete tex[i];
-	delete tex;
 }
+void drawMapEditor(float dt)
+{
 
+}
 void freeMapEditor()
 {
 
 }
-
+#endif

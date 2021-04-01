@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GDIPVER=0x0110;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Github\WINAPI_Portfolio\WIN_TEST1\game;D:\Github\WINAPI_Portfolio\WIN_TEST1\std;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\날짜별 코드\개인포폴\WinAPI_Portfolio\DHA\DHA\game;C:\Users\user\Desktop\날짜별 코드\개인포폴\WinAPI_Portfolio\DHA\DHA\std;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -148,6 +148,7 @@
     <ClInclude Include="game\iWindow.h" />
     <ClInclude Include="game\Loading.h" />
     <ClInclude Include="game\Map.h" />
+    <ClInclude Include="game\Map2.h" />
     <ClInclude Include="game\MapEditor.h" />
     <ClInclude Include="game\Test.h" />
     <ClInclude Include="game\Tile.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="game\iWindow.cpp" />
     <ClCompile Include="game\Loading.cpp" />
     <ClCompile Include="game\Map.cpp" />
+    <ClCompile Include="game\Map2.cpp" />
     <ClCompile Include="game\MapEditor.cpp" />
     <ClCompile Include="game\Test.cpp" />
     <ClCompile Include="game\Tile.cpp" />

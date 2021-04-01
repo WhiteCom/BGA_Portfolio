@@ -130,7 +130,7 @@ void loadCharacter(iPoint off)
 	mainCharacter->position += off;
 }
 
-void drawCharacter(float dt, MTile* dataTile)//(float dt, MapTile* currMap)
+void drawCharacter(float dt)//(float dt, MapTile* currMap)
 {
 
 	//MapTile* map = currMap;
@@ -140,7 +140,6 @@ void drawCharacter(float dt, MTile* dataTile)//(float dt, MapTile* currMap)
 	//int x = mainCharacter->position.x - map->off.x; x /= tileWSize;
 	//int y = mainCharacter->position.y - map->off.y; y /= tileHSize;
 
-	MTile* map = dataTile;
 
 	int x = mainCharacter->position.x; x /= tileWSize;
 	int y = mainCharacter->position.y; y /= tileHSize;
@@ -153,9 +152,8 @@ void drawCharacter(float dt, MTile* dataTile)//(float dt, MapTile* currMap)
 	{
 		printf("left\n");
 		//check = map->tile_map[xy - 1].value;
-		check = map[xy - 1].weight;
 		//if (x > 0 && (check == 0 || check == 1))
-		if (x > 1 && check == 0)
+		if (x > 1)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)
@@ -172,9 +170,8 @@ void drawCharacter(float dt, MTile* dataTile)//(float dt, MapTile* currMap)
 	{
 		printf("right\n");
 		//check = map->tile_map[xy + 1].value;
-		check = map[xy + 1].weight;
 		//if (x < tileW - 1 && (check == 0 || check == 1))
-		if (x < tileW - 2 && check == 0)
+		if (x < tileW - 2)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)
@@ -191,9 +188,8 @@ void drawCharacter(float dt, MTile* dataTile)//(float dt, MapTile* currMap)
 	{
 		printf("Up\n");
 		//check = map->tile_map[xy - tileW].value;
-		check = map[xy - tileW].weight;
 		//if (y > 0 && (check == 0 || check == 1))
-		if (y > 1 || check == 0)
+		if (y > 1)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)
@@ -209,9 +205,8 @@ void drawCharacter(float dt, MTile* dataTile)//(float dt, MapTile* currMap)
 	{
 		printf("Down\n");
 		//check = map->tile_map[xy + tileW].value;
-		check = map[xy + tileW].weight;
 		//if (y < tileH - 1 && (check == 0 || check == 1))
-		if (y < tileH - 2 && check == 0)
+		if (y < tileH - 2)
 		{
 			//warp일때 씬전환이 일어나는 변수를 조작해줘야함
 			//if (check == 1)

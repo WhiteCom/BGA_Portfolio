@@ -1,7 +1,7 @@
 ﻿#include "Intro.h"
 
 #include "Loading.h"
-#include "Map.h"
+#include "Map2.h"
 
 Texture* texIntroBg;
 
@@ -28,7 +28,7 @@ void drawIntro(float dt)
 	drawImage(texIntroBg, 0, 0, TOP | LEFT);
 
 	if (keyStat == keysSpace)
-		setLoading(gs_map, freeIntro, loadMap);
+		setLoading(gs_map2, freeIntro, loadMap);
 }
 
 void keyIntro(iKeyStat stat, iPoint point)
@@ -36,7 +36,7 @@ void keyIntro(iKeyStat stat, iPoint point)
 	switch(stat)
 	{
 		case iKeyStatBegan:
-			setLoading(gs_map, freeIntro, loadMap);
+			setLoading(gs_map2, freeIntro, loadMap);
 			break;
 		case iKeyStatMoved:
 			break;

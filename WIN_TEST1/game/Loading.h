@@ -5,8 +5,9 @@
 #define gs_intro			0
 #define gs_menu				1
 #define gs_map				2
-#define gs_proc				3
-#define gs_ending			4
+#define gs_map2				3
+#define gs_proc				4
+#define gs_ending			5
 
 #define gs_loading			0xff
 

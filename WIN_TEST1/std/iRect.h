@@ -14,3 +14,5 @@ struct iRect
 iRect iRectMake(iPoint p, iSize s);
 iRect iRectMake(float x, float y, float width, float height);
 
+bool containPoint(iPoint point, iRect rect);
+bool containRect(iRect rt0, iRect rt1);

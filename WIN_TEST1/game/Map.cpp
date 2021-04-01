@@ -4,6 +4,8 @@
 #include "MapEditor.h"
 
 #if 0
+
+#if 0
 #include "Loading.h"
 #include "Intro.h"
 #include "MapGlobal.h"
@@ -263,10 +265,17 @@ void FObject::paint(float dt)
 FObject* fobj;
 int fobjNum;
 
+iPoint positionTile, prevPosition;
+bool movingTile;
+
 void loadMap()
 {
     texBg = createImage("assets/map.jpg");
 
+    positionTile = iPointMake(0, tileHSize * tileH + tileHSize);
+    prevPosition = iPointZero;
+    movingTile = false;
+#if 0
     int i, j;
 
     texTile = createImageDivide(8, 32, "assets/Image/tile1.bmp");
@@ -307,12 +316,14 @@ void loadMap()
 
         texObject[fobjIndex[i]] = createImage(dataObj[fobjIndex[i]].strPath);
     }
+#endif
 }
 
 void freeMap()
 {
     freeImage(texBg);
 
+#if 0
     int i;
 
     for (i = 0; i < 256; i++)
@@ -330,9 +341,42 @@ void freeMap()
             freeImage(texObject[i]);
     }
     delete texObject;
+#endif
 }
 
-MapEditor t;
+
+void drawToolRect()
+{
+    iRect EditRT = iRectMake(0, 0, tileWSize * tileW, tileHSize * tileH);
+    iRect TileRT = iRectMake(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+    iRect WeightRT = iRectMake(tileWSize * 8 + tileWSize, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+    iRect ObjRT = iRectMake(tileWSize * 8 * 2 + tileWSize * 2, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+
+    setRGBA(1, 0, 0, 1);
+    drawRect(EditRT);
+    drawRect(TileRT);
+    drawRect(WeightRT);
+    drawRect(ObjRT);
+    setRGBA(1, 1, 1, 1);
+
+    Texture** tex = createImageDivide(8, 32, "assets/Image/tile1.bmp");
+
+    int i;
+
+    setClip(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+
+    for (i = 0; i < 256; i++)
+    {
+        drawImage(tex[i], positionTile.x + (i % 8) * tileWSize, positionTile.y + (i / 8) * tileHSize, TOP | LEFT);
+    }
+
+    setClip(0, 0, 0, 0);
+
+    for (i = 0; i < 256; i++)
+        delete tex[i];
+    delete tex;
+}
+
 
 void drawMap(float dt, const char* str)
 {
@@ -403,7 +447,6 @@ void drawMap(float dt, const char* str)
 }
 
 
-
 void keyMap(iKeyStat stat, iPoint point)
 {
     switch (stat)
@@ -418,5 +461,37 @@ void keyMap(iKeyStat stat, iPoint point)
     case iKeyStatEnded:
         break;
     }
+
+    if (stat == iKeyStatBegan)
+    {
+        iRect rt;
+        rt.origin = positionTile;
+        rt.size = iSizeMake(tileWSize * 8, tileHSize * 32);
+        if (containPoint(point, rt))
+        {
+            movingTile = true;
+            prevPosition = point;
+        }
+    }
+    else if (stat == iKeyStatMoved)
+    {
+        if (movingTile)
+        {
+            iPoint mp = point - prevPosition;
+            prevPosition = point;
+
+            positionTile.y += mp.y;
+            if (positionTile.y < tileHSize * tileH + tileHSize - tileHSize * 24)
+                positionTile.y = tileHSize * tileH + tileHSize - tileHSize * 24;
+            else if (positionTile.y > tileHSize * tileH + tileHSize)
+                positionTile.y = tileHSize * tileH + tileHSize;
+        }
+    }
+    else if (stat == iKeyStatEnded)
+    {
+        movingTile = false;
+    }
 }
+#endif
+
 #endif
