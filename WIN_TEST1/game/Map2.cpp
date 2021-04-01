@@ -228,8 +228,10 @@ void MapEditor::init(int x, int y, int w, int h)
 
 	int tileXY = tileX * tileY, i;
 	tileIndex = new int[tileXY];
+
 	for (i = 0; i < tileXY; i++)
 		tileIndex[i] = 128;
+
 	tileWeight = new int[tileXY];
 	objIndex = new int[tileXY];
 
@@ -238,8 +240,10 @@ void MapEditor::init(int x, int y, int w, int h)
 	texTiles = new Texture* [tileXY];
 	
 	//#need issue!! 이거 인덱스 번호만 잘 수정하면 됨.
-	for (i = 0; tileXY; i++)
+	for (i = 0; i<tileXY; i++)
 	{
+		if (i == 180) 
+			int test = 0;
 		int ti = tileIndex[i];
 		texTiles[i] = tmp[ti];
 	}
@@ -517,7 +521,7 @@ void drawMap(float dt, const char* str)
     
     drawToolRect();
 
-	iPoint off = iPointMake(tileW * 10, 0);
+	iPoint off = iPointMake(tileW * tileWSize + tileWSize * 2, 0);
 	tEditor->draw(dt, off);
 }
 
