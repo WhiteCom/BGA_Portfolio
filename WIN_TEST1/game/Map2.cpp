@@ -201,11 +201,15 @@ void MapEditor::draw(float dt, iPoint off)
 	int i, xy = tileX * tileY;
 	int ti, tw, oi;
 
+	Texture** texs = createImageDivide(8, 32, "assets/Image/tile1.bmp");
+
 	for (i = 0; i < xy; i++)
 	{
 		int x = off.x + i % tileX * tileWidth;
 		int y = off.y + i / tileX * tileHeight;
 		ti = tileIndex[i];
+		texTiles[ti] = texs[ti]; //바뀐 이미지로 체인지하기.
+
 		Texture* tex = texTiles[ti];
 		drawImage(tex, x, y, TOP | LEFT);
 
@@ -217,6 +221,8 @@ void MapEditor::draw(float dt, iPoint off)
 		//y = positionObjects[oi].y + y + tileHeight / 2;
 		//drawImage(tex, x, y, TOP | LEFT);
 	}
+
+	delete texs;
 }
 
 void MapEditor::init(int x, int y, int w, int h)
@@ -239,7 +245,6 @@ void MapEditor::init(int x, int y, int w, int h)
 
 	texTiles = new Texture* [tileXY];
 	
-	//#need issue!! 이거 인덱스 번호만 잘 수정하면 됨.
 	for (i = 0; i<tileXY; i++)
 	{
 		if (i == 180) 
@@ -417,6 +422,7 @@ void MapEditor::insert(iPoint point)
 	{
 		objIndex[xy] = selectedObject;
 	}
+
 }
 
 //Texture** tex 이친구를 init할때 멤버변수 texTiles에 집어넣고, 
@@ -481,8 +487,12 @@ iRect ObjRT;
 void drawToolRect()
 {
 	//EditRT = new iRect[tileW * tileH];
+
+	float stw = ((tileWSize * 9) + (tileWSize * 16 + tileWSize)) / 2 - tileWSize / 2;
+	float sth = ((tileHSize * (tileH+1)) + (tileHSize * (tileH+9))) / 2 - tileHSize / 2;
+
     TileRT        = iRectMake(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
-    selectTileRT  = iRectMake(tileWSize * tileW , 0, tileWSize, tileHSize);
+    selectTileRT  = iRectMake(stw, sth, tileWSize, tileHSize);
     WeightRT      = iRectMake(tileWSize * 8 + tileWSize, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
     ObjRT         = iRectMake(tileWSize * 8 * 2 + tileWSize * 2, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
 
@@ -497,9 +507,9 @@ void drawToolRect()
 	}
 
     drawRect(TileRT);
-    drawRect(selectTileRT);
     drawRect(WeightRT);
     drawRect(ObjRT);
+    fillRect(selectTileRT);
     setRGBA(1, 1, 1, 1);
 
 	drawImage(texSelectTile, selectTileRT.origin.x, selectTileRT.origin.y, TOP | LEFT);
