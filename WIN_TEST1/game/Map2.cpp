@@ -213,6 +213,7 @@ void MapEditor::draw(float dt, iPoint off)
 		Texture* tex = texTiles[ti];
 		drawImage(tex, x, y, TOP | LEFT);
 
+		//가중치
 		//tw = tileWeight[i];
 
 		//oi = objIndex[i];
@@ -425,13 +426,15 @@ void MapEditor::insert(iPoint point)
 
 }
 
-//Texture** tex 이친구를 init할때 멤버변수 texTiles에 집어넣고, 
-//이후에 insert할때, 아래쪽에 보면 이미 다 만들어진 그것을 갖고, 멤버변수 tileIndex에 집어넣은 후, 
-//draw에서 texTile과 tileIndex를 이용해서, 그릴 수 있으면 된다. (x, y, width, height 다 있으니 가능함)
-
 Texture* texBg;
 Texture** tex; 
 Texture** tmpTiles;
+
+//#need update
+//가중치 정보를 글자로 그려질 수 있도록 하는게 중요 
+//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, INF
+//weight 변수 필요함.
+
 Texture* texSelectTile;
 iPoint positionTile, prevPosition;
 iPoint* positionEditRT;
@@ -440,6 +443,9 @@ bool movingTile;
 MapEditor* tEditor;
 iRect* EditRT;
 
+//load 할때 현재 타일에 대한 처리만 했음
+//next step : 가중치에 대한 처리 -> drawString으로 가중치 숫자를 지정해보자.
+//next step2 : 오브젝트에 대한 처리 -> 타일과 비슷하게
 void loadMap()
 {
     texBg = createImage("assets/map.jpg");
@@ -550,10 +556,13 @@ void keyMap(iKeyStat stat, iPoint point)
         break;
     }
 
+	//EditRT 영역들
 	iRect rt = iRectMake(0, 0, tileW * tileWSize-1, tileH * tileHSize-1);
 
     if (stat == iKeyStatBegan)
     {
+		//TileRT 영역에 있으면 
+		//mode == 0
         if (containPoint(point, TileRT))
         {
             movingTile = true;
@@ -570,6 +579,13 @@ void keyMap(iKeyStat stat, iPoint point)
 				}
             }
         }
+		//else if : containPoint WeightRT (가중치 박스에 커서가 간 경우)
+		//mode == 1
+
+		//else if : containPoint objectRT (오브젝트 박스에 커서가 간 경우)
+		//mode == 2
+
+		//EditRT에 커서가 간 경우 : 실제로 저장되는 타일 영역
 		else if (containPoint(point, rt))
 		{
 			tEditor->insert(point - rt.origin);
