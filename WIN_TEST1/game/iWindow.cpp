@@ -132,23 +132,25 @@ iPoint coordinate(int x, int y)
     return p;
 }
 
+#define CP_CODE CP_UTF8
 wchar_t* utf8_to_utf16(const char* szFormat, ...)
 {
     char szText[1024];
     va_start_end(szText, szFormat);
 
-    int length = MultiByteToWideChar(CP_UTF8, 0, szText, -1, NULL, 0);
+    int length = MultiByteToWideChar(CP_CODE, 0, szText, -1, NULL, 0);
     wchar_t* ws = new wchar_t[length];
-    MultiByteToWideChar(CP_UTF8, 0, szText, strlen(szText) + 1, ws, length);
+    MultiByteToWideChar(CP_CODE, 0, szText, strlen(szText) + 1, ws, length);
     
     return ws;
 }
 
 char* utf16_to_utf8(const wchar_t* str)
 {
-    int length = WideCharToMultiByte(CP_UTF8, 0, str, lstrlenW(str), NULL, 0, NULL, NULL);
+    int length = WideCharToMultiByte(CP_CODE, 0, str, -1, NULL, 0, NULL, NULL);
     char* s = new char[length];
-    WideCharToMultiByte(CP_UTF8, 0, str, lstrlenW(str), s, length, NULL, NULL);
-
+    WideCharToMultiByte(CP_CODE, 0, str, -1, s, length, NULL, NULL);
+ 
     return s;
 }
+

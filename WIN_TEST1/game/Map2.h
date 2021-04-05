@@ -12,10 +12,10 @@ public:
 	void clean();
 	void openObject(const char* szFormat, ...);
 
-	void draw(float dt, iPoint off);
+	void draw(float dt, iPoint off, const char* ImgPath);
 
 	//init ¸Å°³º¯¼ö ´ú ÀÛ¼ºµÊ.
-	void init(int x, int y, int w, int h);
+	void init(int x, int y, int w, int h, const char* ImgPath);
 
 	void load(const char* szFormat, ...);
 	void save(const char* str);
@@ -37,6 +37,7 @@ public:
 	int selectedTile, selectedAttr, selectedObject;
 };
 
+const char* openImage();
 void loadMap();
 void freeMap();
 void drawMap(float dt, const char* str);

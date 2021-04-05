@@ -26,23 +26,23 @@
 //#need update
 //----------------------------------------
 int ForestIdx[4] = {
-    20, 76, 86,
+	20, 76, 86,
 };
 
 int DesertIdx[4] = {
-    27, 84,
+	27, 84,
 };
 
 int IceIdx[4] = {
-    71, 179, 181,
+	71, 179, 181,
 };
 
 int FireIdx[4] = {
-    14, 15,
+	14, 15,
 };
 
 int BossIdx[4] = {
-    231,
+	231,
 };
 
 //공간아닌곳
@@ -53,23 +53,23 @@ int NoneIdx = 128, WarpIdx = 132; //warp : 132
 //#need update
 //----------------------------------------
 int ForestWallIdx[4] = {
-    18, 116,
+	18, 116,
 };
 
 int DesertWallIdx[4] = {
-    26, 121,
+	26, 121,
 };
 
 int IceWallIdx[4] = {
-    42, 187, 131, 189
+	42, 187, 131, 189
 };
 
 int FireWallIdx[4] = {
-    89, 126,
+	89, 126,
 };
 
 int BossWallIdx[4] = {
-    129,
+	129,
 };
 
 #include "MapEditor.h"
@@ -142,7 +142,7 @@ void MapEditor::clean()
 	delete objIndex;
 
 	int i;
-	
+
 	//for (i = 0; i < numTiles; i++)
 	//	freeImage(texTiles[i]);
 	delete texTiles;
@@ -196,19 +196,23 @@ void MapEditor::openObject(const char* szFormat, ...)
 	}
 }
 
-void MapEditor::draw(float dt, iPoint off)
+void MapEditor::draw(float dt, iPoint off, const char* ImgPath)
 {
 	int i, xy = tileX * tileY;
 	int ti, tw, oi;
-
-	Texture** texs = createImageDivide(8, 32, "assets/Image/tile1.bmp");
+	
+	//#issue! 
+	//여기서 계속 그려주면 안됨. 그리고 texs를 클래스내의 멤버변수로 고정시키면 어떨지 고민해봐야함.
+	//타일이미지가 바뀐다고, (openImage) 클래스 내의 인자에해당하는 이미지가 전부 바뀌면 안됨
+	Texture** texs = createImageDivide(8, 32, ImgPath);
 
 	for (i = 0; i < xy; i++)
 	{
 		int x = off.x + i % tileX * tileWidth;
 		int y = off.y + i / tileX * tileHeight;
 		ti = tileIndex[i];
-		texTiles[ti] = texs[ti]; //바뀐 이미지로 체인지하기.
+		texTiles[ti] = texs[ti]; //바뀐 이미지로 체인지하기. 
+		//위의 로직을 draw가 아닌 다른곳에서 처리되도록 해줘야함.
 
 		Texture* tex = texTiles[ti];
 		drawImage(tex, x, y, TOP | LEFT);
@@ -226,7 +230,7 @@ void MapEditor::draw(float dt, iPoint off)
 	delete texs;
 }
 
-void MapEditor::init(int x, int y, int w, int h)
+void MapEditor::init(int x, int y, int w, int h, const char* ImgPath)
 {
 	tileX = x;
 	tileY = y;
@@ -242,13 +246,13 @@ void MapEditor::init(int x, int y, int w, int h)
 	tileWeight = new int[tileXY];
 	objIndex = new int[tileXY];
 
-	Texture** tmp = createImageDivide(8, 32, "assets/Image/tile1.bmp");
+	Texture** tmp = createImageDivide(8, 32, ImgPath);
 
-	texTiles = new Texture* [tileXY];
-	
-	for (i = 0; i<tileXY; i++)
+	texTiles = new Texture * [tileXY];
+
+	for (i = 0; i < tileXY; i++)
 	{
-		if (i == 180) 
+		if (i == 180)
 			int test = 0;
 		int ti = tileIndex[i];
 		texTiles[i] = tmp[ti];
@@ -258,9 +262,9 @@ void MapEditor::init(int x, int y, int w, int h)
 
 	//#need update
 	//임시로 할당한것 실제 오브젝트 집어넣을땐 거기에 맞게 적용해야 함.
-	texObjects = new Texture* [tileXY];
+	texObjects = new Texture * [tileXY];
 	numObjects = tileXY;
-	
+
 	//texTiles
 	//texObjects 할당해줘야함.
 	mode = 0;
@@ -426,8 +430,37 @@ void MapEditor::insert(iPoint point)
 
 }
 
+const char* openImage()
+{
+	OPENFILENAME ofn;
+	memset(&ofn, 0x00, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	extern HWND hWnd;
+	ofn.hwndOwner = hWnd;
+	TCHAR szFile[260] = { 0 };
+	ofn.lpstrFile = szFile;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrFilter = _T("All\0*.*\0Text\0*.TXT\0");
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	char* path = NULL;
+	
+	if (GetOpenFileName(&ofn) == TRUE)
+	{
+		path = utf16_to_utf8(ofn.lpstrFile);
+		//printf("path[%s]\n", path);
+	}
+
+	return path;
+}
+
 Texture* texBg;
-Texture** tex; 
+Texture** tex;
 Texture** tmpTiles;
 
 //#need update
@@ -443,19 +476,26 @@ bool movingTile;
 MapEditor* tEditor;
 iRect* EditRT;
 
+const char* ImgPath = NULL;
+
 //load 할때 현재 타일에 대한 처리만 했음
 //next step : 가중치에 대한 처리 -> drawString으로 가중치 숫자를 지정해보자.
 //next step2 : 오브젝트에 대한 처리 -> 타일과 비슷하게
 void loadMap()
 {
-    texBg = createImage("assets/map.jpg");
+	if (ImgPath == NULL)
+		ImgPath = "assets/Image/Tile1.bmp";
+	else
+		ImgPath = openImage();
+	
+	texBg = createImage("assets/map.jpg");
 
-    positionTile = iPointMake(0, tileHSize * tileH + tileHSize);
-    prevPosition = iPointZero;
+	positionTile = iPointMake(0, tileHSize * tileH + tileHSize);
+	prevPosition = iPointZero;
 	positionEditRT = new iPoint[tileW * tileH];
-    movingTile = false;
+	movingTile = false;
 
-    tex = createImageDivide(8, 32, "assets/Image/tile1.bmp");
+	tex = createImageDivide(8, 32, ImgPath);
 
 	tmpTiles = new Texture * [tileW * tileH];
 	for (int i = 0; i < tileW * tileH; i++)
@@ -464,121 +504,124 @@ void loadMap()
 	texSelectTile = tex[128];
 
 	tEditor = new MapEditor();
-	tEditor->init(tileW, tileH, tileWSize, tileHSize);
+	tEditor->init(tileW, tileH, tileWSize, tileHSize, ImgPath);
 
 	EditRT = new iRect[tileW * tileH];
 }
 
 void freeMap()
 {
-    freeImage(texBg);
+	freeImage(texBg);
 
-    int i;
+	int i;
 	delete positionEditRT;
 
-    for (i = 0; i < 256; i++)
-        delete tex[i];
-    delete tex;
+	for (i = 0; i < 256; i++)
+		delete tex[i];
+	delete tex;
 	delete tmpTiles;
 
 	delete tEditor;
 	delete EditRT;
 }
-
+//EditRT 영역들
+iRect rt;
 iRect TileRT;
 iRect selectTileRT;
 iRect WeightRT;
 iRect ObjRT;
+iRect ImgOpenBtn;
 
 void drawToolRect()
 {
 	//EditRT = new iRect[tileW * tileH];
 
 	float stw = ((tileWSize * 9) + (tileWSize * 16 + tileWSize)) / 2 - tileWSize / 2;
-	float sth = ((tileHSize * (tileH+1)) + (tileHSize * (tileH+9))) / 2 - tileHSize / 2;
+	float sth = ((tileHSize * (tileH + 1)) + (tileHSize * (tileH + 9))) / 2 - tileHSize / 2;
 
-    TileRT        = iRectMake(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
-    selectTileRT  = iRectMake(stw, sth, tileWSize, tileHSize);
-    WeightRT      = iRectMake(tileWSize * 8 + tileWSize, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
-    ObjRT         = iRectMake(tileWSize * 8 * 2 + tileWSize * 2, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	rt = iRectMake(0, 0, tileW * tileWSize - 1, tileH * tileHSize - 1);
+	TileRT = iRectMake(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	selectTileRT = iRectMake(stw, sth, tileWSize, tileHSize);
+	WeightRT = iRectMake(tileWSize * 8 + tileWSize, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	ObjRT = iRectMake(tileWSize * 8 * 2 + tileWSize * 2, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	ImgOpenBtn = iRectMake(0, tileHSize * 21, tileWSize * 4, tileHSize);
 
-    setRGBA(1, 0, 0, 1);
+	setRGBA(1, 0, 0, 1);
 	int i;
 	for (i = 0; i < tileW * tileH; i++)
 	{
-		EditRT[i] = iRectMake(i % tileW * tileWSize, i/tileW * tileWSize, tileWSize, tileHSize);
+		EditRT[i] = iRectMake(i % tileW * tileWSize, i / tileW * tileWSize, tileWSize, tileHSize);
 		positionEditRT[i] = iPointMake(i % tileW * tileWSize, i / tileW * tileWSize);
 		drawRect(EditRT[i]);
-		drawImage(tmpTiles[i], i % tileW * tileWSize, i / tileW * tileWSize, TOP|LEFT);
+		drawImage(tmpTiles[i], i % tileW * tileWSize, i / tileW * tileWSize, TOP | LEFT);
+		
 	}
 
-    drawRect(TileRT);
-    drawRect(WeightRT);
-    drawRect(ObjRT);
-    fillRect(selectTileRT);
-    setRGBA(1, 1, 1, 1);
+	drawRect(TileRT);
+	drawRect(WeightRT);
+	drawRect(ObjRT);
+	fillRect(selectTileRT);
+	fillRect(ImgOpenBtn);
+	setRGBA(1, 1, 1, 1);
 
 	drawImage(texSelectTile, selectTileRT.origin.x, selectTileRT.origin.y, TOP | LEFT);
 
-    setClip(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	setClip(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
 
-    for (i = 0; i < 256; i++)
-    {
-        drawImage(tex[i], positionTile.x + (i % 8) * tileWSize, positionTile.y + (i / 8) * tileHSize, TOP | LEFT);
-    }
+	for (i = 0; i < 256; i++)
+	{
+		drawImage(tex[i], positionTile.x + (i % 8) * tileWSize, positionTile.y + (i / 8) * tileHSize, TOP | LEFT);
+	}
 
-    setClip(0, 0, 0, 0);
+	setClip(0, 0, 0, 0);
 
 }
 
 void drawMap(float dt, const char* str)
 {
-    clearRect();
-    
-    drawToolRect();
+	clearRect();
+
+	drawToolRect();
 
 	iPoint off = iPointMake(tileW * tileWSize + tileWSize * 2, 0);
-	tEditor->draw(dt, off);
+	tEditor->draw(dt, off, ImgPath);
 }
 
 void keyMap(iKeyStat stat, iPoint point)
 {
-    switch (stat)
-    {
-    case iKeyStatBegan:
-        //t.openObject("test");
-        break;
+	switch (stat)
+	{
+	case iKeyStatBegan:
+		//t.openObject("test");
+		break;
 
-    case iKeyStatMoved:
-        break;
+	case iKeyStatMoved:
+		break;
 
-    case iKeyStatEnded:
-        break;
-    }
+	case iKeyStatEnded:
+		break;
+	}
 
-	//EditRT 영역들
-	iRect rt = iRectMake(0, 0, tileW * tileWSize-1, tileH * tileHSize-1);
-
-    if (stat == iKeyStatBegan)
-    {
+	if (stat == iKeyStatBegan)
+	{
 		//TileRT 영역에 있으면 
 		//mode == 0
-        if (containPoint(point, TileRT))
-        {
-            movingTile = true;
-            prevPosition = point;
+		if (containPoint(point, TileRT))
+		{
+			movingTile = true;
+			prevPosition = point;
 
-            for (int i = 0; i < 256; i++)
-            {
-                //iRect seletTileRT;
-                iRect texRT = iRectMake(positionTile.x + (i % 8) * tileWSize, positionTile.y + (i / 8) * tileHSize, tileWSize, tileHSize);
+			for (int i = 0; i < 256; i++)
+			{
+				//iRect seletTileRT;
+				iRect texRT = iRectMake(positionTile.x + (i % 8) * tileWSize, positionTile.y + (i / 8) * tileHSize, tileWSize, tileHSize);
 				if (containPoint(point, texRT))
 				{
 					texSelectTile = tex[i];
 					tEditor->selectedTile = i;
 				}
-            }
-        }
+			}
+		}
 		//else if : containPoint WeightRT (가중치 박스에 커서가 간 경우)
 		//mode == 1
 
@@ -586,7 +629,7 @@ void keyMap(iKeyStat stat, iPoint point)
 		//mode == 2
 
 		//EditRT에 커서가 간 경우 : 실제로 저장되는 타일 영역
-		else if (containPoint(point, rt))
+		if (containPoint(point, rt))
 		{
 			tEditor->insert(point - rt.origin);
 			for (int i = 0; i < tileW * tileH; i++)
@@ -597,24 +640,34 @@ void keyMap(iKeyStat stat, iPoint point)
 				}
 			}
 		}
-    }
-    else if (stat == iKeyStatMoved)
-    {
-        if (movingTile)
-        {
-            iPoint mp = point - prevPosition;
-            prevPosition = point;
 
-            positionTile.y += mp.y;
-            if (positionTile.y < tileHSize * tileH + tileHSize - tileHSize * 24)
-                positionTile.y = tileHSize * tileH + tileHSize - tileHSize * 24;
-            else if (positionTile.y > tileHSize * tileH + tileHSize)
-                positionTile.y = tileHSize * tileH + tileHSize;
-        }
+		if (containPoint(point, ImgOpenBtn))
+		{
+			//ImgPath = openImage();
+			////for (int i = 0; i < 256; i++)
+			////	delete tex[i];
+			////delete tex;
+			//tex = createImageDivide(8, 32, ImgPath);
+			loadMap();
+		}
+	}
+	else if (stat == iKeyStatMoved)
+	{
+		if (movingTile)
+		{
+			iPoint mp = point - prevPosition;
+			prevPosition = point;
 
-    }
-    else if (stat == iKeyStatEnded)
-    {
-        movingTile = false;
-    }
+			positionTile.y += mp.y;
+			if (positionTile.y < tileHSize * tileH + tileHSize - tileHSize * 24)
+				positionTile.y = tileHSize * tileH + tileHSize - tileHSize * 24;
+			else if (positionTile.y > tileHSize * tileH + tileHSize)
+				positionTile.y = tileHSize * tileH + tileHSize;
+		}
+
+	}
+	else if (stat == iKeyStatEnded)
+	{
+		movingTile = false;
+	}
 }

@@ -7,6 +7,8 @@ Texture* texIntroBg;
 
 iImage* imgIntro;
 
+
+
 void loadIntro()
 {
 	texIntroBg = createImage("assets/proc.jpg");
@@ -36,11 +38,16 @@ void keyIntro(iKeyStat stat, iPoint point)
 	switch(stat)
 	{
 		case iKeyStatBegan:
-			setLoading(gs_map2, freeIntro, loadMap);
+			//setLoading(gs_map2, freeIntro, loadMap);
 			break;
 		case iKeyStatMoved:
 			break;
 		case iKeyStatEnded:
 			break;
+	}
+
+	if (stat == iKeyStatBegan)
+	{
+
 	}
 }
