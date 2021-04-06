@@ -95,7 +95,7 @@ MapEditor::MapEditor()
 	numObjects = 0;
 
 	mode = 0;
-	selectedTile = -1;
+	selectedTile = 0; 
 	selectedAttr = -1;
 	selectedObject = -1;
 }
@@ -206,6 +206,7 @@ void MapEditor::draw(float dt, iPoint off, const char* ImgPath)
 	//타일이미지가 바뀐다고, (openImage) 클래스 내의 인자에해당하는 이미지가 전부 바뀌면 안됨
 	Texture** texs = createImageDivide(8, 32, ImgPath);
 
+	
 	for (i = 0; i < xy; i++)
 	{
 		int x = off.x + i % tileX * tileWidth;
@@ -226,6 +227,7 @@ void MapEditor::draw(float dt, iPoint off, const char* ImgPath)
 		//y = positionObjects[oi].y + y + tileHeight / 2;
 		//drawImage(tex, x, y, TOP | LEFT);
 	}
+	
 
 	delete texs;
 }
@@ -252,8 +254,6 @@ void MapEditor::init(int x, int y, int w, int h, const char* ImgPath)
 
 	for (i = 0; i < tileXY; i++)
 	{
-		if (i == 180)
-			int test = 0;
 		int ti = tileIndex[i];
 		texTiles[i] = tmp[ti];
 	}
@@ -385,13 +385,17 @@ void MapEditor::save(const char* str)
 		bmp->UnlockBits(&bd);
 	}
 
+	//==================================================================
+	//#need update 현재 오브젝트처리를 하나도 안해줌.
+	//==================================================================
+#if 0
 	fwrite(&numObjects, sizeof(int), xy, pf);
 	for (i = 0; i < numObjects; i++)
 	{
 		int w = texObjects[i]->width, h = texObjects[i]->height;
 		fwrite(&w, sizeof(int), 1, pf);
 		fwrite(&h, sizeof(int), 1, pf);
-
+	
 		Bitmap* bmp = (Bitmap*)texObjects[i]->texID;
 		Rect rt(0, 0, w, h);
 		BitmapData bd;
@@ -401,11 +405,11 @@ void MapEditor::save(const char* str)
 		for (j = 0; j < h; j++)
 			fwrite(&rgba[stride], sizeof(int), w, pf);
 		bmp->UnlockBits(&bd);
-
+	
 		fwrite(&positionObjects[i].x, sizeof(float), 1, pf);
 		fwrite(&positionObjects[i].y, sizeof(float), 1, pf);
 	}
-
+#endif
 	fclose(pf);
 }
 
@@ -478,11 +482,42 @@ iRect* EditRT;
 
 const char* ImgPath = NULL;
 
+//EditRT 영역들
+iRect rt;
+iRect TileRT;
+iRect selectTileRT;
+iRect WeightRT;
+iRect ObjRT;
+iRect ImgOpenBtn;
+iRect tSave;
+iRect tLoad;
+
 //load 할때 현재 타일에 대한 처리만 했음
 //next step : 가중치에 대한 처리 -> drawString으로 가중치 숫자를 지정해보자.
 //next step2 : 오브젝트에 대한 처리 -> 타일과 비슷하게
 void loadMap()
 {
+	//=========================================================================
+	//Rect
+	//=========================================================================
+	//EditRT = new iRect[tileW * tileH];
+
+	float stw = ((tileWSize * 9) + (tileWSize * 16 + tileWSize)) / 2 - tileWSize / 2;
+	float sth = ((tileHSize * (tileH + 1)) + (tileHSize * (tileH + 9))) / 2 - tileHSize / 2;
+
+	rt = iRectMake(0, 0, tileW * tileWSize - 1, tileH * tileHSize - 1);
+	TileRT = iRectMake(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	selectTileRT = iRectMake(stw, sth, tileWSize, tileHSize);
+	WeightRT = iRectMake(tileWSize * 8 + tileWSize, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	ObjRT = iRectMake(tileWSize * 8 * 2 + tileWSize * 2, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
+	ImgOpenBtn = iRectMake(0, tileHSize * 21, tileWSize * 4, tileHSize);
+	tLoad = iRectMake(tileWSize * 27, tileHSize * tileH + tileHSize, tileWSize * 4, tileHSize);
+	tSave = iRectMake(tileWSize * 27, tileHSize * (tileH+2) + tileHSize, tileWSize * 4, tileHSize);
+
+	//=========================================================================
+	//Texture, Position
+	//=========================================================================
+
 	if (ImgPath == NULL)
 		ImgPath = "assets/Image/Tile1.bmp";
 	else
@@ -501,10 +536,12 @@ void loadMap()
 	for (int i = 0; i < tileW * tileH; i++)
 		tmpTiles[i] = tex[128];
 
-	texSelectTile = tex[128];
 
 	tEditor = new MapEditor();
 	tEditor->init(tileW, tileH, tileWSize, tileHSize, ImgPath);
+
+	int texIdx = tEditor->selectedTile;
+	texSelectTile = tex[texIdx];
 
 	EditRT = new iRect[tileW * tileH];
 }
@@ -524,28 +561,9 @@ void freeMap()
 	delete tEditor;
 	delete EditRT;
 }
-//EditRT 영역들
-iRect rt;
-iRect TileRT;
-iRect selectTileRT;
-iRect WeightRT;
-iRect ObjRT;
-iRect ImgOpenBtn;
 
 void drawToolRect()
 {
-	//EditRT = new iRect[tileW * tileH];
-
-	float stw = ((tileWSize * 9) + (tileWSize * 16 + tileWSize)) / 2 - tileWSize / 2;
-	float sth = ((tileHSize * (tileH + 1)) + (tileHSize * (tileH + 9))) / 2 - tileHSize / 2;
-
-	rt = iRectMake(0, 0, tileW * tileWSize - 1, tileH * tileHSize - 1);
-	TileRT = iRectMake(0, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
-	selectTileRT = iRectMake(stw, sth, tileWSize, tileHSize);
-	WeightRT = iRectMake(tileWSize * 8 + tileWSize, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
-	ObjRT = iRectMake(tileWSize * 8 * 2 + tileWSize * 2, tileHSize * tileH + tileHSize, tileWSize * 8, tileHSize * 8);
-	ImgOpenBtn = iRectMake(0, tileHSize * 21, tileWSize * 4, tileHSize);
-
 	setRGBA(1, 0, 0, 1);
 	int i;
 	for (i = 0; i < tileW * tileH; i++)
@@ -562,6 +580,8 @@ void drawToolRect()
 	drawRect(ObjRT);
 	fillRect(selectTileRT);
 	fillRect(ImgOpenBtn);
+	fillRect(tLoad);
+	fillRect(tSave);
 	setRGBA(1, 1, 1, 1);
 
 	drawImage(texSelectTile, selectTileRT.origin.x, selectTileRT.origin.y, TOP | LEFT);
@@ -641,6 +661,7 @@ void keyMap(iKeyStat stat, iPoint point)
 			}
 		}
 
+		//타일 이미지 열기
 		if (containPoint(point, ImgOpenBtn))
 		{
 			//ImgPath = openImage();
@@ -650,6 +671,19 @@ void keyMap(iKeyStat stat, iPoint point)
 			//tex = createImageDivide(8, 32, ImgPath);
 			loadMap();
 		}
+		
+		//맵 로드
+		if (containPoint(point, tLoad))
+		{
+			tEditor->load("map.tile");
+		}
+
+		//맵 저장하기
+		if (containPoint(point, tSave))
+		{
+			tEditor->save("map.tile");
+		}
+
 	}
 	else if (stat == iKeyStatMoved)
 	{

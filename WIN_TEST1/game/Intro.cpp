@@ -46,6 +46,7 @@ void keyIntro(iKeyStat stat, iPoint point)
 			break;
 	}
 
+	//마우스 클릭 이벤트를 막기위함
 	if (stat == iKeyStatBegan)
 	{
 
