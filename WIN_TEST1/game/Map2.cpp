@@ -227,8 +227,8 @@ void MapEditor::draw(float dt, iPoint off, const char* ImgPath)
 		//y = positionObjects[oi].y + y + tileHeight / 2;
 		//drawImage(tex, x, y, TOP | LEFT);
 	}
-	
 
+	
 	delete texs;
 }
 
@@ -278,6 +278,11 @@ void MapEditor::load(const char* szFormat, ...)
 	va_start_end(szText, szFormat);
 
 	FILE* pf = fopen(szText, "rb");
+	if (pf == NULL)
+	{
+		printf("No File!");
+		return;
+	}
 
 	// tile info
 	fread(&tileX, sizeof(int), 1, pf);
@@ -319,6 +324,10 @@ void MapEditor::load(const char* szFormat, ...)
 		texTiles[i] = tex;
 	}
 
+	//==================================================================
+	//#need update 현재 오브젝트처리를 하나도 안해줌.
+	//==================================================================
+#if 1
 	fread(&numObjects, sizeof(int), xy, pf);
 	texObjects = new Texture * [numObjects];
 	positionObjects = new iPoint[numObjects];
@@ -351,7 +360,7 @@ void MapEditor::load(const char* szFormat, ...)
 		fread(&positionObjects[i].x, sizeof(float), 1, pf);
 		fread(&positionObjects[i].y, sizeof(float), 1, pf);
 	}
-
+#endif
 	fclose(pf);
 }
 
@@ -413,7 +422,7 @@ void MapEditor::save(const char* str)
 	fclose(pf);
 }
 
-void MapEditor::insert(iPoint point)
+void MapEditor::insert(iPoint point) //매개변수 const char* ImgPath 넣어야 하지 않을까?
 {
 	int x = point.x; x /= tileWidth;
 	int y = point.y; y /= tileHeight;
@@ -436,6 +445,9 @@ void MapEditor::insert(iPoint point)
 
 const char* openImage()
 {
+	WCHAR pp[1024];
+	GetCurrentDirectory(1024, pp);
+
 	OPENFILENAME ofn;
 	memset(&ofn, 0x00, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
@@ -459,6 +471,8 @@ const char* openImage()
 		path = utf16_to_utf8(ofn.lpstrFile);
 		//printf("path[%s]\n", path);
 	}
+
+	SetCurrentDirectory(pp);
 
 	return path;
 }
@@ -579,8 +593,14 @@ void drawToolRect()
 	drawRect(WeightRT);
 	drawRect(ObjRT);
 	fillRect(selectTileRT);
+
+	setRGBA(1, 1, 0, 1);
 	fillRect(ImgOpenBtn);
+
+	setRGBA(0, 0, 1, 1);
 	fillRect(tLoad);
+	
+	setRGBA(0, 1, 0, 1);
 	fillRect(tSave);
 	setRGBA(1, 1, 1, 1);
 
@@ -669,13 +689,17 @@ void keyMap(iKeyStat stat, iPoint point)
 			////	delete tex[i];
 			////delete tex;
 			//tex = createImageDivide(8, 32, ImgPath);
+			
 			loadMap();
+			//ImgPath = openImage();
 		}
 		
 		//맵 로드
 		if (containPoint(point, tLoad))
 		{
+			//const char* tmp_path = openFile();
 			tEditor->load("map.tile");
+			//tEditor("map.tile");
 		}
 
 		//맵 저장하기

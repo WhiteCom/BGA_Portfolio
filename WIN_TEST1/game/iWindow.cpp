@@ -149,7 +149,7 @@ char* utf16_to_utf8(const wchar_t* str)
 {
     int length = WideCharToMultiByte(CP_CODE, 0, str, -1, NULL, 0, NULL, NULL);
     char* s = new char[length];
-    WideCharToMultiByte(CP_CODE, 0, str, -1, s, length, NULL, NULL);
+    WideCharToMultiByte(CP_CODE, 0, str, lstrlenW(str) + 1, s, length, NULL, NULL);
  
     return s;
 }
