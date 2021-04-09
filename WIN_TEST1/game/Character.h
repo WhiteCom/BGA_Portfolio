@@ -2,7 +2,7 @@
 
 #include "iStd.h"
 #include "TileType.h"
-#include "Map2.h"
+#include "Map3.h"
 
 void loadCharacter(iPoint off);
 //void drawCharacter(float dt, MapTile* currMap);

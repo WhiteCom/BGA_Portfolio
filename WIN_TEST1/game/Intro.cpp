@@ -1,7 +1,7 @@
 ﻿#include "Intro.h"
 
 #include "Loading.h"
-#include "Map2.h"
+#include "Map3.h"
 
 Texture* texIntroBg;
 
@@ -38,7 +38,7 @@ void keyIntro(iKeyStat stat, iPoint point)
 	switch(stat)
 	{
 		case iKeyStatBegan:
-			//setLoading(gs_map2, freeIntro, loadMap);
+			setLoading(gs_map2, freeIntro, loadMap);
 			break;
 		case iKeyStatMoved:
 			break;
@@ -46,9 +46,5 @@ void keyIntro(iKeyStat stat, iPoint point)
 			break;
 	}
 
-	//마우스 클릭 이벤트를 막기위함
-	if (stat == iKeyStatBegan)
-	{
 
-	}
 }

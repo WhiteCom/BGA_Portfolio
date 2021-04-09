@@ -1,7 +1,7 @@
 #include "Game.h"
 
 #include "Intro.h"
-#include "Map2.h"
+#include "Map3.h"
 #include "Ending.h"
 
 #include "Loading.h"
@@ -18,7 +18,7 @@ void drawGame(float dt)
     {
     case gs_intro: drawIntro(dt); break;
     //case gs_map: drawMap(dt, "grass"); break;
-    case gs_map2: drawMap(dt, "grass"); break;
+    case gs_map2: drawMap(dt); break;
     case gs_ending: drawEnding(dt); break;
     }
 

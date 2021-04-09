@@ -1,3 +1,4 @@
+#if 0
 #pragma once
 
 #include "iStd.h"
@@ -43,3 +44,4 @@ void freeMap();
 void drawMap(float dt, const char* str);
 void keyMap(iKeyStat stat, iPoint point);
 
+#endif

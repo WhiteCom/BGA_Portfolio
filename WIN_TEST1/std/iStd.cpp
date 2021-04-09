@@ -314,15 +314,15 @@ void drawImage(Texture* tex, float x, float y, int anc,
 	{
 	case TOP | LEFT:										break;
 	case TOP | RIGHT:			x -= w;						break;
-	case TOP | HCENTER:		x -= w / 2;					break;
+	case TOP | HCENTER:			x -= w / 2;					break;
 
 	case BOTTOM | LEFT:						y -= h;			break;
 	case BOTTOM | RIGHT:		x -= w;		y -= h;			break;
-	case BOTTOM | HCENTER:	x -= w / 2; y -= h;			break;
+	case BOTTOM | HCENTER:		x -= w / 2; y -= h;			break;
 
 	case VCENTER | LEFT:					y -= h / 2;		break;
 	case VCENTER | RIGHT:		x -= w;		y -= h / 2;		break;
-	case VCENTER | HCENTER:	x -= w / 2;	y -= h / 2;		break;
+	case VCENTER | HCENTER:		x -= w / 2;	y -= h / 2;		break;
 	}
 
 	iPoint dstPoint[3] = {
@@ -338,8 +338,8 @@ void drawImage(Texture* tex, float x, float y, int anc,
 	else if (xyz == 1)
 	{
 		dstPoint[0].x =
-		dstPoint[1].x = x + w / 2 - w / 2 * _cos(degree);
-		dstPoint[2].x = x + w / 2 + w / 2 * _sin(degree);
+		dstPoint[2].x = x + w / 2 - w / 2 * _cos(degree);
+		dstPoint[1].x = x + w / 2 + w / 2 * _sin(degree);
 	}
 
 	else //if(xyz == 2)

@@ -1,4 +1,5 @@
-﻿#include "Map2.h"
+﻿#if 0
+#include "Map2.h"
 #include "TileType.h"
 //#include "MapEditor.h"
 #include "iWindow.h"
@@ -445,8 +446,8 @@ void MapEditor::insert(iPoint point) //매개변수 const char* ImgPath 넣어�
 
 const char* openImage()
 {
-	WCHAR pp[1024];
-	GetCurrentDirectory(1024, pp);
+	WCHAR pathCurr[1024];
+	GetCurrentDirectory(1024, pathCurr);
 
 	OPENFILENAME ofn;
 	memset(&ofn, 0x00, sizeof(ofn));
@@ -470,9 +471,14 @@ const char* openImage()
 	{
 		path = utf16_to_utf8(ofn.lpstrFile);
 		//printf("path[%s]\n", path);
-	}
 
-	SetCurrentDirectory(pp);
+		SetCurrentDirectory(pathCurr);
+	}
+	else
+	{
+		printf("FAIL!\n");
+
+	}
 
 	return path;
 }
@@ -568,7 +574,7 @@ void freeMap()
 	delete positionEditRT;
 
 	for (i = 0; i < 256; i++)
-		delete tex[i];
+		freeImage(tex[i]);
 	delete tex;
 	delete tmpTiles;
 
@@ -629,19 +635,6 @@ void drawMap(float dt, const char* str)
 
 void keyMap(iKeyStat stat, iPoint point)
 {
-	switch (stat)
-	{
-	case iKeyStatBegan:
-		//t.openObject("test");
-		break;
-
-	case iKeyStatMoved:
-		break;
-
-	case iKeyStatEnded:
-		break;
-	}
-
 	if (stat == iKeyStatBegan)
 	{
 		//TileRT 영역에 있으면 
@@ -729,3 +722,4 @@ void keyMap(iKeyStat stat, iPoint point)
 		movingTile = false;
 	}
 }
+#endif
