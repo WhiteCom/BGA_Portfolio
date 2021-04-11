@@ -265,6 +265,7 @@ char* openImg()
 //iRect영역들
 //==========================================================
 
+iRect RT;
 iRect* EditRT;
 iRect TileRT;
 iRect TileImgRT;
@@ -275,6 +276,7 @@ iRect SaveBtn;
 iRect ImgOpenBtn;
 iRect selectedRT;
 
+iPoint prevPosition;
 iPoint EditRT_point;
 iPoint TileRT_point;
 iPoint TileImgRT_point;
@@ -286,6 +288,7 @@ iPoint ImgOpenBtn_point;
 iPoint selectedRT_point;
 
 static bool set_check = false;
+static bool movingTileImg = false;
 
 static const char* ImgPath = NULL;
 
@@ -299,6 +302,7 @@ MapEditor* tEditor;
 void RTset()
 {
     //좌표 세팅을 위한 일회성 함수로 한번 쓰고 안쓸거임.
+    prevPosition =          iPointMake(0, 0);
     EditRT_point =          iPointMake(0, 0);
     TileRT_point =          iPointMake(tileWSize * 17,  0);
 
@@ -321,6 +325,7 @@ void RTset()
         EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
     }
 
+    RT =            iRectMake(0, 0, tileWSize * 16, tileHSize * 12);
     TileRT =        iRectMake(TileRT_point.x, TileRT_point.y, tileWSize * 16, tileHSize * 12);
     TileImgRT =     iRectMake(TileImgRT_point.x, TileImgRT_point.y, tileWSize * 8, tileHSize * 8);
     TileWeiRT =     iRectMake(TileWeiRT_point.x, TileWeiRT_point.y, tileWSize * 8, tileHSize * 8);
@@ -387,15 +392,15 @@ void drawMap(float dt)
     //===========================================
     //draw TileImg, TileWeight, selectedTex
     //===========================================
-    setClip(TileImgRT_point.x, TileImgRT_point.y, tileWSize * 8, tileHSize * 8);
-
-    for (i = 0; i < 256; i++)
-        drawImage(texs[i], TileImgRT_point.x + (i%tileW) * tileWSize, TileImgRT_point.y + (i/tileW) * tileHSize, TOP | LEFT);
-
-    setClip(0, 0, 0, 0);
-
     if(selectedTex)
         drawImage(selectedTex, selectedRT_point.x, selectedRT_point.y, TOP|LEFT);
+
+    setClip(0, tileHSize * (tileH + 1), tileWSize * 8, tileHSize * 8);
+
+    for (i = 0; i < 256; i++)
+        drawImage(texs[i], TileImgRT_point.x + (i % 8) * tileWSize, TileImgRT_point.y + (i / 8) * tileHSize, TOP | LEFT);
+
+    setClip(0, 0, 0, 0);
 }
 
 void freeMap()
@@ -419,6 +424,19 @@ void keyMap(iKeyStat stat, iPoint point)
 {
     if (stat == iKeyStatBegan)
     {
+
+        //편집영역에 있을때 (격자무늬)
+        if (containPoint(point, RT))
+        {
+        }
+
+        //타일 이미지 내
+        if (containPoint(point, TileImgRT))
+        {
+            prevPosition = point;
+            movingTileImg = true;
+        }
+
         //이미지 열기 버튼
         if (containPoint(point, ImgOpenBtn))
         {
@@ -427,11 +445,23 @@ void keyMap(iKeyStat stat, iPoint point)
     }
     else if (stat == iKeyStatMoved)
     {
+        if (movingTileImg)
+        {
+            iPoint mp = point - prevPosition;
+            prevPosition = point;
 
+            TileImgRT_point.y += mp.y;
+            tileWSize * 8;
+            tileHSize * 8;
+            if (TileImgRT_point.y < tileHSize * (tileH + 1) - tileHSize * 24)
+                TileImgRT_point.y = tileHSize * (tileH + 1) - tileHSize * 24;
+            else if (TileImgRT_point.y > tileHSize * (tileH + 1))
+                TileImgRT_point.y = tileHSize * (tileH + 1);
+        }
     }
     else //if(stat == iKeyStatEnded)
     {
-
+        movingTileImg = false;
     }
 }
 
