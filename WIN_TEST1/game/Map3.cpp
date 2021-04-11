@@ -70,16 +70,18 @@ void MapEditor::clean()
 
     int i;
 
-    if (texTiles[numTiles - 1] != NULL)
-    {
-        for (i = 0; i < numTiles; i++)
-            freeImage(texTiles[i]);
-    }
+    //#issue! freeMap()의 texs를 해제하는것과 충돌남.
+#if 0
+    for (i = 0; i < numTiles; i++)
+        freeImage(texTiles[i]);
+
+#endif
+   
     delete texTiles;
 }
 
 
-void MapEditor::draw(float dt, iPoint off, const char* ImgPath)
+void MapEditor::draw(float dt, iPoint off)
 {
     int i, xy = tileX * tileY;
     int ti, tw;
@@ -88,14 +90,13 @@ void MapEditor::draw(float dt, iPoint off, const char* ImgPath)
     {
         int x = off.x + i % tileX * tileWidth;
         int y = off.y + i / tileX * tileHeight;
-        //ti = tileIndex[i];
         
         if(texTiles[i]) //NULL 아닌경우만
             drawImage(texTiles[i], x, y, TOP | LEFT);
     }
 }
 
-void MapEditor::init(int x, int y, int w, int h)
+void MapEditor::init(int x, int y, int w, int h, Texture** texs)
 {
     tileX = x;
     tileY = y;
@@ -108,9 +109,8 @@ void MapEditor::init(int x, int y, int w, int h)
     tileWeight = new int[tileXY] { 0, };
     
     texTiles = new Texture * [tileXY];
-    //여기서 문제 
-    //이전처럼 Texture** texs를 여기서 쓰면 이미지를 오픈할때마다, 계속 갱신됨. 
-    //따라서 여기서 쓰는게 아닌, loadMap이나, insert할때 Texture** texs를 넣어줄 생각해야함.
+    for (i = 0; i < tileXY; i++)
+        texTiles[i] = texs[selectedTile];
    
     numTiles = tileXY;
 
@@ -261,20 +261,11 @@ char* openImg()
 //1) 클래스 내 멤버변수로 tex** 생성 (생성자 혹은 load 등에서 처리)
 //2) load 등에서 본 파일(map3.cpp) 에서만 쓰이는 파일 tex** 생성 (이미지 생성 후 객체 내부 tex** 변수에도 들어갈수 있게처리)
 
-//==============================================================
-//Texture** tex = createImageDivide(...);
-//이거를 할때 Texture* tmp = new Texture; 이런식으로 하나 tmp 변수 만들고 tmp = tex[tileIndex] 해서 처리하는 방식은 어떨까?
-//이후에 delete 시 
-//for(i=0;i<256;i++)
-//  freeImage(tex[i]);
-//delete tex; 
-//==============================================================
-
 //==========================================================
 //iRect영역들
 //==========================================================
 
-iRect EditRT;
+iRect* EditRT;
 iRect TileRT;
 iRect TileImgRT;
 iRect TileWeiRT;
@@ -296,10 +287,11 @@ iPoint selectedRT_point;
 
 static bool set_check = false;
 
-const char* ImgPath = NULL;
+static const char* ImgPath = NULL;
 
-Texture** texs;
-Texture* selecTex; //커서로 선택한 타일이미지
+Texture** texs = NULL;
+
+Texture* selectedTex = NULL; //커서로 선택한 타일이미지
 
 MapEditor* tEditor;
 
@@ -320,7 +312,15 @@ void RTset()
     
     selectedRT_point =      iPointMake(tileWSize * 22 - tileWSize/2, tileHSize * 17 - tileHSize/2);
 
-    EditRT =        iRectMake(EditRT_point.x, EditRT_point.y, tileWSize * 16, tileHSize * 12);
+    EditRT = new iRect[tileW * tileH];
+    //x = i % tileW;
+    //y = i / tileW * tileW;
+    for (int i = 0; i < tileW * tileH; i++)
+    {
+        int x = i % tileW, y = i/tileW;
+        EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
+    }
+
     TileRT =        iRectMake(TileRT_point.x, TileRT_point.y, tileWSize * 16, tileHSize * 12);
     TileImgRT =     iRectMake(TileImgRT_point.x, TileImgRT_point.y, tileWSize * 8, tileHSize * 8);
     TileWeiRT =     iRectMake(TileWeiRT_point.x, TileWeiRT_point.y, tileWSize * 8, tileHSize * 8);
@@ -331,26 +331,32 @@ void RTset()
     selectedRT =    iRectMake(selectedRT_point.x, selectedRT_point.y, tileWSize, tileHSize);
 
     tEditor = new MapEditor();
-    tEditor->init(tileW, tileH, tileWSize, tileHSize);
+    //#issue! 전역포인터 texs를 삭제한 뒤에 파괴자에서 다시 파괴하는 짓을 하니
+    //이미 delete 시킨걸 또 delete 시키려해서 문제가 발생함.
+    tEditor->init(tileW, tileH, tileWSize, tileHSize, texs);
+
 
     set_check = true;
 }
 
-
 void loadMap()
 {
-    if (!set_check)
-        RTset();
-
     if (ImgPath == NULL)
         ImgPath = "assets/Image/Tile1.bmp";
     else
         ImgPath = openImg();
-
-    texs = createImageDivide(8, 32, ImgPath);
     
-    //인덱스 처리해줘야함. 아직 안해준것들이 좀 있음. 
+    texs = createImageDivide(8, 32, ImgPath);
+    selectedTex = new Texture();
+    memcpy(selectedTex, texs[0], sizeof(Texture));
 
+    if (!set_check)
+        RTset();
+    
+
+    //to do...
+    //가중치 처리해줘야함. 아직 안해준것들이 좀 있음. 
+    tEditor;
 }
 
 void drawMap(float dt)
@@ -359,9 +365,10 @@ void drawMap(float dt)
     //===========================================
     //draw iRect
     //===========================================
-
+    int i;
     setRGBA(1, 0, 0, 1);
-    drawRect(EditRT);
+    for(i=0;i<tileW * tileH;i++)
+        drawRect(EditRT[i]);
     drawRect(TileRT);
     drawRect(TileImgRT);
     drawRect(TileWeiRT);
@@ -372,15 +379,39 @@ void drawMap(float dt)
     drawRect(selectedRT);
     setRGBA(1, 1, 1, 1);
 
+    //===========================================
+    //draw Tile
+    //===========================================
+    tEditor->draw(dt, TileRT_point);
+
+    //===========================================
+    //draw TileImg, TileWeight, selectedTex
+    //===========================================
+    setClip(TileImgRT_point.x, TileImgRT_point.y, tileWSize * 8, tileHSize * 8);
+
+    for (i = 0; i < 256; i++)
+        drawImage(texs[i], TileImgRT_point.x + (i%tileW) * tileWSize, TileImgRT_point.y + (i/tileW) * tileHSize, TOP | LEFT);
+
+    setClip(0, 0, 0, 0);
+
+    if(selectedTex)
+        drawImage(selectedTex, selectedRT_point.x, selectedRT_point.y, TOP|LEFT);
 }
+
 void freeMap()
 {
+
     int i;
+
+    delete selectedTex;
+
+    //#issue! 74 line 파괴자의 해제와 충돌나는 코드!
+#if 1
     for (i = 0; i < 256; i++)
         freeImage(texs[i]);
     delete texs;
-    
-    //#issue 현재 할당만 했지, 값이 없어서 삭제하면 터짐
+#endif
+
     delete tEditor;
 }
 
@@ -388,7 +419,11 @@ void keyMap(iKeyStat stat, iPoint point)
 {
     if (stat == iKeyStatBegan)
     {
-
+        //이미지 열기 버튼
+        if (containPoint(point, ImgOpenBtn))
+        {
+            loadMap();
+        }
     }
     else if (stat == iKeyStatMoved)
     {
@@ -399,3 +434,5 @@ void keyMap(iKeyStat stat, iPoint point)
 
     }
 }
+
+

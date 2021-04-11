@@ -11,9 +11,9 @@ public:
 
 	void clean();
 
-	void draw(float dt, iPoint off, const char* ImgPath);
+	void draw(float dt, iPoint off);
 
-	void init(int x, int y, int w, int h);
+	void init(int x, int y, int w, int h, Texture** texs);
 
 	void load(const char* szFormat, ...);
 	void save(const char* str);
