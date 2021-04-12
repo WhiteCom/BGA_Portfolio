@@ -31,7 +31,7 @@ public:
 	int selectedTile, selectedWeight;
 };
 
-char* openImg(const char* szFormaat, ...);
+//char* openImg(const char* szFormaat, ...);
 
 void loadMap();
 void drawMap(float dt);
