@@ -42,30 +42,48 @@ void setKeys(int& keys, iKeyStat stat, unsigned int c)
 {
 	if (stat == iKeyStatBegan)
 	{
-		if (c == 'a' || c == 'A' || c == VK_LEFT)
+		if (c == 'a' || c == 'A')
 			keys |= keysA;
-		else if (c == 's' || c == 'S' || c == VK_DOWN)
+		else if (c == 's' || c == 'S')
 			keys |= keysS;
-		else if (c == 'd' || c == 'D' || c == VK_RIGHT)
+		else if (c == 'd' || c == 'D')
 			keys |= keysD;
-		else if (c == 'w' || c == 'W' || c == VK_UP)
+		else if (c == 'w' || c == 'W')
 			keys |= keysW;
 		else if (c == ' ')
 			keys |= keysSpace;
+
+		else if (c == VK_LEFT)
+			keys |= keysLeft;
+		else if (c == VK_RIGHT)
+			keys |= keysRight;
+		else if (c == VK_UP)
+			keys |= keysUp;
+		else if (c == VK_DOWN)
+			keys |= keysDown;
 	}
 	
 	else if (stat == iKeyStatEnded)
 	{
-		if (c == 'a' || c == 'A' || c == VK_LEFT)
+		if (c == 'a' || c == 'A')
 			keys &= ~keysA;
-		else if (c == 's' || c == 'S' || c == VK_DOWN)
+		else if (c == 's' || c == 'S')
 			keys &= ~keysS;
-		else if (c == 'd' || c == 'D' || c == VK_RIGHT)
+		else if (c == 'd' || c == 'D')
 			keys &= ~keysD;
-		else if (c == 'w' || c == 'W' || c == VK_UP)
+		else if (c == 'w' || c == 'W')
 			keys &= ~keysW;
 		else if (c == ' ')
 			keys &= ~keysSpace;
+
+		else if (c == VK_LEFT)
+			keys &= ~keysLeft;
+		else if (c == VK_RIGHT)
+			keys &= ~keysRight;
+		else if (c == VK_UP)
+			keys &= ~keysUp;
+		else if (c == VK_DOWN)
+			keys &= ~keysDown;
 	}
 }
 

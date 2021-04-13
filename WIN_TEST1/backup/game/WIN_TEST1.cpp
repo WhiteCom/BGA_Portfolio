@@ -181,8 +181,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_SETCURSOR:
     {
-        
-        if (updateCursor(LOWORD(lParam)==HTCLIENT))
+        bool b = false;
+        if (LOWORD(lParam) == HTCLIENT)
+            b = true;
+        if (updateCursor(b))
             return true;
         break;
     }

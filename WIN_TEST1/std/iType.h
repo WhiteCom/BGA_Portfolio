@@ -35,6 +35,11 @@ typedef void (*KEY_METHOD)(iKeyStat, iPoint);
 #define keysW			8
 #define keysSpace		16
 
+#define keysLeft		32
+#define keysRight		64
+#define keysUp			128
+#define	keysDown		256
+
 //anc
 #define LEFT			1
 #define RIGHT			2

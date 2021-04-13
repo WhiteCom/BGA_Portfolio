@@ -27,6 +27,7 @@ MapEditor::MapEditor()
     tileIndex = NULL;
     tileWeight = 0;
 
+    texTiles = NULL;
     numTiles = 0;
 
     selectedTile = 0;
@@ -42,6 +43,7 @@ MapEditor::MapEditor(const char* szFormat, ...)
     tileIndex = NULL;
     tileWeight = NULL;
 
+    texTiles = NULL;
     numTiles = 0;
 
     selectedTile = 0;
@@ -63,13 +65,19 @@ void MapEditor::clean()
     if (tileIndex == NULL)
         return;
 
-    for (int i = 0; i < 3; i++)
-        delete tileIndex[i];
     delete tileIndex;
-
     delete tileWeight;
 
     int i;
+
+    //#issue! freeMap()의 texs를 해제하는것과 충돌남.
+#if 0
+    for (i = 0; i < numTiles; i++)
+        freeImage(texTiles[i]);
+
+#endif
+   
+    delete texTiles;
 }
 
 
@@ -83,8 +91,8 @@ void MapEditor::draw(float dt, iPoint off)
         int x = off.x + i % tileX * tileWidth;
         int y = off.y + i / tileX * tileHeight;
         
-        //if(texTiles[i]) //NULL 아닌경우만
-        //    drawImage(texTiles[i], x, y, TOP | LEFT);
+        if(texTiles[i]) //NULL 아닌경우만
+            drawImage(texTiles[i], x, y, TOP | LEFT);
     }
 }
 
@@ -97,13 +105,15 @@ void MapEditor::init(int x, int y, int w, int h, Texture** texs)
     
     int tileXY = tileX * tileY;
     int i;
-    tileIndex = new int* [3];
-    for (int i = 0; i < 3; i++)
-        tileIndex[i] = new int[tileXY];
-
-    tileWeight = new int[tileXY];
+    tileIndex = new int[tileXY] { 0, };
+    tileWeight = new int[tileXY] { 0, };
     
+    texTiles = new Texture * [tileXY];
+    for (i = 0; i < tileXY; i++)
+        texTiles[i] = texs[selectedTile];
+   
     numTiles = tileXY;
+
 }
 
 void MapEditor::load(const char* szFormat, ...)
@@ -127,19 +137,12 @@ void MapEditor::load(const char* szFormat, ...)
     fread(&tileHeight, sizeof(int), 1, pf);
 
     int xy = tileX * tileY;
-    int i;
-    tileIndex = new int* [3];
-    for (i = 0; i < 3; i++)
-        tileIndex[i] = new int[xy];
+    tileIndex = new int[xy];
     tileWeight = new int[xy];
-
-    for(i = 0;i<3;i++)
-        fread(tileIndex[i], sizeof(int), xy, pf);
+    fread(tileIndex, sizeof(int), xy, pf);
     fread(tileWeight, sizeof(int), xy, pf);
 
     fread(&numTiles, sizeof(int), xy, pf);
-
-#if 0 //texTiles 멤버변수 안쓰면 사용안할것들
     texTiles = new Texture * [numTiles];
     int i, j;
     for (i = 0; i < numTiles; i++)
@@ -164,7 +167,6 @@ void MapEditor::load(const char* szFormat, ...)
 
         texTiles[i] = tex;
     }
-#endif
 
     fclose(pf);
 }
@@ -180,13 +182,10 @@ void MapEditor::save(const char* str)
     fwrite(&tileHeight, sizeof(int), 1, pf);
 
     int xy = tileX * tileY;
-    for(int i=0;i<3;i++)
-        fwrite(tileIndex[i], sizeof(int), xy, pf);
-
+    fwrite(tileIndex, sizeof(int), xy, pf);
     fwrite(tileWeight, sizeof(int), xy, pf);
 
     fwrite(&numTiles, sizeof(int), xy, pf);
-#if 0 //texTiles 멤버변수 안쓰면 사용안할것들
     int i, j;
     for (i = 0; i < numTiles; i++)
     {
@@ -200,28 +199,27 @@ void MapEditor::save(const char* str)
             fwrite(&rgba[stride], sizeof(int), tileWidth, pf);
         bmp->UnlockBits(&bd);
     }
-#endif
+
     fclose(pf);
 }
 
-void MapEditor::insert(iPoint point, int type)
+void MapEditor::insert(iPoint point, const char* ImgPath)
 {
     int x = point.x; x /= tileWidth;
     int y = point.y; y /= tileHeight;
     int xy = tileX * y + x;
 
-    tileIndex[type][xy] = selectedTile;
+    Texture** texs = createImageDivide(8, 32, ImgPath);
+    tileIndex[xy] = selectedTile;
     tileWeight[xy] = selectedWeight;
     
-#if 0 //texTiles 멤버변수 안쓰면 사용안할것들
-    Texture** texs = createImageDivide(8, 32, ImgPath);
     int ti = tileIndex[xy];
     texTiles[xy] = texs[ti]; //실제 타일의 넘버링에 tileindex에 해당하는 인덱스 번호의 텍스처들어가기
+    
    
     for (int i = 0; i < 256; i++)
         freeImage(texs[i]);
     delete texs;
-#endif
 }
 
 #if 0

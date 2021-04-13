@@ -18,12 +18,13 @@ public:
 	void load(const char* szFormat, ...);
 	void save(const char* str);
 
-	void insert(iPoint point, int type);
+	void insert(iPoint point, const char* ImgPath);
 
 public:
 	int tileX, tileY, tileWidth, tileHeight;
-	int** tileIndex, *tileWeight;
+	int* tileIndex, * tileWeight;
 
+	Texture** texTiles;
 	int numTiles;
 
 	//int mode;// 0:tile, 1:attr, 2:obj
