@@ -88,7 +88,7 @@ void MapEditor::draw(float dt, iPoint off)
     }
 }
 
-void MapEditor::init(int x, int y, int w, int h, Texture** texs)
+void MapEditor::init(int x, int y, int w, int h)
 {
     tileX = x;
     tileY = y;
@@ -98,10 +98,15 @@ void MapEditor::init(int x, int y, int w, int h, Texture** texs)
     int tileXY = tileX * tileY;
     int i;
     tileIndex = new int* [3];
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
         tileIndex[i] = new int[tileXY];
 
+    for (i = 0; i < tileXY; i++)
+        tileIndex[0][i] = 0;
+
     tileWeight = new int[tileXY];
+    for (i = 0; i < tileXY; i++)
+        tileWeight[i] = 0;
     
     numTiles = tileXY;
 }
@@ -270,7 +275,7 @@ char* openImg()
 //==========================================================
 
 iRect RT;
-iRect* EditRT;
+//iRect* EditRT;
 iRect TileRT;
 iRect TileImgRT;
 iRect TileImgRT2;
@@ -284,7 +289,7 @@ iRect selectedWeiRT;
 iRect ExitRT;
 
 iPoint prevPosition;
-iPoint EditRT_point;
+//iPoint EditRT_point;
 iPoint TileRT_point;
 iPoint TileImgRT_point;
 iPoint TileImgRT2_point;
@@ -315,8 +320,9 @@ void RTset()
 {
     //좌표 세팅을 위한 일회성 함수로 한번 쓰고 안쓸거임.
     prevPosition =          iPointMake(0, 0);
-    EditRT_point =          iPointMake(0, 0);
-    TileRT_point =          iPointMake(tileWSize * 17,  0);
+    //EditRT_point =          iPointMake(0, 0);
+    //TileRT_point =          iPointMake(tileWSize * 17,  0);
+    TileRT_point =          iPointMake(0, 0);
 
     TileImgRT_point =       iPointMake(0,               tileHSize * 13);
     TileImgRT2_point =      iPointMake(tileWSize * 9,   tileHSize * 13);
@@ -329,13 +335,13 @@ void RTset()
     selectedImgRT_point =   iPointMake(tileWSize * 36 - tileWSize/2,  tileHSize * 6);
     selectedWeiRT_point =   iPointMake(tileWSize * 36 - tileWSize/2, tileHSize * 8);
 
-    EditRT = new iRect[tileW * tileH];
+    //EditRT = new iRect[tileW * tileH];
 
-    for (int i = 0; i < tileW * tileH; i++)
-    {
-        int x = i % tileW, y = i/tileW;
-        EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
-    }
+    //for (int i = 0; i < tileW * tileH; i++)
+    //{
+    //    int x = i % tileW, y = i/tileW;
+    //    EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
+    //}
 
     RT =            iRectMake(0, 0, tileWSize * 16, tileHSize * 12);
     TileRT =        iRectMake(TileRT_point.x, TileRT_point.y, tileWSize * 16, tileHSize * 12);
@@ -350,6 +356,7 @@ void RTset()
     selectedWeiRT = iRectMake(selectedWeiRT_point.x, selectedWeiRT_point.y, tileWSize, tileHSize);
 
     tEditor = new MapEditor();
+    tEditor->init(tileW, tileH, tileWSize, tileHSize);
   
     set_check = true;
 }
@@ -384,8 +391,8 @@ void drawMap(float dt)
     //===========================================
     int i;
     setRGBA(1, 0, 0, 1);
-    for(i=0;i<tileW * tileH;i++)
-        drawRect(EditRT[i]);
+    //for(i=0;i<tileW * tileH;i++)
+    //    drawRect(EditRT[i]);
     drawRect(TileRT);
     drawRect(TileImgRT);
     drawRect(TileImgRT2);
@@ -418,7 +425,24 @@ void drawMap(float dt)
     //===========================================
     //draw Tile
     //===========================================
-    tEditor->draw(dt, TileRT_point);
+    //tEditor->draw(dt, TileRT_point);
+    int x = tEditor->tileX;
+    int y = tEditor->tileY;
+    for (int j = 0; j < 3; j++)
+    {
+        for (int i = 0; i < x * y; i++)
+        {
+            if (tEditor->tileIndex[j][i] > -1)
+                drawImage(texs[j][tEditor->tileIndex[j][i]], TileRT_point.x + i%x*tileWSize, TileRT_point.y + i/x*tileHSize, TOP | LEFT);
+        }
+    }
+
+    const char* str = "0";
+    setStringBorderRGBA(1, 0, 0, 1);
+    //for (int i = 0; i < x * y; i++)
+    //{
+    //    drawString(TileRT_point.x + i % x * tileWSize + 1, TileRT_point.y + i / x * tileHSize, TOP | LEFT, str);
+    //}
 
     //===========================================
     //draw TileImg 1, 2, 3 & TileWeight 
@@ -443,8 +467,6 @@ void drawMap(float dt)
     for (i = 0; i < 256; i++)
         drawImage(texs[2][i], TileImgRT3_point.x + (i % 8) * tileWSize, TileImgRT3_point.y + (i / 8) * tileHSize, TOP | LEFT);
     setClip(0, 0, 0, 0);
-
-    
 
 }
 

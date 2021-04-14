@@ -13,7 +13,7 @@ public:
 
 	void draw(float dt, iPoint off);
 
-	void init(int x, int y, int w, int h, Texture** texs);
+	void init(int x, int y, int w, int h);
 
 	void load(const char* szFormat, ...);
 	void save(const char* str);
