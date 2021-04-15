@@ -72,7 +72,6 @@ void MapEditor::clean()
     int i;
 }
 
-
 void MapEditor::draw(float dt, iPoint off)
 {
     int i, xy = tileX * tileY;
@@ -275,7 +274,7 @@ char* openImg()
 //==========================================================
 
 iRect RT;
-//iRect* EditRT;
+iRect* EditRT;
 iRect TileRT;
 iRect TileImgRT;
 iRect TileImgRT2;
@@ -289,7 +288,7 @@ iRect selectedWeiRT;
 iRect ExitRT;
 
 iPoint prevPosition;
-//iPoint EditRT_point;
+iPoint EditRT_point;
 iPoint TileRT_point;
 iPoint TileImgRT_point;
 iPoint TileImgRT2_point;
@@ -320,9 +319,9 @@ void RTset()
 {
     //좌표 세팅을 위한 일회성 함수로 한번 쓰고 안쓸거임.
     prevPosition =          iPointMake(0, 0);
-    //EditRT_point =          iPointMake(0, 0);
-    //TileRT_point =          iPointMake(tileWSize * 17,  0);
-    TileRT_point =          iPointMake(0, 0);
+    EditRT_point =          iPointMake(0, 0);
+    TileRT_point =          iPointMake(tileWSize * 17,  0);
+    //TileRT_point =          iPointMake(0, 0);
 
     TileImgRT_point =       iPointMake(0,               tileHSize * 13);
     TileImgRT2_point =      iPointMake(tileWSize * 9,   tileHSize * 13);
@@ -335,13 +334,13 @@ void RTset()
     selectedImgRT_point =   iPointMake(tileWSize * 36 - tileWSize/2,  tileHSize * 6);
     selectedWeiRT_point =   iPointMake(tileWSize * 36 - tileWSize/2, tileHSize * 8);
 
-    //EditRT = new iRect[tileW * tileH];
+    EditRT = new iRect[tileW * tileH];
 
-    //for (int i = 0; i < tileW * tileH; i++)
-    //{
-    //    int x = i % tileW, y = i/tileW;
-    //    EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
-    //}
+    for (int i = 0; i < tileW * tileH; i++)
+    {
+        int x = i % tileW, y = i/tileW;
+        EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
+    }
 
     RT =            iRectMake(0, 0, tileWSize * 16, tileHSize * 12);
     TileRT =        iRectMake(TileRT_point.x, TileRT_point.y, tileWSize * 16, tileHSize * 12);
@@ -391,8 +390,8 @@ void drawMap(float dt)
     //===========================================
     int i;
     setRGBA(1, 0, 0, 1);
-    //for(i=0;i<tileW * tileH;i++)
-    //    drawRect(EditRT[i]);
+    for(i=0;i<tileW * tileH;i++)
+        drawRect(EditRT[i]);
     drawRect(TileRT);
     drawRect(TileImgRT);
     drawRect(TileImgRT2);
@@ -421,6 +420,11 @@ void drawMap(float dt)
     for (int i = 0; i < 10; i++)
         drawString(TileWeiRT_point.x, TileWeiRT_point.y + (i*20), TOP | LEFT, weight[i]); 
 
+    //#need update 위치조정
+    const char* loadStr = "Load";
+    const char* saveStr = "Save";
+    drawString(LoadBtn_point.x, LoadBtn_point.y, TOP | LEFT, loadStr);
+    drawString(SaveBtn_point.x, SaveBtn_point.y, TOP | LEFT, saveStr);
 
     //===========================================
     //draw Tile
@@ -437,14 +441,8 @@ void drawMap(float dt)
         }
     }
 
-    const char* str = "0";
-    setStringSize(15);
-    setStringBorderRGBA(1, 0, 0, 1);
-    //#issue! gdiplus 로만 계속 그리고 있어서가 느린건지, draw를 많이해서 느린건지?
-    //for (int i = 0; i < x * y; i++)
-    //{
-    //    drawString(TileRT_point.x + i % x * tileWSize + 1, TileRT_point.y + i / x * tileHSize, TOP | LEFT, str);
-    //}
+    if (selectedTex)
+        drawImage(selectedTex, selectedImgRT_point.x, selectedImgRT_point.y, TOP | LEFT);
 
     //===========================================
     //draw TileImg 1, 2, 3 & TileWeight 
@@ -477,10 +475,8 @@ void freeMap()
 
     int i, j;
 
-    delete selectedTex;
+    delete EditRT;
 
-    //#issue! 74 line 파괴자의 해제와 충돌나는 코드!
-#if 1
     for (j = 0; j < 3; j++)
     {
         for (i = 0; i < 256; i++)
@@ -488,9 +484,34 @@ void freeMap()
         delete texs[j];
     }
     delete texs;
-#endif
 
     delete tEditor;
+}
+
+void containTileImg(iPoint point, iPoint off)
+{
+    iRect texRT;
+    int texs_idx;
+    if (movingTileImg)
+        texs_idx = 0;
+    else if (movingTileImg2)
+        texs_idx = 1;
+    else //if(movingTileImg3)
+        texs_idx = 2;
+
+    for (int i = 0; i < 256; i++)
+    {
+        texRT = iRectMake(off.x + (i % 8) * tileWSize, off.y + (i / 8) * tileHSize, tileWSize, tileHSize);
+        if (containPoint(point, texRT))
+        {
+            selectedTex = texs[texs_idx][i];
+            //#issue! 선택한 타일의 인덱스를 객체의 인덱스에 집어넣을때,
+            //이전에 쓴 1차원 배열의 방식이 아닌, 2차원 배열의 방식을 생각해봐야함
+            //tEditor->tileIndex[texs_idx][]
+            //tEditor->selectedTile = i;
+
+        }
+    }
 }
 
 void keyMap(iKeyStat stat, iPoint point)
@@ -508,24 +529,34 @@ void keyMap(iKeyStat stat, iPoint point)
         if (containPoint(point, TileImgRT))
         {
             movingTileImg = true;
+            containTileImg(point, TileImgRT_point);
         }
         else if (containPoint(point, TileImgRT2))
         {
             movingTileImg2 = true;
+            containTileImg(point, TileImgRT2_point);
         }
         else if (containPoint(point, TileImgRT3))
         {
             movingTileImg3 = true;
+            containTileImg(point, TileImgRT3_point);
         }
 
         //load 버튼
         if (containPoint(point, LoadBtn))
         {
+#ifdef WIN32
             MessageBox(NULL, TEXT("로드완료"), TEXT("Load"), MB_OK);
+#endif //WIN32
         }
 
         //save 버튼
-
+        if (containPoint(point, SaveBtn))
+        {
+#ifdef WIN32
+            MessageBox(NULL, TEXT("저장완료"), TEXT("Save"), MB_OK);
+#endif //WIN32
+        }
 
     }
     else if (stat == iKeyStatMoved)
