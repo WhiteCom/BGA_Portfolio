@@ -409,12 +409,12 @@ void drawMap(float dt)
     //draw string
     //===========================================
     //to do...
-    const char* weight[10] = {
-        "0","1","2","3","4","5","6","7","8","9"
+    const char* weight[11] = {
+        "0","1","2","3","4","5","6","7","8","9", "INF"
     };
     setStringName("굴림");
     setStringSize(30);
-    setStringRGBA(1, 0, 1, 1);
+    setStringRGBA(1, 0, 0, 1);
     setStringBorder(0.5f);
     setStringBorderRGBA(0, 0, 0, 1);
     //test
@@ -438,7 +438,9 @@ void drawMap(float dt)
     }
 
     const char* str = "0";
+    setStringSize(15);
     setStringBorderRGBA(1, 0, 0, 1);
+    //#issue! gdiplus 로만 계속 그리고 있어서가 느린건지, draw를 많이해서 느린건지?
     //for (int i = 0; i < x * y; i++)
     //{
     //    drawString(TileRT_point.x + i % x * tileWSize + 1, TileRT_point.y + i / x * tileHSize, TOP | LEFT, str);
@@ -515,6 +517,15 @@ void keyMap(iKeyStat stat, iPoint point)
         {
             movingTileImg3 = true;
         }
+
+        //load 버튼
+        if (containPoint(point, LoadBtn))
+        {
+            MessageBox(NULL, TEXT("로드완료"), TEXT("Load"), MB_OK);
+        }
+
+        //save 버튼
+
 
     }
     else if (stat == iKeyStatMoved)
