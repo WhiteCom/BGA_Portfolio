@@ -12,6 +12,10 @@
 #include "iColor.h"
 #include "iImage.h"
 
+#include "iGraphics.h"
+
+#include "iOpenGL.h"
+
 // C 런타임 헤더 파일입니다.
 #include <stdio.h>
 #include <string.h>

@@ -273,8 +273,10 @@ char* openImg()
 //iRect영역들
 //==========================================================
 
-iRect RT;
+iRect E_RT;
 iRect* EditRT;
+iRect W_RT;
+iRect* WeiRT; //가중치 선택하는 영역의 숫자칸들
 iRect TileRT;
 iRect TileImgRT;
 iRect TileImgRT2;
@@ -309,11 +311,13 @@ static bool movingTileImg3 = false;
 static const char* ImgPath[3];
 
 Texture*** texs;
-
 Texture* selectedTex = NULL; //커서로 선택한 타일이미지
-
+int selectedWei = 99; //INF
 MapEditor* tEditor;
 
+const char* weight[11] = {
+       "0","1","2","3","4","5","6","7","8","9", "INF"
+};
 
 void RTset()
 {
@@ -341,8 +345,10 @@ void RTset()
         int x = i % tileW, y = i/tileW;
         EditRT[i] = iRectMake(EditRT_point.x + x * tileWSize, EditRT_point.y + y * tileHSize, tileWSize, tileHSize);
     }
+   
 
-    RT =            iRectMake(0, 0, tileWSize * 16, tileHSize * 12);
+    E_RT =          iRectMake(0, 0, tileWSize * 16, tileHSize * 12);
+    W_RT =          iRectMake(TileWeiRT_point.x, TileWeiRT_point.y, tileWSize * 8, tileHSize * 8);
     TileRT =        iRectMake(TileRT_point.x, TileRT_point.y, tileWSize * 16, tileHSize * 12);
     TileImgRT =     iRectMake(TileImgRT_point.x, TileImgRT_point.y, tileWSize * 8, tileHSize * 8);
     TileImgRT2 =    iRectMake(TileImgRT2_point.x, TileImgRT2_point.y, tileWSize * 8, tileHSize * 8);
@@ -353,6 +359,13 @@ void RTset()
     SaveBtn =       iRectMake(SaveBtn_point.x, SaveBtn_point.y, tileWSize * 4, tileHSize);
     selectedImgRT = iRectMake(selectedImgRT_point.x, selectedImgRT_point.y, tileWSize, tileHSize);
     selectedWeiRT = iRectMake(selectedWeiRT_point.x, selectedWeiRT_point.y, tileWSize, tileHSize);
+
+    WeiRT = new iRect[11]; //0~9, INF
+
+    for (int i = 0; i < 11; i++)
+    {
+        WeiRT[i] = iRectMake(TileWeiRT_point.x + (i % 3) * tileWSize * 2, TileWeiRT_point.y + (i / 3) * tileHSize * 2, tileWSize * 2, tileHSize * 2);
+    }
 
     tEditor = new MapEditor();
     tEditor->init(tileW, tileH, tileWSize, tileHSize);
@@ -392,6 +405,7 @@ void drawMap(float dt)
     setRGBA(1, 0, 0, 1);
     for(i=0;i<tileW * tileH;i++)
         drawRect(EditRT[i]);
+   
     drawRect(TileRT);
     drawRect(TileImgRT);
     drawRect(TileImgRT2);
@@ -402,23 +416,23 @@ void drawMap(float dt)
     drawRect(SaveBtn);
     drawRect(selectedImgRT);
     drawRect(selectedWeiRT);
+    for (i = 0; i < 11; i++)
+        drawRect(WeiRT[i]);
     setRGBA(1, 1, 1, 1);
 
     //===========================================
     //draw string
     //===========================================
     //to do...
-    const char* weight[11] = {
-        "0","1","2","3","4","5","6","7","8","9", "INF"
-    };
+   
     setStringName("굴림");
     setStringSize(30);
     setStringRGBA(1, 0, 0, 1);
     setStringBorder(0.5f);
     setStringBorderRGBA(0, 0, 0, 1);
     //test
-    for (int i = 0; i < 10; i++)
-        drawString(TileWeiRT_point.x, TileWeiRT_point.y + (i*20), TOP | LEFT, weight[i]); 
+    for (int i = 0; i < 11; i++)
+        drawString(TileWeiRT_point.x + (i%3) * tileWSize * 2, TileWeiRT_point.y + (i / 3) * tileHSize * 2, TOP | LEFT, weight[i]);
 
     //#need update 위치조정
     const char* loadStr = "Load";
@@ -514,13 +528,19 @@ void containTileImg(iPoint point, iPoint off)
     }
 }
 
+void containWeiImg(iPoint point, iPoint off)
+{
+    iRect texWei;
+
+}
+
 void keyMap(iKeyStat stat, iPoint point)
 {
     if (stat == iKeyStatBegan)
     {
 
         //편집영역에 있을때 (격자무늬)
-        if (containPoint(point, RT))
+        if (containPoint(point, E_RT))
         {
         }
 
@@ -541,6 +561,13 @@ void keyMap(iKeyStat stat, iPoint point)
             movingTileImg3 = true;
             containTileImg(point, TileImgRT3_point);
         }
+
+        //Wei 버튼 (숫자버튼)
+        if (containPoint(point, W_RT))
+        {
+            
+        }
+
 
         //load 버튼
         if (containPoint(point, LoadBtn))
