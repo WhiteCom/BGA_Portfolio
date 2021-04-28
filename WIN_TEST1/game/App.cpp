@@ -1,4 +1,4 @@
-﻿#include "WIN_TEST1.h"
+﻿#include "App.h"
 #include "Game.h"
 
 #define MAX_LOADSTRING 100
@@ -10,7 +10,6 @@ HWND hWnd;
 HDC hdc;
 WCHAR szTitle[MAX_LOADSTRING] = TEXT("WIN_TEST");               
 WCHAR szWindowClass[MAX_LOADSTRING] = TEXT("WIN_TEST2");          
-
 
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -54,6 +53,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
     hdc = GetDC(hWnd);
+
 
     //#NEED UPDATE
     ULONG_PTR token = startApp(hdc, loadGame);

@@ -25,7 +25,7 @@ MapEditor::MapEditor()
     tileWidth = 0;
     tileHeight = 0;
     tileIndex = NULL;
-    tileWeight = 0;
+    tileWeight = NULL;
 
     numTiles = 0;
 
@@ -100,13 +100,8 @@ void MapEditor::init(int x, int y, int w, int h)
     for (i = 0; i < 3; i++)
         tileIndex[i] = new int[tileXY];
 
-    for (i = 0; i < tileXY; i++)
-        tileIndex[0][i] = 0;
-
     tileWeight = new int[tileXY];
-    for (i = 0; i < tileXY; i++)
-        tileWeight[i] = 0;
-    
+        
     numTiles = tileXY;
 }
 
@@ -214,18 +209,14 @@ void MapEditor::insert(iPoint point, int type)
     int y = point.y; y /= tileHeight;
     int xy = tileX * y + x;
 
+    for (int i = 0; i < 3; i++)
+    {
+        if (tileIndex[i][xy] > -1) //이미 무언가 할당되어있는데, 새로 추가될때
+            tileIndex[i][xy] = -1;
+    }
+
     tileIndex[type][xy] = selectedTile;
     tileWeight[xy] = selectedWeight;
-    
-#if 0 //texTiles 멤버변수 안쓰면 사용안할것들
-    Texture** texs = createImageDivide(8, 32, ImgPath);
-    int ti = tileIndex[xy];
-    texTiles[xy] = texs[ti]; //실제 타일의 넘버링에 tileindex에 해당하는 인덱스 번호의 텍스처들어가기
-   
-    for (int i = 0; i < 256; i++)
-        freeImage(texs[i]);
-    delete texs;
-#endif
 }
 
 #if 0
@@ -311,13 +302,18 @@ static bool movingTileImg3 = false;
 static const char* ImgPath[3];
 
 Texture*** texs;
+Texture** tmpTileTex;
+int* tmpTileWei;
 Texture* selectedTex = NULL; //커서로 선택한 타일이미지
 int selectedWei = 99; //INF
+int texs_idx;
 MapEditor* tEditor;
 
 const char* weight[11] = {
-       "0","1","2","3","4","5","6","7","8","9", "INF"
+       "0","1","2","3","4","5","6","7","8","9", "10"
 };
+char selWei[10] = { NULL, };
+char tmpWei[10] = { NULL, };
 
 void RTset()
 {
@@ -391,6 +387,14 @@ void loadMap()
     //to do...
     //가중치 처리해줘야함. 아직 안해준것들이 좀 있음. 
     tEditor;
+
+    tmpTileTex = new Texture * [tileW * tileH];
+    tmpTileWei = new int [tileW * tileH];
+    for (int i = 0; i < tileW * tileH; i++)
+    {
+        tmpTileTex[i] = NULL;
+        tmpTileWei[i] = 0;
+    }
 }
 
 
@@ -439,6 +443,22 @@ void drawMap(float dt)
     const char* saveStr = "Save";
     drawString(LoadBtn_point.x, LoadBtn_point.y, TOP | LEFT, loadStr);
     drawString(SaveBtn_point.x, SaveBtn_point.y, TOP | LEFT, saveStr);
+
+    //선택한 가중치
+    drawString(selectedWeiRT_point.x, selectedWeiRT_point.y, TOP|LEFT, selWei);
+
+    //===========================================
+    //draw tmpTile
+    //===========================================
+    for (int i = 0; i < tileW * tileH; i++)
+    {
+        if (tmpTileTex[i])
+        {
+            drawImage(tmpTileTex[i], i % tileW * tileWSize, i / tileW * tileHSize, TOP | LEFT);
+            sprintf(tmpWei, "%d", tmpTileWei[i]);
+            drawString(i % tileW * tileWSize, i / tileW * tileHSize, TOP | LEFT, tmpWei);
+        }
+    }
 
     //===========================================
     //draw Tile
@@ -499,13 +519,16 @@ void freeMap()
     }
     delete texs;
 
+    delete tmpTileTex;
+    delete tmpTileWei;
+
     delete tEditor;
 }
 
 void containTileImg(iPoint point, iPoint off)
 {
     iRect texRT;
-    int texs_idx;
+   
     if (movingTileImg)
         texs_idx = 0;
     else if (movingTileImg2)
@@ -519,11 +542,9 @@ void containTileImg(iPoint point, iPoint off)
         if (containPoint(point, texRT))
         {
             selectedTex = texs[texs_idx][i];
-            //#issue! 선택한 타일의 인덱스를 객체의 인덱스에 집어넣을때,
-            //이전에 쓴 1차원 배열의 방식이 아닌, 2차원 배열의 방식을 생각해봐야함
-            //tEditor->tileIndex[texs_idx][]
-            //tEditor->selectedTile = i;
-
+            //선택 영역의 이미지 인덱스를 객체 멤버변수에 저장
+            tEditor->selectedTile = i;
+            
         }
     }
 }
@@ -532,6 +553,17 @@ void containWeiImg(iPoint point, iPoint off)
 {
     iRect texWei;
 
+    for (int i = 0; i < 11; i++)
+    {
+        texWei = iRectMake(off.x + (i % 3) * tileWSize * 2, off.y + (i / 3) * tileHSize * 2, tileWSize * 2, tileHSize * 2);
+        if (containPoint(point, texWei))
+        {
+            selectedWei = i ;
+        }
+    }
+
+    sprintf(selWei, "%d", selectedWei);
+    tEditor->selectedWeight = selectedWei;
 }
 
 void keyMap(iKeyStat stat, iPoint point)
@@ -542,6 +574,21 @@ void keyMap(iKeyStat stat, iPoint point)
         //편집영역에 있을때 (격자무늬)
         if (containPoint(point, E_RT))
         {
+            if (selWei[0] && selectedTex) //이미지, 가중치 둘다 선택됬을때
+            {
+                //tEditor->selectedTile = selectedTex
+                tEditor->insert(point, texs_idx);
+                
+                for (int i = 0; i < tileW * tileH; i++)
+                {
+                    if (containPoint(point, EditRT[i]))
+                    {
+                        tmpTileTex[i] = selectedTex;
+                        tmpTileWei[i] = selectedWei;
+                    }
+
+                }
+            }
         }
 
         prevPosition = point;
@@ -565,7 +612,7 @@ void keyMap(iKeyStat stat, iPoint point)
         //Wei 버튼 (숫자버튼)
         if (containPoint(point, W_RT))
         {
-            
+            containWeiImg(point, TileWeiRT_point);
         }
 
 
@@ -629,5 +676,3 @@ void keyMap(iKeyStat stat, iPoint point)
         movingTileImg3 = false;
     }
 }
-
-

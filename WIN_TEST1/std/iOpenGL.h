@@ -7,8 +7,9 @@
 #include <gl/GLU.h>
 #pragma comment(lib, "OpenGL32.lib")
 
+#include <Windows.h>
 
-//void loadOpenGL(HDC hDC);
+void loadOpenGL(HDC hDC);
 void freeOpenGL();
 
 enum TextureWrap {
