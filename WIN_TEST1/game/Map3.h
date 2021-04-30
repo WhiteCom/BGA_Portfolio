@@ -16,7 +16,7 @@ public:
 	void init(int x, int y, int w, int h);
 
 	void load(const char* szFormat, ...);
-	void save(const char* str);
+	void save(const char* str, ...);
 
 	void insert(iPoint point, int type);
 
@@ -24,7 +24,7 @@ public:
 	int tileX, tileY, tileWidth, tileHeight;
 	int** tileIndex, *tileWeight;
 
-	int numTiles;
+	//int numTiles;
 
 	//int mode;// 0:tile, 1:attr, 2:obj
 	int selectedTile, selectedWeight;

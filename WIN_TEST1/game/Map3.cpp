@@ -2,6 +2,8 @@
 
 #include "iWindow.h"
 #include "TileType.h"
+#include "Loading.h"
+#include "Intro.h"
 
 /*
    public:
@@ -27,7 +29,7 @@ MapEditor::MapEditor()
     tileIndex = NULL;
     tileWeight = NULL;
 
-    numTiles = 0;
+    //numTiles = 0;
 
     selectedTile = 0;
     selectedWeight = 0;
@@ -42,7 +44,7 @@ MapEditor::MapEditor(const char* szFormat, ...)
     tileIndex = NULL;
     tileWeight = NULL;
 
-    numTiles = 0;
+    //numTiles = 0;
 
     selectedTile = 0;
     selectedWeight = 0;
@@ -58,6 +60,7 @@ MapEditor::~MapEditor()
     clean();
 }
 
+//#issue! 현재 여기서 뭔가 잘못 삭제하고 있어서 문제가 있다. 
 void MapEditor::clean()
 {
     if (tileIndex == NULL)
@@ -68,8 +71,6 @@ void MapEditor::clean()
     delete tileIndex;
 
     delete tileWeight;
-
-    int i;
 }
 
 void MapEditor::draw(float dt, iPoint off)
@@ -102,7 +103,7 @@ void MapEditor::init(int x, int y, int w, int h)
 
     tileWeight = new int[tileXY];
         
-    numTiles = tileXY;
+    //numTiles = tileXY;
 }
 
 void MapEditor::load(const char* szFormat, ...)
@@ -136,7 +137,7 @@ void MapEditor::load(const char* szFormat, ...)
         fread(tileIndex[i], sizeof(int), xy, pf);
     fread(tileWeight, sizeof(int), xy, pf);
 
-    fread(&numTiles, sizeof(int), xy, pf);
+    //fread(&numTiles, sizeof(int), xy, pf);
 
 #if 0 //texTiles 멤버변수 안쓰면 사용안할것들
     texTiles = new Texture * [numTiles];
@@ -168,7 +169,7 @@ void MapEditor::load(const char* szFormat, ...)
     fclose(pf);
 }
 
-void MapEditor::save(const char* str)
+void MapEditor::save(const char* str, ...)
 {
     FILE* pf = fopen(str, "wb");
 
@@ -184,7 +185,7 @@ void MapEditor::save(const char* str)
 
     fwrite(tileWeight, sizeof(int), xy, pf);
 
-    fwrite(&numTiles, sizeof(int), xy, pf);
+    //write(&numTiles, sizeof(int), xy, pf);
 #if 0 //texTiles 멤버변수 안쓰면 사용안할것들
     int i, j;
     for (i = 0; i < numTiles; i++)
@@ -276,6 +277,7 @@ iRect TileWeiRT;
 iRect TileSelRT;
 iRect LoadBtn;
 iRect SaveBtn;
+iRect ExitBtn;
 iRect selectedImgRT;
 iRect selectedWeiRT;
 iRect ExitRT;
@@ -290,6 +292,7 @@ iPoint TileWeiRT_point;
 iPoint TileSelRT_point;
 iPoint LoadBtn_point;
 iPoint SaveBtn_point;
+iPoint ExitBtn_point;
 iPoint selectedImgRT_point;
 iPoint selectedWeiRT_point;
 iPoint ExitRT_point;
@@ -330,9 +333,10 @@ void RTset()
 
     LoadBtn_point =         iPointMake(tileWSize * 34,  tileHSize);
     SaveBtn_point =         iPointMake(tileWSize * 34,  tileHSize * 3);
-    TileSelRT_point =       iPointMake(tileWSize * 34,  tileHSize * 5);
-    selectedImgRT_point =   iPointMake(tileWSize * 36 - tileWSize/2,  tileHSize * 6);
-    selectedWeiRT_point =   iPointMake(tileWSize * 36 - tileWSize/2, tileHSize * 8);
+    ExitBtn_point =         iPointMake(tileWSize * 34, tileHSize * 5);
+    TileSelRT_point =       iPointMake(tileWSize * 34,  tileHSize * 7);
+    selectedImgRT_point =   iPointMake(tileWSize * 36 - tileWSize/2,  tileHSize * 8);
+    selectedWeiRT_point =   iPointMake(tileWSize * 36 - tileWSize/2, tileHSize * 10);
 
     EditRT = new iRect[tileW * tileH];
 
@@ -353,6 +357,7 @@ void RTset()
     TileSelRT =     iRectMake(TileSelRT_point.x, TileSelRT_point.y, tileWSize * 4, tileHSize * 5);
     LoadBtn =       iRectMake(LoadBtn_point.x, LoadBtn_point.y, tileWSize * 4, tileHSize);
     SaveBtn =       iRectMake(SaveBtn_point.x, SaveBtn_point.y, tileWSize * 4, tileHSize);
+    ExitBtn =       iRectMake(ExitBtn_point.x, ExitBtn_point.y, tileWSize * 4, tileHSize);
     selectedImgRT = iRectMake(selectedImgRT_point.x, selectedImgRT_point.y, tileWSize, tileHSize);
     selectedWeiRT = iRectMake(selectedWeiRT_point.x, selectedWeiRT_point.y, tileWSize, tileHSize);
 
@@ -366,7 +371,7 @@ void RTset()
     tEditor = new MapEditor();
     tEditor->init(tileW, tileH, tileWSize, tileHSize);
   
-    set_check = true;
+    //set_check = true;
 }
 
 void loadMap()
@@ -381,8 +386,8 @@ void loadMap()
     texs[1] = createImageDivide(8, 32, ImgPath[1]);
     texs[2] = createImageDivide(8, 32, ImgPath[2]);
 
-    if (!set_check)
-        RTset();
+    //if (!set_check)
+    RTset();
     
     //to do...
     //가중치 처리해줘야함. 아직 안해준것들이 좀 있음. 
@@ -418,6 +423,7 @@ void drawMap(float dt)
     drawRect(TileSelRT);
     drawRect(LoadBtn);
     drawRect(SaveBtn);
+    drawRect(ExitBtn);
     drawRect(selectedImgRT);
     drawRect(selectedWeiRT);
     for (i = 0; i < 11; i++)
@@ -441,8 +447,10 @@ void drawMap(float dt)
     //#need update 위치조정
     const char* loadStr = "Load";
     const char* saveStr = "Save";
+    const char* exitStr = "Exit";
     drawString(LoadBtn_point.x, LoadBtn_point.y, TOP | LEFT, loadStr);
     drawString(SaveBtn_point.x, SaveBtn_point.y, TOP | LEFT, saveStr);
+    drawString(ExitBtn_point.x, ExitBtn_point.y, TOP | LEFT, exitStr);
 
     //선택한 가중치
     drawString(selectedWeiRT_point.x, selectedWeiRT_point.y, TOP|LEFT, selWei);
@@ -509,6 +517,16 @@ void freeMap()
 
     int i, j;
 
+    //Map3.cpp 전역변수 초기화
+    selectedTex = NULL;
+    selectedWei = 99;
+
+    for (i = 0; i < 10; i++)
+    {
+        selWei[i] = NULL;
+        tmpWei[i] = NULL;
+    }
+
     delete EditRT;
 
     for (j = 0; j < 3; j++)
@@ -522,6 +540,7 @@ void freeMap()
     delete tmpTileTex;
     delete tmpTileWei;
 
+    //객체 초기화
     delete tEditor;
 }
 
@@ -619,6 +638,8 @@ void keyMap(iKeyStat stat, iPoint point)
         //load 버튼
         if (containPoint(point, LoadBtn))
         {
+
+            tEditor->load("map.tile");
 #ifdef WIN32
             MessageBox(NULL, TEXT("로드완료"), TEXT("Load"), MB_OK);
 #endif //WIN32
@@ -627,9 +648,16 @@ void keyMap(iKeyStat stat, iPoint point)
         //save 버튼
         if (containPoint(point, SaveBtn))
         {
+            tEditor->save("map.tile");
 #ifdef WIN32
             MessageBox(NULL, TEXT("저장완료"), TEXT("Save"), MB_OK);
 #endif //WIN32
+        }
+
+        //Exit 버튼
+        if (containPoint(point, ExitBtn))
+        {
+            setLoading(gs_intro, freeMap, loadIntro);
         }
 
     }
