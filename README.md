@@ -1,4 +1,4 @@
-# WINAPI_Portfolio
+# WINAPI_Portfolio -> BGA_Game_portfolio(21.7.12)
 
 #If you uese this Proejct, First Change Directory Setting 
 
@@ -41,3 +41,9 @@
 #2021-03-30
 - update TileType, map, Character
 - add Obj img(assets/Image)
+
+------
+
+#2021-07-11 
+- delete previous files
+- update files WIN32 Api + openGL 1.0 etc...
