@@ -74,9 +74,9 @@ struct BattleUnit
 	virtual ~BattleUnit();
 	
 	virtual float update(float dt);
-	virtual bool paint(float dt, iPoint off);
-	virtual bool paint(float dt, iPoint off, iPoint rate);
-	virtual bool paint(float dt, iPoint off, float rx, float ry);
+	virtual bool paint(float dt, iPoint off) = 0;
+	virtual bool paint(float dt, iPoint off, iPoint rate) = 0;
+	virtual bool paint(float dt, iPoint off, float rx, float ry) = 0;
 	virtual void attack();
 	
 
@@ -103,8 +103,8 @@ struct BUMonster : BattleUnit
 
 	virtual float update(float dt);
 	virtual bool paint(float dt, iPoint off);
-	//virtual bool paint(float dt, iPoint off, iPoint rate);
-	//virtual bool paint(float dt, iPoint off, float rx, float ry);
+	virtual bool paint(float dt, iPoint off, iPoint rate);
+	virtual bool paint(float dt, iPoint off, float rx, float ry);
 	virtual void attack();
 };
 
@@ -114,8 +114,8 @@ struct BUHero : BattleUnit
 	virtual ~BUHero();
 	virtual float update(float dt);
 	virtual bool paint(float dt, iPoint off);
-	//virtual bool paint(float dt, iPoint off, iPoint rate);
-	//virtual bool paint(float dt, iPoint off, float rx, float ry);
+	virtual bool paint(float dt, iPoint off, iPoint rate);
+	virtual bool paint(float dt, iPoint off, float rx, float ry);
 	virtual void attack();
 	virtual bool keyHero(iKeyStat stat, iPoint p);
 	
@@ -167,6 +167,8 @@ public:
 	virtual ~BattlePop();
 
 	void paint(float dt, iPoint off);
+	void popBeforeMethod(iPopup* pop, float dt, float rate);
+	void popAfterMethod(iPopup* pop, float dt, float rate);
 	void showPopBattle(bool check);
 	bool keyPopBattle(iKeyStat stat, iPoint p);
 	
