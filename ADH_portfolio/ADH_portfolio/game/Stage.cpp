@@ -7,6 +7,7 @@
 #include "Menu.h"
 #include "Battle.h"
 #include "Ending.h"
+#include "App.h"
 
 #include "Common.h"
 
@@ -243,6 +244,7 @@ void loadStage()
     //TopUI
     createPopTopUI();
     createPopSetting();
+    createPopStageExit();
     createPopStageHow();
     createPopInven();
 
@@ -263,8 +265,6 @@ void loadStage()
     showPopInven(false);
     showPopStageOption(false);
     showPopStageExit(false);
-
-
 }
 
 void freeStage()
@@ -286,6 +286,7 @@ void freeStage()
     //TopUI
     freePopTopUI();
     freePopSetting();
+    freePopStageExit();
     freePopStageHow();
     freePopInven();
 
@@ -390,7 +391,6 @@ void drawStage(float dt)
 //=========================================================
     drawPopStageStr(dt);
     drawPopStepStr(dt);
-    
 
     //BottomUI
     drawPopBottomUI(dt);
@@ -429,7 +429,7 @@ void keyStage(iKeyStat stat, iPoint point)
 // popTopUI : 메뉴, 설정, 인벤토리
 //=========================================================
 
-iPopup** popTopUI; //메뉴, 설정, 인벤토리
+iPopup* popTopUI; //메뉴, 설정, 인벤토리
 iImage** imgTopBtn; //메뉴, 설정, 인벤토리
 
 void drawPopTopUIBefore(iPopup* pop, float dt, float rate);
@@ -439,7 +439,7 @@ void createPopTopUI()
     iImage* img;
     Texture* tex;
 
-    popTopUI = new iPopup * [2];
+    popTopUI = new iPopup();
     imgTopBtn = new iImage * [3]; // 설정, 방법, 인벤
 
     const char* imgPath[3] = {
@@ -448,64 +448,59 @@ void createPopTopUI()
         "assets/Inven2.png",
     };
     
-    for (int k = 0; k < 2; k++)
+  
+    iPopup* pop = new iPopup();
+    for (int i = 0; i < 3; i++)
     {
-        iPopup* pop = new iPopup();
-        for (int i = 0; i < 3; i++)
+        img = new iImage();
+        for (int j = 0; j < 2; j++)
         {
-            img = new iImage();
-            for (int j = 0; j < 2; j++)
+            iGraphics* g = iGraphics::share();
+            iSize size = iSizeMake(50, 50);
+            g->init(size);
+            igImage* btnImg = g->createIgImage(imgPath[i]);
+            if (j == 0)
             {
-                iGraphics* g = iGraphics::share();
-                iSize size = iSizeMake(50, 50);
-                g->init(size);
-                igImage* btnImg = g->createIgImage(imgPath[i]);
-                if (j == 0)
-                {
-                    setRGBA(0, 0, 0, 1);
-                    g->fillRect(0, 0, size.width, size.height, 5);
-                    setRGBA(1, 1, 1, 1);
-                    g->drawRect(0, 0, size.width, size.height, 5);
-                    g->drawigImage(btnImg, size.width / 2, size.height / 2, VCENTER | HCENTER,
-                        0, 0, btnImg->GetWidth(), btnImg->GetHeight(), (float)50 / 512, (float)50 / 512,
-                        2, 0);
-                }
-                else
-                {
-                    setRGBA(1, 1, 0, 1);
-                    g->fillRect(0, 0, size.width, size.height, 5);
-                    setRGBA(0, 0, 0, 1);
-                    g->drawRect(0, 0, size.width, size.height, 5);
-                    setRGBA(1, 1, 1, 1);
-                    g->drawigImage(btnImg, size.width / 2, size.height / 2, VCENTER | HCENTER,
-                        0, 0, btnImg->GetWidth(), btnImg->GetHeight(), (float)50 / 512, (float)50 / 512, 
-                        2, 0);
-                }
-                tex = g->getTexture();
-                img->addObject(tex);
-                freeImage(tex);
+                setRGBA(0, 0, 0, 1);
+                g->fillRect(0, 0, size.width, size.height, 5);
+                setRGBA(1, 1, 1, 1);
+                g->drawRect(0, 0, size.width, size.height, 5);
+                g->drawigImage(btnImg, size.width / 2, size.height / 2, VCENTER | HCENTER,
+                    0, 0, btnImg->GetWidth(), btnImg->GetHeight(), (float)50 / 512, (float)50 / 512,
+                    2, 0);
             }
-            img->position = iPointMake((25 + i*80), 25);
-            pop->addObject(img);
-
-            imgTopBtn[i] = img;
+            else
+            {
+                setRGBA(1, 1, 0, 1);
+                g->fillRect(0, 0, size.width, size.height, 5);
+                setRGBA(0, 0, 0, 1);
+                g->drawRect(0, 0, size.width, size.height, 5);
+                setRGBA(1, 1, 1, 1);
+                g->drawigImage(btnImg, size.width / 2, size.height / 2, VCENTER | HCENTER,
+                    0, 0, btnImg->GetWidth(), btnImg->GetHeight(), (float)50 / 512, (float)50 / 512, 
+                    2, 0);
+            }
+            tex = g->getTexture();
+            img->addObject(tex);
+            freeImage(tex);
         }
-        if (k == 0)
-        {
-            pop->methodBefore = drawPopTopUIBefore;
-        }
-        pop->style = iPopupAlpha;
-        pop->openPoint = iPointZero;
-        pop->closePoint = iPointZero;
+        img->position = iPointMake((25 + i*80), 25);
+        pop->addObject(img);
 
-        popTopUI[k] = pop;
+        imgTopBtn[i] = img;
     }
+    
+    pop->methodBefore = drawPopTopUIBefore;
+    pop->style = iPopupAlpha;
+    pop->openPoint = iPointZero;
+    pop->closePoint = iPointZero;
+
+    popTopUI = pop;
+    
 }
 
 void freePopTopUI()
 {
-    for (int i = 0; i < 2; i++)
-        delete popTopUI[i];
     delete popTopUI;
     delete imgTopBtn;
 }
@@ -513,12 +508,11 @@ void freePopTopUI()
 void drawPopTopUIBefore(iPopup* pop, float dt, float rate)
 {
     for (int i = 0; i < 3; i++)
-        imgTopBtn[i]->setTexObject(i == popTopUI[0]->selected);
+        imgTopBtn[i]->setTexObject(i == popTopUI->selected);
 }
 void drawPopTopUI(float dt)
 {
-    for (int i = 0; i < 2; i++)
-        popTopUI[i]->paint(dt);
+    popTopUI->paint(dt);
 
     drawPopSetting(dt);
     drawPopStageHow(dt);
@@ -526,8 +520,7 @@ void drawPopTopUI(float dt)
 }
 void showPopTopUI(bool show)
 {
-    for (int i = 0; i < 2; i++)
-        popTopUI[i]->show(show);
+    popTopUI->show(show);
     if (show)
     {
 
@@ -539,7 +532,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         keyPopStageHow(stat, point))
         return true;
 
-    iPopup* pop = popTopUI[0];
+    iPopup* pop = popTopUI;
 
     if (pop->bShow == false)
         return false;
@@ -601,7 +594,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-            printf("audio Play\n");
+            printf("TopUI audio Play\n");
             //audioPlay(0);
             pop->selected = j;
         }
@@ -731,6 +724,9 @@ void drawMethodPopSet(iPopup* pop, float dt, float rate)
 void drawPopSetting(float dt)
 {
     popSetting->paint(dt);
+
+    drawPopStageOption(dt);
+    drawPopStageExit(dt);
 }
 void showPopSetting(bool show)
 {
@@ -741,15 +737,12 @@ void showPopSetting(bool show)
 }
 bool keyPopSetting(iKeyStat stat, iPoint point)
 {
-
     iPopup* pop = popSetting;
 
     if (keyPopStageOption(stat, point) ||
         keyPopStageExit(stat, point))
         return false;
 
-    if (popTopUI[0]->selected != 0)
-        return false;
     if (popSetting->bShow == false)
         return false;
   
@@ -764,14 +757,17 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
 
         else if (pop->selected == 0) //Resume
         {
+            printf("Stage Resume\n");
             showPopSetting(false);
         }
         else if (pop->selected == 1) //Menu
         {
+            printf("Stage Menu\n");
             setLoading(gs_menu, freeStage, loadMenu);
         }
         else if (pop->selected == 2) //Option
         {
+            printf("Stage Option\n");
             showPopSetting(false);
 #if 1 
             //showPopOption(true);
@@ -780,6 +776,7 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         }
         else if (pop->selected == 3) //Exit
         {
+            printf("Stage Exit\n");
             showPopSetting(false);
             showPopStageExit(true);
         }
@@ -879,25 +876,170 @@ bool keyPopTmp(iKeyStat stat, iPoint point)
 // popStageExit : 나가기 팝업 -> popSetting
 //=========================================================
 
+iPopup* popStageExit;
+iImage** imgStageExitBtn;
+
+void drawPopStageExitBefore(iPopup* pop, float dt, float rate);
+void closePopStageExit(iPopup* pop)
+{
+    showPopSetting(true);
+}
+
 void createPopStageExit()
 {
+    iImage* img = new iImage();
+    Texture* tex;
 
+    int i, j;
+
+    iPopup* pop = new iPopup();
+
+    //Bg
+    
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(640, 480);
+    g->init(size);
+
+    setRGBA(1, 1, 1, 0.7f);
+    g->fillRect(0, 0, size.width, size.height, 10);
+    setRGBA(1, 1, 1, 1);
+
+    setStringSize(40);
+    setStringRGBA(0, 0, 0, 1);
+    setStringBorder(2);
+    setStringRGBA(1, 1, 1, 1);
+    g->drawString(size.width / 2, size.height / 2 - 50, VCENTER | HCENTER, "정말 종료하시겠습니까?");
+
+    tex = g->getTexture();
+    img->addObject(tex);
+    freeImage(tex);
+    pop->addObject(img);
+
+    //Btn
+
+  //Btn
+
+    const char* strBtn[2] = {
+        "예", "아니요"
+    };
+    imgStageExitBtn = new iImage * [2];
+
+    for (i = 0; i < 2; i++)
+    {
+        img = new iImage();
+        for (j = 0; j < 2; j++)
+        {
+            size = iSizeMake(150, 40);
+            g->init(size);
+
+            if (j == 0)
+            {
+                setRGBA(0, 0, 0, 1);
+                g->fillRect(0, 0, size.width, size.height, 10);
+                setRGBA(1, 1, 1, 1);
+                setStringSize(30);
+                setStringRGBA(0, 0, 0, 1);
+                setStringBorder(2);
+                setStringBorderRGBA(1, 1, 1, 1);
+                g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
+            }
+            else
+            {
+                setRGBA(1, 1, 0, 1);
+                g->fillRect(0, 0, size.width, size.height, 10);
+                setRGBA(1, 1, 1, 1);
+                setStringSize(30);
+                setStringRGBA(0.4f, 0.5f, 1, 1);
+                setStringBorder(2);
+                setStringBorderRGBA(1, 1, 1, 1);
+                g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
+            }
+
+            tex = g->getTexture();
+            img->addObject(tex);
+            freeImage(tex);
+        }
+        img->position = iPointMake(size.width + 180 * i, 270);
+        pop->addObject(img);
+
+        imgStageExitBtn[i] = img;
+    }
+    pop->style = iPopupRotate;
+    pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
+    pop->closePoint = iPointMake((devSize.width - 640) / 2, (devSize.height - 480) / 2);
+    pop->methodBefore = drawPopStageExitBefore;
+    pop->methodClose = closePopStageExit;
+
+    popStageExit = pop;
 }
 void freePopStageExit()
 {
-
+    delete popStageExit;
+    delete imgStageExitBtn;
+}
+void drawPopStageExitBefore(iPopup* pop, float dt, float rate)
+{
+    for (int i = 0; i < 2; i++)
+        imgStageExitBtn[i]->setTexObject(i == popStageExit->selected);
 }
 void drawPopStageExit(float dt)
 {
-
+    popStageExit->paint(dt);
 }
 void showPopStageExit(bool show)
 {
-
+    popStageExit->show(show);
 }
 bool keyPopStageExit(iKeyStat stat, iPoint point)
 {
-    return false;
+    if (popStageExit->bShow == false)
+        return false;
+    if (popStageExit->stat != iPopupProc)
+        return true;
+
+    int i, j = -1;
+
+    switch (stat)
+    {
+    case iKeyStatBegan:
+        if (popStageExit->selected == -1)
+            break;
+
+        if (popStageExit->selected == 0)
+        {
+            printf("예\n");
+            //프로그램 종료
+            runWnd = false;
+        }
+        else //if (popStageExit->selected == 1)
+        {
+            printf("아니요\n");
+            showPopStageExit(false);
+            popTopUI->selected = 0; //popSetting activated
+        }
+        break;
+
+    case iKeyStatMoved:
+        for (i = 0; i < 2; i++)
+        {
+            if (containPoint(point, imgStageExitBtn[i]->touchRect(popStageExit->closePoint)))
+            {
+                j = i;
+                break;
+            }
+        }
+        if (popStageExit->selected != j)
+        {
+            printf("audio play\n");
+            popStageExit->selected = j;
+        }
+        break;
+
+    case iKeyStatEnded:
+        break;
+    }
+
+    return true;
 }
 
 //=========================================================
