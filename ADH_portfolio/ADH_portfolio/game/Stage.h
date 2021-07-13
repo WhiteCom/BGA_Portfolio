@@ -3,6 +3,7 @@
 #include "iStd.h"
 #include "Character.h"
 
+
 extern int stageFrom, stageTo;
 extern Character* mainCharacter;
 
@@ -12,7 +13,7 @@ void drawStage(float dt);
 void keyStage(iKeyStat stat, iPoint point);
 
 //=========================================================
-// popTopUI;
+// popTopUI : popSetting, popStageHow, popInven
 //=========================================================
 
 void createPopTopUI();
@@ -32,13 +33,23 @@ void showPopSetting(bool show);
 bool keyPopSetting(iKeyStat stat, iPoint point);
 
 //=========================================================
+// popStageHow : 게임방법
+//=========================================================
+
+void createPopStageHow();
+void freePopStageHow();
+void drawPopStageHow(float dt);
+void showPopStageHow(bool show);
+bool keyPopStageHow(iKeyStat stat, iPoint point);
+
+//=========================================================
 // popOption : option -> popSetting
 //=========================================================
 
 void createPopStageOption();
 void freePopStageOption();
 void drawPopStageOption(float dt);
-void showPopStageOptionmp(bool show);
+void showPopStageOption(bool show);
 bool keyPopStageOption(iKeyStat stat, iPoint point);
 
 //=========================================================
@@ -60,16 +71,6 @@ void freePopStageExit();
 void drawPopStageExit(float dt);
 void showPopStageExit(bool show);
 bool keyPopStageExit(iKeyStat stat, iPoint point);
-
-//=========================================================
-// popStageHow : 게임방법
-//========================================= ================
-
-void createPopStageHow();
-void freePopStageHow();
-void drawPopStageHow(float dt);
-void showPopStageHow(bool show);
-bool keyPopStageHow(iKeyStat stat, iPoint point);
 
 //=========================================================
 // popInven : 인벤토리

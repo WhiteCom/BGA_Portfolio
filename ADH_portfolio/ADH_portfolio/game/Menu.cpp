@@ -294,7 +294,7 @@ iStrTex* stHow;
 iPopup* popHow;
 iImage** imgHowBtn;
 
-int page, _page;
+static int page, _page;
 
 Texture* methodStHow(const char* str);
 void drawMethodPopHow(iPopup* pop, float dt, float rate);
@@ -306,7 +306,7 @@ void createPopHow()
 	Texture* tex;
 	iPopup* pop;
 
-	//Bg
+	//Bg + Str
 
 	page = 0;
 	_page = 3;
@@ -323,9 +323,9 @@ void createPopHow()
 
 	iGraphics* g = iGraphics::share();
 	iSize size = iSizeMake(50, 50);
-	
+
 	const char* strBtn[3] = { "X", "◀", "▶" };
-	iPoint positionBtn[3] = { {800 - 25, -25}, {400-25 - 100, 540-25}, {400 - 25 + 100, 540-25} };
+	iPoint positionBtn[3] = { {800 - 25, -25}, {400 - 25 - 100, 540 - 25}, {400 - 25 + 100, 540 - 25} };
 	imgHowBtn = new iImage * [3];
 
 	for (int i = 0; i < 3; i++)
@@ -369,41 +369,57 @@ Texture* methodStHow(const char* str)
 
 	setRGBA(0.5f, 0.5f, 0.5f, 1);
 	g->fillRect(0, 0, size.width, size.height, 5);
+	setRGBA(1, 1, 1, 1);
 
 	setStringSize(30);
 	setStringRGBA(0, 0, 0, 1);
 	setStringBorder(1);
 	setStringBorderRGBA(1, 1, 0.5f, 1);
 
-	const char** content = new const char* [9];
+	const char** content = new const char* [6];
 
 	content[0] = "<게임방법>";
 	content[1] = "1.맵을 돌아다닌다.\n";
 	content[2] = "[방향키 : ←, →, ↑, ↓ 또는 w,a,s,d]\n";
-	content[3] = "2.STEP이 0이되면 GAME OVER\n";
-	content[4] = "3.적을 만나면 싸워야 한다.\n";
-	content[5] = "적과의 싸움에서 패배하면 GAMEOVER\n";
-	content[6] = "4.아이템 및 동료획득가능\n";
-	content[7] = "(승리조건 : 미구현)\n";
-	content[8] = "☆최적의 방법으로 게임을 클리어해봐요!☆\n";
+	content[3] = "2.걸어다니면 Step이 깍임.\n";
+	content[4] = "3.맵 마다 적이 있다. 적을 만나면 싸워야 한다.\n";
+	content[5] = "☆최적의 방법으로 게임을 클리어해봐요!☆\n";
+
+	const char** content2 = new const char* [4];
+
+	content2[0] = "<승리조건>";
+	content2[1] = "1.Step이 0이 되지 않게.\n";
+	content2[2] = "2.모든 적들을 쓰러뜨림\n";
+	content2[3] = "☆최적의 방법으로 게임을 클리어해봐요!☆\n";
+
+	const char** content3 = new const char* [4];
+
+	content3[0] = "<패배조건>";
+	content3[1] = "1.Step이 0이 된 경우\n";
+	content3[2] = "2.적과의 싸움에서 진경우(HP = 0)\n";
+	content3[3] = "☆최적의 방법으로 게임을 클리어해봐요!☆\n";
 
 	int p = atoi(str);
 	if (p == 0)
 	{
-		//g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "첫번째 페이지\n");
-		for(int i=0;i<9;i++)
-			g->drawString(20, (1+i) * 40, TOP | LEFT, content[i]);
+		for (int i = 0; i < 6; i++)
+			g->drawString(20, (1 + i) * 40, TOP | LEFT, content[i]);
 	}
 	else if (p == 1)
 	{
-		g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "두번째 페이지");
+		for (int i = 0; i < 4; i++)
+			g->drawString(20, (1 + i) * 40, TOP | LEFT, content2[i]);
 	}
 	else //if(p==3)
 	{
-		g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "세번째 페이지");
+		for (int i = 0; i < 4; i++)
+			g->drawString(20, (1 + i) * 40, TOP | LEFT, content3[i]);
 	}
 	g->drawString(size.width / 2, size.height * 0.9f, VCENTER | HCENTER, "%d / %d", 1 + p, _page);
 
+	delete content;
+	delete content2;
+	delete content3;
 	return g->getTexture();
 }
 
@@ -416,28 +432,14 @@ void freePopHow()
 {
 	delete popHow;
 	delete stHow;
+	delete imgHowBtn;
 }
 
-#if 0
-static float testDt = 0.0f;
-#endif
 void drawMethodPopHow(iPopup* pop, float dt, float rate)
 {
 	for (int i = 0; i < 3; i++)
 		imgHowBtn[i]->setTexObject(popHow->selected == i);
 
-//#issue! 자동으로 페이지 넘어가는 코드
-#if 0
-	testDt += dt;
-	if (testDt > 1.0f)
-	{
-		testDt -= 1.0f;
-		page++;
-		if (page > _page - 1)
-			page = _page - 1;
-		stHow->setString("%d", page);
-	}
-#endif 
 }
 
 void drawPopHow(float dt)

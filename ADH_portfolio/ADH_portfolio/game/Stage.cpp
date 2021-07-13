@@ -255,7 +255,16 @@ void loadStage()
 
     showPopStageStr(true);
     showPopStepStr(true);
+    showPopOverStep(false);
+
     showPopTopUI(true);
+    showPopSetting(false);
+    showPopStageHow(false);
+    showPopInven(false);
+    showPopStageOption(false);
+    showPopStageExit(false);
+
+
 }
 
 void freeStage()
@@ -326,7 +335,6 @@ void drawStage(float dt)
             drawImage(texs[tEditor->tileIndex[i]], (tileOff.x) + i % x * TILE_WSIZE, (tileOff.y) + i / x * TILE_HSIZE, TOP | LEFT);
             setRGBA(1, 1, 1, 1);
         }
-
     }
 
     drawCharacter(dt, tileOff);
@@ -348,6 +356,7 @@ void drawStage(float dt)
         {
             step = 0;
             showPopOverStep(true);
+            
             //to do... 게임 멈추기
         }
         lastHeroIndex = newHeroIndex;
@@ -361,7 +370,6 @@ void drawStage(float dt)
     if (locationWarp >= 10 && locationWarp < 100)
     {
         stageTo = locationWarp - 10;
-        //tEditor->save(gameFile);
         setLoading(gs_stage, freeStage, loadStage);
     }
 
@@ -380,20 +388,17 @@ void drawStage(float dt)
 //=========================================================
 // draw Popup
 //=========================================================
-
-    drawPopOverStep(dt);
     drawPopStageStr(dt);
     drawPopStepStr(dt);
+    
 
     //BottomUI
     drawPopBottomUI(dt);
 
     //TopUI
     drawPopTopUI(dt);
-    drawPopSetting(dt);
-    drawPopStageHow(dt);
-    drawPopInven(dt);
 
+    drawPopOverStep(dt);
 }
 
 void keyStage(iKeyStat stat, iPoint point)
@@ -488,7 +493,6 @@ void createPopTopUI()
         if (k == 0)
         {
             pop->methodBefore = drawPopTopUIBefore;
-            
         }
         pop->style = iPopupAlpha;
         pop->openPoint = iPointZero;
@@ -515,6 +519,10 @@ void drawPopTopUI(float dt)
 {
     for (int i = 0; i < 2; i++)
         popTopUI[i]->paint(dt);
+
+    drawPopSetting(dt);
+    drawPopStageHow(dt);
+    drawPopInven(dt);
 }
 void showPopTopUI(bool show)
 {
@@ -528,9 +536,7 @@ void showPopTopUI(bool show)
 bool keyPopTopUI(iKeyStat stat, iPoint point)
 {
     if (keyPopSetting(stat, point) ||
-        keyPopStageOption(stat, point) ||
-        keyPopStageExit(stat, point)
-        )
+        keyPopStageHow(stat, point))
         return true;
 
     iPopup* pop = popTopUI[0];
@@ -553,18 +559,33 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         {
             printf("Setting\n");
             pop->selected = -1;
+            
+            //showPopOverStep(false);
+
             showPopSetting(true);
+            //showPopStageHow(false);
+            //showPopInven(false);
         }
         else if (pop->selected == 1)
         {
             printf("How\n");
             pop->selected = -1;
-            showPopHow(true);
+
+            //showPopOverStep(false);
+
+            //showPopSetting(false);
+            showPopStageHow(true);
+            //showPopInven(false);
         }
         else //if (pop->selected == 2)
         {
             printf("Inven\n");
             pop->selected = -1;
+
+            //showPopOverStep(false);
+
+            //showPopSetting(false);
+            //showPopStageHow(false);
             showPopInven(true);
         }
         break;
@@ -720,12 +741,18 @@ void showPopSetting(bool show)
 }
 bool keyPopSetting(iKeyStat stat, iPoint point)
 {
+
     iPopup* pop = popSetting;
 
+    if (keyPopStageOption(stat, point) ||
+        keyPopStageExit(stat, point))
+        return false;
+
+    if (popTopUI[0]->selected != 0)
+        return false;
     if (popSetting->bShow == false)
         return false;
-    if (popSetting->stat != iPopupProc)
-        return true;
+  
     
     int i, j = -1;
 
@@ -754,7 +781,7 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         else if (pop->selected == 3) //Exit
         {
             showPopSetting(false);
-            showPopExit(true); //to do...
+            showPopStageExit(true);
         }
 
         break;
@@ -806,7 +833,7 @@ void drawPopStageOption(float dt)
     drawPopTmp(dt);
 #endif
 }
-void showPopStageOptionmp(bool show)
+void showPopStageOption(bool show)
 {
 #if 1
     showPopTmp(show);
@@ -849,7 +876,7 @@ bool keyPopTmp(iKeyStat stat, iPoint point)
 }
 
 //=========================================================
-// popExit : 나가기 팝업 -> popSetting
+// popStageExit : 나가기 팝업 -> popSetting
 //=========================================================
 
 void createPopStageExit()
@@ -873,54 +900,371 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
     return false;
 }
 
-
 //=========================================================
 // popStageHow : 게임방법
 //=========================================================
 
+iStrTex* stPopHow;
+iPopup* popStageHow;
+iImage** imgHowBtns;
+
+static int page, _page;
+
+Texture* methodStPopHow(const char* str);
+void drawBeforePopHow(iPopup* pop, float dt, float rate);
+
 void createPopStageHow()
 {
+    iImage* img = new iImage();
+    iPopup* pop = new iPopup();
+    Texture* tex;
 
+    //Bg + Str
+
+    page = 0;
+    _page = 3;
+
+    iStrTex* stPop = new iStrTex(methodStPopHow);
+    stPop->setString("%d", page);
+    img->addObject(stPop->tex);
+    pop->addObject(img);
+    stPopHow = stPop;
+    
+    //Btn
+
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(50, 50);
+
+    const char* strBtn[3] = { "X", "◀", "▶" };
+    iPoint positionBtn[3] = {
+        {800 - 25, -25},
+        {400 - 25 - 100, 540 - 25},
+        {400 - 25 + 100, 540 - 25},
+    };
+    imgHowBtns = new iImage * [3];
+
+    for (int i = 0; i < 3; i++)
+    {
+        img = new iImage();
+        for (int j = 0; j < 2; j++)
+        {
+            g->init(size);
+            
+            if (j == 0) setRGBA(0, 0, 0, 1);
+            else setRGBA(1, 1, 0, 1);
+            g->fillRect(0, 0, size.width, size.height, 10);
+
+            setStringSize(30);
+            setStringRGBA(1, 0, 1, 1);
+            setStringBorder(0);
+            g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
+
+            tex = g->getTexture();
+            img->addObject(tex);
+            freeImage(tex);
+        }
+        img->position = positionBtn[i];
+        pop->addObject(img);
+        imgHowBtns[i] = img;
+    }
+
+    pop->style = iPopupZoom;
+    pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
+    pop->closePoint = iPointMake(devSize.width / 2 - 400, devSize.height / 2 - 300);
+    pop->methodBefore = drawBeforePopHow;
+    
+    popStageHow = pop;
 }
+
+Texture* methodStPopHow(const char* str)
+{
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(800, 600);
+    g->init(size);
+
+    //
+    // Bg
+    //
+    setRGBA(0.5f, 0.5f, 0.5f, 0.7f);
+    g->fillRect(0, 0, size.width, size.height, 5);
+    setRGBA(1, 1, 1, 1);
+
+    setStringSize(30);
+    setStringRGBA(0, 0, 0, 1);
+    setStringBorder(1);
+    setStringBorderRGBA(1, 1, 0.5f, 1);
+
+    const char** content = new const char* [4];
+
+    content[0] = "<개발일지>";
+    content[1] = "1. 참고게임 : 헬테이커 + 동방영강창(동인게임)";
+    content[2] = "2. 턴제 알피지 형식";
+    content[3] = "3. 아무말";
+
+    const char** content2 = new const char* [4];
+
+    content2[0] = "<개발일지2>";
+    content2[1] = "-";
+    content2[2] = "-";
+    content2[3] = "-";
+
+    const char** content3 = new const char* [4];
+
+    content3[0] = "<개발일지3>";
+    content3[1] = "-";
+    content3[2] = "-";
+    content3[3] = "-";
+
+    int p = atoi(str);
+ 
+    if (p == 0)
+    {
+        for (int i = 0; i < 4; i++)
+            g->drawString(20, (1 + i) * 40, TOP | LEFT, content[i]);
+    }
+    else if (p == 1)
+    {
+        for (int i = 0; i < 4; i++)
+            g->drawString(20, (1 + i) * 40, TOP | LEFT, content2[i]);
+    }
+    else //if(p==3)
+    {
+        for (int i = 0; i < 4; i++)
+            g->drawString(20, (1 + i) * 40, TOP | LEFT, content3[i]);
+    }
+    g->drawString(size.width / 2, size.height * 0.9f, VCENTER | HCENTER, "%d / %d", 1 + p, _page);
+ 
+    delete content;
+    delete content2;
+    delete content3;
+
+    return g->getTexture();
+}
+
+void drawBeforePopHow(iPopup* pop, float dt, float rate)
+{
+    for (int i = 0; i < 3; i++)
+        imgHowBtns[i]->setTexObject(popStageHow->selected == i);
+}
+
 void freePopStageHow()
 {
-
+    delete popStageHow;
+    delete stPopHow;
+    delete imgHowBtns;
 }
 void drawPopStageHow(float dt)
 {
-
+    popStageHow->paint(dt);
 }
 void showPopStageHow(bool show)
 {
+    popStageHow->show(show);
+    if (show)
+    {
+        // to do...
 
+    }
 }
 bool keyPopStageHow(iKeyStat stat, iPoint point)
 {
-    return false;
+    if (popStageHow->bShow == false)
+        return false;
+    if (popStageHow->stat != iPopupProc)
+        return true;
+
+    int i, j = -1;
+
+    switch (stat)
+    {
+    case iKeyStatBegan:
+        if (popStageHow->selected == -1)
+            break;
+
+        audioPlay(0);
+        if (popStageHow->selected == 0)
+        {
+            showPopStageHow(false);
+        }
+        else if (popStageHow->selected == 1)
+        {
+            page--;
+            if (page < 0)
+                page = 0;
+            stPopHow->setString("%d", page);
+        }
+        else if (popStageHow->selected == 2)
+        {
+            page++;
+            if (page > _page - 1)
+                page = _page - 1;
+            stPopHow->setString("%d", page);
+        }
+        break;
+
+    case iKeyStatMoved:
+        for (i = 0; i < 3; i++)
+        {
+            if (containPoint(point, imgHowBtns[i]->touchRect(popStageHow->closePoint)))
+            {
+                j = i;
+                break;
+            }
+        }
+        if (popStageHow->selected != j)
+        {
+            audioPlay(0);
+            popStageHow->selected = j;
+            printf("popStageHow : %d\n", popStageHow->selected);
+        }
+        break;
+
+    case iKeyStatEnded:
+        break;
+    }
+    
+    return true;
 }
 
 //=========================================================
 // popInven : 인벤토리
 //=========================================================
 
+iPopup* popInven;
+iStrTex* stPopInven; //영웅 속성에 대한 이미지
+//iImage** imgInvenBtns; //아이템을 담을 이미지. need clipping
+
+Texture* stMethodPopInven(const char* str);
+static char heroName[64];
+static char heroHP[64];
+static char heroAtk[64];
+
 void createPopInven()
 {
+//#issue! ascii to Unicode! 
+    const char* tmpHeroName = "Hero0";
+    const char* tmpHeroHP = "HP0";
+    const char* tmpHeroAtk = "ATK0";
 
+    strcpy(heroName, tmpHeroName);
+    strcpy(heroHP, tmpHeroHP);
+    strcpy(heroAtk, tmpHeroAtk);
+
+    char str[1024];
+    strcpy(str, heroName);
+    strcat(str, "/");
+    strcat(str, heroHP);
+    strcat(str, "/");
+    strcat(str, heroAtk);
+    strcat(str, "/");
+
+    iPopup* pop = new iPopup();
+    iImage* img = new iImage();
+    Texture* tex;
+    
+    //
+    // Bg + str
+    //
+
+    iStrTex* st = new iStrTex(stMethodPopInven);
+    st->setString(str);
+    img->addObject(st->tex);
+    pop->addObject(img);
+    stPopInven = st;
+
+    pop->style = iPopupZoom;
+    pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
+    pop->closePoint = iPointMake(devSize.width / 2 - 400, devSize.height / 2 - 300);
+    popInven = pop;
+}
+
+Texture* stMethodPopInven(const char* str)
+{
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(800, 600);
+    g->init(size);
+
+    //
+    // Bg
+    //
+
+    setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
+    g->fillRect(0, 0, size.width, size.height, 10);
+    setRGBA(1, 1, 1, 1);
+
+    setStringSize(30);
+    setStringRGBA(0, 0, 0, 1);
+    setStringBorder(0);
+    
+    const char* content[3] = {
+        "Name",
+        "HP",
+        "AP",
+    };
+
+    char HeroStr[3][64];
+    int cnt = 0;
+    int strNum = 0;
+    for (int j = 0; str[j];j++)
+    {
+        if (str[j] == '/')
+        {
+            int last = j - strNum;
+            memcpy(HeroStr[cnt], &str[strNum], sizeof(char) * last);
+            HeroStr[cnt][last] = 0;
+            cnt++;
+            strNum = j + 1;
+        }
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        switch (i)
+        {
+        case 0 : g->drawString(size.width - 400, 30 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+        case 1 : g->drawString(size.width - 400, 30 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+        case 2: g->drawString(size.width - 400, 30 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+        }
+    }
+
+    return g->getTexture();
 }
 void freePopInven()
 {
-
+    delete popInven;
+    delete stPopInven;
+    //delete imgInvenBtns;
 }
 void drawPopInven(float dt)
 {
-
+    popInven->paint(dt);
 }
 void showPopInven(bool show)
 {
-
+    popInven->show(show);
+    if (show)
+    {
+        //to do...
+    }
 }
 bool keyPopInven(iKeyStat stat, iPoint point)
 {
+    if (popInven->bShow == false)
+        return false;
+    if (popInven->stat != iPopupProc)
+        return true;
+
+    switch (stat)
+    {
+    case iKeyStatBegan:
+        break;
+
+    case iKeyStatMoved:
+        break;
+
+    case iKeyStatEnded:
+        break;
+    }
     return false;
 }
 

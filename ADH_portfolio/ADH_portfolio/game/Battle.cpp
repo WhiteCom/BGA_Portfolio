@@ -181,11 +181,18 @@ void createBattlePopBottomUI()
 	const char* stBottomEnemy[4] = {"적1", "적2", "적3", "적4"};
 	
 
-	for (int i = 0; i < bm->enemyNum; i++)
+	for (int i = 0; i < MAX_ENEMY; i++)
 	{
 		iStrTex* stStat = new iStrTex(texEnemyStat); //name, HP, MP
-		stStat->setString("[%s] %s : %d",
-			stBottomEnemy[i], "HP", bm->enemy[i]->hp);
+		if (i < bm->enemyNum)
+		{
+			stStat->setString("[%s] %s : %d",
+				stBottomEnemy[i], "HP", bm->enemy[i]->hp);
+		}
+		else
+		{
+			stStat->setString("-");
+		}
 		
 		img = new iImage();
 		img->addObject(stStat->tex);
@@ -222,14 +229,21 @@ void createBattlePopBottomUI()
 	const char* stat[2] = { "HP", "MP" };
 	
 //#need update! if change bm->hero
-	for (int i = 0; i < bm->heroNum; i++)
+	for (int i = 0; i < MAX_HERO; i++)
 	{
 		//
 		//str
 		//
 		iStrTex* stStat = new iStrTex(texHeroStat); //name, HP, MP
-		stStat->setString("[%s]  %s : %d / %s : %d",
-			stBottomHero[i], stat[0], bm->hero[i]->hp, stat[1], bm->hero[i]->mp);
+		if (i < bm->heroNum)
+		{
+			stStat->setString("[%s]  %s : %d / %s : %d",
+				stBottomHero[i], stat[0], bm->hero[i]->hp, stat[1], bm->hero[i]->mp);
+		}
+		else
+		{
+			stStat->setString("-");
+		}
 		
 		img = new iImage();
 		img->addObject(stStat->tex);
@@ -295,11 +309,24 @@ void drawBattlePopAfter(iPopup* pop, float dt, float rate)
 	int enemyNum = bm->enemyNum;
 	int heroNum = bm->heroNum;
 
-	for (int i = 0; i < enemyNum; i++)
+		
+	int i, j;
+	for (i = 0; i < enemyNum; i++)
 		imgBottomUIStatus[i]->setString("[%s] %s : %d ", stBottomEnemy[i], stat[0], bm->enemy[i]->hp);
+	if (enemyNum < MAX_ENEMY)
+	{
+		for (j = enemyNum; j < 4; j++)
+			imgBottomUIStatus[j]->setString("-");
+	}
+	
 
-	for (int i = 0; i < heroNum; i++)
-		imgBottomUIStatus[i+enemyNum]->setString("[%s]  %s : %d / %s : %d", stBottomHero[i], stat[0], bm->hero[i]->hp, stat[1], 0);
+	for (i = 0; i < heroNum; i++)
+		imgBottomUIStatus[i+MAX_ENEMY]->setString("[%s]  %s : %d / %s : %d", stBottomHero[i], stat[0], bm->hero[i]->hp, stat[1], 0);
+	if (heroNum < MAX_HERO)
+	{
+		for (j = heroNum; j < MAX_HERO; j++)
+			imgBottomUIStatus[j+MAX_ENEMY]->setString("-");
+	}
 	
 	
 	iPoint StatBgOff = iPointMake(400, 30) + pop->closePoint; //80 + 320
@@ -342,7 +369,7 @@ void drawBattlePopBottomUI(float dt, iPoint off)
 //================================================================
 
 #define MAX_HP 100
-#define MAX_AP 10
+#define MAX_AP 50
 
 BattleUnit::BattleUnit(int index)
 {
@@ -355,8 +382,8 @@ BattleUnit::BattleUnit(int index)
 	imgNum = 0;
 	position = iPointZero;
 	_position = iPointZero;
-	hp = MAX_HP;
-	atk = MAX_AP;
+	hp = 0;
+	atk = 0;
 //#need update! set mp
 	mp = 0;
 
@@ -433,6 +460,9 @@ BUMonster::BUMonster(int index) : BattleUnit(index)
 	
 	//_attAniDt = attackDt[index];
 	_attDt = ENEMY_COOL_TIME;
+
+	hp = MAX_HP;
+	atk = 10;
 }
 
 BUMonster::~BUMonster()
@@ -638,6 +668,9 @@ BUHero::BUHero(int index) : BattleUnit(index)
 	imgCurr = imgs[BeWait];
 
 	_attDt = HERO_COOL_TIME;
+
+	hp = MAX_HP;
+	atk = MAX_AP;
 
 	enemyIndex = -1;
 

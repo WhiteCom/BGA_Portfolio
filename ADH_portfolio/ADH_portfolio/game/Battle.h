@@ -54,12 +54,12 @@ extern BattleManager* bm;
 #define ENEMY_COOL_TIME 4.0f
 #define ENEMY_MOVE_TIME 1.0f
 #define ENEMY_ATK_TIME 2.0f
-#define ENEMY_BACK_TIME 1.5f
+#define ENEMY_BACK_TIME 1.0f
 
 #define HERO_COOL_TIME 3.0f
 #define HERO_MOVE_TIME 0.7f
-#define HERO_ATK_TIME 2.0f
-#define HERO_BACK_TIME 1.5f
+#define HERO_ATK_TIME 1.5f
+#define HERO_BACK_TIME 1.0f
 
 #define WAIT_STATE_TIME 0.5f
 
@@ -146,6 +146,10 @@ struct BattleManager
 타일 가중치에 따른 몬스터 타입 제작 (툴 + BattleManager)
 */
 
+//=============================================
+// TimeRate
+//=============================================
+
 class TimeRate
 {
 public:
@@ -159,6 +163,9 @@ public:
 	Texture** texTick;
 };
 
+//=============================================
+// BattlePop
+//=============================================
 
 class BattlePop
 {
