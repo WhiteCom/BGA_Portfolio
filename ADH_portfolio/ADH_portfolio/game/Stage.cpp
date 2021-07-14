@@ -601,8 +601,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-            printf("TopUI audio Play\n");
-            //audioPlay(0);
+            audioPlay(0);
             pop->selected = j;
         }
         break;
@@ -801,7 +800,6 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-            printf("audio Play\n");
             audioPlay(0);
             pop->selected = j;
         }
@@ -1037,7 +1035,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         }
         if (popStageExit->selected != j)
         {
-            printf("audio play\n");
+            audioPlay(0);
             popStageExit->selected = j;
         }
         break;
@@ -1264,7 +1262,6 @@ bool keyPopStageHow(iKeyStat stat, iPoint point)
         {
             audioPlay(0);
             popStageHow->selected = j;
-            printf("popStageHow : %d\n", popStageHow->selected);
         }
         break;
 
@@ -1597,7 +1594,10 @@ bool keyPopInven(iKeyStat stat, iPoint point)
         }
         
         if (popInven->selected != j)
+        {
             popInven->selected = j;
+            audioPlay(0);
+        }
         break;
 
     case iKeyStatEnded:
@@ -1793,7 +1793,7 @@ bool keyPopOverStep(iKeyStat stat, iPoint point)
         }
         if (popOverStep->selected != j)
         {
-            //audioPlay
+            audioPlay(0);
             popOverStep->selected = j;
         }
         break;

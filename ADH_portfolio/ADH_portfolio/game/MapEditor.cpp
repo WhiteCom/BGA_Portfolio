@@ -205,7 +205,7 @@ void loadMapEditor()
 
 Texture* methodStMapBtn(const char* str)
 {
-    int lineNum;   
+    int lineNum;
     char** line = iString::getStringLine(str, lineNum);
     const char* s = line[0];
     int i = atoi(line[1]);
@@ -247,14 +247,13 @@ Texture* methodStWeiBtn(const char* str)
 
     iSize size = iSizeMake(TILE_WSIZE * 2, TILE_HSIZE * 2);
     g->init(size);
-
     setRGBA(0, 0, 0, 1);
     g->fillRect(0, 0, size.width, size.height);
 
     setStringSize(20);
     setStringRGBA(1, 0, 1, 1);
     setStringBorder(2);
-
+    
     if (i != 0) //버튼 활성화
     {
         setStringRGBA(0, 1, 0, 1);

@@ -21,7 +21,7 @@ void loadBattle()
 
 	bm = new BattleManager();
 
-	texBg = createImage("assets/Image/BattleBg/옥좌.bmp");
+	texBg = createImage("assets/Image/BattleBg/초원+.bmp");
 
 	createBattlePopTopUI();
 	createBattlePopBottomUI();
@@ -652,6 +652,7 @@ BUHero::BUHero(int index) : BattleUnit(index)
 			for(int i = 10; i>-1;i--)
 				img->addObject(texs[i]);
 			img->startAnimation();
+			img->_delta = 0.018f;
 			imgs[BeAttack] = img;
 		}
 		

@@ -280,7 +280,6 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 		}
 		if (pop->selected != j)
 		{
-			//printf("audioPlay\n");
 			audioPlay(0);
 			pop->selected = j;
 		}
