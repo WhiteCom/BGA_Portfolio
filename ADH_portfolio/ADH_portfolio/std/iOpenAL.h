@@ -40,6 +40,7 @@ void pauseAudio();
 void resumeAudio();
 
 void audioPlay(int idx);
+void audioStop(int index);
 void audioStop();
 void audioVolume(float bgm, float eff, int effNum);
 

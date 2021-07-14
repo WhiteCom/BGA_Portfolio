@@ -38,6 +38,8 @@
 #define DEV_HEIGHT 720
 #define RATE_MONITOR 0.3f
 
+//for openAL
+#define SOUND_NUM 7
 
 extern iSize devSize;
 extern iRect viewport;

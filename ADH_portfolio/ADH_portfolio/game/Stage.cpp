@@ -120,6 +120,10 @@ void copyFile(const char* szFormat, ...)
 //타일, 적, 오브젝트 관계로 지어주고 있기에, 이에 따라 캐릭터 및 전투 이벤트를 바꿔줘야 함.
 void loadStage()
 {
+    for (int i = 0; i < SOUND_NUM; i++)
+        audioStop(i);
+
+    audioPlay(2);
 
 //===============================================
 //맵 타일 & 캐릭터 위치 세팅
@@ -372,6 +376,7 @@ void drawStage(float dt)
     {
         stageTo = locationWarp - 10;
         setLoading(gs_stage, freeStage, loadStage);
+        audioStop(2);
     }
 
     //===================
@@ -384,6 +389,7 @@ void drawStage(float dt)
         tEditor->tileWeight[newHeroIndex] = 1;
         tEditor->save(gameFile);
         setLoading(gs_battle, freeStage, loadBattle);
+        audioStop(2);
     }
     
 //=========================================================
@@ -529,7 +535,8 @@ void showPopTopUI(bool show)
 bool keyPopTopUI(iKeyStat stat, iPoint point)
 {
     if (keyPopSetting(stat, point) ||
-        keyPopStageHow(stat, point))
+        keyPopStageHow(stat, point) ||
+        keyPopInven(stat, point))
         return true;
 
     iPopup* pop = popTopUI;
@@ -907,7 +914,7 @@ void createPopStageExit()
     setStringSize(40);
     setStringRGBA(0, 0, 0, 1);
     setStringBorder(2);
-    setStringRGBA(1, 1, 1, 1);
+    setStringBorderRGBA(1, 1, 1, 1);
     g->drawString(size.width / 2, size.height / 2 - 50, VCENTER | HCENTER, "정말 종료하시겠습니까?");
 
     tex = g->getTexture();
@@ -1274,9 +1281,12 @@ bool keyPopStageHow(iKeyStat stat, iPoint point)
 
 iPopup* popInven;
 iStrTex* stPopInven; //영웅 속성에 대한 이미지
-//iImage** imgInvenBtns; //아이템을 담을 이미지. need clipping
+iImage* InvenExitBtn;
+iImage** imgHeroParts;
+iImage** imgItems;
 
 Texture* stMethodPopInven(const char* str);
+void drawBeforePopInven(iPopup* pop, float dt, float rate);
 static char heroName[64];
 static char heroHP[64];
 static char heroAtk[64];
@@ -1284,9 +1294,9 @@ static char heroAtk[64];
 void createPopInven()
 {
 //#issue! ascii to Unicode! 
-    const char* tmpHeroName = "Hero0";
-    const char* tmpHeroHP = "HP0";
-    const char* tmpHeroAtk = "ATK0";
+    const char* tmpHeroName = "영웅1";
+    const char* tmpHeroHP = "HP";
+    const char* tmpHeroAtk = "ATK";
 
     strcpy(heroName, tmpHeroName);
     strcpy(heroHP, tmpHeroHP);
@@ -1305,7 +1315,7 @@ void createPopInven()
     Texture* tex;
     
     //
-    // Bg + str
+    // Bg + stat
     //
 
     iStrTex* st = new iStrTex(stMethodPopInven);
@@ -1314,9 +1324,157 @@ void createPopInven()
     pop->addObject(img);
     stPopInven = st;
 
+    //
+    // Inven Exit Btn
+    //
+
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(50, 50);
+    iPoint positionBtn = {800 - 25, -25};
+    
+    img = new iImage();
+
+    for (int i = 0; i < 2; i++)
+    {
+        g->init(size);
+        if (i == 0) setRGBA(0, 0, 0, 1);
+        else        setRGBA(1, 1, 0, 1);
+        g->fillRect(0, 0, size.width, size.height, 10);
+
+        setStringSize(30);
+        setStringRGBA(1, 0, 1, 1);
+        setStringBorder(0);
+        g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "X");
+
+        Texture* tex = g->getTexture();
+        img->addObject(tex);
+        freeImage(tex);
+    }
+    img->position = positionBtn;
+    pop->addObject(img);
+    InvenExitBtn = img;
+
+    //
+    // Hero Bg
+    //
+
+    size = iSizeMake(360, 260);
+    g->init(size);
+    
+    setRGBA(0.2f, 0.2f, 0.2f, 1);
+    g->fillRect(0, 0, size.width, size.height, 5);
+    setRGBA(1, 1, 1, 1);
+
+    tex = g->getTexture();
+    img = new iImage();
+    img->addObject(tex);
+    freeImage(tex);
+    img->position = iPointMake(20, 20);
+    pop->addObject(img);
+
+    //
+    // Hero Btns (center : hero, / up, down, left, right)
+    //
+
+    //Hero
+
+    iPoint HeroP = iPointMake(200 - 20, 150 - 20);
+    img = new iImage();
+
+    size = iSizeMake(40, 40);
+    g->init(size);
+    setRGBA(1, 1, 1, 1);
+    g->drawRect(0, 0, size.width, size.height, 5);
+
+    igImage* Heroimg = g->createIgImage("assets/Image/Hero0.png");
+    g->drawigImage(Heroimg, size.width / 2, size.height / 2, VCENTER | HCENTER);
+    tex = g->getTexture();
+    img->addObject(tex);
+    freeImage(tex);
+    img->position = HeroP;
+    pop->addObject(img);
+
+    //Hero parts : head / armor / shoe / weapon etc...
+
+    imgHeroParts = new iImage * [4];
+
+    iPoint partsP[4] = {
+        {HeroP.x - 60,  HeroP.y},
+        {HeroP.x + 60,  HeroP.y},
+        {HeroP.x,       HeroP.y - 60},
+        {HeroP.x,       HeroP.y + 60}
+    };
+
+    for (int i = 0; i < 4; i++)
+    {
+        img = new iImage();
+        size = iSizeMake(40, 40);
+        for (int j = 0; j < 2; j++)
+        {
+            g->init(size);
+            if (j == 0) setRGBA(0, 0, 0, 1);
+            else        setRGBA(1, 1, 0, 1);
+            g->fillRect(0, 0, size.width, size.height, 5);
+            setRGBA(1, 1, 1, 1);
+            g->drawRect(0, 0, size.width, size.height, 5);
+
+            tex = g->getTexture();
+            img->addObject(tex);
+            freeImage(tex);
+        }
+        img->position = partsP[i];
+        pop->addObject(img);
+        imgHeroParts[i] = img;
+    }
+
+    //
+    // Items 
+    //
+
+    //Bg
+
+    img = new iImage();
+
+    size = iSizeMake(760, 280);
+    g->init(size);
+
+    setRGBA(0.2f, 0.2f, 0.2f, 1);
+    g->fillRect(0, 0, size.width, size.height, 10);
+    setRGBA(1, 1, 1, 1);
+
+    tex = g->getTexture();
+    img->addObject(tex);
+    freeImage(tex);
+    img->position = iPointMake(20, 300);
+    pop->addObject(img);
+
+    //Items
+
+    imgItems = new iImage * [18 * 6];
+
+    iPoint itemsOff = iPointMake(40, 320);
+
+    for (int i = 0; i < 18 * 6; i++)
+    {
+        img = new iImage();
+        size = iSizeMake(40, 40);
+        g->init(size);
+        setRGBA(0, 0, 0, 1);
+        g->fillRect(0, 0, size.width, size.height, 5);
+        setRGBA(1, 1, 1, 1);
+        g->drawRect(0, 0, size.width, size.height, 5);
+
+        tex = g->getTexture();
+        img->addObject(tex);
+        freeImage(tex);
+        img->position = itemsOff + iPointMake(i % 18 * 40, i / 18 * 40);
+        pop->addObject(img);
+    }
+
     pop->style = iPopupZoom;
     pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
     pop->closePoint = iPointMake(devSize.width / 2 - 400, devSize.height / 2 - 300);
+    pop->methodBefore = drawBeforePopInven;
     popInven = pop;
 }
 
@@ -1330,16 +1488,20 @@ Texture* stMethodPopInven(const char* str)
     // Bg
     //
 
-    setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
+    setRGBA(0.5f, 0.5f, 0.5f, 0.8f);
     g->fillRect(0, 0, size.width, size.height, 10);
     setRGBA(1, 1, 1, 1);
+
+    //
+    // Stat
+    //
 
     setStringSize(30);
     setStringRGBA(0, 0, 0, 1);
     setStringBorder(0);
     
     const char* content[3] = {
-        "Name",
+        "이름",
         "HP",
         "AP",
     };
@@ -1363,9 +1525,9 @@ Texture* stMethodPopInven(const char* str)
     {
         switch (i)
         {
-        case 0 : g->drawString(size.width - 400, 30 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
-        case 1 : g->drawString(size.width - 400, 30 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
-        case 2: g->drawString(size.width - 400, 30 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+        case 0 : g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+        case 1 : g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+        case 2: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
         }
     }
 
@@ -1375,8 +1537,18 @@ void freePopInven()
 {
     delete popInven;
     delete stPopInven;
-    //delete imgInvenBtns;
+    delete imgHeroParts;
 }
+
+void drawBeforePopInven(iPopup* pop, float dt, float rate)
+{
+    InvenExitBtn->setTexObject(popInven->selected == 0);
+    for (int i = 0; i < 4; i++)
+    {
+        imgHeroParts[i]->setTexObject(popInven->selected == i + 1);
+    }
+}
+
 void drawPopInven(float dt)
 {
     popInven->paint(dt);
@@ -1396,18 +1568,43 @@ bool keyPopInven(iKeyStat stat, iPoint point)
     if (popInven->stat != iPopupProc)
         return true;
 
+    int j = -1;
+    iPoint positionBtn = { devSize.width / 2 + 400 - 25, devSize.height / 2 - 300 - 25 };
     switch (stat)
     {
     case iKeyStatBegan:
+        if (popInven->selected == -1)
+            break;
+
+        if (popInven->selected == 0)
+        {
+            showPopInven(false);
+        }
         break;
 
     case iKeyStatMoved:
+        for (int i = 0; i < 4; i++)
+        {
+            if (containPoint(point, imgHeroParts[i]->touchRect(popInven->closePoint)))
+            {
+                j = i + 1;
+                break;
+            }
+        }
+        if (containPoint(point, InvenExitBtn->touchRect(popInven->closePoint)))
+        {
+            j = 0;
+        }
+        
+        if (popInven->selected != j)
+            popInven->selected = j;
         break;
 
     case iKeyStatEnded:
         break;
     }
-    return false;
+
+    return true;
 }
 
 //=========================================================

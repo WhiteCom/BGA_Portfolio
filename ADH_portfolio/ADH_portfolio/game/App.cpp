@@ -14,6 +14,7 @@ WCHAR szWindowClass[MAX_LOADSTRING] = TEXT("ADH_Portfolio");
 
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 
+void mainLoop();
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -23,7 +24,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
-
+    
     WNDCLASSEXW wcex;
 
     wcex.cbSize = sizeof(WNDCLASSEX);
@@ -62,6 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ShowWindow(hWnd, nCmdShow);
     //UpdateWindow(hWnd);
     updateWindow();
+    goFullscreen();
 
     MSG msg;
 
@@ -75,13 +77,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
+            mainLoop();
+        }
+    }
+
+    //freeOpenGL();
+    ReleaseDC(hWnd, hDC);
+    freeCursor();
+    endApp(freeGame);
+    return (int) msg.wParam;
+}
+
+void mainLoop()
+{
+    //readyOpenGL();
 fbo->bind();
-            readyOpenGL();
 glViewport(0, 0, devSize.width, devSize.height);
 glClearColor(0, 0, 0, 1);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            drawApp(drawGame);
+    drawApp(drawGame);
 
 fbo->unbind();
 glViewport(viewport.origin.x, viewport.origin.y,
@@ -96,15 +111,7 @@ drawImage(t, 0, 0, TOP | LEFT,
 //drawImage(t, devSize.width, devSize.height, BOTTOM | RIGHT,
 //    0, 0, t->width, t->height, 0.3f, 0.3f, 2, 0, REVERSE_HEIGHT);
 setGLBlend(GLBlendAlpha);
-            SwapBuffers(hDC);
-        }
-    }
-
-    freeOpenGL();
-    ReleaseDC(hWnd, hDC);
-    freeCursor();
-    endApp(freeGame);
-    return (int) msg.wParam;
+    SwapBuffers(hDC);
 }
 
 iSize sizeMonitor;
@@ -124,6 +131,8 @@ void updateWindow()
         x, y, w + win_border_width, h + win_border_height, SWP_SHOWWINDOW);
 }
 
+#define TEST2 1 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -140,10 +149,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         GetClientRect(hWnd, &rt); printf("crt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
         win_border_width = (rtWnd.right - rtWnd.left) - (rt.right - rt.left);
         win_border_height = (rtWnd.bottom - rtWnd.top) - (rt.bottom - rt.top);
-
-        GetSystemMetrics(SM_CXFRAME) * 2;
-        GetSystemMetrics(SM_CYFRAME) * 2; + GetSystemMetrics(SM_CYCAPTION);
-
+        //GetSystemMetrics(SM_CXFRAME) * 2;
+        //GetSystemMetrics(SM_CYFRAME) * 2; + GetSystemMetrics(SM_CYCAPTION);
         break;
     }
     case WM_GETMINMAXINFO:
@@ -163,13 +170,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZING:
     case WM_MOVING:
     {
-        RECT rt;
-        GetWindowRect(hWnd, &rt);
+        //RECT rt;
+        //GetWindowRect(hWnd, &rt);
         RECT& rect = *reinterpret_cast<LPRECT>(lParam);
         enforceResolution((int)wParam, rect, win_border_width, win_border_height);
-        resizeApp(rect.right - rect.left - win_border_width,
-            rect.bottom - rect.top - win_border_height);
+        resizeApp(  rect.right - rect.left - win_border_width,
+                    rect.bottom - rect.top - win_border_height);
+#if TEST2 //#issue! map editor
+        readyOpenGL();
+        mainLoop();
+#else
         drawApp(drawGame);
+#endif
         return 0;
     }
     
@@ -177,7 +189,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
     {
         resizeApp(LOWORD(lParam), HIWORD(lParam));
+#if TEST2 //#issue! map editor
+        readyOpenGL();
+        mainLoop();
+#else
         drawApp(drawGame);
+#endif
         return 0;// break;
 
     }
@@ -274,6 +291,8 @@ void setCurrentMonitor(RECT& rt)
     }
 }
 
+#define CENTER 1 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 RECT rtPrev;
 void goFullscreen()
 {
@@ -282,6 +301,7 @@ void goFullscreen()
     if (isFullscreen)
     {
         GetWindowRect(hWnd, &rtPrev);
+        //GetClientRect(hWnd, &rtPrev);
         RECT rt;
         setCurrentMonitor(rt);
         int x = rt.left,
@@ -292,14 +312,21 @@ void goFullscreen()
         SetWindowPos(hWnd, HWND_TOP,
             x, y, w, h,
             SWP_SHOWWINDOW);
-
     }
     else
     {
+#if CENTER
+        int w = rtPrev.right - rtPrev.left,
+            h = rtPrev.bottom - rtPrev.top;
+
+        int x = (sizeMonitor.width - w) / 2,
+            y = (sizeMonitor.height - h) / 2;
+#else
         int x = rtPrev.left,
             y = rtPrev.top,
             w = rtPrev.right - rtPrev.left,
             h = rtPrev.bottom - rtPrev.top;
+#endif
         SetWindowLong(hWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
         SetWindowPos(hWnd, HWND_TOP,
             x, y, w, h, SWP_SHOWWINDOW);

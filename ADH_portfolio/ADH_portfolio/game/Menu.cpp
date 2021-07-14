@@ -8,6 +8,11 @@
 
 void loadMenu()
 {
+	for (int i = 0; i < SOUND_NUM; i++)
+		audioStop(i);
+
+	audioPlay(3);
+
 	createPopMenu();
 	createPopHow();
 	createPopOption();
@@ -234,11 +239,13 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 			printf("게임시작\n");
 			stageFrom = stageTo = 10;
 			setLoading(gs_stage, freeMenu, loadStage);
+			audioStop(3);
 		}
 		else if (pop->selected == 1)
 		{
 			printf("에디터\n");
 			setLoading(gs_map, freeMenu, loadMapEditor);
+			audioStop(3);
 		}
 		else if (pop->selected == 2)
 		{
@@ -589,7 +596,7 @@ void createPopExit()
 	setStringSize(40);
 	setStringRGBA(0, 0, 0, 1);
 	setStringBorder(2);
-	setStringRGBA(1, 1, 1, 1);
+	setStringBorderRGBA(1, 1, 1, 1);
 	g->drawString(size.width / 2, size.height / 2 - 50, VCENTER | HCENTER, "정말 종료하시겠습니까?");
 
 	tex = g->getTexture();

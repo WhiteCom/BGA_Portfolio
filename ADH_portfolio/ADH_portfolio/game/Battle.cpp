@@ -15,6 +15,10 @@ BattlePop* bp;
 
 void loadBattle()
 {
+	for (int i = 0; i < SOUND_NUM; i++)
+		audioStop(i);
+	audioPlay(4);
+
 	bm = new BattleManager();
 
 	texBg = createImage("assets/Image/BattleBg/옥좌.bmp");
@@ -457,7 +461,6 @@ BUMonster::BUMonster(int index) : BattleUnit(index)
 	be = BeWait;
 	imgCurr = imgs[BeWait];
 
-	
 	//_attAniDt = attackDt[index];
 	_attDt = ENEMY_COOL_TIME;
 
@@ -521,12 +524,12 @@ bool BUMonster::paint(float dt, iPoint off, float rx, float ry)
 				attAniDt = 0.0f;
 				state = 1;
 			}
-
 		}
 
 		//attack
 		else if (state == 1)
 		{
+
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(50, 0);
@@ -545,6 +548,8 @@ bool BUMonster::paint(float dt, iPoint off, float rx, float ry)
 			else if (attAniDt >= ENEMY_ATK_TIME / 2)
 			{
 				imgCurr = imgs[BeAttack];
+				if(attAniDt < ENEMY_ATK_TIME / 2 + 0.03f)
+					audioPlay(6); //Hit
 			}
 
 		}
@@ -642,10 +647,11 @@ BUHero::BUHero(int index) : BattleUnit(index)
 			//
 			// BeAttack
 			//
-			for (int i = 0; i < 8; i++)
+			for (int i = 0; i < 12; i++)
+				img->addObject(texs[i]);
+			for(int i = 10; i>-1;i--)
 				img->addObject(texs[i]);
 			img->startAnimation();
-			img->_delta = 0.1f;
 			imgs[BeAttack] = img;
 		}
 		
@@ -719,6 +725,7 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 	{
 		iPoint tmpP = iPointZero;
 		
+
 		//move
 		if (state == 0)
 		{
@@ -745,6 +752,7 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = tmpP;
 
+
 			if (attAniDt >= HERO_ATK_TIME)
 			{
 				attAniDt = HERO_ATK_TIME;
@@ -758,8 +766,9 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 			else if (attAniDt >= HERO_ATK_TIME / 2)
 			{
 				imgCurr = imgs[BeAttack];
+				if(attAniDt < HERO_ATK_TIME / 2 + 0.04f)
+					audioPlay(5); //Hit
 			}
-
 		}
 
 		//back

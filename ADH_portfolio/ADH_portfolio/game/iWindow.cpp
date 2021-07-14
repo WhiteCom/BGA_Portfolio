@@ -1,6 +1,7 @@
 #include "iWindow.h"
 #include "iStd.h"
 #include "Game.h"
+#include "App.h"
 
 void startApp(HDC hdc, VOID_METHOD methodLoad)
 {
@@ -10,12 +11,12 @@ void startApp(HDC hdc, VOID_METHOD methodLoad)
 
     iGraphics::share()->start(hdc);
     loadOpenGL(hdc);
-
+    
     fbo = new iFBO(devSize.width, devSize.height);
     texFboForiPopup = createTexture(devSize.width, devSize.height);
     appInitialize();
-    methodLoad(); //loadGame()
 
+    methodLoad(); //loadGame()
 }
 
 void drawApp(FLOAT_METHOD methodDraw)
