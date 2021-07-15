@@ -19,16 +19,16 @@ void loadGame()
 
     AudioInfo ai[SOUND_NUM] = {
         {"assets/sound/cursor.wav", false, 1.0f},
-        {"assets/sound/waterfall_ship_fall.wav", false, 1.0f},
+        {"assets/sound/EditorBg.wav", true, 1.0f},
         {"assets/sound/BgMusic.wav", true, 1.0f},
         {"assets/sound/BgMusic2.wav", true, 1.0f},
-        {"assets/sound/PerituneMaterial_Puppeteer_loop.wav", true, 1.0f},
+        {"assets/sound/BattleBg1.wav", true, 1.0f},
         {"assets/sound/Hit00.wav", false, 1.0f},
         {"assets/sound/Hit03 A.wav", false, 1.0f},
     };
     loadAudio(ai, SOUND_NUM);
     //audioVolume(appData->bgm, appData->eff, 2);
-    audioVolume(1.0f, 1.0f, 2);
+    audioVolume(1.0f, 1.0f, 0);
 
     setStringName("assets/font/DungGeunMo.ttf");
     

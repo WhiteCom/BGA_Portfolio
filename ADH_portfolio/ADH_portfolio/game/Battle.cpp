@@ -73,9 +73,6 @@ bool keyBattle(iKeyStat stat, iPoint point)
 	switch (stat)
 	{
 	case iKeyStatBegan:
-#if 1 //test code
-		//setLoading(gs_stage, freeBattle, loadStage);
-#endif
 		break;
 
 	case iKeyStatMoved:
@@ -1008,6 +1005,8 @@ void BattleManager::paint(float dt)
 		printf("전투패배!\n");
 
 		//to do... 패배 팝업
+		for (int i = 0; i < SOUND_NUM; i++)
+			audioStop(i);
 		setLoading(gs_ending, freeBattle, loadEnding);
 	}
 

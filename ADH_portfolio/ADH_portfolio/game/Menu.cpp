@@ -445,7 +445,6 @@ void drawMethodPopHow(iPopup* pop, float dt, float rate)
 {
 	for (int i = 0; i < 3; i++)
 		imgHowBtn[i]->setTexObject(popHow->selected == i);
-
 }
 
 void drawPopHow(float dt)
@@ -528,37 +527,307 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 //===========================================================
 //popOption
 //===========================================================
+iPopup* popOption;
+iImage** imgOptionBtn;
+iStrTex* stSound;
+
+int soundSize = 10;
+
+void drawPopOptionBefore(iPopup* pop, float dt, float rate);
+void closeMethodPopOption(iPopup* pop);
+Texture* stSoundMethod(const char* str);
 
 void createPopOption()
 {
-#if 1 //#need update! temp code
-	createPopTemp();
-#endif
+	iPopup* pop = new iPopup();
+	iImage* img;
+	Texture* tex;
+
+	//
+	//Bg
+	//
+
+	iGraphics* g = iGraphics::share();
+	iSize size = iSizeMake(640, 480);
+	g->init(size);
+
+	setRGBA(0.5f, 0.5f, 0.5f, 1);
+	g->fillRect(0, 0, size.width, size.height, 10);
+
+	setStringSize(40);
+	setStringRGBA(0, 0, 0, 1);
+	setStringBorder(1);
+	setStringBorderRGBA(1, 1, 1, 1);
+	
+	g->drawString(size.width / 2, 40	  , VCENTER | HCENTER, "<Option>");
+	g->drawString(40,			  40 + 80 , TOP | LEFT, "전체화면 : ");
+	g->drawString(40,			  40 + 130 , TOP | LEFT, "사운드 : ");
+
+	tex = g->getTexture();
+	img = new iImage();
+	img->addObject(tex);
+	freeImage(tex);
+	pop->addObject(img);
+
+	//
+	//Btn
+	//
+
+	imgOptionBtn = new iImage * [5];
+	
+	//닫기
+	
+	img = new iImage();
+
+	size = iSizeMake(80, 40);
+	for (int i = 0; i < 2; i++)
+	{
+		g->init(size);
+
+		if (i == 0) setRGBA(0, 0, 0, 1);
+		else		setRGBA(1, 1, 0, 1);
+		g->fillRect(0, 0, size.width, size.height, 10);
+
+		setStringSize(25);
+		setStringRGBA(1, 1, 1, 1);
+		g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "닫기");
+
+		tex = g->getTexture();
+		img->addObject(tex);
+		freeImage(tex);
+	}
+	img->position = iPointMake(320 - size.width / 2, 480 - 100);
+	pop->addObject(img);
+	imgOptionBtn[0] = img;
+
+	// 전체화면 on/off
+
+	size = iSizeMake(60, 40);
+	for (int i = 1; i < 3; i++)
+	{
+		img = new iImage();
+		for (int j = 0; j < 2; j++)
+		{
+			g->init(size);
+			if (j == 0)
+			{
+				setRGBA(0, 0, 0, 1);
+				g->fillRect(0, 0, size.width, size.height, 10);
+
+				setStringSize(30);
+				setStringRGBA(0, 0, 0, 1);
+			}
+			else
+			{
+				setRGBA(1, 1, 0, 1);
+				g->fillRect(0, 0, size.width, size.height, 10);
+
+				setStringSize(30);
+				setStringRGBA(0.5f, 0.2f, 1, 1);
+			}
+			setStringBorder(2);
+			setStringBorderRGBA(1, 1, 1, 1);
+			
+			if(i==1)
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "ON");
+			else if(i==2)
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "OFF");
+			tex = g->getTexture();
+			img->addObject(tex);
+			freeImage(tex);
+		}
+		img->position = iPointMake(200 + i * 70, 120);
+		pop->addObject(img);
+		imgOptionBtn[i] = img;
+	}
+
+	// 사운드
+
+	//음량 btn
+
+	size = iSizeMake(40, 40);
+	for (int i = 3; i < 5; i++)
+	{
+		img = new iImage();
+		for (int j = 0; j < 2; j++)
+		{
+			g->init(size);
+			if (j == 0)
+			{
+				setRGBA(0, 0, 0, 1);
+				g->fillRect(0, 0, size.width, size.height, 10);
+
+				setStringSize(30);
+				setStringRGBA(0, 0, 0, 1);
+			}
+			else
+			{
+				setRGBA(1, 1, 0, 1);
+				g->fillRect(0, 0, size.width, size.height, 10);
+
+				setStringSize(30);
+				setStringRGBA(0.5f, 0.2f, 1, 1);
+			}
+			setRGBA(1, 1, 1, 1);
+			setStringBorder(2);
+			setStringBorderRGBA(1, 1, 1, 1);
+
+			if (i == 3)
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "-");
+			else if (i == 4)
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "+");
+			
+			tex = g->getTexture();
+			img->addObject(tex);
+			freeImage(tex);
+		}
+		img->position = imgOptionBtn[1]->position + iPointMake(150 * (i - 3), 50);
+		pop->addObject(img);
+		imgOptionBtn[i] = img;
+	}
+	
+	// 음량 str
+
+	iStrTex* st = new iStrTex(stSoundMethod);
+	st->setString("%d", soundSize);
+	img = new iImage();
+	img->addObject(st->tex);
+	img->position = imgOptionBtn[3]->position + iPointMake(65, 0);
+	pop->addObject(img);
+	stSound = st;
+
+	pop->style = iPopupZoom;
+	pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
+	pop->closePoint = iPointMake((devSize.width - 640) / 2, (devSize.height - 480) / 2);
+	pop->methodBefore = drawPopOptionBefore;
+	pop->methodClose = closeMethodPopOption;
+
+	popOption = pop;
+
 }
+
+Texture* stSoundMethod(const char* str)
+{
+	iGraphics* g = iGraphics::share();
+	iSize size = iSizeMake(60, 40);
+	g->init(size);
+
+	setRGBA(0, 0, 0, 1);
+	g->fillRect(0, 0, size.width, size.height, 10);
+
+	setStringSize(30);
+	setStringRGBA(1, 1, 1, 1);
+	setStringBorder(0);
+
+	int ss = atoi(str);
+	g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "%d", ss);
+
+	return g->getTexture();
+}
+
 void freePopOption()
 {
-#if 1 //#need update! temp code
-	freePopTemp();
-#endif
+	delete popOption;
+	delete imgOptionBtn;
+	delete stSound;
 }
+void drawPopOptionBefore(iPopup* pop, float dt, float rate)
+{
+	for (int i = 0; i < 5; i++)
+		imgOptionBtn[i]->setTexObject(popOption->selected == i);
+}
+void closeMethodPopOption(iPopup* pop)
+{
+	showPopMenu(true);
+}
+
 void drawPopOption(float dt)
 {
-#if 1 //#need update! temp code
-	drawPopTemp(dt);
-#endif
+	popOption->paint(dt);
 }
 void showPopOption(bool show)
 {
-#if 1 //#need update! temp code
-	showPopTemp(show);
-#endif
+	popOption->show(show);
+	if (show)
+	{
+		indexCloseMenu = -1;
+	}
+	else
+	{
+
+	}
 }
 bool keyPopOption(iKeyStat stat, iPoint point)
 {
-#if 1 //#need update! temp code
-	return keyPopTemp(stat, point);
-#endif
+	if (popOption->bShow == false)
+		return false;
+	if (popOption->stat != iPopupProc)
+		return true;
 
+	int i, j = -1;
+
+	switch (stat)
+	{
+	case iKeyStatBegan:
+		if (popOption->selected == -1)
+			break;
+
+		audioPlay(0);
+		
+		if (popOption->selected == 0)  
+		{
+			showPopOption(false);
+		}
+		else if (popOption->selected == 1) 
+		{
+			if(!isFullscreen)
+				goFullscreen();
+		}
+		else if (popOption->selected == 2)
+		{
+			if (isFullscreen)
+				goFullscreen();
+		}
+		else if (popOption->selected == 3)
+		{
+			if (soundSize > 0)
+				soundSize--;
+			stSound->setString("%d", soundSize);
+			float sSize = soundSize * 0.1f;
+			audioVolume(sSize, sSize, 0);
+		}
+		else //if(popOpion->selected == 4)
+		{
+			if (soundSize < 10)
+				soundSize++;
+			stSound->setString("%d", soundSize);
+			float sSize = soundSize * 0.1f;
+			audioVolume(sSize, sSize, 0);
+		}
+		break;
+
+	case iKeyStatMoved:
+		for (i = 0; i < 5; i++)
+		{
+			if (containPoint(point, imgOptionBtn[i]->touchRect(popOption->closePoint)))
+			{
+				j = i;
+				break;
+			}
+		}
+		if (popOption->selected != j)
+		{
+			audioPlay(0);
+			popOption->selected = j;
+			printf("popOption : %d\n", popOption->selected);
+		}
+		break;
+
+	case iKeyStatEnded:
+		break;
+	}
+
+	return true;
 }
 
 //===========================================================
@@ -725,165 +994,6 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		{
 			printf("audio play\n");
 			popExit->selected = j;
-		}
-		break;
-
-	case iKeyStatEnded:
-		break;
-	}
-
-	return true;
-}
-
-//===========================================================
-//popTemp : 미구현 팝업
-//===========================================================
-
-iPopup* popTemp;
-iImage** imgTempBtn;
-
-void drawPopTempBefore(iPopup* pop, float dt, float rate);
-void closeMethodPopTemp(iPopup* pop);
-
-void createPopTemp()
-{
-	iPopup* pop = new iPopup();
-	iImage* img;
-	Texture* tex;
-
-	//
-	//Bg
-	//
-
-	iGraphics* g = iGraphics::share();
-	iSize size = iSizeMake(640, 480);
-	g->init(size);
-
-	setRGBA(0.5f, 0.5f, 0.5f, 1.0f);
-	g->fillRect(0, 0, size.width, size.height, 10);
-
-	setStringSize(40);
-	setStringRGBA(0, 0, 0, 1);
-	setStringBorder(1);
-	setStringBorderRGBA(1, 1, 1, 1);
-	g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "미구현된 기능입니다.");
-
-	tex = g->getTexture();
-	img = new iImage();
-	img->addObject(tex);
-	freeImage(tex);
-	pop->addObject(img);
-
-	//
-	//Btn
-	//
-
-	imgTempBtn = new iImage * [1];
-	img = new iImage();
-
-	size = iSizeMake(80, 40);
-	for(int i = 0; i < 2; i++)
-	{
-		g->init(size);
-
-		if (i == 0) setRGBA(0, 0, 0, 1);
-		else		setRGBA(1, 1, 0, 1);
-		g->fillRect(0, 0, size.width, size.height, 10);
-
-		setStringSize(25);
-		setStringRGBA(1, 1, 1, 1);
-		g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "닫기");
-		
-		tex = g->getTexture();
-		img->addObject(tex);
-		freeImage(tex);
-	}
-	img->position = iPointMake(320 - size.width / 2, 480 - 100);
-	pop->addObject(img);
-	imgTempBtn[0] = img;
-
-	pop->style = iPopupZoom;
-#if 1
-	pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
-	pop->closePoint = iPointMake((devSize.width - 640) / 2, (devSize.height-480) / 2);
-#else
-	pop->openPoint = iPointZero;
-	pop->closePoint = iPointZero;
-#endif
-	pop->methodBefore = drawPopTempBefore;
-	pop->methodClose = closeMethodPopTemp;
-
-	popTemp = pop;
-}
-
-void drawPopTempBefore(iPopup* pop, float dt, float rate)
-{
-	for (int i = 0; i < 1; i++)
-		imgTempBtn[i]->setTexObject(popTemp->selected == i);
-}
-
-void closeMethodPopTemp(iPopup* pop)
-{
-	showPopMenu(true);
-}
-
-void freePopTemp()
-{
-	delete popTemp;
-	delete imgTempBtn;
-}
-void drawPopTemp(float dt)
-{
-	popTemp->paint(dt);
-}
-void showPopTemp(bool show)
-{
-	popTemp->show(show);
-	if (show)
-	{
-		indexCloseMenu = -1;
-	}
-	else
-	{
-
-	}
-}
-bool keyPopTemp(iKeyStat stat, iPoint point)
-{
-	if (popTemp->bShow == false)
-		return false;
-	if (popTemp->stat != iPopupProc)
-		return true;
-
-	int i, j = -1;
-
-	switch (stat)
-	{
-	case iKeyStatBegan:
-		if (popTemp->selected == -1)
-			break;
-
-		audioPlay(0);
-		if (popTemp->selected == 0)
-		{
-			showPopTemp(false);
-		}
-		break;
-
-	case iKeyStatMoved:
-		for (i = 0; i < 1; i++)
-		{
-			if (containPoint(point, imgTempBtn[i]->touchRect(popTemp->closePoint)))
-			{
-				j = i;
-				break;
-			}
-		}
-		if (popTemp->selected != j)
-		{
-			audioPlay(0);
-			popTemp->selected = j;
-			printf("popTemp : %d\n", popTemp->selected);
 		}
 		break;
 

@@ -142,6 +142,7 @@ void Map::load(const char* szFormat, ...)
     tileEnemy = new enemyInfo[xy];
     fread(tileEnemy, sizeof(enemyInfo), xy, pf);
 
+
     fclose(pf);
 }
 

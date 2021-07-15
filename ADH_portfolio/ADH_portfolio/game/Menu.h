@@ -30,6 +30,7 @@ bool keyPopHow(iKeyStat stat, iPoint point);
 //===========================================================
 //popOption
 //===========================================================
+extern int soundSize;
 
 void createPopOption();
 void freePopOption();
@@ -47,12 +48,4 @@ void drawPopExit(float dt);
 void showPopExit(bool show);
 bool keyPopExit(iKeyStat stat, iPoint point);
 
-//===========================================================
-//popTemp : 미구현 팝업
-//===========================================================
 
-void createPopTemp();
-void freePopTemp();
-void drawPopTemp(float dt);
-void showPopTemp(bool show);
-bool keyPopTemp(iKeyStat stat, iPoint point);

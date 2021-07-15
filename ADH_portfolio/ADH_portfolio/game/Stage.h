@@ -33,7 +33,7 @@ void showPopSetting(bool show);
 bool keyPopSetting(iKeyStat stat, iPoint point);
 
 //=========================================================
-// popStageHow : 게임방법
+// popStageHow : 게임방법 (현재 개발일지)
 //=========================================================
 
 void createPopStageHow();
@@ -43,7 +43,7 @@ void showPopStageHow(bool show);
 bool keyPopStageHow(iKeyStat stat, iPoint point);
 
 //=========================================================
-// popOption : option -> popSetting
+// popStageOption : option -> popSetting
 //=========================================================
 
 void createPopStageOption();
@@ -51,16 +51,6 @@ void freePopStageOption();
 void drawPopStageOption(float dt);
 void showPopStageOption(bool show);
 bool keyPopStageOption(iKeyStat stat, iPoint point);
-
-//=========================================================
-// popTmp : option 임시 팝업 -> popSetting
-//=========================================================
-
-void createPopTmp();
-void freePopTmp();
-void drawPopTmp(float dt);
-void showPopTmp(bool show);
-bool keyPopTmp(iKeyStat stat, iPoint point);
 
 //=========================================================
 // popExit : 나가기 팝업 -> popSetting

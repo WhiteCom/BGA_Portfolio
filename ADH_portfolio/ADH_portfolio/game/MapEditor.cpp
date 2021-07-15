@@ -101,6 +101,8 @@ void RTset()
 
 void loadMapEditor()
 {
+    audioPlay(1);
+
     tFont = loadFont("assets/font/BMJUA_ttf.ttf", 24, "0123456789");
     setFont(tFont);
 
@@ -690,6 +692,17 @@ void keyMapEditor(iKeyStat stat, iPoint point)
             }
 
             tEditor->load(ch);
+
+#if 1
+            //map info
+            for (int i = 0; i < TILE_W * TILE_H; i++)
+            {
+                if (i % TILE_W == 0) printf("\n");
+                printf("%d ", tEditor->tileWeight[i]);
+            }
+#endif
+
+
             //편집영역에 로드 파일을 옮기는 용도
             for (int i = 0; i < TILE_W * TILE_H; i++)
             {
@@ -728,6 +741,8 @@ void keyMapEditor(iKeyStat stat, iPoint point)
         //Exit 버튼
         else if (selectedBtn == 2)
         {
+            for (int i = 0; i < SOUND_NUM; i++)
+                audioStop(i);
             setLoading(gs_menu, freeMapEditor, loadMenu);
         }
 
