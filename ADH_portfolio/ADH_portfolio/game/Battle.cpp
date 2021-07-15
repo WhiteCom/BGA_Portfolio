@@ -545,7 +545,7 @@ bool BUMonster::paint(float dt, iPoint off, float rx, float ry)
 			else if (attAniDt >= ENEMY_ATK_TIME / 2)
 			{
 				imgCurr = imgs[BeAttack];
-				if(attAniDt < ENEMY_ATK_TIME / 2 + 0.03f)
+				if(attAniDt < ENEMY_ATK_TIME / 2 + 0.05f)
 					audioPlay(6); //Hit
 			}
 

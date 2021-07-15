@@ -101,6 +101,8 @@ void RTset()
 
 void loadMapEditor()
 {
+    for (int i = 0; i < SOUND_NUM; i++)
+        audioStop(i);
     audioPlay(1);
 
     tFont = loadFont("assets/font/BMJUA_ttf.ttf", 24, "0123456789");
@@ -741,8 +743,7 @@ void keyMapEditor(iKeyStat stat, iPoint point)
         //Exit 버튼
         else if (selectedBtn == 2)
         {
-            for (int i = 0; i < SOUND_NUM; i++)
-                audioStop(i);
+            
             setLoading(gs_menu, freeMapEditor, loadMenu);
         }
 
@@ -760,10 +761,6 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                 break;
             }
         }
-
-#ifdef _DEBUG
-        printf("selectedBtn : %d\n", selectedBtn);
-#endif
 
         if (j != -1)
         {

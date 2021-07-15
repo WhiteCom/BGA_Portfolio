@@ -10,7 +10,6 @@ void loadMenu()
 {
 	for (int i = 0; i < SOUND_NUM; i++)
 		audioStop(i);
-
 	audioPlay(3);
 
 	createPopMenu();
@@ -239,13 +238,11 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 			printf("게임시작\n");
 			stageFrom = stageTo = 10;
 			setLoading(gs_stage, freeMenu, loadStage);
-			audioStop(3);
 		}
 		else if (pop->selected == 1)
 		{
 			printf("에디터\n");
 			setLoading(gs_map, freeMenu, loadMapEditor);
-			audioStop(3);
 		}
 		else if (pop->selected == 2)
 		{
@@ -389,7 +386,7 @@ Texture* methodStHow(const char* str)
 	content[2] = "[방향키 : ←, →, ↑, ↓ 또는 w,a,s,d]\n";
 	content[3] = "2.걸어다니면 Step이 깍임.\n";
 	content[4] = "3.맵 마다 적이 있다. 적을 만나면 싸워야 한다.\n";
-	content[5] = "☆최적의 방법으로 게임을 클리어해봐요!☆\n";
+	content[5] = "(ESC 키를 누르면 전체화면 On/Off이 됩니다.)\n";
 
 	const char** content2 = new const char* [4];
 
