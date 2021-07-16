@@ -1,258 +1,262 @@
 ﻿  App.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(95,40): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(95,25): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(103,39): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(103,18): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(102,46): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(102,27): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(110,22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(110,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(127,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(128,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(143,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(142,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(161,22): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(162,23): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(284,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(286,32): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(322,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(323,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(344,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(355,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(369,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(375,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(389,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(395,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(407,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(413,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(427,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\App.cpp(433,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(95,40): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(95,25): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(103,39): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(103,18): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(102,46): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(102,27): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(110,22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(110,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(127,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(128,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(143,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(142,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(161,22): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(162,23): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(284,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(286,32): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(322,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(323,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(344,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(355,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(369,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(375,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(389,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(395,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(407,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(413,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(427,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\App.cpp(433,52): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Battle.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(47,28): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(47,14): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(203,47): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(254,47): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(339,46): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(500,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(501,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(719,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(720,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(850,62): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(850,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(925,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(926,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(930,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(931,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(932,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(936,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(937,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(938,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(939,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(966,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(967,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(971,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(972,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(973,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(977,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(978,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(979,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(980,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(999,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1008,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1072,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1105,10): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1147,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1147,46): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1147,26): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1169,22): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Battle.cpp(1220,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(47,28): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(47,14): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(200,47): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(251,47): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(336,46): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(497,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(498,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(716,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(717,13): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(847,62): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(847,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(922,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(923,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(927,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(928,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(929,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(933,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(934,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(935,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(936,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(963,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(964,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(968,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(969,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(970,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(974,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(975,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(976,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(977,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(996,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1005,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1071,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1104,10): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1146,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1146,46): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1146,26): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1168,22): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Battle.cpp(1219,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Character.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Character.cpp(148,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Character.cpp(149,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Character.cpp(150,9): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Character.cpp(151,9): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Character.cpp(148,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Character.cpp(149,8): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Character.cpp(150,9): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Character.cpp(151,9): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Common.cpp
   Ending.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Ending.cpp(65,57): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Ending.cpp(65,38): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Ending.cpp(68,57): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Ending.cpp(68,38): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Game.cpp
   iFBO.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iFBO.cpp(86,85): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iFBO.cpp(86,64): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iFBO.cpp(86,47): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iFBO.cpp(86,28): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iFBO.cpp(86,85): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iFBO.cpp(86,64): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iFBO.cpp(86,47): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iFBO.cpp(86,28): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Intro.cpp
   iWindow.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iWindow.cpp(15,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iWindow.cpp(15,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iWindow.cpp(16,59): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iWindow.cpp(16,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iWindow.cpp(53,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\iWindow.cpp(61,32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iWindow.cpp(15,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iWindow.cpp(15,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iWindow.cpp(16,59): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iWindow.cpp(16,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iWindow.cpp(53,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\iWindow.cpp(61,32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Loading.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Loading.cpp(93,17): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Loading.cpp(151,15): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Loading.cpp(151,5): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Loading.cpp(250,16): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Loading.cpp(270,14): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Loading.cpp(93,17): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Loading.cpp(151,15): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Loading.cpp(151,5): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Loading.cpp(250,16): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Loading.cpp(270,14): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Map.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Map.cpp(66,9): warning C4101: 'ti' :참조되지 않은 지역 변수입니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Map.cpp(65,12): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Map.cpp(66,13): warning C4101: 'tw' :참조되지 않은 지역 변수입니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Map.cpp(136,9): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Map.cpp(206,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Map.cpp(207,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Map.cpp(66,9): warning C4101: 'ti' :참조되지 않은 지역 변수입니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Map.cpp(65,12): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Map.cpp(66,13): warning C4101: 'tw' :참조되지 않은 지역 변수입니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Map.cpp(136,9): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Map.cpp(207,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Map.cpp(208,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   MapEditor.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(160,64): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(161,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(181,95): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(181,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(380,74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(380,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(410,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(409,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(785,67): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\MapEditor.cpp(787,66): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(164,64): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(165,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(185,95): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(185,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(384,74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(384,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(414,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(413,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(797,67): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(799,66): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Menu.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(159,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(239,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(246,24): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(252,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(258,21): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(412,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(417,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(422,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(704,18): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Menu.cpp(710,24): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(161,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(241,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(247,24): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(252,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(258,21): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(412,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(417,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(422,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(639,34): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(684,62): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(973,18): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Menu.cpp(979,24): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Stage.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(159,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(160,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(161,29): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(161,26): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(167,44): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(167,28): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(188,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(188,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(202,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(202,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(216,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(216,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(230,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(230,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(236,56): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(236,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(276,12): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(276,9): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(307,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(308,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(309,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(310,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(475,64): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(475,43): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(486,64): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(486,43): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(493,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(706,62): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1015,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1021,33): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1170,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1175,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1180,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1467,67): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1467,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1525,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1526,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\game\Stage.cpp(1527,52): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(160,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(161,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(162,29): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(162,26): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(168,44): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(168,28): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(189,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(189,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(203,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(203,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(217,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(217,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(231,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(231,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(237,56): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(237,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(278,12): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(278,9): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(309,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(310,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(311,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(312,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(476,64): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(476,43): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(487,64): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(487,43): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(494,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(712,62): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(932,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(975,73): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1246,27): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1252,33): warning C4819: 현재 코드 페이지(0)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1401,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1406,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1411,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1698,67): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1698,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1756,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1757,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\Stage.cpp(1758,52): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iArray.cpp
   iButton.cpp
   iColor.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iColor.cpp(16,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iColor.cpp(17,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iColor.cpp(18,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iColor.cpp(19,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iColor.cpp(16,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iColor.cpp(17,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iColor.cpp(18,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iColor.cpp(19,14): warning C4244: '=': 'float'에서 'uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iFPS.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iFPS.cpp(57,11): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iFPS.cpp(57,11): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iGraphics.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(41,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(41,14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(68,58): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(68,48): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(68,38): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(68,28): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(303,46): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(303,28): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(360,48): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(360,33): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(419,47): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(419,32): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(428,27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(431,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(450,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(471,27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(474,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(492,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(513,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(513,58): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(513,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iGraphics.cpp(513,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(41,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(41,14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(68,58): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(68,48): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(68,38): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(68,28): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(303,46): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(303,28): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(360,48): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(360,33): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(419,47): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(419,32): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(428,27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(431,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(450,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(471,27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(474,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(492,31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(513,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(513,58): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(513,40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iGraphics.cpp(513,31): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iImage.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iImage.cpp(53,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iImage.cpp(53,25): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iImage.cpp(123,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iImage.cpp(123,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iImage.cpp(53,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iImage.cpp(53,25): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iImage.cpp(123,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iImage.cpp(123,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   컴파일하고 있습니다...
   iOpenAL.cpp
   iOpenGL.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iOpenGL.cpp(79,37): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iOpenGL.cpp(79,16): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iOpenGL.cpp(78,47): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iOpenGL.cpp(78,28): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iOpenGL.cpp(79,37): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iOpenGL.cpp(79,16): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iOpenGL.cpp(78,47): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iOpenGL.cpp(78,28): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iPoint.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPoint.cpp(142,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPoint.cpp(166,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPoint.cpp(171,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPoint.cpp(185,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPoint.cpp(142,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPoint.cpp(166,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPoint.cpp(171,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPoint.cpp(185,13): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iPopup.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPopup.cpp(263,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPopup.cpp(263,11): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPopup.cpp(270,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iPopup.cpp(270,11): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPopup.cpp(263,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPopup.cpp(263,11): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPopup.cpp(270,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iPopup.cpp(270,11): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iRect.cpp
   iSize.cpp
   iSort.cpp
   iStd.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(12,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(169,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(173,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(251,31): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(251,24): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(251,18): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(251,13): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(720,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(720,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(833,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(833,19): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(840,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStd.cpp(840,19): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(12,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(169,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(173,12): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(251,31): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(251,24): warning C4244: '인수': 'float'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(251,18): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(251,13): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(720,24): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(720,12): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(833,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(833,19): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(840,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStd.cpp(840,19): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iString.cpp
   iStrTex.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(94,18): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(94,11): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(179,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(179,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(188,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(188,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(193,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(193,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(198,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\std\iStrTex.cpp(198,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(94,18): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(94,11): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(179,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(179,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(188,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(188,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(193,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(193,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(198,53): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\std\iStrTex.cpp(198,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   iNumber.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\util\iNumber.cpp(26,35): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\util\iNumber.cpp(26,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\ADH_portfolio\util\iNumber.cpp(26,13): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\util\iNumber.cpp(26,35): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\util\iNumber.cpp(26,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\util\iNumber.cpp(26,13): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   glew.c
   코드를 생성하고 있습니다.
   Previous IPDB not found, fall back to full compilation.
-  All 912 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 910 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
-  ADH_portfolio.vcxproj -> C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio3\Release\ADH_portfolio.exe
+  ADH_portfolio.vcxproj -> C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\Release\ADH_portfolio.exe

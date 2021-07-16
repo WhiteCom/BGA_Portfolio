@@ -2,7 +2,7 @@
 #include "Loading.h"
 #include "Menu.h"
 
-const char* strEnding = "취업 성공을 위해서 열심히 준비했습니다. 누가 보면 부족해 보일지 모르나, 저는 제가 이룬것에 대해 아주 만족합니다. 화이팅";
+//const char* strEnding = "취업 성공을 위해서 열심히 준비했습니다. 누가 보면 부족해 보일지 모르나, 저는 제가 이룬것에 대해 아주 만족합니다. 화이팅";
 
 Texture* gameOverBg;
 
@@ -13,6 +13,9 @@ float viewTime;
 
 void loadEnding()
 {
+	for (int i = 0; i < SOUND_NUM; i++)
+		audioStop(i);
+
 	gameOverBg = createImage("assets/gameOverBg.png");
 
 	viewTime = 1.0f;

@@ -121,8 +121,9 @@ void copyFile(const char* szFormat, ...)
 void loadStage()
 {
     for (int i = 0; i < SOUND_NUM; i++)
+    {
         audioStop(i);
-
+    }
     audioPlay(2);
 
 //===============================================
@@ -314,6 +315,7 @@ int heroIndex()
     return index;
 }
 
+extern iPopup* popOverStep;
 void drawStage(float dt)
 {
     clearRect();
@@ -377,7 +379,6 @@ void drawStage(float dt)
     {
         stageTo = locationWarp - 10;
         setLoading(gs_stage, freeStage, loadStage);
-        audioStop(2);
     }
 
     //===================
@@ -390,7 +391,6 @@ void drawStage(float dt)
         tEditor->tileWeight[newHeroIndex] = 1;
         tEditor->save(gameFile);
         setLoading(gs_battle, freeStage, loadBattle);
-        audioStop(2);
     }
     
 //=========================================================
@@ -621,6 +621,7 @@ iPopup* popSetting;
 iImage** imgSetBtn;
 
 void drawMethodPopSet(iPopup* pop, float dt, float rate);
+void closePopSettingMethod(iPopup* pop);
 
 void createPopSetting()
 {
@@ -716,6 +717,7 @@ void createPopSetting()
     pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
     pop->closePoint = iPointMake(devSize.width / 2 - 240, devSize.height / 2 - 240);
     pop->methodBefore = drawMethodPopSet;
+    pop->methodClose = closePopSettingMethod;
 
     popSetting = pop;
 }
@@ -730,6 +732,13 @@ void drawMethodPopSet(iPopup* pop, float dt, float rate)
 {
     for (int i = 0; i < 4; i++)
         imgSetBtn[i]->setTexObject(popSetting->selected == i);
+}
+void closePopSettingMethod(iPopup* pop)
+{
+    if (popSetting->selected == 2)
+        showPopStageOption(true);
+    else if (popSetting->selected == 3)
+        showPopStageExit(true);
 }
 
 void drawPopSetting(float dt)
@@ -752,7 +761,7 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
 
     if (keyPopStageOption(stat, point) ||
         keyPopStageExit(stat, point))
-        return false;
+        return true;
 
     if (popSetting->bShow == false)
         return false;
@@ -779,13 +788,11 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         {
             printf("Stage Option\n");
             showPopSetting(false);
-            showPopStageOption(true);
         }
         else if (pop->selected == 3) //Exit
         {
             printf("Stage Exit\n");
             showPopSetting(false);
-            showPopStageExit(true);
         }
 
         break;
@@ -976,7 +983,7 @@ void createPopStageOption()
     st->setString("%d", soundSize);
     img = new iImage();
     img->addObject(st->tex);
-    img->position = imgStageOptionBtn[3]->position + iPointMake(65, 0);
+    img->position = imgStageOptionBtn[3]->position + iPointMake(60, 0);
     pop->addObject(img);
     stStageSound = st;
 
@@ -1244,7 +1251,6 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         {
             printf("아니요\n");
             showPopStageExit(false);
-            popTopUI->selected = 0; //popSetting activated
         }
         break;
 
@@ -1276,7 +1282,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
 //=========================================================
 
 iStrTex* stPopHow;
-iPopup* popStageHow;
+iPopup* popStageHow; 
 iImage** imgHowBtns;
 
 static int page, _page;
@@ -1356,52 +1362,53 @@ Texture* methodStPopHow(const char* str)
     //
     // Bg
     //
-    setRGBA(0.5f, 0.5f, 0.5f, 0.7f);
+    setRGBA(1, 1, 1, 0.9f);
     g->fillRect(0, 0, size.width, size.height, 5);
     setRGBA(1, 1, 1, 1);
 
     setStringSize(30);
     setStringRGBA(0, 0, 0, 1);
     setStringBorder(1);
-    setStringBorderRGBA(1, 1, 0.5f, 1);
+    setStringBorderRGBA(0, 0.7f, 0.5f, 1);
 
     const char** content = new const char* [4];
 
-    content[0] = "<개발일지>";
-    content[1] = "1. 참고게임 : 헬테이커 + 동방영강창(동인게임)";
-    content[2] = "2. 턴제 알피지 형식";
-    content[3] = "3. 아무말";
+    content[0] = "<개발일지 - 기획>";
+    content[1] = "- C++, WIN32, GDI+, OpenGL, OpenAL";
+    content[2] = "- 기획 : 턴제 RPG 형식 게임제작";
+    content[3] = "- 참고 : 헬테이커, 동방영강창(동인게임)";
 
-    const char** content2 = new const char* [4];
+    const char** content2 = new const char* [5];
 
-    content2[0] = "<개발일지2>";
-    content2[1] = "-";
-    content2[2] = "-";
-    content2[3] = "-";
+    content2[0] = "<개발일지 - 기획>";
+    content2[1] = "- 개발목표";
+    content2[2] = "- 1순위 : 게임시스템(씬 전환/UI/이벤트/전투)";
+    content2[3] = "- 2순위 : 게임완성도";
+    content2[4] = "- 3순위 : 플레이 스토어";
 
     const char** content3 = new const char* [4];
 
-    content3[0] = "<개발일지3>";
-    content3[1] = "-";
-    content3[2] = "-";
-    content3[3] = "-";
+    content3[0] = "<개발일지 - 개발현황>";
+    content3[1] = "- 현재 개발 된것 : UI/맵 툴/전투/씬 전환";
+    content3[2] = "- 차후 개발목표 : 게임완성도";
+    content3[3] = "- 3순위는 다음기회에...";
 
     int p = atoi(str);
  
     if (p == 0)
     {
         for (int i = 0; i < 4; i++)
-            g->drawString(20, (1 + i) * 40, TOP | LEFT, content[i]);
+            g->drawString(20, (1 + i) * 45, TOP | LEFT, content[i]);
     }
     else if (p == 1)
     {
-        for (int i = 0; i < 4; i++)
-            g->drawString(20, (1 + i) * 40, TOP | LEFT, content2[i]);
+        for (int i = 0; i < 5; i++)
+            g->drawString(20, (1 + i) * 45, TOP | LEFT, content2[i]);
     }
     else //if(p==3)
     {
         for (int i = 0; i < 4; i++)
-            g->drawString(20, (1 + i) * 40, TOP | LEFT, content3[i]);
+            g->drawString(20, (1 + i) * 45, TOP | LEFT, content3[i]);
     }
     g->drawString(size.width / 2, size.height * 0.9f, VCENTER | HCENTER, "%d / %d", 1 + p, _page);
  
@@ -1516,8 +1523,8 @@ void createPopInven()
 {
 //#issue! ascii to Unicode! 
     const char* tmpHeroName = "영웅1";
-    const char* tmpHeroHP = "HP";
-    const char* tmpHeroAtk = "ATK";
+    const char* tmpHeroHP = "100";
+    const char* tmpHeroAtk = "50";
 
     strcpy(heroName, tmpHeroName);
     strcpy(heroHP, tmpHeroHP);
@@ -1709,7 +1716,7 @@ Texture* stMethodPopInven(const char* str)
     // Bg
     //
 
-    setRGBA(0.5f, 0.5f, 0.5f, 0.8f);
+    setRGBA(0.5f, 0.5f, 0.5f, 0.9f);
     g->fillRect(0, 0, size.width, size.height, 10);
     setRGBA(1, 1, 1, 1);
 
@@ -1724,7 +1731,7 @@ Texture* stMethodPopInven(const char* str)
     const char* content[3] = {
         "이름",
         "HP",
-        "AP",
+        "ATK",
     };
 
     char HeroStr[3][64];
@@ -1883,15 +1890,15 @@ void createPopOverStep()
     g->fillRect(0, 0, size.width, size.height, 10);
     setRGBA(1, 1, 1, 1);
 
-    setStringSize(20);
+    setStringSize(30);
     setStringRGBA(1, 1, 1, 1);
     setStringBorder(2);
     setStringBorderRGBA(0, 0, 0, 1);
-    g->drawString(size.width / 2, size.height / 2, VCENTER|HCENTER, "스텝을 모두 소진하였습니다.");
+    g->drawString(size.width / 2, size.height / 2 - 40, VCENTER|HCENTER, "스텝을 모두 소진하였습니다.");
 
-    setStringSize(30);
+    setStringSize(50);
     setStringRGBA(1, 0.1f, 0.1f, 1);
-    g->drawString(size.width / 2, size.height / 2 + 20, VCENTER | HCENTER, "Game Over");
+    g->drawString(size.width / 2, size.height / 2 + 15, VCENTER | HCENTER, "Game Over");
 
     tex = g->getTexture();
     img = new iImage();
@@ -2010,7 +2017,6 @@ bool keyPopOverStep(iKeyStat stat, iPoint point)
         {
             if (containPoint(point, imgOverStepBtn[i]->touchRect(popOverStep->closePoint)))
             {
-                printf("popOverStep\n");
                 j = i;
                 break;
             }
