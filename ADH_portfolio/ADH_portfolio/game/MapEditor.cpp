@@ -94,7 +94,7 @@ void RTset()
     TileWeiRT =     iRectMake(TileWeiRT_point.x, TileWeiRT_point.y, TILE_WSIZE * 8, TILE_HSIZE * 8);
     TileSelRT =     iRectMake(TileSelRT_point.x, TileSelRT_point.y, TILE_WSIZE * 4, TILE_HSIZE * 5);
     selectedImgRT = iRectMake(selectedImgRT_point.x, selectedImgRT_point.y, TILE_WSIZE, TILE_HSIZE);
-    
+
     tEditor = new Map();
     tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
 }
@@ -118,7 +118,7 @@ void loadMapEditor()
     texs[2] = createImageDivide(8, 32, ImgPath[2]);
 
 #if EDITOR_USE_FBO
-    texFBO = createTexture(tileWSize * 8, tileHSize * 8);
+    texFBO = createTexture(TILE_WSIZE * 8, TILE_HSIZE * 8);
 #endif
     
     const char* strMap[3] = {
@@ -313,7 +313,7 @@ void drawMapEditor(float dt)
         //버튼이 활성화 됬을 때 비활성화 됬을 때
         if (selectedWeiType > -1)
         {
-         
+
 #if 0   //#issue! selectedWei
             if (selectedWei < 100)
                 imgWeiBtn[i]->setTexObject((selectedWei) == i);
@@ -342,6 +342,7 @@ void drawMapEditor(float dt)
         REVERSE_HEIGHT);
 
     setGLBlend(GLBlendAlpha);
+
 
 #else
     setClip(TILE_WSIZE * 9, TILE_HSIZE, TILE_WSIZE * 8, TILE_HSIZE * 8);
@@ -528,49 +529,60 @@ void containWeiImg(iPoint point)
 {
     movingWeiImg = true;
 
+#ifdef EDITOR_USE_FBO
     for (int i = 0; i < 100; i++)
     {
-        if(containPoint(point, imgWeiBtn[i]->touchRect(iPointZero)))
+        //texFBO draw position : TILE_WSIZE * 9, TILE_HSIZE * 13
+        if (containPoint(point, 
+            imgWeiBtn[i]->touchRect(iPointZero) + iRectMake(TILE_WSIZE * 9, TILE_HSIZE * 13, 0, 0)))
         {
-//#issue! selectedWei
-#if 0
-            if (selectedWei == i)
-                selectedWei = -1;
-            else if ((selectedWei - 100) / 100 == i)
-                selectedWei = -1;
-            else if ((selectedWei - 10000) / 10000 == i)
-                selectedWei = -1;
-#else
+            //#issue! selectedWei
             if (selectedWei == i)
                 selectedWei = -1;
             else if ((selectedWei - 100) / 100 == i)
                 selectedWei = -1;
             else if ((selectedWei - 10001) / 10000 == i)
                 selectedWei = -1;
-#endif
-            
+
             else
             {
-//#issue! selectedWei
-#if 0
-                if (selectedWeiType == 0) //Tile
-                    selectedWei = i;
-                else if (selectedWeiType == 1) //Enemy
-                    selectedWei = 100 + (i) * 100;
-                else if (selectedWeiType == 2) //Item
-                    selectedWei = 10000 + (i) * 10000;
-#else
+                //#issue! selectedWei
                 if (selectedWeiType == 0) //Tile
                     selectedWei = i;
                 else if (selectedWeiType == 1) //Enemy
                     selectedWei = 100 + (i) * 100;
                 else if (selectedWeiType == 2) //Item
                     selectedWei = 10001 + (i) * 10000;
-#endif
             }
-            
         }
     }
+#else
+    for (int i = 0; i < 100; i++)
+    {
+        if (containPoint(point, imgWeiBtn[i]->touchRect(iPointZero)))
+        {
+            //#issue! selectedWei
+            if (selectedWei == i)
+                selectedWei = -1;
+            else if ((selectedWei - 100) / 100 == i)
+                selectedWei = -1;
+            else if ((selectedWei - 10001) / 10000 == i)
+                selectedWei = -1;
+
+            else
+            {
+                //#issue! selectedWei
+                if (selectedWeiType == 0) //Tile
+                    selectedWei = i;
+                else if (selectedWeiType == 1) //Enemy
+                    selectedWei = 100 + (i) * 100;
+                else if (selectedWeiType == 2) //Item
+                    selectedWei = 10001 + (i) * 10000;
+            }
+
+        }
+}
+#endif
 
     sprintf(selWei, "%d", selectedWei);
     tEditor->selectedWeight = selectedWei;
@@ -787,6 +799,21 @@ void keyMapEditor(iKeyStat stat, iPoint point)
 
         if (movingWeiImg)
         {
+#ifdef EDITOR_USE_FBO
+        // to do...
+            iPoint mp = point - prevPosition;
+            prevPosition = point;
+
+            for (int i = 0; i < 100; i++)
+            {
+                imgWeiBtn[i]->position.y += mp.y;
+                if (imgWeiBtn[i]->position.y < TILE_HSIZE * (-42) + TILE_HSIZE * 2 * (i / 4))
+                    imgWeiBtn[i]->position.y = TILE_HSIZE * (-42) + TILE_HSIZE * 2 * (i / 4);
+                else if (imgWeiBtn[i]->position.y > TILE_HSIZE * (0) + TILE_HSIZE * 2 * (i / 4))
+                    imgWeiBtn[i]->position.y = TILE_HSIZE * (0) + TILE_HSIZE * 2 * (i / 4);
+                    
+            }
+#else
             iPoint mp = point - prevPosition;
             prevPosition = point;
 
@@ -798,6 +825,7 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                 else if (imgWeiBtn[i]->position.y > TILE_HSIZE * (13) + TILE_HSIZE * 2 * (i / 4))
                     imgWeiBtn[i]->position.y = TILE_HSIZE * (13) + TILE_HSIZE * 2 * (i / 4);
             }
+#endif
             return;
         }
     }

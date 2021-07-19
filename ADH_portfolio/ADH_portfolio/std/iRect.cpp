@@ -1,4 +1,12 @@
-﻿#include "iRect.h"
+#include "iRect.h"
+
+iRect iRect::operator + (const iRect rect)
+{
+	iRect rt;
+	rt.origin = origin + rect.origin;
+	rt.size = size + rect.size;
+	return rt;
+}
 
 iRect iRectMake(iPoint p, iSize s)
 {

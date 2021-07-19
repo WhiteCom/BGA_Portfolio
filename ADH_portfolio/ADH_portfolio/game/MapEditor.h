@@ -2,7 +2,7 @@
 
 #include "iStd.h"
 
-#define EDITOR_USE_FBO 0
+#define EDITOR_USE_FBO 1
 
 void loadMapEditor();
 void drawMapEditor(float dt);
