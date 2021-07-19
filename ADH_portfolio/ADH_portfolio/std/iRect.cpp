@@ -8,6 +8,58 @@ iRect iRect::operator + (const iRect rect)
 	return rt;
 }
 
+iRect iRect::operator - (const iRect rect)
+{
+	iRect rt;
+	rt.origin = origin - rect.origin;
+	rt.size = size - rect.size;
+	return rt;
+}
+
+iRect iRect::operator * (const iRect rect)
+{
+	iRect rt;
+	rt.origin = origin * rect.origin;
+	rt.size = size * rect.size;
+	return rt;
+}
+
+iRect iRect::operator / (const iRect rect)
+{
+	iRect rt;
+	rt.origin = origin / rect.origin;
+	rt.size = size / rect.size;
+	return rt;
+}
+
+iRect& iRect::operator += (const iRect rt)
+{
+	origin += rt.origin;
+	size += rt.size;
+	return *this;
+}
+
+iRect& iRect::operator -= (const iRect rt)
+{
+	origin -= rt.origin;
+	size -= rt.size;
+	return *this;
+}
+
+iRect& iRect::operator *= (const iRect rt)
+{
+	origin *= rt.origin;
+	size *= rt.size;
+	return *this;
+}
+
+iRect& iRect::operator /= (const iRect rt)
+{
+	origin /= rt.origin;
+	size /= rt.size;
+	return *this;
+}
+
 iRect iRectMake(iPoint p, iSize s)
 {
 	iRect tmp;

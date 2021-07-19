@@ -29,7 +29,6 @@ iRect selectedImgRT;
 iRect selectedWeiRT;
 iRect ExitRT;
 
-iPoint prevPosition;
 iPoint EditRT_point;
 iPoint TileRT_point;
 iPoint TileImgRT_point;
@@ -72,7 +71,6 @@ static char tmpWei[10] = { NULL, };
 
 void RTset()
 {
-    prevPosition =          iPointMake(0, 0);
     EditRT_point =          iPointMake(0, 0);
     TileRT_point =          iPointMake(TILE_WSIZE * 17,  0);
     TileImgRT_point =       iPointMake(0, TILE_HSIZE * 13);
@@ -647,8 +645,10 @@ char* openFile(bool open, LPCWSTR filter)
     return path;
 }
 
+static iPoint prevPosition = iPointZero;
 void keyMapEditor(iKeyStat stat, iPoint point)
 {
+    
     if (keyPopLoad(stat, point) || keyPopSave(stat, point))
         return;
 

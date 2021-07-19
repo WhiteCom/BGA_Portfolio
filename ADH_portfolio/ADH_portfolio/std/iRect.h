@@ -9,6 +9,14 @@ struct iRect
 	iSize size;
 
 	iRect operator + (const iRect rt);
+	iRect operator - (const iRect rt);
+	iRect operator * (const iRect rt);
+	iRect operator / (const iRect rt);
+
+	iRect& operator += (const iRect rt);
+	iRect& operator -= (const iRect rt);
+	iRect& operator *= (const iRect rt);
+	iRect& operator /= (const iRect rt);
 };
 
 #define iRectZero iRectMake(0,0,0,0)

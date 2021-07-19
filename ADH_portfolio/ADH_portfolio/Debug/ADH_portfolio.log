@@ -1,14 +1,14 @@
 ﻿  MapEditor.cpp
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(164,64): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(165,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(183,77): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(183,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(341,34): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(341,19): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(385,74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(385,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(415,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(414,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(811,67): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(813,65): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(163,64): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(164,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(182,77): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(182,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(340,34): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(340,19): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(384,74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(384,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(414,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(413,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(812,67): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\ADH_portfolio\game\MapEditor.cpp(814,65): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ADH_portfolio.vcxproj -> C:\Users\user\Desktop\DailyCode\GamePortfolio\ADH_portfolio4\Debug\ADH_portfolio.exe
