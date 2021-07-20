@@ -46,6 +46,7 @@ static const char* ImgPath[3];
 
 static Texture*** texs;
 static Texture** tmpTileTex;
+static Texture* E_RT;
 static Texture* selectedTex = NULL; //커서로 선택한 타일이미지
 static Texture* weiFBO = NULL;
 static Texture* texFBO = NULL;
@@ -57,11 +58,9 @@ static int selectedBtn;
 static int texs_idx;
 static Map* tEditor;
 static iFont* tFont;
-static iGraphics* g;
 
 static char selWei[10] = { NULL, };
 static char tmpWei[10] = { NULL, };
-
 
 void RTset();
 void ButtonSet();
@@ -168,6 +167,23 @@ void ButtonSet()
     selectedTexIdx = -1;
 }
 
+
+void createEditRT()
+{
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(2 * (TILE_W+1) * TILE_WSIZE, TILE_H * TILE_HSIZE);
+    g->init(size);
+
+    setRGBA(1, 0, 0, 1);
+    for (int i = 0; i < TILE_W * TILE_H; i++)
+        g->drawRect(i % TILE_W * TILE_WSIZE, i / TILE_W * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE);
+    
+    g->drawRect((TILE_W + 1) * TILE_WSIZE, 0, TILE_W * TILE_WSIZE, TILE_H * TILE_HSIZE);
+    setRGBA(1, 1, 1, 1);
+
+    E_RT = g->getTexture();
+}
+
 void RTset()
 {
     TileRT_point = iPointMake(TILE_WSIZE * 17, 0);
@@ -181,6 +197,8 @@ void RTset()
         tmpTileTex[i] = NULL;
         tmpTileWei[i] = -1;
     }
+
+    createEditRT();
 }
 
 Texture* methodStMapBtn(const char* str)
@@ -255,12 +273,7 @@ void drawMapEditor(float dt)
     //===========================================
     //draw Rect
     //===========================================
-
-    setRGBA(1, 0, 0, 1);
-    for (int i = 0; i < TILE_W * TILE_H; i++)
-        drawRect(i % TILE_W * TILE_WSIZE, i / TILE_W * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE);
-    drawRect((TILE_W + 1) * TILE_WSIZE, 0, TILE_W * TILE_WSIZE, TILE_H * TILE_HSIZE);
-    setRGBA(1, 1, 1, 1);
+    drawImage(E_RT, 0, 0, TOP | LEFT);
 
     //===========================================
     //draw Button
@@ -417,6 +430,7 @@ void freeMapEditor()
 
     delete tmpTileTex;
     delete tmpTileWei;
+    delete E_RT;
 
     //객체 초기화
     delete tEditor;
@@ -576,7 +590,6 @@ void keyMapEditor(iKeyStat stat, iPoint point)
             if (selWei[0] || selectedTex)
             {
                 tEditor->insert(point, 0);
-#if 1
                 for (int i = 0; i < TILE_W * TILE_H; i++)
                 {
                     int x = i % TILE_W, y = i / TILE_W;
@@ -594,7 +607,6 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                         }
                     }
                 }
-#endif
             }
         }
 
@@ -629,15 +641,12 @@ void keyMapEditor(iKeyStat stat, iPoint point)
 
             tEditor->load(ch);
 
-#if 1
             //map info
             for (int i = 0; i < TILE_W * TILE_H; i++)
             {
                 if (i % TILE_W == 0) printf("\n");
                 printf("%d ", tEditor->tileWeight[i]);
             }
-#endif
-
 
             //편집영역에 로드 파일을 옮기는 용도
             for (int i = 0; i < TILE_W * TILE_H; i++)
@@ -728,7 +737,6 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                     imgWeiBtn[i]->position.y = TILE_HSIZE * (-42) + TILE_HSIZE * 2 * (i / 4);
                 else if (imgWeiBtn[i]->position.y > TILE_HSIZE * (0) + TILE_HSIZE * 2 * (i / 4))
                     imgWeiBtn[i]->position.y = TILE_HSIZE * (0) + TILE_HSIZE * 2 * (i / 4);
-
             }
             return;
         }
