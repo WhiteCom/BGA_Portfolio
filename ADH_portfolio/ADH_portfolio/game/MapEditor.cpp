@@ -18,7 +18,6 @@ char* openFile(bool open, LPCWSTR filter);
 //==========================================================
 
 #if 0
-
 iRect* EditRT; //편집 영역
 iRect* WeiRT; //가중치 선택하는 영역의 숫자칸들
 iRect TileRT;
@@ -28,15 +27,9 @@ iRect selectedWeiRT;
 iRect ExitRT;
 #endif
 
-iPoint EditRT_point;
 iPoint TileRT_point;
 iPoint TileImgRT_point;
-
 iPoint TileWeiRT_point;
-iPoint TileSelRT_point;
-iPoint selectedImgRT_point;
-iPoint selectedWeiRT_point;
-iPoint ExitRT_point;
 
 iImage** imgMapBtn;
 iImage** imgWeiBtn;
@@ -69,34 +62,9 @@ static iGraphics* g;
 static char selWei[10] = { NULL, };
 static char tmpWei[10] = { NULL, };
 
-void RTset()
-{
-    EditRT_point =          iPointMake(0, 0);
-    TileRT_point =          iPointMake(TILE_WSIZE * 17,  0);
-    TileImgRT_point =       iPointZero;
-    TileWeiRT_point =       iPointMake(TILE_WSIZE * 9, TILE_HSIZE * 13);
-    selectedImgRT_point =   iPointMake(TILE_WSIZE * 36 - TILE_HSIZE /2, TILE_HSIZE * 8);
 
-#if 0
-    EditRT = new iRect[TILE_W * TILE_H];
-
-    for (int i = 0; i < TILE_W * TILE_H; i++)
-    {
-        int x = i % TILE_W, y = i/ TILE_W;
-        EditRT[i] = iRectMake(EditRT_point.x + x * TILE_WSIZE, EditRT_point.y + y * TILE_WSIZE, TILE_WSIZE, TILE_HSIZE);
-    }
-
-    E_RT =          iRectMake(0, 0, TILE_WSIZE * 16, TILE_HSIZE * 12);
-    TileRT =        iRectMake(TileRT_point.x, TileRT_point.y, TILE_WSIZE * 16, TILE_HSIZE * 12);
-    TileImgRT =     iRectMake(TileImgRT_point.x, TileImgRT_point.y, TILE_WSIZE * 8, TILE_HSIZE * 8);
-    TileWeiRT =     iRectMake(TileWeiRT_point.x, TileWeiRT_point.y, TILE_WSIZE * 8, TILE_HSIZE * 8);
-    selectedImgRT = iRectMake(selectedImgRT_point.x, selectedImgRT_point.y, TILE_WSIZE, TILE_HSIZE);
-#endif
-
-    tEditor = new Map();
-    tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
-}
-
+void RTset();
+void ButtonSet();
 void loadMapEditor()
 {
     for (int i = 0; i < SOUND_NUM; i++)
@@ -118,8 +86,20 @@ void loadMapEditor()
     weiFBO = createTexture(TILE_WSIZE * 8, TILE_HSIZE * 8);
     texFBO = createTexture(TILE_WSIZE * 8, TILE_HSIZE * 8);
     
+    ButtonSet();
+    RTset();
+
+    tEditor = new Map();
+    tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
+
+    createPopLoad();
+    createPopSave();
+}
+
+void ButtonSet()
+{
     const char* strMap[3] = {
-        "Load", "Save", "Exit"
+    "Load", "Save", "Exit"
     };
 
     const char* strWeiType[3] = {
@@ -127,7 +107,7 @@ void loadMapEditor()
     };
 
     const char* strWei[100] = {
-         "0",  "1",  "2",  "3",  "4",  "5",  "6",  "7",  "8",  "9", 
+         "0",  "1",  "2",  "3",  "4",  "5",  "6",  "7",  "8",  "9",
         "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
         "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
         "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
@@ -151,20 +131,20 @@ void loadMapEditor()
             iStrTex* st = new iStrTex(methodStMapBtn);
             st->setString("%s\n%d", strMap[i], j);
             img->addObject(st->tex);
-            
+
             st = new iStrTex(methodStMapBtn);
             st->setString("%s\n%d", strWeiType[i], j);
             img2->addObject(st->tex);
             delete st;
         }
-        
+
         img->position = iPointMake(TILE_WSIZE * 34, TILE_HSIZE * (1 + 2 * i));
         img2->position = iPointMake(TILE_WSIZE * 9 + TILE_WSIZE * 9, TILE_HSIZE * 13 + (i % 3) * TILE_HSIZE * 2);
 
         imgMapBtn[i] = img;
         imgWeiTypeBtn[i] = img2;
     }
-    
+
     imgWeiBtn = new iImage * [100];
     for (int i = 0; i < 100; i++)
     {
@@ -180,25 +160,27 @@ void loadMapEditor()
 
         imgWeiBtn[i] = img;
     }
-    
+
     //Load, Save, Exit, Img, Wei Btn 관련 변수
     selectedBtn = -1;
     selectedWei = -1;
     selectedWeiType = 0; //초기값 : tile
     selectedTexIdx = -1;
+}
 
-    RTset();
-    
+void RTset()
+{
+    TileRT_point = iPointMake(TILE_WSIZE * 17, 0);
+    TileImgRT_point = iPointZero;
+    TileWeiRT_point = iPointMake(TILE_WSIZE * 9, TILE_HSIZE * 13);
+
     tmpTileTex = new Texture * [TILE_W * TILE_H];
-    tmpTileWei = new int [TILE_W * TILE_H];
+    tmpTileWei = new int[TILE_W * TILE_H];
     for (int i = 0; i < TILE_W * TILE_H; i++)
     {
         tmpTileTex[i] = NULL;
         tmpTileWei[i] = -1;
     }
-
-    createPopLoad();
-    createPopSave();
 }
 
 Texture* methodStMapBtn(const char* str)
@@ -271,20 +253,15 @@ void drawMapEditor(float dt)
 {
     clearRect();
     //===========================================
-    //draw iRect
+    //draw Rect
     //===========================================
-#if 0
+
     setRGBA(1, 0, 0, 1);
-    for (i = 0; i < TILE_W * TILE_H; i++)
-        drawRect(EditRT[i]);
-
-    drawRect(TileRT);
-    drawRect(TileImgRT);
-    drawRect(TileSelRT);
-    drawRect(selectedImgRT);
-
+    for (int i = 0; i < TILE_W * TILE_H; i++)
+        drawRect(i % TILE_W * TILE_WSIZE, i / TILE_W * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE);
+    drawRect((TILE_W + 1) * TILE_WSIZE, 0, TILE_W * TILE_WSIZE, TILE_H * TILE_HSIZE);
     setRGBA(1, 1, 1, 1);
-#endif
+
     //===========================================
     //draw Button
     //===========================================
@@ -589,27 +566,29 @@ void keyMapEditor(iKeyStat stat, iPoint point)
     iRect TileImgRT = iRectMake(0, TILE_HSIZE * 13, TILE_WSIZE * 8, TILE_HSIZE * 8);
     iRect TileWeiRT = iRectMake(TileWeiRT_point.x, TileWeiRT_point.y, TILE_WSIZE * 8, TILE_HSIZE * 8);
 
-    if (stat == iKeyStatBegan)
+    switch (stat)
+    {
+    case iKeyStatBegan:
     {
         //편집영역에 있을때 (격자무늬)
         if (containPoint(point, E_RT))
         {
-            if (selWei[0] || selectedTex) 
+            if (selWei[0] || selectedTex)
             {
                 tEditor->insert(point, 0);
 #if 1
                 for (int i = 0; i < TILE_W * TILE_H; i++)
                 {
                     int x = i % TILE_W, y = i / TILE_W;
-                    EditRT = iRectMake(EditRT_point.x + x * TILE_WSIZE, 
-                                       EditRT_point.y + y * TILE_WSIZE, 
-                                       TILE_WSIZE, 
-                                       TILE_HSIZE);
+                    EditRT = iRectMake(x * TILE_WSIZE,
+                        y * TILE_WSIZE,
+                        TILE_WSIZE,
+                        TILE_HSIZE);
                     if (containPoint(point, EditRT))
                     {
-                        if(selectedTex)
+                        if (selectedTex)
                             tmpTileTex[i] = selectedTex;
-                        if(selectedWei > -1)
+                        if (selectedWei > -1)
                         {
                             tmpTileWei[i] = selectedWei;
                         }
@@ -625,7 +604,7 @@ void keyMapEditor(iKeyStat stat, iPoint point)
             containTileImg(point, TileImgRT_point);
 
         //Wei 버튼 (숫자버튼)
-        if(containPoint(point, TileWeiRT))
+        if (containPoint(point, TileWeiRT))
             containWeiImg(point);
 
         //WeiType 버튼(toggle btn)
@@ -691,20 +670,16 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                 sprintf(savePath, "%s.tile", tmpPath);
 
             tEditor->save(savePath);
-            
-            showPopSave(true);
 
+            showPopSave(true);
         }
         //Exit 버튼
         else if (selectedBtn == 2)
-        {
-            
             setLoading(gs_menu, freeMapEditor, loadMenu);
-        }
-
-
     }
-    else if (stat == iKeyStatMoved)
+        break;
+
+    case iKeyStatMoved:
     {
         int i, j = -1;
 
@@ -742,7 +717,7 @@ void keyMapEditor(iKeyStat stat, iPoint point)
 
         if (movingWeiImg)
         {
-        // to do...
+            // to do...
             iPoint mp = point - prevPosition;
             prevPosition = point;
 
@@ -753,15 +728,17 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                     imgWeiBtn[i]->position.y = TILE_HSIZE * (-42) + TILE_HSIZE * 2 * (i / 4);
                 else if (imgWeiBtn[i]->position.y > TILE_HSIZE * (0) + TILE_HSIZE * 2 * (i / 4))
                     imgWeiBtn[i]->position.y = TILE_HSIZE * (0) + TILE_HSIZE * 2 * (i / 4);
-                    
+
             }
             return;
         }
     }
-    else //if(stat == iKeyStatEnded)
-    {
+        break;
+
+    case iKeyStatEnded:
         movingTileImg = false;
         movingWeiImg = false;
+        break;
     }
 }
 
@@ -857,14 +834,6 @@ void freePopLoad()
 void showPopLoad(bool show)
 {
     popLoad->show(show);
-    if (show)
-    {
-
-    }
-    else
-    {
-
-    }
 }
 
 void drawPopLoadBefore(iPopup* pop, float dt, float rate)
@@ -1012,14 +981,6 @@ void freePopSave()
 void showPopSave(bool show)
 {
     popSave->show(show);
-    if (show)
-    {
-
-    }
-    else
-    {
-
-    }
 }
 void drawPopSaveBefore(iPopup* pop, float dt, float rate)
 {
