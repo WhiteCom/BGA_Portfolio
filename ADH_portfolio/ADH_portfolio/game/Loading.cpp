@@ -74,7 +74,6 @@ void drawLoading(float dt)
 		if (loadingDt > _loadingDt * 2 + 1.0f)
 		{
 			loadingDt = 0.0f;
-			freeImage(texLoading);
 			freeProgress();
 			return;
 		}
@@ -98,6 +97,7 @@ void drawLoading(float dt)
 
 		if (methodFree)
 			methodFree();
+
 		if (methodLoad)
 			methodLoad();
 
@@ -105,10 +105,10 @@ void drawLoading(float dt)
 
 		a = 1.0f; //완전까맣게
 	}
-	else if (loadingDt <= _loadingDt * 2)
+	else if (loadingDt < _loadingDt * 2)
 	{
 		loadingDt += dt;
-		if (loadingDt > _loadingDt * 2)
+		if (loadingDt >= _loadingDt * 2)
 		{
 			loadingDt = 0.0f;
 			freeProgress();

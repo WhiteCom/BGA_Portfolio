@@ -638,8 +638,13 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                 tmpTileTex[i] = NULL;
                 tmpTileWei[i] = -1;
             }
-
+#if 0
             tEditor->load(ch);
+#else
+            int length;
+            char* ch2 = loadFile(ch, length);
+            tEditor->loadA(ch2);
+#endif
 
             //map info
             for (int i = 0; i < TILE_W * TILE_H; i++)

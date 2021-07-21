@@ -15,6 +15,8 @@ void loadGame()
 {
 #if 0
     callAppData();
+#else
+    loadMapData();
 #endif
 
     AudioInfo ai[SOUND_NUM] = {

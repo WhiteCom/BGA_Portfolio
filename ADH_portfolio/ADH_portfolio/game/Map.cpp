@@ -182,6 +182,7 @@ void Map::loadA(char* buf)
     off += sizeof(int) * xy;
     memcpy(tileEnemy, &buf[off], sizeof(enemyInfo) * xy);
 }
+
 void Map::saveA(char* buf)
 {
     memcpy(&buf[0], &tileX, sizeof(int));

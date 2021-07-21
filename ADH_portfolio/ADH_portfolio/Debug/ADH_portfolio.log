@@ -1,20 +1,4 @@
-﻿  MapEditor.cpp
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(140,64): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(141,86): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(158,77): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(158,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(179,57): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(179,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(315,36): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(315,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(328,74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(328,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(355,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(354,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(391,36): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(391,21): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(597,27): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(596,42): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(737,67): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\BGA\GamePortfoilo\ADH_portfolio6\ADH_portfolio\game\MapEditor.cpp(739,65): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Common.cpp
+  Game.cpp
+  코드를 생성하고 있습니다...
   ADH_portfolio.vcxproj -> D:\BGA\GamePortfoilo\ADH_portfolio6\Debug\ADH_portfolio.exe
