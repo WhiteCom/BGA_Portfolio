@@ -4,6 +4,8 @@
 
 #define EDITOR_USE_FBO 1
 
+extern HWND hWnd;
+
 void loadMapEditor();
 void drawMapEditor(float dt);
 void freeMapEditor();

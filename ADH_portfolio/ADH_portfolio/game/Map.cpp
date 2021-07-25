@@ -55,8 +55,11 @@ void Map::clean()
     if (tileEnemy == NULL)
         return;
 
+#if 1 //#issue!
     for (int i = 0; i < tileEnemy->eTypeNum; i++)
-        delete tileEnemy[i].eType;
+        if(tileEnemy[i].eType)
+            delete tileEnemy[i].eType;
+#endif
     delete tileEnemy;
 }
 
@@ -151,6 +154,7 @@ void Map::save(const char* str, ...)
     FILE* pf = fopen(str, "wb");
 
     // tile info
+#if 0
     fwrite(&tileX, sizeof(int), 1, pf);
     fwrite(&tileY, sizeof(int), 1, pf);
     fwrite(&tileWidth, sizeof(int), 1, pf);
@@ -161,6 +165,20 @@ void Map::save(const char* str, ...)
     fwrite(tileIndex, sizeof(int), xy, pf);
     fwrite(tileWeight, sizeof(int), xy, pf);
     fwrite(tileEnemy, sizeof(enemyInfo), xy, pf);
+#else
+    fwrite(&tileX, sizeof(char), 4, pf);
+    fwrite(&tileY, sizeof(char), 4, pf);
+    fwrite(&tileWidth, sizeof(char), 4, pf);
+    fwrite(&tileHeight, sizeof(char), 4, pf);
+
+    int xy = tileX * tileY;
+
+    fwrite(tileIndex, sizeof(char), 4 * xy, pf);
+    fwrite(tileWeight, sizeof(char), 4 * xy, pf);
+    fwrite(tileEnemy, sizeof(char), 8 * xy, pf);
+#endif
+
+
 
     fclose(pf);
 }
@@ -199,7 +217,8 @@ void Map::saveA(char* buf)
     off += sizeof(int) * xy;
     memcpy(&buf[off], tileEnemy, sizeof(enemyInfo) * xy);
 
-    saveAppData();
+//#issue! AppData    
+    //saveAppData();
 }
 #endif
 
@@ -212,9 +231,7 @@ void Map::insert(iPoint point, int type)
     if (selectedTile > -1)
         tileIndex[xy] = selectedTile;
     if (selectedWeight > -1)
-    {
         tileWeight[xy] = selectedWeight;
-    }
     
     //EnemyType
     

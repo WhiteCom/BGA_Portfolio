@@ -135,17 +135,23 @@ void loadStage()
 
     texs = createImageDivide(8, 32, si->strPathTile);
 
+#if 1
+
+#if 0
     strcpy(gameFile, si->strPathData);
     strcat(gameFile, str);
     copyFile(gameFile);
+#endif
 
     tEditor = new Map();
     tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
-#if 1
+#endif
+
+#if 0
     tEditor->load(gameFile);
 #else
-    int stage = 0;
-    tEditor->loadA(&appData->mapData[MAP_FILE_SIZE * stage]);
+//#issue!
+    tEditor->loadA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
 #endif
 
 #if 1
@@ -389,7 +395,11 @@ void drawStage(float dt)
     if (locationWarp > 99 && locationWarp < 10000)
     {
         tEditor->tileWeight[newHeroIndex] = 1;
+#if 0
         tEditor->save(gameFile);
+#else
+        tEditor->saveA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
+#endif
         setLoading(gs_battle, freeStage, loadBattle);
     }
     

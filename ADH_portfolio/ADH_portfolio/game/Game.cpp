@@ -13,11 +13,7 @@
 
 void loadGame()
 {
-#if 0
     callAppData();
-#else
-    loadMapData();
-#endif
 
     AudioInfo ai[SOUND_NUM] = {
         {"assets/sound/cursor.wav", false, 1.0f},
@@ -29,13 +25,14 @@ void loadGame()
         {"assets/sound/Hit03 A.wav", false, 1.0f},
     };
     loadAudio(ai, SOUND_NUM);
-    //audioVolume(appData->bgm, appData->eff, 2);
-    audioVolume(1.0f, 1.0f, 0);
+    //audioVolume(appData->bgm, appData->eff, 0);
+    audioVolume(0.0f, 0.0f, 0);
 
     setStringName("assets/font/DungGeunMo.ttf");
     
     loadIntro(); 
     gameState = gs_intro;
+
 }
 
 void drawGame(float dt)
@@ -56,6 +53,7 @@ void drawGame(float dt)
 void freeGame()
 {
     //saveAppData();
+    freeAppData();
 
     switch (gameState)
     {
@@ -66,6 +64,7 @@ void freeGame()
     case gs_battle: freeBattle(); break;
     case gs_ending: freeEnding(); break;
     }
+
 }
 
 void keyGame(iKeyStat stat, iPoint p)

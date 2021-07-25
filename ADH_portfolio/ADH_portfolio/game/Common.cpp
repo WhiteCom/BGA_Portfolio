@@ -1,7 +1,24 @@
 #include "Common.h"
 #include "Map.h"
 
-#if 1
+//============================================
+// AppData
+//============================================
+
+AppData::AppData()
+{
+	eff = 0.0f;
+	bgm = 0.0f;
+
+	mapData = new char[MAP_FILE_SIZE * MAP_NUM + 1];
+}
+
+AppData::~AppData()
+{
+	delete mapData;
+}
+
+#if 1 //#need update! chanage file format no use save.dat
 AppData* appData;
 
 void loadMapData()
@@ -11,9 +28,8 @@ void loadMapData()
 
 	for (int i = 0; i < MAP_NUM; i++)
 	{
-		const char* str = "map";
 		char strMap[128];
-		sprintf(strMap, "map/%s%d.tile", str, i);
+		sprintf(strMap, "map/map%d.tile", i);
 		
 		int tmpLen;
 		char* tmpBuf = loadFile(strMap, tmpLen);
@@ -23,6 +39,7 @@ void loadMapData()
 		memcpy(&buf[bufOff], tmpBuf, tmpLen);
 		bufOff += tmpLen;
 		buf[bufOff] = 0;
+		delete tmpBuf;
 	}
 
 	FILE* wp = fopen(APP_DATA_PATH, "wb");
@@ -32,30 +49,34 @@ void loadMapData()
 
 void callAppData()
 {
-	int length;
-	char* buf = loadFile(APP_DATA_PATH, length);
-	if (buf == NULL)
+	AppData* ad = new AppData();
+	char* buf = (char*)ad;
+
+	ad->eff = 1.0f;
+	ad->bgm = 1.0f;
+	memset(ad->mapData, 0x00, sizeof(MAP_FILE_SIZE * MAP_NUM));
+
+	int bufOff = 0;
+	// 3088 + dummy = MAP_FILE_SIZE
+	for (int i = 0; i < MAP_NUM; i++)
 	{
-		AppData* ad = new AppData;
-		buf = (char*)ad;
+		char* a;
+		a = &ad->mapData[MAP_FILE_SIZE * i];
 
-		memset(ad, 0x00, sizeof(AppData));
-		ad->eff = 1.0f;
-		ad->bgm = 1.0f;
+		 char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
+		 int len;
+		 char* b = loadFile(s, len);
+		 memcpy(a, b, len);
+		 //strcat(a, b);
 
-		// 408 + dummy = 512
-		for (int i = 0; i < 10; i++)
-		{
-			 char* a = &ad->mapData[512*i];
-
-			 char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
-			 int len;
-			 char* b = loadFile(s, len);
-			 memcpy(a, b, len);
-			 delete b;
-		}
+		 bufOff += MAP_FILE_SIZE;
+		 a[bufOff-1] = 0;
+		 printf("a : %s\n", a);
+		 delete b;
 	}
-	appData = (AppData*)buf;
+	appData = ad;
+
+	printf("Appdata->mapdata : %s\n", appData->mapData);
 }
 
 void saveAppData()
@@ -63,3 +84,8 @@ void saveAppData()
 	saveFile(APP_DATA_PATH, (char*)appData, sizeof(AppData));
 }
 #endif
+
+void freeAppData()
+{
+	delete appData;
+}

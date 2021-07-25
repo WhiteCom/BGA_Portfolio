@@ -133,7 +133,7 @@ void updateWindow()
 
 #define TEST2 1 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -144,9 +144,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         printf("monitor : %.f %.f\n", sizeMonitor.width, sizeMonitor.height);
 
         RECT rt;
-        GetWindowRect(hWnd, &rt); printf("wrt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
+        GetWindowRect(hwnd, &rt); printf("wrt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
         RECT rtWnd = rt;
-        GetClientRect(hWnd, &rt); printf("crt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
+        GetClientRect(hwnd, &rt); printf("crt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
         win_border_width = (rtWnd.right - rtWnd.left) - (rt.right - rt.left);
         win_border_height = (rtWnd.bottom - rtWnd.top) - (rt.bottom - rt.top);
         //GetSystemMetrics(SM_CXFRAME) * 2;
@@ -219,6 +219,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_KEYDOWN:
     {
+       
         setKeyStat(iKeyStatBegan, wParam);
         setKeyDown(iKeyStatBegan, wParam);
         return 0;
@@ -268,7 +269,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return 0;
     }
     
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
 void setCurrentMonitor(RECT& rt)

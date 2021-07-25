@@ -11,7 +11,11 @@ struct AppData
 	
 	// item info
 
-	char mapData[MAP_FILE_SIZE * 10];
+	//char mapData[MAP_FILE_SIZE * 10];
+	char* mapData;
+
+	AppData();
+	~AppData();
 };
 
 extern AppData* appData;
@@ -19,6 +23,7 @@ extern AppData* appData;
 #define MAP_NUM 9
 
 void loadMapData();
+void freeAppData();
 void callAppData();
 void saveAppData();
 
