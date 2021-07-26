@@ -1893,7 +1893,7 @@ void createPopOverStep()
     //
     // bg
     //
-    iSize size = iSizeMake(480, 320);
+    iSize size = iSizeMake(640, 480);
     g->init(size);
 
     setRGBA(0.5f, 0.5f, 0.5f, 0.8f);
@@ -1923,7 +1923,7 @@ void createPopOverStep()
         "확인"
     };
     iPoint posBtn[1] = {
-        {(480 - 200) / 2, 160 + 52}
+        {(640 - 200) / 2, 240 + 52}
     };
     imgOverStepBtn = new iImage*[1];
 
@@ -1969,8 +1969,8 @@ void createPopOverStep()
     }
 
     pop->style = iPopupZoom;
-    pop->openPoint = iPointMake((devSize.width-480) / 2, (devSize.height-320) / 2);
-    pop->closePoint = iPointMake((devSize.width - 480) / 2, (devSize.height - 320) / 2);
+    pop->openPoint = iPointMake((devSize.width-640) / 2, (devSize.height-480) / 2);
+    pop->closePoint = iPointMake((devSize.width - 640) / 2, (devSize.height - 480) / 2);
     pop->methodBefore = drawPopOverStepBefore;
     popOverStep = pop;
 }

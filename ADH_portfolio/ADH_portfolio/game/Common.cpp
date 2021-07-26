@@ -68,9 +68,10 @@ void callAppData()
 		 char* b = loadFile(s, len);
 		 memcpy(a, b, len);
 		 //strcat(a, b);
+		 a[len] = 0;
 
 		 bufOff += MAP_FILE_SIZE;
-		 a[bufOff-1] = 0;
+		 //a[bufOff-1] = 0;
 		 printf("a : %s\n", a);
 		 delete b;
 	}

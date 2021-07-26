@@ -4,6 +4,7 @@
 #include "TileType.h"
 #include "Map.h"
 #include "Loading.h"
+#include "Stage.h"
 
 bool warpEvent;
 
@@ -144,6 +145,8 @@ void loadCharacter(iPoint off, const char* str)
 
 void drawCharacter(float dt, iPoint off)
 {
+	//Step Over
+
 	iPoint v = iPointZero;
 	int x = mainCharacter->position.x; x /= TILE_WSIZE;
 	int y = mainCharacter->position.y; y /= TILE_HSIZE;
@@ -153,7 +156,9 @@ void drawCharacter(float dt, iPoint off)
 
 	int check;
 
-	if (loadingDt == 0.0f && mainCharacter->moveDt == MOVE_TIME)
+	if (loadingDt == 0.0f && 
+		mainCharacter->moveDt == MOVE_TIME &&
+		step > 0)
 	{
 		if (keyDown & keysA || keyDown & keysLeft)
 		{
