@@ -30,12 +30,11 @@ public:
 	void load(const char* szFormat, ...);
 	void save(const char* str, ...);
 
-#if 1
 	void loadA(char* buf);
 	void saveA(char* buf);
-#endif
 
 	void insert(iPoint point, int type);
+	void remove(iPoint point);
 
 public:
 	int tileX, tileY, tileWidth, tileHeight;

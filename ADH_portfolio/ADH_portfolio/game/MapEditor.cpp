@@ -615,6 +615,39 @@ void drawTileInfo(iKeyStat stat, iPoint point, iRect RT)
     }
 }
 
+void removeTileInfo(iKeyStat stat, iPoint point, iRect RT)
+{
+//#issue! mouse right no use DragDetect
+#if 0
+    if (stat == iKeyStatMoved)
+    {
+        POINT pt = { GET_X_LPARAM(point.x), GET_Y_LPARAM(point.y) };
+        if (!DragDetect(hWnd, pt))
+            return;
+    }
+#endif
+    if (containPoint(point, RT))
+    {
+        for (int i = 0; i < TILE_W * TILE_H; i++)
+        {
+            int x = i % TILE_W, y = i / TILE_W;
+            iRect EditRT = iRectMake(x * TILE_WSIZE,
+                y * TILE_WSIZE,
+                TILE_WSIZE,
+                TILE_HSIZE);
+            if (containPoint(point, EditRT))
+            {
+                tEditor->remove(point);
+                if (tmpTileTex[i] > 0)
+                    tmpTileTex[i] = NULL;
+                if (tmpTileWei[i] > 0)
+                    tmpTileWei[i] = -1;
+
+            }
+        }
+    }
+}
+
 static iPoint prevPosition = iPointZero;
 void keyMapEditor(iKeyStat stat, iPoint point)
 {
@@ -660,13 +693,10 @@ void keyMapEditor(iKeyStat stat, iPoint point)
                 tmpTileTex[i] = NULL;
                 tmpTileWei[i] = -1;
             }
-#if 0
-            tEditor->load(ch);
-#else
+
             int length;
             char* ch2 = loadFile(ch, length);
             tEditor->loadA(ch2);
-#endif
 
             //map info
             for (int i = 0; i < TILE_W * TILE_H; i++)
@@ -715,13 +745,19 @@ void keyMapEditor(iKeyStat stat, iPoint point)
     }
         break;
 
+    case iKeyStatBegan2:
+    {
+        removeTileInfo(stat ,point, E_RT);
+    }
+        break;
+
     case iKeyStatMoved:
     {
         int i, j = -1;
         
-
         drawTileInfo(stat, point, E_RT);
-
+        //#issue! 
+        //removeTileInfo(stat, point, E_RT);
 
         for (i = 0; i < 3; i++)
         {

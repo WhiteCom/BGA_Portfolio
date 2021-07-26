@@ -23,6 +23,7 @@ struct Texture
 enum iKeyStat
 {
 	iKeyStatBegan = 0,
+	iKeyStatBegan2,
 	iKeyStatMoved,
 	iKeyStatEnded
 };

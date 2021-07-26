@@ -255,3 +255,15 @@ void Map::insert(iPoint point, int type)
     
 }
 
+void Map::remove(iPoint point)
+{
+    int x = point.x; x /= tileWidth;
+    int y = point.y; y /= tileHeight;
+    int xy = tileX * y + x;
+
+    if (tileIndex[xy] > 0)
+        tileIndex[xy] = -1;
+    if (tileWeight[xy] > 0)
+        tileWeight[xy] = -1;
+
+}

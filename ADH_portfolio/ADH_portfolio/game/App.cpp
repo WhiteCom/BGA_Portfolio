@@ -217,6 +217,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         keyGame(iKeyStatEnded, cursor);
         return 0;
     }
+
+    case WM_RBUTTONDOWN:
+    {
+        cursor = coordinate(LOWORD(lParam), HIWORD(lParam));
+        keyGame(iKeyStatBegan2, cursor);
+        return 0;
+    }
+
     case WM_KEYDOWN:
     {
        
