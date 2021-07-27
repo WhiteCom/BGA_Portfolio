@@ -12,8 +12,6 @@ void startApp(HDC hdc, VOID_METHOD methodLoad)
     iGraphics::share()->start(hdc);
     loadOpenGL(hdc);
     
-    fbo = new iFBO(devSize.width, devSize.height);
-    texFboForiPopup = createTexture(devSize.width, devSize.height);
     appInitialize();
 
     methodLoad(); //loadGame()
@@ -39,7 +37,6 @@ void endApp(VOID_METHOD methodFree)
 {
     methodFree(); //freeGame
     iGraphics::share()->end();
-    delete fbo;
     freeOpenGL();
 }
 

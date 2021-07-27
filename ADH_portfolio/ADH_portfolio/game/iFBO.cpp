@@ -61,11 +61,10 @@ void iFBO::bind(Texture* tex)
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex->texID, 0);
 
 	glViewport(0, 0, tex->width, tex->height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0, tex->width, tex->height, 0, 0, 1);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+
+	matrixProj->loadIdentity();
+	matrixProj->ortho(0, tex->width, tex->height, 0, -1, 1);
+	matrixView->loadIdentity();
 
 	texStack[stackNum] = tex;
 	stackNum++;
@@ -84,11 +83,10 @@ void iFBO::unbind()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glViewport(viewport.origin.x, viewport.origin.y, viewport.size.width, viewport.size.height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0, devSize.width, devSize.height, 0, 0, 1);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+
+	matrixProj->loadIdentity();
+	matrixProj->ortho(0, devSize.width, devSize.height, 0, -1, 1);
+	matrixView->loadIdentity();
 }
 
 void iFBO::read(int x, int y, int width, int height, uint32* pixels)

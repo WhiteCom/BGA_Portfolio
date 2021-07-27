@@ -2,28 +2,33 @@
 
 #include "iGraphics.h"
 
-#include <GL/glew.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
+#include <gl/glew.h>
+#include <GL/gl.h>			/* OpenGL header file */
+#include <GL/glu.h>			/* OpenGL utilities header file */
+#include <gl/wglew.h>
 #pragma comment(lib, "OpenGL32.lib")
-
-#include <Windows.h>
 
 void loadOpenGL(HDC hDC);
 void freeOpenGL();
 
 enum TextureWrap {
-	TextureWrapClamp = 0,
-	TextureWrapRepeat
+	CLAMP = 0,
+	REPEAT
 };
 
 enum TextureFilter {
-	TextureFilterNearest = 0,
-	TextureFilterLinear,
+	NEAREAST = 0,
+	LINEAR,
+	MIPMAP
 };
 
-void setTextureParms(TextureWrap wrap, TextureFilter filter);
-void applyTextureParms();
+void getTexture(TextureWrap& wrap, TextureFilter& minFilter, TextureFilter& magFilter);
+
+void setTexture();
+void setTexture(TextureWrap wrap, TextureFilter filter);
+void setTexture(TextureWrap wrap, TextureFilter minFilter, TextureFilter magFilter);
+void setTexture(GLuint texID, TextureWrap wrap, TextureFilter filter);
+void setTexture(GLuint texID, TextureWrap wrap, TextureFilter minFilter, TextureFilter magFilter);
 
 void readyOpenGL();
 
@@ -32,7 +37,86 @@ enum GLBlend {
 	GLBlendLight,
 
 	GLBlendMultiplied,
+	//GLBlendNum
 };
 
 void setGLBlend(GLBlend blend);
 GLBlend getGLBlend();
+
+// ================================================================
+// iVertex
+// ================================================================
+#define vertex_w_max 8
+#define vertex_h_max 8
+struct VertexInfo;
+struct iMatrix;
+
+extern iMatrix* matrixProj, * matrixView;
+
+struct iVertex
+{
+	iVertex();
+	~iVertex();
+
+	static GLuint getProgram(const char* strVer, const char* strFrag);
+	GLuint useProgram(const char* strVert, const char* strFrag);
+	void bufferSubData(VertexInfo* data, int w, int h);
+	GLuint enableVertexAttrArray(const char* str, const void* src, int stride, int size, int type);
+	void disableVertexAttrArray(GLuint attr);
+
+	void setUniformMat(const char* str, iMatrix* m);
+	void setUniform1i(const char* str, int x);
+	void setUniform1f(const char* str, float x);
+	void setUniform2f(const char* str, float x, float y);
+
+	void drawElements();
+
+	int convert(VertexInfo* vtx, int w = 1, int h = 1);
+	VertexInfo* vi;
+	int viNum;
+
+	GLuint id;
+
+	GLuint vao;
+	GLuint vbo;
+	GLuint vbe;
+
+	void setDetail(bool enable)
+	{
+		vbe = vbe_[enable];
+	}
+	GLuint vbe_[2];// 1, 16
+};
+
+extern iVertex* vtx;
+
+#include "iColor.h"
+#include "iPoint.h"
+struct VertexInfo
+{
+	float position[4];
+	iColor4f color;
+	iPoint uv;
+
+};
+
+// ================================================================
+// Shader
+// ================================================================
+
+// Compile
+#define shader_vert 0
+#define shader_frag 1
+
+void checkShaderID(GLuint id);
+GLuint createShaderID(const char* str, GLuint flag);
+void freeShaderID(GLuint id);
+
+// Link
+void checkProgramID(GLuint id);
+GLuint createProgramID(GLuint vertID, GLuint fragID);
+void freeProgramID(GLuint id);
+
+
+
+

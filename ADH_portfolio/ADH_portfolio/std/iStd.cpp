@@ -254,6 +254,8 @@ void setClip(float x, float y, float width, float height)
 	}
 }
 
+//#need update openGL 1.x -> 3.x
+//drawLine, drawRect, fillRect ...
 void drawLine(iPoint sp, iPoint ep)
 {
 	glLineWidth(_lineWidth);
@@ -401,7 +403,7 @@ Texture* createImageWithRGBA(uint8* rgba, int width, int height)
 	GLuint texID;
 	glGenTextures(1, &texID);
 	glBindTexture(GL_TEXTURE_2D, texID);
-	applyTextureParms();
+	setTexture();
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, potWidth, potHeight, 0,
 		GL_RGBA, GL_UNSIGNED_BYTE, rgba);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -419,14 +421,23 @@ Texture* createImageWithRGBA(uint8* rgba, int width, int height)
 	return tex;
 }
 
-Texture* createTexture(int width, int height)
+Texture* createTexture(int width, int height, bool rgba32f)
 {
 	GLuint texID;
 	glGenTextures(1, &texID);
 	glBindTexture(GL_TEXTURE_2D, texID);
-	applyTextureParms();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	setTexture();
+	if (rgba32f == false)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	}
+	else
+	{
+		//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_HALF_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+	}
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	Texture* tex = new Texture;
@@ -617,31 +628,28 @@ void drawImage(Texture* tex, float x, float y, int anc,
 	float rx, float ry,
 	int xyz, float degree, int reverse)
 {
-	//Image* img = (Image*)_img;
+	//float w = tex->width * rx, h = tex->height * ry;
 	float w = iw * rx, h = ih * ry;
 
-	switch (anc)
-	{
-	case TOP | LEFT:										break;
-	case TOP | RIGHT:			x -= w;						break;
-	case TOP | HCENTER:			x -= w / 2;					break;
+	switch (anc) {
+	case TOP | LEFT:								break;
+	case TOP | RIGHT:		x -= w;					break;
+	case TOP | HCENTER:		x -= w / 2;				break;
 
-	case BOTTOM | LEFT:						y -= h;			break;
-	case BOTTOM | RIGHT:		x -= w;		y -= h;			break;
-	case BOTTOM | HCENTER:		x -= w / 2; y -= h;			break;
+	case BOTTOM | LEFT:					y -= h;		break;
+	case BOTTOM | RIGHT:	x -= w;		y -= h;		break;
+	case BOTTOM | HCENTER:	x -= w / 2;	y -= h;		break;
 
-	case VCENTER | LEFT:					y -= h / 2;		break;
-	case VCENTER | RIGHT:		x -= w;		y -= h / 2;		break;
-	case VCENTER | HCENTER:		x -= w / 2;	y -= h / 2;		break;
+	case VCENTER | LEFT:				y -= h / 2;	break;
+	case VCENTER | RIGHT:	x -= w;		y -= h / 2;	break;
+	case VCENTER | HCENTER:	x -= w / 2;	y -= h / 2;	break;
 	}
-
 	iPoint dstPoint[4] = {
-		{x, y},			{x + w, y},
-		{ x, y + h },	{x + w, y + h},
+		{0, 0},	{w, 0},
+		{0, h},	{w, h}
 	};
-
 	if (reverse == REVERSE_NONE);
-	else if (reverse == REVERSE_WIDTH) //좌우 반전
+	else if (reverse == REVERSE_WIDTH)
 	{
 		float t = dstPoint[0].x;
 		dstPoint[0].x = dstPoint[1].x;
@@ -650,8 +658,7 @@ void drawImage(Texture* tex, float x, float y, int anc,
 		dstPoint[2].x = dstPoint[0].x;
 		dstPoint[3].x = dstPoint[1].x;
 	}
-
-	else if (reverse == REVERSE_HEIGHT) //상하 반전
+	else if (reverse == REVERSE_HEIGHT)
 	{
 		float t = dstPoint[0].y;
 		dstPoint[0].y = dstPoint[2].y;
@@ -661,55 +668,82 @@ void drawImage(Texture* tex, float x, float y, int anc,
 		dstPoint[3].y = dstPoint[2].y;
 	}
 
-	iPoint t = iPointMake(x + w / 2, y + h / 2);
-	if (xyz == 0)
+
+	matrixView->push();
+	matrixView->translate(x, y, 0);
+
+
+	if (degree)
 	{
-		dstPoint[0].y =
-			dstPoint[1].y = y + h / 2 - h / 2 * _cos(degree);
-		dstPoint[2].y =
-			dstPoint[3].y = y + h / 2 + h / 2 * _cos(degree);
-	}
-	else if (xyz == 1)
-	{
-		dstPoint[0].x =
-			dstPoint[2].x = x + w / 2 - w / 2 * _cos(degree);
-		dstPoint[1].x =
-			dstPoint[3].x = x + w / 2 + w / 2 * _cos(degree);
+		iPoint t = iPointMake(x + w / 2, y + h / 2);
+		if (xyz == 0)// x
+		{
+			matrixView->translate(w / 2, h / 2, 0);
+			matrixView->rotate(1, 0, 0, degree);
+			matrixView->translate(-w / 2, -h / 2, 0);
+		}
+		else if (xyz == 1)// y
+		{
+			matrixView->translate(w / 2, h / 2, 0);
+			matrixView->rotate(0, 1, 0, degree);
+			matrixView->translate(-w / 2, -h / 2, 0);
+		}
+		else// if (xyz == 2)// z
+		{
+			matrixView->translate(w / 2, h / 2, 0);
+			matrixView->rotate(0, 0, 1, degree);
+			matrixView->translate(-w / 2, -h / 2, 0);
+		}
 	}
 
-	else //if(xyz == 2)
-	{
-		for (int i = 0; i < 4; i++)
-			dstPoint[i] = iPointRotate(dstPoint[i], t, degree);
-	}
 
+
+	// 0,0   1,0
+	//
+	// 0,1   1,1
 	iPoint st[4] = {
 		{ix / tex->potWidth, iy / tex->potHeight},			{(ix + iw) / tex->potWidth, iy / tex->potHeight},
 		{ix / tex->potWidth, (iy + ih) / tex->potHeight},	{(ix + iw) / tex->potWidth, (iy + ih) / tex->potHeight},
 	};
 
 	iColor4f c[4] = {
-		 {_r, _g, _b, _a}, {_r, _g, _b, _a},
-		 {_r, _g, _b, _a}, {_r, _g, _b, _a},
+		{_r, _g, _b, _a},	{_r, _g, _b, _a},
+		{_r, _g, _b, _a},	{_r, _g, _b, _a},
 	};
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnable(GL_TEXTURE_2D);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//3.x ver
+	GLuint id = vtx->useProgram("alpha", "alpha");
+	VertexInfo vi[4];
+	for (int i = 0; i < 4; i++)
+	{
+		memcpy(vi[i].position, &dstPoint[i], sizeof(iPoint));
+		vi[i].position[2] = 0; // z
+		vi[i].position[3] = 1; // w
+		memcpy(&vi[i].color, &c[i], sizeof(iColor4f));
+		memcpy(&vi[i].uv, &st[i], sizeof(iPoint));
+	}
+	vtx->bufferSubData(vi, 1, 1);
+	GLuint attrP = vtx->enableVertexAttrArray("position", (const void*)offsetof(VertexInfo, position), sizeof(VertexInfo), 4, GL_FLOAT);
+	GLuint attrC = vtx->enableVertexAttrArray("color", (const void*)offsetof(VertexInfo, color), sizeof(VertexInfo), 4, GL_FLOAT);
+	GLuint attrT = vtx->enableVertexAttrArray("texcoord", (const void*)offsetof(VertexInfo, uv), sizeof(VertexInfo), 2, GL_FLOAT);
+
+	vtx->setUniformMat("projMatrix", matrixProj);
+	vtx->setUniformMat("viewMatrix", matrixView);
+	vtx->setUniform1i("tex", 0);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, tex->texID);
 
-	glVertexPointer(2, GL_FLOAT, sizeof(iPoint), dstPoint);
-	glColorPointer(4, GL_FLOAT, sizeof(iColor4f), c);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(iPoint), st);
+	vtx->drawElements();
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	vtx->disableVertexAttrArray(attrP);
+	vtx->disableVertexAttrArray(attrC);
+	vtx->disableVertexAttrArray(attrT);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisable(GL_TEXTURE_2D);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	vtx->bufferSubData(NULL, 0, 0);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	matrixView->pop();
 
 }
 void drawImage(Texture* tex, float x, float y, int anc)

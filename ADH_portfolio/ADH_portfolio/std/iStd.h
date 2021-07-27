@@ -21,6 +21,8 @@
 #include "iStrTex.h"
 #include "iFBO.h"
 
+#include "iMatrix.h"
+
 #include "iNumber.h"
 
 // C 런타임 헤더 파일입니다.
@@ -94,7 +96,7 @@ void copyBmp2RGBABgAlpha(uint32* src, int stride, int x, int y, int w, int h,
 	uint32* dst, int dw, int dh);
 
 Texture* createImageWithRGBA(uint8* rgba, int width, int height);
-Texture* createTexture(int width, int height);
+Texture* createTexture(int width, int height, bool rgba32F = false);
 #define CHECK_TEXTURE 1
 #if CHECK_TEXTURE
 	extern int texture_num;
