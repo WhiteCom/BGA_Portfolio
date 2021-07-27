@@ -47,3 +47,6 @@
 #2021-07-11 
 - delete previous files
 - update files WIN32 Api + openGL 1.0 etc...
+
+#2021-07-28
+- openGL 1.x ver -> openGL 3.x ver (rendering with shader (alpha.vert, alpha.frag))
