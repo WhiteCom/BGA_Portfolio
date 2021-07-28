@@ -80,6 +80,12 @@ float getLineWidth();
 void clearRect();
 void setClip(float x, float y, float width, float height);
 
+void setDotSize(float size);
+void drawDot(float x, float y);
+
+void drawCircle(float x, float y, float radius);
+void fillCircle(float x, float y, float radius);
+
 void drawLine(iPoint sp, iPoint ep);
 void drawLine(float x0, float y0, float x1, float y1);
 

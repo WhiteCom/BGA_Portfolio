@@ -254,6 +254,139 @@ void setClip(float x, float y, float width, float height)
 	}
 }
 
+static float dotSize_ = 1.0f;
+void setDotSize(float size)
+{
+	dotSize_ = size;
+}
+void drawDot_(float x, float y, const char* strVert, const char* strFrag)
+{
+	struct Dot
+	{
+		float position[4];
+		float color[4];
+	};
+
+	float radius = dotSize_ / 2;
+	Dot dot[4] =
+	{
+		{{-radius - 0.5f, -radius - 0.5f, 0, 1}, {_r, _g, _b, _a}},
+		{{+radius + 0.5f, -radius - 0.5f, 0, 1}, {_r, _g, _b, _a}},
+		{{-radius - 0.5f, +radius + 0.5f, 0, 1}, {_r, _g, _b, _a}},
+		{{+radius + 0.5f, +radius + 0.5f, 0, 1}, {_r, _g, _b, _a}},
+	};
+
+	GLuint id = vtx->useProgram(strVert, strFrag);
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Dot) * 4, dot);
+
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, position));
+	GLuint attrPosition = attr;
+	
+	attr = glGetAttribLocation(id, "color");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, color));
+	GLuint attrColor = attr;
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	matrixView->translate(x, y, 0);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+	// 좌표값(x, y) & 반지름 (radius)
+	loc = glGetUniformLocation(id, "center");
+	glUniform2f(loc, x, devSize.height - y);
+	loc = glGetUniformLocation(id, "radius");
+	glUniform1f(loc, radius);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDisableVertexAttribArray(attrPosition);
+	glDisableVertexAttribArray(attrColor);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	matrixView->pop();
+
+}
+
+void drawDot(float x, float y)
+{
+	drawDot_(x, y, "dot", "dot");
+}
+
+void drawCircle(float x, float y, float radius)
+{
+	struct Dot
+	{
+		float position[4];
+		float color[4];
+	};
+
+	Dot dot[4] =
+	{
+		{{-radius - 0.5f, -radius - 0.5f, 0, 1}, {_r, _g, _b, _a}},
+		{{+radius + 0.5f, -radius - 0.5f, 0, 1}, {_r, _g, _b, _a}},
+		{{-radius - 0.5f, +radius + 0.5f, 0, 1}, {_r, _g, _b, _a}},
+		{{+radius + 0.5f, +radius + 0.5f, 0, 1}, {_r, _g, _b, _a}},
+	};
+
+	GLuint id = vtx->useProgram("dot", "drawCircle");
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Dot) * 4, dot);
+
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, position));
+	GLuint attrPosition = attr;
+
+	attr = glGetAttribLocation(id, "color");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, color));
+	GLuint attrColor = attr;
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	matrixView->translate(x, y, 0);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+	//좌표값(x, y) & 반지름(radius)
+	loc = glGetUniformLocation(id, "center");
+	glUniform2f(loc, x, devSize.height - y);
+	loc = glGetUniformLocation(id, "radius");
+	glUniform1f(loc, radius);
+	loc = glGetUniformLocation(id, "lineWidth");
+	glUniform1f(loc, _lineWidth);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDisableVertexAttribArray(attrPosition);
+	glDisableVertexAttribArray(attrColor);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	matrixView->pop();
+}
+void fillCircle(float x, float y, float radius)
+{
+	float ds = dotSize_;
+
+	setDotSize(2 * radius);
+	drawDot(x, y);
+
+	dotSize_ = ds;
+}
+
+
+
 //#need update openGL 1.x -> 3.x
 //drawLine, drawRect, fillRect ...
 void drawLine(iPoint sp, iPoint ep)

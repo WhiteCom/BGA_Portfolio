@@ -59,6 +59,16 @@ void drawIntro(float dt)
 	{
 		setLoading(gs_menu, freeIntro, loadMenu);
 	}
+
+	setRGBA(1, 0, 0, 1);
+
+	setDotSize(10.0f);
+	drawDot(100, 100);
+
+	setDotSize(50.f);
+	drawCircle(100, 250, 50.f);
+
+	setRGBA(1, 1, 1, 1);
 }
 
 void keyIntro(iKeyStat stat, iPoint point)
