@@ -391,6 +391,7 @@ void fillCircle(float x, float y, float radius)
 //drawLine, drawRect, fillRect ...
 void drawLine(iPoint sp, iPoint ep)
 {
+#if 0
 	glLineWidth(_lineWidth);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -406,10 +407,14 @@ void drawLine(iPoint sp, iPoint ep)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
+#else
+	drawLine(sp.x, sp.y, ep.x, ep.y);
+#endif
 
 }
 void drawLine(float x0, float y0, float x1, float y1)
 {
+#if 0
 	glLineWidth(_lineWidth);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -425,6 +430,68 @@ void drawLine(float x0, float y0, float x1, float y1)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
+#else
+	struct Dot
+	{
+		float position[4];
+		float color[4];
+	};
+
+	Dot dot[4] =
+	{
+		{{x0 - 1.0f, y0 - 1.0f, 0, 1}, {_r, _g, _b, _a}},
+		{{x1 + 1.0f, y0 - 1.0f, 0, 1}, {_r, _g, _b, _a}},
+		{{x0 - 1.0f, y1 + 1.0f, 0, 1}, {_r, _g, _b, _a}},
+		{{x1 + 1.0f, y1 + 1.0f, 0, 1}, {_r, _g, _b, _a}},
+	};
+
+	GLuint id = vtx->useProgram("Line_V", "Line_F");
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Dot) * 4, dot);
+
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, position));
+	GLuint attrPosition = attr;
+
+	attr = glGetAttribLocation(id, "color");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, color));
+	GLuint attrColor = attr;
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	matrixView->translate(x0, y0, 0);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+#if 0
+	//좌표값(x, y) & 반지름(radius)
+	loc = glGetUniformLocation(id, "center");
+	glUniform2f(loc, x, devSize.height - y);
+	loc = glGetUniformLocation(id, "radius");
+	glUniform1f(loc, radius);
+	loc = glGetUniformLocation(id, "lineWidth");
+	glUniform1f(loc, _lineWidth);
+#else
+	//좌표값 (x0, y0), (x1, y1)
+	loc = glGetUniformLocation(id, "sp");
+	glUniform2f(loc, x0, devSize.height - y0);
+	loc = glGetUniformLocation(id, "ep");
+	glUniform2f(loc, x1, devSize.height - y1);
+#endif
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDisableVertexAttribArray(attrPosition);
+	glDisableVertexAttribArray(attrColor);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	matrixView->pop();
+#endif
 }
 
 void drawRect(iRect rt, float radius)
