@@ -68,8 +68,15 @@ void drawIntro(float dt)
 	setDotSize(50.f);
 	drawCircle(100, 250, 50.f);
 
-	drawLine(100, 200, 200, 250);
+	setLineWidth(10);
+	drawLine(500, 500, 550, 600);
 
+	drawRect(150, 150, 100, 150);
+	setLineWidth(1);
+
+
+	setRGBA(0, 1, 0, 1);
+	fillRect(400, 100, 200, 100);
 	setRGBA(1, 1, 1, 1);
 }
 

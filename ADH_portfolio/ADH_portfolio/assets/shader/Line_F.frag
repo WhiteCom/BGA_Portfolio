@@ -8,29 +8,30 @@ precision highp float; // double, float64
 
 uniform vec2 sp;
 uniform vec2 ep;
-//uniform float radius;
+uniform float radius;
 
-//from vert
 in vec4 colorV;
 
 out vec4 fragColor;
 
-//#issue! see ishadertoy -> iResolution
-//see more shadertoy drawLine
-//float segment(vec2 P, vec2 A, vec2 B, float r) 
-//{
-//    vec2 AB = B - A;
-//    vec2 AP = P - A;
-//    float d = length(h - g * clamp(dot(g, h) / dot(g,g), 0.0, 1.0));
-//	return smoothstep(r, 0.5*r, d);
-//}
+float LineSegment(vec2 U, vec2 A, vec2 B)
+{
+	vec2 UA = U - A;
+	vec2 BA = B - A;
+
+	float s = dot(UA, BA) / length(BA);
+	s = s / length(BA);
+
+	s = clamp(s, 0.0, 1.0);
+	return step(length(UA - s * BA), radius);
+}
 
 void main()
 {
-	//float intensity = segment(gl_FragCoord.xy, sp, ep, 0.1f);
-	//
-	//fragColor = vec4(colorV.xyz, intensity);
-	fragColor = vec4(colorV.xyz, clamp(length(sp-ep), 1.0f, 1.0f));
+	vec2 U = gl_FragCoord.xy;
+	float l = LineSegment(U, sp, ep);
+	
+	fragColor = vec4(colorV.xyz, l);
 }
 
 

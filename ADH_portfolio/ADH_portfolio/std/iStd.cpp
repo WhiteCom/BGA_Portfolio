@@ -293,6 +293,7 @@ void drawDot_(float x, float y, const char* strVert, const char* strFrag)
 	GLuint loc = glGetUniformLocation(id, "projMatrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
 
+	matrixView->loadIdentity();
 	loc = glGetUniformLocation(id, "viewMatrix");
 	matrixView->push();
 	matrixView->translate(x, y, 0);
@@ -352,7 +353,8 @@ void drawCircle(float x, float y, float radius)
 
 	GLuint loc = glGetUniformLocation(id, "projMatrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
-
+	
+	matrixView->loadIdentity();
 	loc = glGetUniformLocation(id, "viewMatrix");
 	matrixView->push();
 	matrixView->translate(x, y, 0);
@@ -384,104 +386,94 @@ void fillCircle(float x, float y, float radius)
 
 	dotSize_ = ds;
 }
+static Texture** texDots = NULL;
+void checkDot()
+{
+	if (texDots)
+		return;
 
+	texDots = new Texture * [2];
 
-
-//#need update openGL 1.x -> 3.x
-//drawLine, drawRect, fillRect ...
+	//32 * 32
+	uint8* rgba = new uint8[32 * 32 * 4];
+	for (int i = 0; i < 2; i++)
+	{
+		if (i == 0) //Rect
+		{
+			memset(rgba, 0xff, sizeof(uint8) * 32 * 32 * 4);
+		}
+		else
+		{
+			iPoint center = iPointMake(15.5, 15.5);
+			for (int y = 0; y < 32; y++)
+			{
+				for (int x = 0; x < 32; x++)
+				{
+					uint8* c = &rgba[y * 32 * 4 + 4 * x];
+					c[0] = c[1] = c[2] = 0xff;
+					c[3] = sqrtf((center.x - x) * (center.x - x) + (center.y - y) * (center.y - y)) > 15.5 ? 0 : 0xff;
+				}
+			}
+		}
+		texDots[i] = createImageWithRGBA(rgba, 32, 32);
+	}
+	delete rgba;
+}
+#define SHADER 1
 void drawLine(iPoint sp, iPoint ep)
 {
-#if 0
-	glLineWidth(_lineWidth);
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-
-	iPoint p[2] = { sp,ep };
-	glVertexPointer(2, GL_FLOAT, sizeof(iPoint), p);
-
-	iColor4f c[2] = { {_r, _g, _b, _a}, {_r, _g, _b, _a} };
-	glColorPointer(4, GL_FLOAT, sizeof(iColor4f), c);
-
-	glDrawArrays(GL_LINES, 0, 2);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-#else
-	drawLine(sp.x, sp.y, ep.x, ep.y);
-#endif
-
-}
-void drawLine(float x0, float y0, float x1, float y1)
-{
-#if 0
-	glLineWidth(_lineWidth);
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-
-	iPoint p[2] = { {x0, y0}, {x1, y1} };
-	glVertexPointer(2, GL_FLOAT, sizeof(iPoint), p);
-
-	iColor4f c[2] = { {_r, _g, _b, _a}, {_r, _g, _b, _a} };
-	glColorPointer(4, GL_FLOAT, sizeof(iColor4f), c);
-
-	glDrawArrays(GL_LINES, 0, 2);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-#else
-	struct Dot
+#if SHADER //ONLY SHADER
+	struct Coord
 	{
 		float position[4];
 		float color[4];
 	};
 
-	Dot dot[4] =
+	float len = iPointLength(ep - sp) / 2;
+	float border = getLineWidth() / 2;
+
+	Coord coord[4] =
 	{
-		{{x0 - 1.0f, y0 - 1.0f, 0, 1}, {_r, _g, _b, _a}},
-		{{x1 + 1.0f, y0 - 1.0f, 0, 1}, {_r, _g, _b, _a}},
-		{{x0 - 1.0f, y1 + 1.0f, 0, 1}, {_r, _g, _b, _a}},
-		{{x1 + 1.0f, y1 + 1.0f, 0, 1}, {_r, _g, _b, _a}},
+		{{-len - border, -border, 0, 1}, {_r,_g,_b,_a}},
+		{{+len + border, -border, 0, 1}, {_r,_g,_b,_a}},
+		{{-len - border, +border, 0, 1}, {_r,_g,_b,_a}},
+		{{+len + border, +border, 0, 1}, {_r,_g,_b,_a}},
 	};
+
+	iPoint c = (sp + ep) / 2;
+	float degree = iPointAngle(iPointMake(1, 0), iPointZero, ep - sp);
 
 	GLuint id = vtx->useProgram("Line_V", "Line_F");
 	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Dot) * 4, dot);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Coord) * 4, coord);
 
 	GLuint attr = glGetAttribLocation(id, "position");
 	glEnableVertexAttribArray(attr);
-	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, position));
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Coord), (const void*)offsetof(Coord, position));
 	GLuint attrPosition = attr;
 
 	attr = glGetAttribLocation(id, "color");
 	glEnableVertexAttribArray(attr);
-	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Dot), (const void*)offsetof(Dot, color));
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Coord), (const void*)offsetof(Coord, color));
 	GLuint attrColor = attr;
 
 	GLuint loc = glGetUniformLocation(id, "projMatrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
-
+	
+	matrixView->loadIdentity();
 	loc = glGetUniformLocation(id, "viewMatrix");
 	matrixView->push();
-	matrixView->translate(x0, y0, 0);
+	matrixView->translate(c.x, c.y, 0);
+	matrixView->rotate(0, 0, 1, 360-degree);
 	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
 
-#if 0
-	//좌표값(x, y) & 반지름(radius)
-	loc = glGetUniformLocation(id, "center");
-	glUniform2f(loc, x, devSize.height - y);
-	loc = glGetUniformLocation(id, "radius");
-	glUniform1f(loc, radius);
-	loc = glGetUniformLocation(id, "lineWidth");
-	glUniform1f(loc, _lineWidth);
-#else
-	//좌표값 (x0, y0), (x1, y1)
+	//두 정점 sp, ep, radius(lineWidth/2)
 	loc = glGetUniformLocation(id, "sp");
-	glUniform2f(loc, x0, devSize.height - y0);
+	glUniform2f(loc, sp.x, devSize.height - sp.y);
 	loc = glGetUniformLocation(id, "ep");
-	glUniform2f(loc, x1, devSize.height - y1);
-#endif
+	glUniform2f(loc, ep.x, devSize.height - ep.y);
+	loc = glGetUniformLocation(id, "radius");
+	glUniform1f(loc, border);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
@@ -491,7 +483,45 @@ void drawLine(float x0, float y0, float x1, float y1)
 	glDisableVertexAttribArray(attrColor);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	matrixView->pop();
+#else// use drawImage
+	checkDot();
+
+	Texture* t = texDots[1];
+	float s = getLineWidth() / (t->width);
+	float degree = iPointAngle(iPointMake(1, 0), iPointZero, ep - sp);
+	//왼쪽 반달
+	drawImage(	t, sp.x, sp.y, VCENTER | HCENTER,
+				0, 0, t->width / 2, t->height,
+				s, s, 2, 360-degree);
+
+	//오른쪽 반달
+	drawImage(	t, ep.x, ep.y, VCENTER | HCENTER,
+				0, 0, t->width / 2, t->height,
+				s, s, 2, 180-degree);
+
+	//사각형 부분
+	t = texDots[0];
+	float x0, y0, x1, y1;
+	x0 = sp.x;
+	x1 = ep.x;
+	y0 = sp.y;
+	y1 = ep.y;
+
+	iPoint c = sp + iPointMake((ep.x - sp.x) / 2, (ep.y - sp.y) / 2);
+	float d = iPointDistance(sp, ep);
+
+	drawImage(	t, c.x, c.y, VCENTER | HCENTER,
+				0, 0, d, t->height,
+				1.0f, s, 2, 360 - degree);
+	
 #endif
+
+}
+void drawLine(float x0, float y0, float x1, float y1)
+{
+	iPoint p0 = iPointMake(x0, y0);
+	iPoint p1 = iPointMake(x1, y1);
+	drawLine(p0, p1);
 }
 
 void drawRect(iRect rt, float radius)
@@ -513,26 +543,49 @@ void fillRect(iRect rt, float radius)
 }
 void fillRect(float x, float y, float width, float height, float radius)
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-
-	iPoint p[4] = {
-		{x, y},			{x + width, y},
-		{x, y + height},{x + width, y + height}
+	struct Coord
+	{
+		float position[4];
+		float color[4];
 	};
 
-	glVertexPointer(2, GL_FLOAT, sizeof(iPoint), p);
-
-	iColor4f c[4] = {
-		{_r, _g, _b, _a},	{_r, _g, _b, _a},
-		{_r, _g, _b, _a},	{_r, _g, _b, _a},
+	Coord coord[4] = 
+	{
+		{{x			, y			, 0, 1},{_r, _g, _b, _a}},
+		{{x + width , y			, 0, 1},{_r, _g, _b, _a}},
+		{{x			, y + height, 0, 1},{_r, _g, _b, _a}},
+		{{x + width , y + height, 0, 1},{_r, _g, _b, _a}},
 	};
-	glColorPointer(4, GL_FLOAT, sizeof(iColor4f), c);
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	GLuint id = vtx->useProgram("Rect_V", "Rect_F");
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Coord) * 4, coord);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Coord), (const void*)offsetof(Coord, position));
+	GLuint attrPosition = attr;
+
+	attr = glGetAttribLocation(id, "color");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, sizeof(Coord), (const void*)offsetof(Coord, color));
+	GLuint attrColor = attr;
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	matrixView->loadIdentity();
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDisableVertexAttribArray(attrPosition);
+	glDisableVertexAttribArray(attrColor);
+	matrixView->pop();
 }
 
 uint32 nextPot(uint32 x)
@@ -868,7 +921,7 @@ void drawImage(Texture* tex, float x, float y, int anc,
 		dstPoint[3].y = dstPoint[2].y;
 	}
 
-
+	matrixView->loadIdentity();
 	matrixView->push();
 	matrixView->translate(x, y, 0);
 

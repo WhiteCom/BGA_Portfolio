@@ -17,7 +17,9 @@ out vec4 fragColor;
 
 void main()
 {
+	//fragColor = vec4(colorV.xyz, clamp(radius - length(center - gl_FragCoord.xy), 0.0f, 1.0f));
 	fragColor = vec4(colorV.xyz, clamp(radius - length(center - gl_FragCoord.xy), 0.0f, 1.0f));
+	//fragColor = colorV;
 }
 
 

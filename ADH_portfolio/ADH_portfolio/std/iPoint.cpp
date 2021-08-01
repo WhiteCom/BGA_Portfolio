@@ -182,7 +182,7 @@ float iPointDistance(iPoint p0, iPoint p1)
 	iPoint p;
 	p.x = p0.x - p1.x;
 	p.y = p0.y - p1.y;
-	return sqrt(p.x * p.x + p.y * p.y);
+	return sqrtf(p.x * p.x + p.y * p.y);
 }
 float iPointDistance2(iPoint p0, iPoint p1)
 {

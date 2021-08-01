@@ -8,7 +8,6 @@ uniform mat4 projMatrix, viewMatrix;
 
 in vec4 position;
 in vec4 color;
-in vec2 texcoord;
 
 //to frag
 out vec4 colorV; 
