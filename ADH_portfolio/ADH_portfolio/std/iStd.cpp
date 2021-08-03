@@ -394,32 +394,33 @@ void checkDot()
 
 	texDots = new Texture * [2];
 
-	//32 * 32
-	uint8* rgba = new uint8[32 * 32 * 4];
+	//256 * 256
+	uint8* rgba = new uint8[256 * 256 * 4];
 	for (int i = 0; i < 2; i++)
 	{
 		if (i == 0) //Rect
 		{
-			memset(rgba, 0xff, sizeof(uint8) * 32 * 32 * 4);
+			memset(rgba, 0xff, sizeof(uint8) * 256 * 256 * 4);
 		}
 		else
 		{
-			iPoint center = iPointMake(15.5, 15.5);
-			for (int y = 0; y < 32; y++)
+			iPoint center = iPointMake(127.5, 127.5);
+			for (int y = 0; y < 256; y++)
 			{
-				for (int x = 0; x < 32; x++)
+				for (int x = 0; x < 256; x++)
 				{
-					uint8* c = &rgba[y * 32 * 4 + 4 * x];
+					uint8* c = &rgba[y * 256 * 4 + 4 * x];
 					c[0] = c[1] = c[2] = 0xff;
-					c[3] = sqrtf((center.x - x) * (center.x - x) + (center.y - y) * (center.y - y)) > 15.5 ? 0 : 0xff;
+					c[3] = sqrtf((center.x - x) * (center.x - x) + (center.y - y) * (center.y - y)) > 127.5 ? 0 : 0xff;
 				}
 			}
 		}
-		texDots[i] = createImageWithRGBA(rgba, 32, 32);
+		texDots[i] = createImageWithRGBA(rgba, 256, 256);
 	}
 	delete rgba;
 }
-#define SHADER 1
+#define SHADER 0
+#define SHADER2 1
 void drawLine(iPoint sp, iPoint ep)
 {
 #if SHADER //ONLY SHADER
@@ -483,6 +484,59 @@ void drawLine(iPoint sp, iPoint ep)
 	glDisableVertexAttribArray(attrColor);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	matrixView->pop();
+#elif SHADER2
+	float lw = _lineWidth / 2;
+	float d = iPointDistance(sp, ep) / 2;
+
+	float p[4][4] =
+	{
+		{ -d + lw - 0.5f, -lw - 0.5f, 0, 1 }, { +d - lw + 0.5f, -lw - 0.5f, 0, 1 },
+		{ -d + lw - 0.5f, +lw + 0.5f, 0, 1 }, { +d - lw + 0.5f, +lw + 0.5f, 0, 1 }
+	};
+
+	GLuint id = vtx->useProgram("dot", "drawLine");
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 16, p);
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	iPoint c = (sp + ep) / 2;
+	matrixView->translate(c.x, c.y, 0);
+	float theta = iPointAngle(iPointMake(1, 0), iPointZero, ep - sp);
+	matrixView->rotate(0, 0, 1, 360 - theta);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, 0, (const void*)0); //stride 되는 사이즈가 struct면 0아닌 struct넣기
+
+	loc = glGetUniformLocation(id, "sp");
+	//glUniform2f(loc, sp.x, devSize.height - sp.y);
+	iPoint _sp = iPointMake(sp.x, devSize.height - sp.y);
+	glUniform2fv(loc, 1, (float*)&_sp);
+
+	loc = glGetUniformLocation(id, "ep");
+	//glUniform2f(loc, ep.x, devSize.height - ep.y);
+	iPoint _ep = iPointMake(ep.x, devSize.height - ep.y);
+	glUniform2fv(loc, 1, (float*)&_ep);
+
+	loc = glGetUniformLocation(id, "lineWidth");
+	glUniform1f(loc, _lineWidth);
+
+	loc = glGetUniformLocation(id, "color");
+	glUniform4f(loc, _r, _g, _b, _a);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDisableVertexAttribArray(attr);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	matrixView->pop();
+
 #else// use drawImage
 	checkDot();
 
@@ -491,12 +545,12 @@ void drawLine(iPoint sp, iPoint ep)
 	float degree = iPointAngle(iPointMake(1, 0), iPointZero, ep - sp);
 	//왼쪽 반달
 	drawImage(	t, sp.x, sp.y, VCENTER | HCENTER,
-				0, 0, t->width / 2, t->height,
+				0, 0, t->width, t->height,
 				s, s, 2, 360-degree);
 
 	//오른쪽 반달
 	drawImage(	t, ep.x, ep.y, VCENTER | HCENTER,
-				0, 0, t->width / 2, t->height,
+				0, 0, t->width, t->height,
 				s, s, 2, 180-degree);
 
 	//사각형 부분
@@ -529,12 +583,56 @@ void drawRect(iRect rt, float radius)
 	drawRect(rt.origin.x, rt.origin.y, rt.size.width, rt.size.height, radius);
 }
 
+#define RECT_SHADER 1
 void drawRect(float x, float y, float width, float height, float radius)
 {
+#if RECT_SHADER
+	//가운데 점 Center를 기준으로 뿌리는 영역 4개를 설정하기
+	float p[4][4] =
+	{
+		{ -width / 2 - 0.5, -height / 2 - 0.5f, 0, 1 }, { width / 2 + 0.5, -height / 2 - 0.5f, 0, 1 },
+		{ -width / 2 - 0.5, +height / 2 + 0.5f, 0, 1 }, { width / 2 + 0.5, +height / 2 + 0.5f, 0, 1 },
+};
+
+	GLuint id = vtx->useProgram("dot", "drawRect");
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 16, p);
+
+
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, 0, (const void*)0);
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	matrixView->translate(x + width / 2, y + height / 2, 0); //회전을 생각해서 가운데 정점을 이용
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+	loc = glGetUniformLocation(id, "rect");
+	glUniform4f(loc, x + width / 2, devSize.height - (y + height / 2), width / 2, height / 2);
+	loc = glGetUniformLocation(id, "radius");
+	glUniform1f(loc, radius);
+	loc = glGetUniformLocation(id, "lineWidth");
+	glUniform1f(loc, _lineWidth);
+	loc = glGetUniformLocation(id, "color");
+	glUniform4f(loc, _r, _g, _b, _a);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(attr);
+	matrixView->pop();
+#else
 	drawLine(x, y, x + width, y);
 	drawLine(x, y + height, x + width, y + height);
 	drawLine(x, y, x, y + height);
 	drawLine(x + width, y, x + width, y + height);
+#endif
 }
 
 void fillRect(iRect rt, float radius)
@@ -543,6 +641,46 @@ void fillRect(iRect rt, float radius)
 }
 void fillRect(float x, float y, float width, float height, float radius)
 {
+#if RECT_SHADER
+	//가운데 점 Center를 기준으로 뿌리는 영역 4개를 설정하기
+	float p[4][4] =
+	{
+		{ -width / 2 - 0.5, -height / 2 - 0.5f, 0, 1 }, { width / 2 + 0.5, -height / 2 - 0.5f, 0, 1 },
+		{ -width / 2 - 0.5, +height / 2 + 0.5f, 0, 1 }, { width / 2 + 0.5, +height / 2 + 0.5f, 0, 1 },
+	};
+
+	GLuint id = vtx->useProgram("dot", "fillRect");
+	glBindBuffer(GL_ARRAY_BUFFER, vtx->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 16, p);
+
+
+	GLuint attr = glGetAttribLocation(id, "position");
+	glEnableVertexAttribArray(attr);
+	glVertexAttribPointer(attr, 4, GL_FLOAT, GL_FALSE, 0, (const void*)0);
+
+	GLuint loc = glGetUniformLocation(id, "projMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixProj->d());
+
+	loc = glGetUniformLocation(id, "viewMatrix");
+	matrixView->push();
+	matrixView->translate(x + width / 2, y + height / 2, 0); //회전을 생각해서 가운데 정점을 이용
+	glUniformMatrix4fv(loc, 1, GL_FALSE, (const GLfloat*)matrixView->d());
+
+	loc = glGetUniformLocation(id, "rect");
+	glUniform4f(loc, x + width / 2, devSize.height - (y + height / 2), width / 2, height / 2);
+	loc = glGetUniformLocation(id, "radius");
+	glUniform1f(loc, radius);
+	loc = glGetUniformLocation(id, "color");
+	glUniform4f(loc, _r, _g, _b, _a);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vtx->vbe);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(attr);
+	matrixView->pop();
+#else
 	struct Coord
 	{
 		float position[4];
@@ -586,6 +724,7 @@ void fillRect(float x, float y, float width, float height, float radius)
 	glDisableVertexAttribArray(attrPosition);
 	glDisableVertexAttribArray(attrColor);
 	matrixView->pop();
+#endif
 }
 
 uint32 nextPot(uint32 x)
