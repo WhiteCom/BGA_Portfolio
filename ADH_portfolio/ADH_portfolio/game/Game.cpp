@@ -25,8 +25,8 @@ void loadGame()
         {"assets/sound/Hit03 A.wav", false, 1.0f},
     };
     loadAudio(ai, SOUND_NUM);
-    //audioVolume(appData->bgm, appData->eff, 0);
-    audioVolume(0.0f, 0.0f, 0);
+    audioVolume(appData->bgm, appData->eff, 1);
+    //audioVolume(0.0f, 0.0f, 0);
 
     setStringName("assets/font/DungGeunMo.ttf");
     

@@ -5,6 +5,7 @@
 #include "MapEditor.h"
 #include "Stage.h"
 #include "App.h"
+#include "Common.h"
 
 void loadMenu()
 {
@@ -31,9 +32,9 @@ void freeMenu()
 }
 void drawMenu(float dt)
 {
-	setRGBA(0.1f, 0.1f, 0.1f, 1.0f);
+	setRGBA(0, 0, 0, 1);
 	clearRect();
-	setRGBA(1, 1, 1, 1.0f);
+	setRGBA(1, 1, 1, 1);
 
 	drawPopMenu(dt);
 	drawPopHow(dt);
@@ -405,7 +406,7 @@ Texture* methodStHow(const char* str)
 	content3[2] = "2.적과의 싸움에서 진경우(HP = 0)\n";
 	content3[3] = "☆최적의 방법으로 게임을 클리어해봐요!☆\n";
 
-	int p = atoi(str);
+	int p = atof(str);
 	if (p == 0)
 	{
 		for (int i = 0; i < 6; i++)
@@ -529,9 +530,7 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 //===========================================================
 iPopup* popOption;
 iImage** imgOptionBtn;
-iStrTex* stSound;
-
-int soundSize = 10;
+iStrTex* stSound, *stEff;
 
 void drawPopOptionBefore(iPopup* pop, float dt, float rate);
 void closeMethodPopOption(iPopup* pop);
@@ -559,9 +558,10 @@ void createPopOption()
 	setStringBorder(1);
 	setStringBorderRGBA(1, 1, 1, 1);
 	
-	g->drawString(size.width / 2, 40	  , VCENTER | HCENTER, "<Option>");
-	g->drawString(40,			  40 + 80 , TOP | LEFT, "전체화면 : ");
-	g->drawString(40,			  40 + 130 , TOP | LEFT, "사운드 : ");
+	g->drawString(size.width / 2,	40,			VCENTER | HCENTER, "<Option>");
+	g->drawString(40,				40 + 80 ,	TOP | LEFT, "전체화면 : ");
+	g->drawString(40,				40 + 130,	TOP | LEFT, "BGM : ");
+	g->drawString(40,				40 + 180,	TOP | LEFT, "EFF : ");
 
 	tex = g->getTexture();
 	img = new iImage();
@@ -573,7 +573,7 @@ void createPopOption()
 	//Btn
 	//
 
-	imgOptionBtn = new iImage * [5];
+	imgOptionBtn = new iImage * [7];
 	
 	//닫기
 	
@@ -646,7 +646,7 @@ void createPopOption()
 	//음량 btn
 
 	size = iSizeMake(40, 40);
-	for (int i = 3; i < 5; i++)
+	for (int i = 3; i < 7; i++)
 	{
 		img = new iImage();
 		for (int j = 0; j < 2; j++)
@@ -672,16 +672,16 @@ void createPopOption()
 			setStringBorder(2);
 			setStringBorderRGBA(1, 1, 1, 1);
 
-			if (i == 3)
+			if (i % 2 == 1)
 				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "-");
-			else if (i == 4)
+			else if (i % 2 == 0)
 				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "+");
 			
 			tex = g->getTexture();
 			img->addObject(tex);
 			freeImage(tex);
 		}
-		img->position = imgOptionBtn[1]->position + iPointMake(150 * (i - 3), 50);
+		img->position = imgOptionBtn[1]->position + iPointMake(150 * (!(i%2)), 50 + (i/5) * 45);
 		pop->addObject(img);
 		imgOptionBtn[i] = img;
 	}
@@ -689,12 +689,22 @@ void createPopOption()
 	// 음량 str
 
 	iStrTex* st = new iStrTex(stSoundMethod);
-	st->setString("%d", soundSize);
+	st->setString("%f", appData->bgm * 10);
 	img = new iImage();
 	img->addObject(st->tex);
 	img->position = imgOptionBtn[3]->position + iPointMake(65, 0);
 	pop->addObject(img);
 	stSound = st;
+
+	// eff str
+
+	st = new iStrTex(stSoundMethod);
+	st->setString("%f", appData->eff * 10);
+	img = new iImage();
+	img->addObject(st->tex);
+	img->position = imgOptionBtn[5]->position + iPointMake(65, 0);
+	pop->addObject(img);
+	stEff = st;
 
 	pop->style = iPopupZoom;
 	pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
@@ -719,8 +729,10 @@ Texture* stSoundMethod(const char* str)
 	setStringRGBA(1, 1, 1, 1);
 	setStringBorder(0);
 
-	int ss = atoi(str);
-	g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "%d", ss);
+	float ss = atof(str);
+	if (ss <= 0.0)
+		ss = 0.0;
+	g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "%.0f", ss);
 
 	return g->getTexture();
 }
@@ -730,10 +742,11 @@ void freePopOption()
 	delete popOption;
 	delete imgOptionBtn;
 	delete stSound;
+	delete stEff;
 }
 void drawPopOptionBefore(iPopup* pop, float dt, float rate)
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 		imgOptionBtn[i]->setTexObject(popOption->selected == i);
 }
 void closeMethodPopOption(iPopup* pop)
@@ -790,24 +803,36 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		}
 		else if (popOption->selected == 3)
 		{
-			if (soundSize > 0)
-				soundSize--;
-			stSound->setString("%d", soundSize);
-			float sSize = soundSize * 0.1f;
-			audioVolume(sSize, sSize, 0);
+			if (appData->bgm * 10 > 0.0)
+				appData->bgm-=0.1;
+			stSound->setString("%f", appData->bgm * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
 		}
-		else //if(popOpion->selected == 4)
+		else if(popOption->selected == 4)
 		{
-			if (soundSize < 10)
-				soundSize++;
-			stSound->setString("%d", soundSize);
-			float sSize = soundSize * 0.1f;
-			audioVolume(sSize, sSize, 0);
+			if (appData->bgm * 10 < 10.0)
+				appData->bgm+=0.1;
+			stSound->setString("%f", appData->bgm * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
+		}
+		else if (popOption->selected == 5)
+		{
+			if (appData->eff * 10 > 0.0)
+				appData->eff -= 0.1;
+			stEff->setString("%f", appData->eff * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
+		}
+		else if (popOption->selected == 6)
+		{
+			if (appData->eff * 10 < 10.0)
+				appData->eff += 0.1;
+			stEff->setString("%f", appData->eff * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
 		}
 		break;
 
 	case iKeyStatMoved:
-		for (i = 0; i < 5; i++)
+		for (i = 0; i < 7; i++)
 		{
 			if (containPoint(point, imgOptionBtn[i]->touchRect(popOption->closePoint)))
 			{
