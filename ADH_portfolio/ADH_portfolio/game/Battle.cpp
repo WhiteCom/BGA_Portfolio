@@ -21,7 +21,19 @@ void loadBattle()
 
 	bm = new BattleManager();
 
-	texBg = createImage("assets/Image/BattleBg/초원+.bmp");
+	const char* Bglist[9] = {
+		"assets/Image/BattleBg/초원+.bmp",
+		"assets/Image/BattleBg/[瑛] 평야.bmp",
+		"assets/Image/BattleBg/던젼２+.bmp",
+		"assets/Image/BattleBg/설원+.bmp",
+		"assets/Image/BattleBg/황야+.bmp",
+		"assets/Image/BattleBg/사구.bmp",
+		"assets/Image/BattleBg/바위+.bmp",
+		"assets/Image/BattleBg/던젼３+.bmp",
+		"assets/Image/BattleBg/신전+.bmp",
+	};
+
+	texBg = createImage(Bglist[stageFrom]);
 
 	createBattlePopTopUI();
 	createBattlePopBottomUI();
@@ -64,11 +76,13 @@ bool keyBattle(iKeyStat stat, iPoint point)
 	if (keyBattlePopTopUI(stat, point))
 		return false;
 
+#if 0 //#need update! not complete Control logic
 	for (int i = 0; i < bm->heroNum; i++)
 	{
 		if (bm->hero[i]->keyHero(stat, point))
 			return true;
 	}
+#endif
 
 	switch (stat)
 	{
@@ -775,7 +789,7 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
-			tp = easeIn(attAniDt / (HERO_BACK_TIME), tmpP, _position);
+			tp = easeOut(attAniDt / (HERO_BACK_TIME), tmpP, _position);
 
 			if (attAniDt >= HERO_BACK_TIME)
 			{

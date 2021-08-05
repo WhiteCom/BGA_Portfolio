@@ -120,6 +120,8 @@ void copyFile(const char* szFormat, ...)
 //타일, 적, 오브젝트 관계로 지어주고 있기에, 이에 따라 캐릭터 및 전투 이벤트를 바꿔줘야 함.
 void loadStage()
 {
+    callMapData();
+
     for (int i = 0; i < SOUND_NUM; i++)
     {
         audioStop(i);
@@ -394,11 +396,7 @@ void drawStage(float dt)
     if (locationWarp > 99 && locationWarp < 10000)
     {
         tEditor->tileWeight[newHeroIndex] = 1;
-#if 0
-        tEditor->save(gameFile);
-#else
         tEditor->saveA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
-#endif
         setLoading(gs_battle, freeStage, loadBattle);
     }
     

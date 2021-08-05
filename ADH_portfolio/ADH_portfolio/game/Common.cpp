@@ -50,10 +50,19 @@ void loadMapData()
 void callAppData()
 {
 	AppData* ad = new AppData();
-	char* buf = (char*)ad;
 
 	ad->eff = 1.0f;
 	ad->bgm = 1.0f;
+
+	appData = ad;
+}
+
+void callMapData()
+{
+	AppData* ad = new AppData();
+
+	ad->eff = appData->eff;
+	ad->bgm = appData->bgm;
 	memset(ad->mapData, 0x00, sizeof(MAP_FILE_SIZE * MAP_NUM));
 
 	int bufOff = 0;
@@ -63,17 +72,15 @@ void callAppData()
 		char* a;
 		a = &ad->mapData[MAP_FILE_SIZE * i];
 
-		 char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
-		 int len;
-		 char* b = loadFile(s, len);
-		 memcpy(a, b, len);
-		 //strcat(a, b);
-		 a[len] = 0;
+		char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
+		int len;
+		char* b = loadFile(s, len);
+		memcpy(a, b, len);
+		a[len] = 0;
 
-		 bufOff += MAP_FILE_SIZE;
-		 //a[bufOff-1] = 0;
-		 printf("a : %s\n", a);
-		 delete b;
+		bufOff += MAP_FILE_SIZE;
+		printf("a : %s\n", a);
+		delete b;
 	}
 	appData = ad;
 

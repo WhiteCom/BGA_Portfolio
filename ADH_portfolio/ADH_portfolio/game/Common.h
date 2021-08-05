@@ -25,5 +25,6 @@ extern AppData* appData;
 void loadMapData();
 void freeAppData();
 void callAppData();
+void callMapData();
 void saveAppData();
 
