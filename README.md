@@ -50,3 +50,6 @@
 
 #2021-07-28
 - openGL 1.x ver -> openGL 3.x ver (rendering with shader (alpha.vert, alpha.frag))
+
+#2021-08-04
+- add dot, Line, Rect, Circle, fillRect, vertex & fragment shader (GLSL in cpp)
