@@ -32,7 +32,6 @@ void loadIntro()
 	g->drawString(size.width / 2, 250, VCENTER | HCENTER, "Space버튼을 누르면 화면이 넘어갑니다");
 	texIntro = g->getTexture();
 	viewDt = 0.0f;
-
 }
 
 void freeIntro()
@@ -59,6 +58,7 @@ void drawIntro(float dt)
 	{
 		setLoading(gs_menu, freeIntro, loadMenu);
 	}
+	
 }
 
 void keyIntro(iKeyStat stat, iPoint point)
