@@ -53,3 +53,6 @@
 
 #2021-08-04
 - add dot, Line, Rect, Circle, fillRect, vertex & fragment shader (GLSL in cpp)
+
+#2021-08-12
+- update fillRect using drawImage
