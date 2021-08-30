@@ -24,6 +24,11 @@ void setLoading(int gameState, MethodLoad free, MethodLoad load, MethodTime time
 	loadProgress(100);
 }
 
+#ifdef OS_ANDROID
+#define DELAY_TIME 1.0f
+#else
+#define DELAY_TIME 1.0f
+#endif
 void drawLoading(float dt)
 {
 	if (loadingDt == 0.0f)
@@ -32,7 +37,6 @@ void drawLoading(float dt)
 	float a = 1.0f;
 
 
-#if 0 //#issue! gameState
 	if (loadingDt < _loadingDt)
 	{
 		loadingDt += dt;
@@ -48,30 +52,35 @@ void drawLoading(float dt)
 		loadingDt = _loadingDt + 0.0000001f;
 
 		if (methodFree)
+		{
 			methodFree();
+			gameState = 10000; //free 이후 딜레이타임동안 안그리기 위함
+		}
 		
 		a = 1.0f; //완전까맣게
 	}
 
-	else if (loadingDt < _loadingDt + 1.0f)
+	else if (loadingDt < _loadingDt + DELAY_TIME)
 	{
 		//delay 0.75f;
 		loadingDt += dt;
-		if (loadingDt >= _loadingDt + 1.0f)
+		if (loadingDt >= _loadingDt + DELAY_TIME)
 		{
-			loadingDt = _loadingDt + 1.000001f;
+			loadingDt = _loadingDt + DELAY_TIME + 0.0000001f;
 			if (methodLoad)
+			{
 				methodLoad();
+			}
 
 			gameState = toGameState;
 		}
 		a = 1.0f; //완전까맣게
 	}
 
-	else if (loadingDt < _loadingDt * 2 + 1.0f)
+	else if (loadingDt < _loadingDt * 2 + DELAY_TIME)
 	{
 		loadingDt += dt;
-		if (loadingDt > _loadingDt * 2 + 1.0f)
+		if (loadingDt > _loadingDt * 2 + DELAY_TIME)
 		{
 			loadingDt = 0.0f;
 			freeProgress();
@@ -80,44 +89,6 @@ void drawLoading(float dt)
 
 		a = 1.0f - (loadingDt - _loadingDt - 1.0f) / _loadingDt; //점점 밝아진다.
 	}
-#else
-	if (loadingDt < _loadingDt)
-	{
-		loadingDt += dt;
-		if (loadingDt > _loadingDt)
-			loadingDt = _loadingDt;
-
-		a = loadingDt / _loadingDt;
-
-		setProgress(a * 100);
-	}
-	else if (loadingDt == _loadingDt)
-	{
-		loadingDt = _loadingDt + 0.0000001f;
-
-		if (methodFree)
-			methodFree();
-
-		if (methodLoad)
-			methodLoad();
-
-		gameState = toGameState;
-
-		a = 1.0f; //완전까맣게
-	}
-	else if (loadingDt < _loadingDt * 2)
-	{
-		loadingDt += dt;
-		if (loadingDt >= _loadingDt * 2)
-		{
-			loadingDt = 0.0f;
-			freeProgress();
-			return;
-		}
-
-		a = 1.0f - (loadingDt - _loadingDt) / _loadingDt; //점점 밝아진다.
-	}
-#endif
 
 	setRGBA(0, 0, 0, a);
 	fillRect(0, 0, devSize.width, devSize.height);
