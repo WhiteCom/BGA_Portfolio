@@ -120,6 +120,9 @@
     <ClInclude Include="std\iMatrix.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="game\UI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -227,6 +230,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="std\iMatrix.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="game\UI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

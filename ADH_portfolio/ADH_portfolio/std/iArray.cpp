@@ -1,4 +1,4 @@
-﻿#include "iArray.h"
+#include "iArray.h"
 
 #include "iStd.h"
 
@@ -65,12 +65,36 @@ void iArray::removeObject(int index)
 	{
 		if (index == last - i)
 		{
-			tmp->prev = n->prev;
-			if (method)
-				method(n->prev);
-			delete n;
-			count--;
-			return;
+			if (tmp == NULL) //Last data
+			{
+				tmp = n;
+				if (method)
+					method(n->data);
+				n = n->prev;
+				node = n;
+				delete tmp;
+				count--;
+				return;
+			}
+			else if (tmp->prev == NULL) //First data
+			{
+				tmp->prev = NULL;
+				if (method)
+					method(n->data);
+				delete n;
+				n = tmp;
+				count--;
+				return;
+			}
+			else
+			{
+				tmp->prev = n->prev;
+				if (method)
+					method(n->prev);
+				delete n;
+				count--;
+				return;
+			}
 		}
 		tmp = n;
 		n = n->prev;

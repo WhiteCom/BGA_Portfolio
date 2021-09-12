@@ -56,3 +56,6 @@
 
 #2021-08-12
 - update fillRect using drawImage
+
+#2021-09-13
+- add class UI (effect to Menu, Stage, MapEditor, Battle etc...)
