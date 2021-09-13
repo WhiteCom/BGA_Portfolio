@@ -120,7 +120,10 @@
     <ClInclude Include="std\iMatrix.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="game\UI.h">
+    <ClInclude Include="game\MenuUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="game\MapEditorUI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -232,7 +235,10 @@
     <ClCompile Include="std\iMatrix.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="game\UI.cpp">
+    <ClCompile Include="game\MenuUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="game\MapEditorUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

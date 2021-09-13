@@ -137,33 +137,18 @@ void loadStage()
 
     texs = createImageDivide(8, 32, si->strPathTile);
 
-#if 1
-
-#if 0
-    strcpy(gameFile, si->strPathData);
-    strcat(gameFile, str);
-    copyFile(gameFile);
-#endif
-
     tEditor = new Map();
     tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
-#endif
 
-#if 0
-    tEditor->load(gameFile);
-#else
-//#issue!
+
     tEditor->loadA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
-#endif
 
-#if 1
     //map info
     for (int i = 0; i < TILE_W * TILE_H; i++)
     {
         if (i % TILE_W == 0) printf("\n");
         printf("%d ",tEditor->tileWeight[i]);
     }
-#endif
 
     int x = devSize.width / 2 - TILE_WSIZE * TILE_W / 2;
     int y = devSize.height / 2 - TILE_HSIZE * TILE_H / 2;
@@ -1559,12 +1544,30 @@ void createPopInven()
     const char* tmpHeroHP = "100";
     const char* tmpHeroAtk = "50";
 
+#if 0
     strcpy(heroName, tmpHeroName);
     strcpy(heroHP, tmpHeroHP);
     strcpy(heroAtk, tmpHeroAtk);
+#else
+    int HeroNameLen = strlen(tmpHeroName);
+    int HeroHpLen = strlen(tmpHeroHP);
+    int HeroAtkLen = strlen(tmpHeroAtk);
+
+    memcpy(heroName, tmpHeroName, HeroNameLen);
+    heroName[HeroNameLen] = 0;
+
+    memcpy(heroHP, tmpHeroHP, HeroHpLen);
+    heroHP[HeroHpLen] = 0;
+
+    memcpy(heroAtk, tmpHeroAtk, HeroAtkLen);
+    heroAtk[HeroAtkLen] = 0;
+#endif 
 
     char str[1024];
-    strcpy(str, heroName);
+
+    //strcpy(str, heroName);
+    memcpy(str, heroName, HeroNameLen);
+    str[HeroNameLen] = 0;
     strcat(str, "/");
     strcat(str, heroHP);
     strcat(str, "/");

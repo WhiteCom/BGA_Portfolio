@@ -59,3 +59,8 @@
 
 #2021-09-13
 - add class UI (effect to Menu, Stage, MapEditor, Battle etc...)
+
+#2021-09-14
+- remove class UI
+- add File MapEditorUI.h, .cpp / MenuUI.h, .cpp
+- strcpy -> memcpy (for Android)

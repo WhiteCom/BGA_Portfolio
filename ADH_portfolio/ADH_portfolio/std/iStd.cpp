@@ -1192,9 +1192,14 @@ void setStringName(const char* str)
 
 		delete stringName;
 	}
-
-	stringName = new char[strlen(str) + 1];
+	int strLen = strlen(str);
+	stringName = new char[strLen + 1];
+#if 0
 	strcpy(stringName, str);
+#else
+	memcpy(stringName, str, strLen);
+	stringName[strLen] = 0;
+#endif
 }
 
 float getStringSize()

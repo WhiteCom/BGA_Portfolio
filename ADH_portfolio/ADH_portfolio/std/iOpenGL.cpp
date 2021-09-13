@@ -319,8 +319,14 @@ GLuint iVertex::getProgram(const char* strVert, const char* strFrag)
     ListProgram* p = &lp[lpNum];
     lpNum++;
     sprintf(s, "%s%s", strVert, strFrag);
-    p->path = new char[strlen(s) + 1];
+    int s_len = strlen(s);
+    p->path = new char[s_len + 1];
+#if 0
     strcpy(p->path, s);
+#else
+    memcpy(p->path, s, s_len);
+    p->path[s_len] = 0;
+#endif
 
     return p->id = programID;
 }

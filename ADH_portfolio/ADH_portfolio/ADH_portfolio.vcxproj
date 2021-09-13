@@ -158,10 +158,11 @@
     <ClInclude Include="game\Loading.h" />
     <ClInclude Include="game\Map.h" />
     <ClInclude Include="game\MapEditor.h" />
+    <ClInclude Include="game\MapEditorUI.h" />
     <ClInclude Include="game\Menu.h" />
+    <ClInclude Include="game\MenuUI.h" />
     <ClInclude Include="game\Stage.h" />
     <ClInclude Include="game\TileType.h" />
-    <ClInclude Include="game\UI.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="std\iArray.h" />
     <ClInclude Include="std\iButton.h" />
@@ -201,9 +202,10 @@
     <ClCompile Include="game\Loading.cpp" />
     <ClCompile Include="game\Map.cpp" />
     <ClCompile Include="game\MapEditor.cpp" />
+    <ClCompile Include="game\MapEditorUI.cpp" />
     <ClCompile Include="game\Menu.cpp" />
+    <ClCompile Include="game\MenuUI.cpp" />
     <ClCompile Include="game\Stage.cpp" />
-    <ClCompile Include="game\UI.cpp" />
     <ClCompile Include="std\iArray.cpp" />
     <ClCompile Include="std\iButton.cpp" />
     <ClCompile Include="std\iColor.cpp" />

@@ -30,8 +30,14 @@ void iStrTex::setString(const char* szFormat, ...)
 		return;
 
 	delete str;
-	str = new char[strlen(szText) + 1];
+	int szLen = strlen(szText);
+	str = new char[szLen + 1];
+#if 0
 	strcpy(str, szText);
+#else
+	memcpy(str, szText, szLen);
+	str[szLen] = 0;
+#endif
 
 	//if (tex)
 	//	freeImage(tex);
@@ -141,7 +147,12 @@ char** iStrTex::getStringLineWidth(const char* str, int& lineNum, float width, i
 			off = i + 1;
 
 			char* r = new char[n];// n-1 +1
+#if 0
 			strcpy(r, result);
+#else
+			memcpy(r, result, n);
+			r[n-1] = 0;
+#endif 
 			res[resNum] = r;
 			resNum++;
 		}
@@ -152,7 +163,12 @@ char** iStrTex::getStringLineWidth(const char* str, int& lineNum, float width, i
 			i -= b;
 
 			char* r = new char[n - b + 1];
+#if 0
 			strcpy(r, result);
+#else
+			memcpy(r, result, n - b);
+			r[n - b] = 0;
+#endif 
 			res[resNum] = r;
 			resNum++;
 		}
@@ -161,7 +177,12 @@ char** iStrTex::getStringLineWidth(const char* str, int& lineNum, float width, i
 	if (off < n)
 	{
 		char* r = new char[n - off + 1];
+#if 0
 		strcpy(r, &str[off]);
+#else
+		memcpy(r, &str[off], n - off);
+		r[n - off] = 0;
+#endif 
 		res[resNum] = r;
 		resNum++;
 	}

@@ -48,8 +48,15 @@ const char* iString::operator + (const char* _str)
 		tmp_str = new char[tmp_strLen = len + 1];
 	}
 	r = tmp_str;
+#if 0
 	strcpy(r, str);
 	strcpy(&r[l], _str);
+#else
+	memcpy(r, str, l);
+	r[l] = 0;
+	memcpy(&r[l], _str, len - l);
+	//r[len] = 0;
+#endif
 	r[len] = 0;
 	return r;
 }
@@ -67,8 +74,15 @@ const char* iString::operator + (const iString& _str)
 		tmp_str = new char[tmp_strLen = len + 1];
 	}
 	r = tmp_str;
+#if 0
 	strcpy(r, str);
-	strcpy(&r[l], _str.str);
+	strcpy(&r[l], _str);
+#else
+	memcpy(r, str, l);
+	r[l] = 0;
+	memcpy(&r[l], _str.str, len - l);
+	//r[len] = 0;
+#endif
 	r[len] = 0;
 	return r;
 }
@@ -94,12 +108,22 @@ void iString::add(const char* _str)
 	if (len > l)
 	{
 		char* s = new char[len + 1];
+#if 0
 		strcpy(s, str);
+#else
+		memcpy(s, str, l);
+		s[l] = 0;
+#endif
 		delete str;
 		str = s;
 		strLength = len + 1;
 	}
+#if 0
 	strcpy(&str[l], szText);
+#else
+	memcpy(&str[l], szText, len - l);
+	str[len] = 0;
+#endif
 }
 
 void iString::set(const char* _str)
@@ -114,7 +138,12 @@ void iString::set(const char* _str)
 		delete str;
 		str = new char[strLength = len + 1];
 	}
+#if 0
 	strcpy(str, szText);
+#else
+	memcpy(str, szText, len);
+	str[len] = 0;
+#endif
 }
 
 char** iString::getStringLine(const char* _str, int& lineNum, int d)

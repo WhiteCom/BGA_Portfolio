@@ -77,10 +77,18 @@ void drawLoading(float dt)
 		a = 1.0f; //완전까맣게
 	}
 
+#if 0
 	else if (loadingDt < _loadingDt * 2 + DELAY_TIME)
+#else
+	else if (loadingDt < _loadingDt + DELAY_TIME + 0.0001f)
+#endif
 	{
 		loadingDt += dt;
+#if 0
 		if (loadingDt > _loadingDt * 2 + DELAY_TIME)
+#else
+		if (loadingDt > _loadingDt + DELAY_TIME + 0.0001f)
+#endif 
 		{
 			loadingDt = 0.0f;
 			freeProgress();
