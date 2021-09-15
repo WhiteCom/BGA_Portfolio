@@ -1,0 +1,7 @@
+﻿  Loading.cpp
+D:\BGA\GamePortfoilo\ADH_portfolio9\ADH_portfolio\game\Loading.cpp(47,17): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\BGA\GamePortfoilo\ADH_portfolio9\ADH_portfolio\game\Loading.cpp(137,15): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\BGA\GamePortfoilo\ADH_portfolio9\ADH_portfolio\game\Loading.cpp(137,5): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\BGA\GamePortfoilo\ADH_portfolio9\ADH_portfolio\game\Loading.cpp(236,16): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\BGA\GamePortfoilo\ADH_portfolio9\ADH_portfolio\game\Loading.cpp(256,14): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ADH_portfolio.vcxproj -> D:\BGA\GamePortfoilo\ADH_portfolio9\Debug\ADH_portfolio.exe

@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;GDIPVER=0x0110;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OS=OS_WINDOW;GLEW_STATIC;GDIPVER=0x0110;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\std;$(ProjectDir)\game;$(ProjectDir)\util;$(ProjectDir)\..\..\OpenAL 1.1 SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="game\App.h" />
     <ClInclude Include="game\Battle.h" />
+    <ClInclude Include="game\BattleUI.h" />
     <ClInclude Include="game\Character.h" />
     <ClInclude Include="game\Common.h" />
     <ClInclude Include="game\Ending.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="game\Menu.h" />
     <ClInclude Include="game\MenuUI.h" />
     <ClInclude Include="game\Stage.h" />
+    <ClInclude Include="game\StageUI.h" />
     <ClInclude Include="game\TileType.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="std\iArray.h" />
@@ -191,6 +193,7 @@
   <ItemGroup>
     <ClCompile Include="game\App.cpp" />
     <ClCompile Include="game\Battle.cpp" />
+    <ClCompile Include="game\BattleUI.cpp" />
     <ClCompile Include="game\Character.cpp" />
     <ClCompile Include="game\Common.cpp" />
     <ClCompile Include="game\Ending.cpp" />
@@ -206,6 +209,7 @@
     <ClCompile Include="game\Menu.cpp" />
     <ClCompile Include="game\MenuUI.cpp" />
     <ClCompile Include="game\Stage.cpp" />
+    <ClCompile Include="game\StageUI.cpp" />
     <ClCompile Include="std\iArray.cpp" />
     <ClCompile Include="std\iButton.cpp" />
     <ClCompile Include="std\iColor.cpp" />

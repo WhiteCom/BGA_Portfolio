@@ -1,11 +1,14 @@
-#include "MenuUI.h"
 #include "Menu.h"
+#include "MenuUI.h"
 
 #include "Loading.h"
-#include "MapEditor.h"
+#include "Intro.h"
 #include "Stage.h"
-#include "App.h"
 #include "Common.h"
+#if (OS==OS_WINDOW)
+#include "App.h"
+#include "MapEditor.h"
+#endif
 
 //===========================================================
 //popMenu
@@ -46,6 +49,7 @@ void createPopMenu()
 		"종료"
 	};
 #else //영어
+#if (OS==OS_WINDOW)
 	const char* strBtn[5] = {
 		"Game Start",
 		"Map Editor",
@@ -53,7 +57,17 @@ void createPopMenu()
 		"Option",
 		"Exit"
 	};
+#elif(OS==OS_ANDROID)
+	const char* strBtn[4] = {
+			"Game Start",
+			"How to Play",
+			"Option",
+			"Exit"
+	};
 #endif
+#endif
+
+#if (OS==OS_WINDOW)
 	imgMenuBtn = new iImage * [5];
 
 	iGraphics* g = iGraphics::share();
@@ -125,7 +139,79 @@ void createPopMenu()
 	}
 
 	indexCloseMenu = -1;
+#elif (OS==OS_ANDROID)
+	imgMenuBtn = new iImage * [4];
 
+	iGraphics* g = iGraphics::share();
+
+	popMenu = new iPopup * [2];
+	for (int k = 0; k < 2; k++)
+	{
+		iPopup* pop = new iPopup();
+
+		for (i = 0; i < 4; i++)
+		{
+			if (i % 2 != k) continue;
+
+			img = new iImage();
+			for (j = 0; j < 2; j++)
+			{
+				iSize size = iSizeMake(300, 60);
+				g->init(size);
+
+				if (j == 0)
+				{
+					setRGBA(1, 1, 1, 1);
+					g->drawRect(0, 0, size.width, size.height, 10);
+					setRGBA(1, 1, 1, 1);
+					setStringSize(30);
+					setStringRGBA(0, 0, 0, 1);
+					setStringBorder(2);
+					setStringBorderRGBA(1, 1, 1, 1);
+					g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
+				}
+				else
+				{
+					setRGBA(1, 1, 0, 1);
+					g->fillRect(0, 0, size.width, size.height, 10);
+					setRGBA(1, 1, 1, 1);
+					setStringSize(30);
+					setStringRGBA(0.4f, 0.5f, 1, 1);
+					setStringBorder(2);
+					setStringBorderRGBA(1, 1, 1, 1);
+					g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
+				}
+
+				tex = g->getTexture();
+				img->addObject(tex);
+				freeImage(tex);
+			}
+
+			img->position = iPointMake(0, 80 * i);
+			pop->addObject(img);
+
+			imgMenuBtn[i] = img;
+		}
+
+		pop->style = iPopupMove;
+		if (k == 0)
+		{
+			pop->openPoint = iPointMake(-150, (devSize.height) / 2 - 160);
+
+			pop->methodBefore = drawPopMenuBefore;
+			pop->methodClose = closePopMenu;
+		}
+		else
+		{
+			pop->openPoint = iPointMake(devSize.width, (devSize.height) / 2 - 160);
+		}
+
+		pop->closePoint = iPointMake(devSize.width / 2 - 150, (devSize.height) / 2 - 160);
+		popMenu[k] = pop;
+	}
+
+	indexCloseMenu = -1;
+#endif
 }
 
 void freePopMenu()
@@ -142,8 +228,13 @@ void drawPopMenuBefore(iPopup* pop, float dt, float rate)
 	fillRect(0, 0, devSize.width, devSize.height);
 	setRGBA(1, 1, 1, 1);
 
+#if (OS==OS_WINDOW)
 	for (int i = 0; i < 5; i++)
 		imgMenuBtn[i]->setTexObject(i == popMenu[0]->selected);
+#elif (OS==OS_ANDROID)
+	for (int i = 0; i < 4; i++)
+		imgMenuBtn[i]->setTexObject(i == popMenu[0]->selected);
+#endif
 }
 
 void drawPopMenu(float dt)
@@ -179,6 +270,7 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		if (pop->selected == -1)
 			break;
+#if (OS==OS_WINDOW)
 		if (pop->selected == 0)
 		{
 			printf("게임시작\n");
@@ -209,9 +301,37 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 			indexCloseMenu = 2;
 			showPopMenu(false);
 		}
+#elif(OS==OS_ANDROID)
+		if (pop->selected == 0)
+		{
+			//printf("게임시작\n");
+			stageFrom = stageTo = 10;
+			setLoading(gs_stage, freeMenu, loadStage);
+		}
+		else if (pop->selected == 1)
+		{
+			//printf("게임설명\n");
+			indexCloseMenu = 0;
+			showPopMenu(false);
+		}
+		else if (pop->selected == 2)
+		{
+			//printf("옵션\n");
+			indexCloseMenu = 1;
+			showPopMenu(false);
+		}
+
+		else //if(pop->selected == 3)
+		{
+			//printf("게임종료\n");
+			indexCloseMenu = 2;
+			showPopMenu(false);
+		}
+#endif
 		break;
 
 	case iKeyStatMoved:
+#if (OS==OS_WINDOW)
 		for (i = 0; i < 5; i++)
 		{
 			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
@@ -219,11 +339,22 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 				j = i;
 				break;
 			}
-
 		}
+#elif (OS==OS_ANDROID)
+		for (i = 0; i < 4; i++)
+		{
+			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
+			{
+				j = i;
+				break;
+			}
+		}
+#endif
 		if (pop->selected != j)
 		{
+#if 0 //#openAL
 			audioPlay(0);
+#endif
 			pop->selected = j;
 		}
 		break;
@@ -234,8 +365,6 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 
 	return true;
 }
-
-
 
 //===========================================================
 //popHow
@@ -278,6 +407,7 @@ void createPopHow()
 	const char* strBtn[3] = { "X", "◀", "▶" };
 	iPoint positionBtn[3] = { {800 - 25, -25}, {400 - 25 - 100, 540 - 25}, {400 - 25 + 100, 540 - 25} };
 	imgHowBtn = new iImage * [3];
+
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -326,7 +456,6 @@ Texture* methodStHow(const char* str)
 	setStringRGBA(0, 0, 0, 1);
 	setStringBorder(1);
 	setStringBorderRGBA(1, 1, 0.5f, 1);
-
 	const char** content = new const char* [6];
 
 	content[0] = "<게임방법>";
@@ -367,11 +496,16 @@ Texture* methodStHow(const char* str)
 			g->drawString(20, (1 + i) * 40, TOP | LEFT, content3[i]);
 	}
 	g->drawString(size.width / 2, size.height * 0.9f, VCENTER | HCENTER, "%d / %d", 1 + p, _page);
-
 	delete content;
 	delete content2;
 	delete content3;
+
+#if 1
+	Texture* temp_tex = g->getTexture();
+	return temp_tex;
+#else
 	return g->getTexture();
+#endif
 }
 
 void closeMethodPopHow(iPopup* pop)
@@ -423,8 +557,9 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		if (popHow->selected == -1)
 			break;
-
+#if 0 //#openAL
 		audioPlay(0);
+#endif
 		if (popHow->selected == 0)
 		{
 			showPopHow(false);
@@ -456,9 +591,15 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 		}
 		if (popHow->selected != j)
 		{
+#if 0 //#openAL
 			audioPlay(0);
+#endif
 			popHow->selected = j;
+#if (OS==OS_WINDOW)
 			printf("popHow : %d\n", popHow->selected);
+#elif (OS==OS_ANDROID)
+			loge("popHow : %d", popHow->selected);
+#endif
 		}
 		break;
 
@@ -489,7 +630,6 @@ void createPopOption()
 	//
 	//Bg
 	//
-
 	iGraphics* g = iGraphics::share();
 	iSize size = iSizeMake(640, 480);
 	g->init(size);
@@ -728,8 +868,9 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		if (popOption->selected == -1)
 			break;
-
+#if 0 //#openAL
 		audioPlay(0);
+#endif
 
 		if (popOption->selected == 0)
 		{
@@ -737,41 +878,53 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		}
 		else if (popOption->selected == 1)
 		{
+#if (OS==OS_WINDOW)
 			if (!isFullscreen)
 				goFullscreen();
+#endif
 		}
 		else if (popOption->selected == 2)
 		{
+#if (OS==OS_WINDOW)
 			if (isFullscreen)
 				goFullscreen();
+#endif
 		}
 		else if (popOption->selected == 3)
 		{
 			if (appData->bgm * 10 > 0.0)
 				appData->bgm -= 0.1;
 			stSound->setString("%f", appData->bgm * 10);
+#if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
+#endif
 		}
 		else if (popOption->selected == 4)
 		{
 			if (appData->bgm * 10 < 10.0)
 				appData->bgm += 0.1;
 			stSound->setString("%f", appData->bgm * 10);
+#if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
+#endif
 		}
 		else if (popOption->selected == 5)
 		{
 			if (appData->eff * 10 > 0.0)
 				appData->eff -= 0.1;
 			stEff->setString("%f", appData->eff * 10);
+#if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
+#endif
 		}
 		else if (popOption->selected == 6)
 		{
 			if (appData->eff * 10 < 10.0)
 				appData->eff += 0.1;
 			stEff->setString("%f", appData->eff * 10);
+#if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
+#endif
 		}
 		break;
 
@@ -786,9 +939,15 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		}
 		if (popOption->selected != j)
 		{
+#if 0 //#openAL
 			audioPlay(0);
+#endif
 			popOption->selected = j;
+#if (OS==OS_WINDOW)
 			printf("popOption : %d\n", popOption->selected);
+#elif (OS==OS_ANDROID)
+			loge("popOption : %d", popOption->selected);
+#endif
 		}
 		break;
 
@@ -940,8 +1099,11 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		if (popExit->selected == 0)
 		{
 			printf("예\n");
+#if (OS==OS_WINDOW)
 			//프로그램 종료
 			runWnd = false;
+#elif(OS==OS_ANDROID)
+#endif
 		}
 		else// if (popExit->selected == 1)
 		{
@@ -961,7 +1123,11 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		}
 		if (popExit->selected != j)
 		{
+#if (OS==OS_WINDOW)
 			printf("audio play\n");
+#elif (OS==OS_ANDROID)
+
+#endif
 			popExit->selected = j;
 		}
 		break;
@@ -972,5 +1138,6 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 
 	return true;
 }
+
 
 

@@ -126,6 +126,12 @@
     <ClInclude Include="game\MapEditorUI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="game\StageUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="game\BattleUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -239,6 +245,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="game\MapEditorUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="game\StageUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="game\BattleUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

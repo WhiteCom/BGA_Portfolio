@@ -19,7 +19,7 @@ void setLoading(int gameState, MethodLoad free, MethodLoad load, MethodTime time
 	methodFree = free;
 	methodLoad = load;
 	methodTime = time;
-	loadingDt = 0.0000001f;
+	loadingDt = 0.000001f;
 
 	loadProgress(100);
 }
@@ -36,7 +36,6 @@ void drawLoading(float dt)
 
 	float a = 1.0f;
 
-
 	if (loadingDt < _loadingDt)
 	{
 		loadingDt += dt;
@@ -44,7 +43,7 @@ void drawLoading(float dt)
 			loadingDt = _loadingDt;
 
 		a = loadingDt / _loadingDt;
-
+		 
 		setProgress(a * 100);
 	}
 	else if (loadingDt == _loadingDt)
@@ -56,7 +55,7 @@ void drawLoading(float dt)
 			methodFree();
 			gameState = 10000; //free 이후 딜레이타임동안 안그리기 위함
 		}
-		
+
 		a = 1.0f; //완전까맣게
 	}
 
@@ -76,19 +75,11 @@ void drawLoading(float dt)
 		}
 		a = 1.0f; //완전까맣게
 	}
-
-#if 0
-	else if (loadingDt < _loadingDt * 2 + DELAY_TIME)
-#else
-	else if (loadingDt < _loadingDt + DELAY_TIME + 0.0001f)
-#endif
+#if 0 ////////////////////////////////////////////////////////////////////////////////
+	else if (loadingDt < _loadingDt * 2)
 	{
 		loadingDt += dt;
-#if 0
-		if (loadingDt > _loadingDt * 2 + DELAY_TIME)
-#else
-		if (loadingDt > _loadingDt + DELAY_TIME + 0.0001f)
-#endif 
+		if (loadingDt > _loadingDt * 2)
 		{
 			loadingDt = 0.0f;
 			freeProgress();
@@ -97,13 +88,25 @@ void drawLoading(float dt)
 
 		a = 1.0f - (loadingDt - _loadingDt - 1.0f) / _loadingDt; //점점 밝아진다.
 	}
+#else
+	else if (loadingDt < _loadingDt + DELAY_TIME + 0.0001f)
+	{
+		loadingDt += dt;
+		if (loadingDt > _loadingDt + DELAY_TIME + 0.0001f)
+		{
+			loadingDt = 0.0f;
+			freeProgress();
+			return;
+		}
 
+		a = 1.0f - (loadingDt - _loadingDt - 1.0f) / _loadingDt; //점점 밝아진다.
+	}
+#endif /////////////////////////////////////////////////////////////////////////////
 	setRGBA(0, 0, 0, a);
 	fillRect(0, 0, devSize.width, devSize.height);
 	setRGBA(1, 1, 1, 1);
 
 	drawProgress(dt);
-	
 }
 
 Texture* texProgressDot;
@@ -127,8 +130,8 @@ struct ProgressDot
 
 		Texture* t = texProgressDot;
 		drawImage(t, p.x, p.y, VCENTER | HCENTER, 0, 0,
-			t->width, t->height, s,  s, 2, 0);
-			
+			t->width, t->height, s, s, 2, 0);
+
 		delta += dt;
 		if (delta > PROGRESS_DOT_DT)
 			return true;
@@ -155,7 +158,6 @@ void loadProgress(int max)
 	progressDot = new ProgressDot * [100];
 	progressDotNum = 0;
 	progressDotCreateDt = 0.0f;
-	progressDotCreateDt = 0.0f;
 	progressDotCreateDtIndex = 0;
 
 	iGraphics* g = iGraphics::share();
@@ -172,19 +174,12 @@ void loadProgress(int max)
 
 	stProgressPercent = new iStrTex(methodStProgressPercent);
 	stProgressPercent->setString("0");
-
 }
 
 Texture* methodStProgressPercent(const char* str)
 {
 	iGraphics* g = iGraphics::share();
-	iSize size = iSizeMake(devSize.width, devSize.height);
-	g->init(size);
-	setRGBA(0, 0, 0, 1);
-	g->fillRect(0,0,size.width, size.height);
-	setRGBA(1, 1, 1, 1);
-
-	size = iSizeMake(128, 32);
+	iSize size = iSizeMake(128, 32);
 	g->init(size);
 
 	int percent = atoi(str);
@@ -192,6 +187,7 @@ Texture* methodStProgressPercent(const char* str)
 	setStringRGBA(1, 1, 1, 1);
 
 	g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER,
+		//"%d", percent);
 		"%d%%%%%%%", percent);
 
 	return g->getTexture();
@@ -209,6 +205,7 @@ void freeProgress()
 
 void drawProgress(float dt)
 {
+	setRGBA(1, 1, 1, 1);
 	for (int i = 0; i < progressDotNum; i++)
 	{
 		if (progressDot[i]->paint(dt))
@@ -220,7 +217,7 @@ void drawProgress(float dt)
 	}
 
 	stProgressPercent->paint(iPointMake(devSize.width / 2, devSize.height / 2), VCENTER | HCENTER);
-	
+
 	progressDotCreateDt += dt;
 	if (progressDotCreateDt > _PROGRESS_DOT_CREATE_DT)
 	{
