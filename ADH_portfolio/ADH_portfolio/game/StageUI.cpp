@@ -43,7 +43,6 @@ void createPopTopUI()
     iGraphics* g = iGraphics::share();
     iSize size = iSizeMake(50, 50);
 
-
     iPopup* pop = new iPopup();
     for (int i = 0; i < 3; i++)
     {
@@ -146,6 +145,153 @@ void showPopTopUI(bool show)
 
     }
 }
+
+// for Android
+#if (OS==OS_ANDROID)
+bool keyPopTopUI(iKeyStat stat, iPoint point)
+{
+    if (keyPopSetting(stat, point) ||
+        keyPopStageHow(stat, point) ||
+        keyPopInven(stat, point))
+    {
+        return true;
+    }
+
+    iPopup* pop = popTopUI;
+    if (pop->bShow == false)
+        return false;
+
+#if 0 //  화면에서 벗어나면
+    float left = devSize.width;
+    float right = 0.0;
+    float top = devSize.height;
+    float bottom = 0.0;
+    loge("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
+
+    for (int i = 0; i < pop->arrayImg->count; i++)
+    {
+        loge("i : %d", i);
+        iImage* img = (iImage*)pop->arrayImg->objectAtIndex(i);
+        loge("keyTopUI img : %d", img);
+        if (img == NULL)
+        {
+            continue;
+        }
+        Texture* tex = img->tex;
+        loge("keyTopUI tex : %d", tex);
+        if (tex == NULL)
+        {
+            continue;
+        }
+        loge("img position, tex->width : %f %f", img->position.x, tex->width);
+        if (left > img->position.x)
+        {
+            left = img->position.x;
+        }
+        loge("img position, tex->width : %f %f", img->position.x, tex->width);
+        if (right < img->position.x + tex->width)
+        {
+            right = img->position.x + tex->width;
+        }
+        if (top > img->position.y)
+        {
+            top = img->position.y;
+        }
+        if (bottom < img->position.x + tex->height)
+        {
+            bottom = img->position.x + tex->height;
+        }
+        loge("l r t b : %f %f %f %f", left, right, top, bottom);
+    }
+    iRect rt = iRectMake(left, top, right - left, bottom - top);
+    loge("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
+    if (containPoint(point, rt) == false)
+        return false;
+#else
+    if (containPoint(point, iRectMake(0, 0, 200, 80)) == false)
+        return false;
+#endif
+    if (pop->stat != iPopupProc)
+        return true;
+
+    int i, j = -1;
+
+    switch (stat)
+    {
+    case iKeyStatBegan:
+        for (i = 0; i < 3; i++)
+        {
+            if (containPoint(point, imgTopBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30))))
+            {
+                j = i;
+                break;
+            }
+        }
+        if (pop->selected != j)
+        {
+#if 0 //#openAL
+            audioPlay(0);
+#endif
+            pop->selected = j;
+        }
+        break;
+
+    case iKeyStatMoved:
+        i = pop->selected;
+        if (i == -1) break;
+        if (containPoint(point, imgTopBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30))) == false)
+        {
+#if 0 //#openAL
+            audioPlay(0);
+#endif
+            pop->selected = -1;
+        }
+        break;
+
+    case iKeyStatEnded:
+        i = pop->selected;
+        if (i == -1) break;
+        pop->selected = -1;
+
+        if (i == 0)
+        {
+            loge("Setting");
+            //showPopOverStep(false);
+
+            showPopSetting(true);
+            //showPopStageHow(false);
+            //showPopInven(false);
+        }
+        else if (i == 1)
+        {
+
+            loge("How");
+            //showPopOverStep(false);
+
+            //showPopSetting(false);
+            showPopStageHow(true);
+            //showPopInven(false);
+        }
+        else //if (i == 2)
+        {
+            loge("Inven");
+            //showPopOverStep(false);
+
+            //showPopSetting(false);
+            //showPopStageHow(false);
+            showPopInven(true);
+        }
+        break;
+    }
+
+    return true;
+}
+
+// =========================================================================================
+// for Window
+// =========================================================================================
+
+#elif(OS==OS_WINDOW)
 bool keyPopTopUI(iKeyStat stat, iPoint point)
 {
     if (keyPopSetting(stat, point) ||
@@ -173,10 +319,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         if (pop->selected == 0)
         {
-#if (OS==OS_WINDOW)
             printf("Setting\n");
-#elif(OS==OS_ANDROID)
-#endif
             pop->selected = -1;
 
             //showPopOverStep(false);
@@ -187,11 +330,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         else if (pop->selected == 1)
         {
-#if (OS==OS_WINDOW)
             printf("How\n");
-#elif(OS==OS_ANDROID)
-            loge("How\n");
-#endif
             pop->selected = -1;
 
             //showPopOverStep(false);
@@ -202,11 +341,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         else //if (pop->selected == 2)
         {
-#if (OS==OS_WINDOW)
             printf("Inven\n");
-#elif(OS==OS_ANDROID)
-            loge("How\n");
-#endif
             pop->selected = -1;
 
             //showPopOverStep(false);
@@ -228,9 +363,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -241,6 +374,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
     return true;
 }
+#endif
 
 //=========================================================
 // popSetting : 설정창
@@ -435,8 +569,10 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
+#if (OS==OS_WINDOW) //#openAL
             audioPlay(0);
+#elif (OS==OS_ANDROID)
+            //audio
 #endif
             pop->selected = j;
         }
@@ -1314,10 +1450,10 @@ void createPopInven()
     igImage* Heroimg = g->createIgImage("Image/Hero0.png");
 #if (OS==OS_WINDOW) ////////////////////////////////////////////////////////////////////////////////////////////////////////
     g->drawigImage(Heroimg, size.width / 2, size.height / 2, VCENTER | HCENTER);
-#elif (OS==OS_WINDOW)
+#elif (OS==OS_ANDROID)
     g->drawigImage(Heroimg, size.width / 2, size.height / 2, VCENTER | HCENTER,
         0, 0, (float)g->igImageGetWidth(Heroimg), (float)g->igImageGetHeight(Heroimg),
-        (float)40 / 20, (float)40 / 30,
+        1.0f, 1.0f, //(float)40 / 20, (float)40 / 30,
         2, 0);
 #endif ///////////////////////////////////////////////////////////////////////////////////////////////////////
     tex = g->getTexture();

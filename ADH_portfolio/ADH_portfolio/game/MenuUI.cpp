@@ -17,7 +17,6 @@
 iPopup** popMenu;
 iImage** imgMenuBtn;
 
-
 void drawPopMenuBefore(iPopup* pop, float dt, float rate);
 int indexCloseMenu;
 void closePopMenu(iPopup* pop)
@@ -148,7 +147,7 @@ void createPopMenu()
 	for (int k = 0; k < 2; k++)
 	{
 		iPopup* pop = new iPopup();
-
+		iSize size = iSizeMake(300, 60);
 		for (i = 0; i < 4; i++)
 		{
 			if (i % 2 != k) continue;
@@ -156,15 +155,16 @@ void createPopMenu()
 			img = new iImage();
 			for (j = 0; j < 2; j++)
 			{
-				iSize size = iSizeMake(300, 60);
 				g->init(size);
 
+				setStringSize(30);
+				setStringBorderRGBA(1, 1, 1, 1);
+				setStringBorder(2);
 				if (j == 0)
 				{
 					setRGBA(1, 1, 1, 1);
 					g->drawRect(0, 0, size.width, size.height, 10);
-					setRGBA(1, 1, 1, 1);
-					setStringSize(30);
+
 					setStringRGBA(0, 0, 0, 1);
 					setStringBorder(2);
 					setStringBorderRGBA(1, 1, 1, 1);
@@ -175,12 +175,10 @@ void createPopMenu()
 					setRGBA(1, 1, 0, 1);
 					g->fillRect(0, 0, size.width, size.height, 10);
 					setRGBA(1, 1, 1, 1);
-					setStringSize(30);
+
 					setStringRGBA(0.4f, 0.5f, 1, 1);
-					setStringBorder(2);
-					setStringBorderRGBA(1, 1, 1, 1);
-					g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
 				}
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, strBtn[i]);
 
 				tex = g->getTexture();
 				img->addObject(tex);
@@ -209,7 +207,6 @@ void createPopMenu()
 		pop->closePoint = iPointMake(devSize.width / 2 - 150, (devSize.height) / 2 - 160);
 		popMenu[k] = pop;
 	}
-
 	indexCloseMenu = -1;
 #endif
 }
@@ -254,6 +251,7 @@ void showPopMenu(bool show)
 
 	}
 }
+#if (OS==OS_ANDROID)
 bool keyPopMenu(iKeyStat stat, iPoint point)
 {
 	iPopup* pop = popMenu[0];
@@ -262,9 +260,135 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 		return false;
 
 #if 1 //화면에서 벗어나면 ////////////////////////////////////////////////////
-	if (containPoint(point, iRectMake(devSize.width / 2 - 180, devSize.width / 2 - 210, 360, 370)) == false)
+	if (containPoint(point, iRectMake(devSize.width / 2 - 200, devSize.height / 2 - 210, 400, 420)) == false)
 		return false;
 #endif ////////////////////////////////////////////////////////////////////
+	if (pop->stat != iPopupProc)
+		return true;
+
+	int i, j = -1;
+
+	switch (stat)
+	{
+	case iKeyStatBegan:
+#if (OS==OS_WINDOW)
+		for (i = 0; i < 5; i++)
+		{
+			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
+			{
+				j = i;
+				break;
+			}
+		}
+#elif (OS==OS_ANDROID)
+		for (i = 0; i < 4; i++)
+		{
+			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
+			{
+				j = i;
+				break;
+			}
+		}
+#endif
+		if (pop->selected != j)
+		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
+			pop->selected = j;
+		}
+		break;
+
+		break;
+
+	case iKeyStatMoved:
+		i = pop->selected;
+		if (i == -1) break;
+		if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint, iSizeMake(40, 40))) == false)
+		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
+			pop->selected = -1;
+		}
+		break;
+
+	case iKeyStatEnded:
+		i = pop->selected;
+		if (i == -1) break;
+		pop->selected = -1;
+
+#if (OS==OS_WINDOW)
+		if (pop->selected == 0)
+		{
+			printf("게임시작\n");
+			stageFrom = stageTo = 10;
+			setLoading(gs_stage, freeMenu, loadStage);
+		}
+		else if (pop->selected == 1)
+		{
+			printf("에디터\n");
+			setLoading(gs_map, freeMenu, loadMapEditor);
+		}
+		else if (pop->selected == 2)
+		{
+			printf("게임설명\n");
+			indexCloseMenu = 0;
+			showPopMenu(false);
+		}
+		else if (pop->selected == 3)
+		{
+			printf("옵션\n");
+			indexCloseMenu = 1;
+			showPopMenu(false);
+		}
+
+		else //if(pop->selected == 4)
+		{
+			printf("게임종료\n");
+			indexCloseMenu = 2;
+			showPopMenu(false);
+		}
+#elif(OS==OS_ANDROID)
+		if (i == 0)
+		{
+			//printf("게임시작\n");
+			stageFrom = stageTo = 10;
+			setLoading(gs_stage, freeMenu, loadStage);
+		}
+		else if (i == 1)
+		{
+			//printf("게임설명\n");
+			indexCloseMenu = 0;
+			showPopMenu(false);
+		}
+		else if (i == 2)
+		{
+			//printf("옵션\n");
+			indexCloseMenu = 1;
+			showPopMenu(false);
+		}
+
+		else //if(i == 3)
+		{
+			//printf("게임종료\n");
+			indexCloseMenu = 2;
+			showPopMenu(false);
+		}
+#endif
+		break;
+	}
+
+	return true;
+}
+
+#elif(OS==OS_WINDOW)
+bool keyPopMenu(iKeyStat stat, iPoint point)
+{
+	iPopup* pop = popMenu[0];
+
+	if (pop->bShow == false)
+		return false;
 
 	if (pop->stat != iPopupProc)
 		return true;
@@ -358,8 +482,10 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 #endif
 		if (pop->selected != j)
 		{
-#if 0 //#openAL
+#if (OS==OS_WINDOW) //#openAL
 			audioPlay(0);
+#elif (OS==OS_ANDROID)
+			//audio
 #endif
 			pop->selected = j;
 		}
@@ -371,6 +497,7 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 
 	return true;
 }
+#endif // keyPopMenu
 
 //===========================================================
 //popHow
@@ -506,12 +633,7 @@ Texture* methodStHow(const char* str)
 	delete content2;
 	delete content3;
 
-#if 1
-	Texture* temp_tex = g->getTexture();
-	return temp_tex;
-#else
 	return g->getTexture();
-#endif
 }
 
 void closeMethodPopHow(iPopup* pop)
@@ -549,11 +671,21 @@ void showPopHow(bool show)
 		//to do...
 	}
 }
+
+//for Android
+#if (OS==OS_ANDROID)
 bool keyPopHow(iKeyStat stat, iPoint point)
 {
-	if (popHow->bShow == false)
+	iPopup* pop = popHow;
+	if (pop->bShow == false)
 		return false;
-	if (popHow->stat != iPopupProc)
+
+#if 1 // 화면에서 벗어난 경우
+	if (containPoint(point, iRectMake(devSize.width / 2 - 450, devSize.height / 2 - 350, 900, 700)) == false)
+		return false;
+#endif ///////////////////
+
+	if (pop->stat != iPopupProc)
 		return true;
 
 	int i, j = -1;
@@ -561,23 +693,102 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	switch (stat)
 	{
 	case iKeyStatBegan:
-		if (popHow->selected == -1)
+		for (i = 0; i < 3; i++)
+		{
+			if (containPoint(point, imgHowBtn[i]->touchRect(popHow->closePoint, iSizeMake(30, 30))))
+			{
+				j = i;
+				break;
+			}
+		}
+		if (pop->selected != j)
+		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
+			pop->selected = j;
+			loge("popHow : %d", pop->selected);
+		}
+		break;
+
+	case iKeyStatMoved:
+		i = pop->selected;
+		if (i == -1) break;
+		if (containPoint(point, imgHowBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30))) == false)
+		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
+			pop->selected = -1;
+		}
+		break;
+
+	case iKeyStatEnded:
+		i = pop->selected;
+		if (i == -1) break;
+		pop->selected = -1;
+
+		if (i == -1)
 			break;
 #if 0 //#openAL
 		audioPlay(0);
 #endif
-		if (popHow->selected == 0)
+		if (i == 0)
 		{
 			showPopHow(false);
 		}
-		else if (popHow->selected == 1)
+		else if (i == 1)
 		{
 			page--;
 			if (page < 0)
 				page = 0;
 			stHow->setString("%d", page);
 		}
-		else if (popHow->selected == 2)
+		else if (i == 2)
+		{
+			page++;
+			if (page > _page - 1)
+				page = _page - 1;
+			stHow->setString("%d", page);
+		}
+		break;
+	}
+
+	return true;
+}
+
+// for Window
+#elif (OS==OS_WINDOW)
+bool keyPopHow(iKeyStat stat, iPoint point)
+{
+	iPopup* pop = popHow;
+
+	if (pop->bShow == false)
+		return false;
+	if (pop->stat != iPopupProc)
+		return true;
+
+	int i, j = -1;
+
+	switch (stat)
+	{
+	case iKeyStatBegan:
+		if (pop->selected == -1)
+			break;
+		audioPlay(0);
+		
+		if (pop->selected == 0)
+		{
+			showPopHow(false);
+		}
+		else if (pop->selected == 1)
+		{
+			page--;
+			if (page < 0)
+				page = 0;
+			stHow->setString("%d", page);
+		}
+		else if (pop->selected == 2)
 		{
 			page++;
 			if (page > _page - 1)
@@ -589,23 +800,18 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	case iKeyStatMoved:
 		for (i = 0; i < 3; i++)
 		{
-			if (containPoint(point, imgHowBtn[i]->touchRect(popHow->closePoint)))
+			if (containPoint(point, imgHowBtn[i]->touchRect(pop->closePoint)))
 			{
 				j = i;
 				break;
 			}
 		}
-		if (popHow->selected != j)
+		if (pop->selected != j)
 		{
-#if 0 //#openAL
 			audioPlay(0);
-#endif
-			popHow->selected = j;
-#if (OS==OS_WINDOW)
-			printf("popHow : %d\n", popHow->selected);
-#elif (OS==OS_ANDROID)
-			loge("popHow : %d", popHow->selected);
-#endif
+		
+			pop->selected = j;
+			printf("popHow : %d\n", pop->selected);
 		}
 		break;
 
@@ -615,6 +821,7 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 
 	return true;
 }
+#endif //keyPopHow
 
 //===========================================================
 //popOption
@@ -648,10 +855,16 @@ void createPopOption()
 	setStringBorder(1);
 	setStringBorderRGBA(1, 1, 1, 1);
 
+#if (OS==OS_WINDOW)
 	g->drawString(size.width / 2, 40, VCENTER | HCENTER, "<Option>");
 	g->drawString(40, 40 + 80, TOP | LEFT, "전체화면 : ");
 	g->drawString(40, 40 + 130, TOP | LEFT, "BGM : ");
 	g->drawString(40, 40 + 180, TOP | LEFT, "EFF : ");
+#elif (OS==OS_ANDROID)
+	g->drawString(size.width / 2, 40, VCENTER | HCENTER, "<Option>");
+	g->drawString(40, 40 + 80, TOP | LEFT, "BGM : ");
+	g->drawString(40, 40 + 150, TOP | LEFT, "EFF : ");
+#endif
 
 	tex = g->getTexture();
 	img = new iImage();
@@ -662,7 +875,7 @@ void createPopOption()
 	//
 	//Btn
 	//
-
+#if (OS==OS_WINDOW)
 	imgOptionBtn = new iImage * [7];
 
 	//닫기
@@ -803,7 +1016,107 @@ void createPopOption()
 	pop->methodClose = closeMethodPopOption;
 
 	popOption = pop;
+#elif (OS==OS_ANDROID)
+	imgOptionBtn = new iImage * [5];
 
+	//닫기
+
+	img = new iImage();
+
+	size = iSizeMake(80, 40);
+	for (int i = 0; i < 2; i++)
+	{
+		g->init(size);
+
+		if (i == 0) setRGBA(0, 0, 0, 1);
+		else		setRGBA(1, 1, 0, 1);
+		g->fillRect(0, 0, size.width, size.height, 10);
+
+		setStringSize(25);
+		setStringRGBA(1, 1, 1, 1);
+		g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "닫기");
+
+		tex = g->getTexture();
+		img->addObject(tex);
+		freeImage(tex);
+	}
+	img->position = iPointMake(320 - size.width / 2, 480 - 100);
+	pop->addObject(img);
+	imgOptionBtn[0] = img;
+
+	// 사운드
+
+	//음량 btn
+
+	size = iSizeMake(40, 40);
+	for (int i = 1; i < 5; i++)
+	{
+		img = new iImage();
+		for (int j = 0; j < 2; j++)
+		{
+			g->init(size);
+			if (j == 0)
+			{
+				setRGBA(0, 0, 0, 1);
+				g->fillRect(0, 0, size.width, size.height, 10);
+
+				setStringSize(30);
+				setStringRGBA(0, 0, 0, 1);
+			}
+			else
+			{
+				setRGBA(1, 1, 0, 1);
+				g->fillRect(0, 0, size.width, size.height, 10);
+
+				setStringSize(30);
+				setStringRGBA(0.5f, 0.2f, 1, 1);
+			}
+			setRGBA(1, 1, 1, 1);
+			setStringBorder(2);
+			setStringBorderRGBA(1, 1, 1, 1);
+
+			if (i % 2 == 1)
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "-");
+			else if (i % 2 == 0)
+				g->drawString(size.width / 2, size.height / 2, VCENTER | HCENTER, "+");
+
+			tex = g->getTexture();
+			img->addObject(tex);
+			freeImage(tex);
+		}
+		img->position = iPointMake(270, 65) + iPointMake(150 * (!(i % 2)), 50 + (i / 3) * 70);
+		pop->addObject(img);
+		imgOptionBtn[i] = img;
+	}
+
+	// 음량 str
+
+	iStrTex* st = new iStrTex(stSoundMethod);
+	st->setString("%f", appData->bgm * 10);
+	img = new iImage();
+	img->addObject(st->tex);
+	img->position = imgOptionBtn[1]->position + iPointMake(65, 0);
+	pop->addObject(img);
+	stSound = st;
+
+	// eff str
+
+	st = new iStrTex(stSoundMethod);
+	st->setString("%f", appData->eff * 10);
+	img = new iImage();
+	img->addObject(st->tex);
+	img->position = imgOptionBtn[3]->position + iPointMake(65, 0);
+	pop->addObject(img);
+	stEff = st;
+
+	pop->style = iPopupZoom;
+	pop->openPoint = iPointMake(devSize.width / 2, devSize.height / 2);
+	pop->closePoint = iPointMake((devSize.width - 640) / 2, (devSize.height - 480) / 2);
+	pop->methodBefore = drawPopOptionBefore;
+	pop->methodClose = closeMethodPopOption;
+
+	popOption = pop;
+#endif
 }
 
 Texture* stSoundMethod(const char* str)
@@ -836,8 +1149,13 @@ void freePopOption()
 }
 void drawPopOptionBefore(iPopup* pop, float dt, float rate)
 {
+#if (OS==OS_WINDOW)
 	for (int i = 0; i < 7; i++)
 		imgOptionBtn[i]->setTexObject(popOption->selected == i);
+#elif (OS==OS_ANDROID)
+	for (int i = 0; i < 5; i++)
+		imgOptionBtn[i]->setTexObject(popOption->selected == i);
+#endif
 }
 void closeMethodPopOption(iPopup* pop)
 {
@@ -860,11 +1178,18 @@ void showPopOption(bool show)
 
 	}
 }
+#if (OS==OS_ANDROID)
 bool keyPopOption(iKeyStat stat, iPoint point)
 {
-	if (popOption->bShow == false)
+	iPopup* pop = popOption;
+
+	if (pop->bShow == false)
 		return false;
-	if (popOption->stat != iPopupProc)
+
+#if 1 // 화면에서 벗어나면 ///////////////////////////////////////////
+
+#endif /////////////////////////////////////////////////////////////
+	if (pop->stat != iPopupProc)
 		return true;
 
 	int i, j = -1;
@@ -872,31 +1197,48 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 	switch (stat)
 	{
 	case iKeyStatBegan:
-		if (popOption->selected == -1)
-			break;
+		for (i = 0; i < 5; i++)
+		{
+			if (containPoint(point, imgOptionBtn[i]->touchRect(popOption->closePoint, iSizeMake(20, 20))))
+			{
+				j = i;
+				break;
+			}
+		}
+		if (pop->selected != j)
+		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
+			pop->selected = j;
+			loge("popOption : %d", pop->selected);
+		}
+		break;
+
+	case iKeyStatMoved:
+		i = pop->selected;
+		if (i == -1) break;
+		if (containPoint(point, imgOptionBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
+		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
+			pop->selected = -1;
+		}
+		break;
+
+	case iKeyStatEnded:
+		i = pop->selected;
+		if (i == -1) break;
+		pop->selected = -1;
 #if 0 //#openAL
 		audioPlay(0);
 #endif
-
-		if (popOption->selected == 0)
+		if (i == 0)
 		{
 			showPopOption(false);
 		}
-		else if (popOption->selected == 1)
-		{
-#if (OS==OS_WINDOW)
-			if (!isFullscreen)
-				goFullscreen();
-#endif
-		}
-		else if (popOption->selected == 2)
-		{
-#if (OS==OS_WINDOW)
-			if (isFullscreen)
-				goFullscreen();
-#endif
-		}
-		else if (popOption->selected == 3)
+		else if (i == 1)
 		{
 			if (appData->bgm * 10 > 0.0)
 				appData->bgm -= 0.1;
@@ -905,7 +1247,7 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
 		}
-		else if (popOption->selected == 4)
+		else if (i == 2)
 		{
 			if (appData->bgm * 10 < 10.0)
 				appData->bgm += 0.1;
@@ -914,7 +1256,7 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
 		}
-		else if (popOption->selected == 5)
+		else if (i == 3)
 		{
 			if (appData->eff * 10 > 0.0)
 				appData->eff -= 0.1;
@@ -923,7 +1265,7 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
 		}
-		else if (popOption->selected == 6)
+		else if (i == 4)
 		{
 			if (appData->eff * 10 < 10.0)
 				appData->eff += 0.1;
@@ -933,27 +1275,89 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 #endif
 		}
 		break;
+	}
+	return true;
+}
+
+// for Window
+#elif (OS==OS_WINDOW)
+bool keyPopOption(iKeyStat stat, iPoint point)
+{
+	iPopup* pop = popOption;
+
+	if (pop->bShow == false)
+		return false;
+	if (pop->stat != iPopupProc)
+		return true;
+
+	int i, j = -1;
+
+	switch (stat)
+	{
+	case iKeyStatBegan:
+		if (pop->selected == -1)
+			break;
+
+		audioPlay(0);
+
+		if (pop->selected == 0)
+		{
+			showPopOption(false);
+		}
+		else if (pop->selected == 1)
+		{
+			if (!isFullscreen)
+				goFullscreen();
+		}
+		else if (pop->selected == 2)
+		{
+			if (isFullscreen)
+				goFullscreen();
+		}
+		else if (pop->selected == 3)
+		{
+			if (appData->bgm * 10 > 0.0)
+				appData->bgm -= 0.1;
+			stSound->setString("%f", appData->bgm * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
+		}
+		else if (pop->selected == 4)
+		{
+			if (appData->bgm * 10 < 10.0)
+				appData->bgm += 0.1;
+			stSound->setString("%f", appData->bgm * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
+		}
+		else if (pop->selected == 5)
+		{
+			if (appData->eff * 10 > 0.0)
+				appData->eff -= 0.1;
+			stEff->setString("%f", appData->eff * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
+		}
+		else if (pop->selected == 6)
+		{
+			if (appData->eff * 10 < 10.0)
+				appData->eff += 0.1;
+			stEff->setString("%f", appData->eff * 10);
+			audioVolume(appData->bgm, appData->eff, 1);
+		}
+		break;
 
 	case iKeyStatMoved:
 		for (i = 0; i < 7; i++)
 		{
-			if (containPoint(point, imgOptionBtn[i]->touchRect(popOption->closePoint)))
+			if (containPoint(point, imgOptionBtn[i]->touchRect(pop->closePoint)))
 			{
 				j = i;
 				break;
 			}
 		}
-		if (popOption->selected != j)
+		if (pop->selected != j)
 		{
-#if 0 //#openAL
 			audioPlay(0);
-#endif
-			popOption->selected = j;
-#if (OS==OS_WINDOW)
-			printf("popOption : %d\n", popOption->selected);
-#elif (OS==OS_ANDROID)
-			loge("popOption : %d", popOption->selected);
-#endif
+			pop->selected = j;
+			printf("popOption : %d\n", pop->selected);
 		}
 		break;
 
@@ -963,6 +1367,7 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 
 	return true;
 }
+#endif //keyPopOption
 
 //===========================================================
 //popExit
@@ -1087,6 +1492,9 @@ void showPopExit(bool show)
 	}
 
 }
+
+//for Window
+#if (OS==OS_WINDOW)
 bool keyPopExit(iKeyStat stat, iPoint point)
 {
 	if (popExit->bShow == false)
@@ -1144,6 +1552,71 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 
 	return true;
 }
+
+// for Android
+#elif (OS==OS_ANDROID)
+bool keyPopExit(iKeyStat stat, iPoint point)
+{
+	iPopup* pop = popExit;
+
+	if (popExit->bShow == false)
+		return false;
+
+#if 1 //화면에서 벗어나면 false /////////////////////////////////////////
+
+#endif ////////////////////////////////////////////////////////////////
+
+	if (pop->stat != iPopupProc)
+		return true;
+
+	int i, j = -1;
+
+	switch (stat)
+	{
+	case iKeyStatBegan:
+		for (i = 0; i < 2; i++)
+		{
+			if (containPoint(point, imgExitBtn[i]->touchRect(popExit->closePoint)))
+			{
+				j = i;
+				break;
+			}
+		}
+		if (pop->selected != j)
+		{
+			pop->selected = j;
+		}
+		break;
+
+	case iKeyStatMoved:
+		i = pop->selected;
+		if (i == -1) break;
+		if (containPoint(point, imgExitBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30))) == false)
+		{
+			pop->selected = -1;
+		}
+		break;
+
+	case iKeyStatEnded:
+		i = pop->selected;
+		if (i == -1) break;
+
+		if (i == 0)
+		{
+			loge("예");
+			//#need update 프로그램 종료 필요!
+		}
+		else// if (popExit->selected == 1)
+		{
+			loge("아니오");
+			showPopExit(false);
+		}
+		break;
+	}
+
+	return true;
+}
+#endif //keyPopExit
 
 
 
