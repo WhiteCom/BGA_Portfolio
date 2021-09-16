@@ -260,6 +260,12 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 
 	if (pop->bShow == false)
 		return false;
+
+#if 1 //화면에서 벗어나면 ////////////////////////////////////////////////////
+	if (containPoint(point, iRectMake(devSize.width / 2 - 180, devSize.width / 2 - 210, 360, 370)) == false)
+		return false;
+#endif ////////////////////////////////////////////////////////////////////
+
 	if (pop->stat != iPopupProc)
 		return true;
 
