@@ -1,11 +1,8 @@
 #pragma once
 
 #include "iStd.h"
-#include "Character.h"
 
-
-extern int stageFrom, stageTo;
-extern Character* mainCharacter;
+extern int stageFrom, stageTo, step;
 
 void loadStage();
 void freeStage();

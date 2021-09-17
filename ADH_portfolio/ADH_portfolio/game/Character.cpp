@@ -8,14 +8,21 @@
 
 bool warpEvent;
 
-
 Character::Character()
 {
 	iPoint startP = iPointMake(0, -20);
-	
 
 	//24 * 32 imgs
-	Texture** texs = createImageAlphaDivide(12, 8, "assets/Image/CharSet/[瑛] 마리사 모션 (1).bmp");
+#if 0 //to do...
+	//Texture** texs = createImageAlphaDivide(12, 8, "assets/Image/CharSet/[瑛] 마리사 모션 (1).bmp");
+#else
+
+#if (OS==OS_WINDOW)
+	Texture** texs = createImageDivide(12, 8, "assets/Image/CharSet/Marisa1.bmp");
+#elif (OS==OS_ANDROID)
+	Texture** texs = createImageAlphaDivide(12, 8, "Image/CharSet/[瑛] 마리사 모션 (1).bmp");
+#endif //OS
+#endif
 
 	Texture* hero[24];
 
@@ -74,7 +81,7 @@ Character::Character()
 	img->position = startP;
 	img->startAnimation();
 	imgs[BehaveWalkUp] = img;
-	
+
 	//
 	//BehaveWalkDown
 	//
@@ -119,15 +126,15 @@ void Character::paint(float dt, iPoint pos)
 			position = tPosition;
 		}
 		p = linear(moveDt / _moveDt, position, tPosition);
-		
+
 	}
-	
+
 #if 0 //적당한 사이즈의 이미지를 찾았을 경우
 	imgCurr->paint(dt, p - iPointMake(0, TILE_HSIZE / 2 - 6), iPointOne);
 #else
-	imgCurr->paint(dt, p - iPointMake(0, 0), 1.3f ,1.3f); 
+	imgCurr->paint(dt, p - iPointMake(0, 0), iPointMake(1.3f, 1.3f));
 #endif
-	
+
 }
 
 Character* mainCharacter;
@@ -143,6 +150,8 @@ void loadCharacter(iPoint off, const char* str)
 	mainCharacter->moveDt = 0.0f;
 }
 
+int charDir = -1;
+
 void drawCharacter(float dt, iPoint off)
 {
 	//Step Over
@@ -156,70 +165,90 @@ void drawCharacter(float dt, iPoint off)
 
 	int check;
 
-	if (loadingDt == 0.0f && 
+#if (OS==OS_WINDOW)
+	if (loadingDt == 0.0f &&
 		mainCharacter->moveDt == MOVE_TIME &&
 		step > 0)
 	{
 		if (keyDown & keysA || keyDown & keysLeft)
 		{
 			printf("left\n");
-			mainCharacter->moveDt = 0.0f;
-			mainCharacter->_moveDt = MOVE_TIME;
-			check = map->tileWeight[xy - 1];
-
-			if (x > 0 + _x && check != 9)
-			{
-				v.x = -1;
-				mainCharacter->be = BehaveWalkLeft;
-				mainCharacter->leftRight = 0;
-				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkLeft];
-			}
+			charDir = 0;
 		}
-
 		else if (keyDown & keysD || keyDown & keysRight)
 		{
 			printf("right\n");
-			mainCharacter->moveDt = 0.0f;
-			mainCharacter->_moveDt = MOVE_TIME;
-			check = map->tileWeight[xy + 1];
-
-			if (x < TILE_W - 1 + _x && check != 9)
-			{
-				v.x = 1;
-				mainCharacter->be = BehaveWalkRight;
-				mainCharacter->leftRight = 1;
-				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkRight];
-			}
+			charDir = 1;
 		}
-
 		else if (keyDown & keysW || keyDown & keysUp)
 		{
 			printf("Up\n");
-			mainCharacter->moveDt = 0.0f;
-			mainCharacter->_moveDt = MOVE_TIME;
-			check = map->tileWeight[xy - TILE_W];
-
-			if (y > 0 + _y && check != 9)
-			{
-				v.y = -1;
-				mainCharacter->be = BehaveWalkUp;
-				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkUp];
-			}
+			charDir = 2;
 		}
-
 		else if (keyDown & keysS || keyDown & keysDown)
 		{
 			printf("Down\n");
-			mainCharacter->moveDt = 0.0f;
-			mainCharacter->_moveDt = MOVE_TIME;
-			check = map->tileWeight[xy + TILE_W];
+			charDir = 3;
+		}
+	}
+#elif (OS==OS_ANDROID)
+	// keyStage에서 처리
+#endif
+	if (charDir == 0)
+	{
+		mainCharacter->moveDt = 0.0f;
+		mainCharacter->_moveDt = MOVE_TIME;
+		check = map->tileWeight[xy - 1];
 
-			if (y < TILE_H - 1 + _y && check != 9)
-			{
-				v.y = 1;
-				mainCharacter->be = BehaveWalkDown;
-				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkDown];
-			}
+		if (x > 0 + _x && check != 9)
+		{
+			v.x = -1;
+			mainCharacter->be = BehaveWalkLeft;
+			mainCharacter->leftRight = 0;
+			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkLeft];
+		}
+	}
+
+	else if (charDir == 1)
+	{
+		mainCharacter->moveDt = 0.0f;
+		mainCharacter->_moveDt = MOVE_TIME;
+		check = map->tileWeight[xy + 1];
+
+		if (x < TILE_W - 1 + _x && check != 9)
+		{
+			v.x = 1;
+			mainCharacter->be = BehaveWalkRight;
+			mainCharacter->leftRight = 1;
+			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkRight];
+		}
+	}
+
+	else if (charDir == 2)
+	{
+		mainCharacter->moveDt = 0.0f;
+		mainCharacter->_moveDt = MOVE_TIME;
+		check = map->tileWeight[xy - TILE_W];
+
+		if (y > 0 + _y && check != 9)
+		{
+			v.y = -1;
+			mainCharacter->be = BehaveWalkUp;
+			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkUp];
+		}
+	}
+
+	else if (charDir == 3)
+	{
+		mainCharacter->moveDt = 0.0f;
+		mainCharacter->_moveDt = MOVE_TIME;
+		check = map->tileWeight[xy + TILE_W];
+
+		if (y < TILE_H - 1 + _y && check != 9)
+		{
+			v.y = 1;
+			mainCharacter->be = BehaveWalkDown;
+			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkDown];
 		}
 	}
 
@@ -231,18 +260,22 @@ void drawCharacter(float dt, iPoint off)
 		{
 			v /= iPointLength(v);
 			mainCharacter->tPosition += v * 32; //타일크기만큼 움직이므로 dt 영향 x
+#if (OS==OS_WINDOW)
 			printf("now charcter pos : %.2f %.2f\n", mainCharacter->position.x, mainCharacter->position.y);
+#elif(OS==OS_ANDROID)
+			loge("now charcter pos : %.2f %.2f\n", mainCharacter->position.x, mainCharacter->position.y);
+#endif
 		}
 		mainCharacter->paint(dt, off);
 	}
-	
+
 	else //wait
 	{
 		mainCharacter->be = BehaveWait;
 		mainCharacter->imgCurr = mainCharacter->imgs[BehaveWait];
 		mainCharacter->paint(dt, off);
 	}
-	
+
 }
 
 void freeCharacter()

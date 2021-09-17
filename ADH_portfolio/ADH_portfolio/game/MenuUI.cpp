@@ -40,6 +40,7 @@ void createPopMenu()
 	int i, j;
 
 #ifdef LANGUAGE_KOR //한글
+#if(OS==OS_WINDOW)
 	const char* strBtn[5] = {
 		"게임시작",
 		"맵 에디터",
@@ -47,6 +48,14 @@ void createPopMenu()
 		"옵션",
 		"종료"
 	};
+#elif(OS==OS_ANDROOS_ANDROID)
+	const char* strBtn[4] = {
+		"게임시작",
+		"게임설명",
+		"옵션",
+		"종료"
+	};
+#endif
 #else //영어
 #if (OS==OS_WINDOW)
 	const char* strBtn[5] = {
@@ -260,7 +269,7 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 		return false;
 
 #if 1 //화면에서 벗어나면 ////////////////////////////////////////////////////
-	if (containPoint(point, iRectMake(devSize.width / 2 - 200, devSize.height / 2 - 210, 400, 420)) == false)
+	if (containPoint(point, iRectMake(devSize.width / 2 - 180, devSize.height / 2 - 210, 360, 370)) == false)
 		return false;
 #endif ////////////////////////////////////////////////////////////////////
 	if (pop->stat != iPopupProc)
@@ -271,25 +280,14 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 	switch (stat)
 	{
 	case iKeyStatBegan:
-#if (OS==OS_WINDOW)
-		for (i = 0; i < 5; i++)
-		{
-			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
-			{
-				j = i;
-				break;
-			}
-		}
-#elif (OS==OS_ANDROID)
 		for (i = 0; i < 4; i++)
 		{
-			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
+			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))))
 			{
 				j = i;
 				break;
 			}
 		}
-#endif
 		if (pop->selected != j)
 		{
 #if 0 //#openAL
@@ -297,8 +295,6 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 #endif
 			pop->selected = j;
 		}
-		break;
-
 		break;
 
 	case iKeyStatMoved:
@@ -318,64 +314,27 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 		if (i == -1) break;
 		pop->selected = -1;
 
-#if (OS==OS_WINDOW)
-		if (pop->selected == 0)
-		{
-			printf("게임시작\n");
-			stageFrom = stageTo = 10;
-			setLoading(gs_stage, freeMenu, loadStage);
-		}
-		else if (pop->selected == 1)
-		{
-			printf("에디터\n");
-			setLoading(gs_map, freeMenu, loadMapEditor);
-		}
-		else if (pop->selected == 2)
-		{
-			printf("게임설명\n");
-			indexCloseMenu = 0;
-			showPopMenu(false);
-		}
-		else if (pop->selected == 3)
-		{
-			printf("옵션\n");
-			indexCloseMenu = 1;
-			showPopMenu(false);
-		}
-
-		else //if(pop->selected == 4)
-		{
-			printf("게임종료\n");
-			indexCloseMenu = 2;
-			showPopMenu(false);
-		}
-#elif(OS==OS_ANDROID)
 		if (i == 0)
 		{
-			//printf("게임시작\n");
 			stageFrom = stageTo = 10;
 			setLoading(gs_stage, freeMenu, loadStage);
 		}
 		else if (i == 1)
 		{
-			//printf("게임설명\n");
 			indexCloseMenu = 0;
 			showPopMenu(false);
 		}
 		else if (i == 2)
 		{
-			//printf("옵션\n");
 			indexCloseMenu = 1;
 			showPopMenu(false);
 		}
 
 		else //if(i == 3)
 		{
-			//printf("게임종료\n");
 			indexCloseMenu = 2;
 			showPopMenu(false);
 		}
-#endif
 		break;
 	}
 
@@ -400,7 +359,6 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		if (pop->selected == -1)
 			break;
-#if (OS==OS_WINDOW)
 		if (pop->selected == 0)
 		{
 			printf("게임시작\n");
@@ -431,37 +389,10 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 			indexCloseMenu = 2;
 			showPopMenu(false);
 		}
-#elif(OS==OS_ANDROID)
-		if (pop->selected == 0)
-		{
-			//printf("게임시작\n");
-			stageFrom = stageTo = 10;
-			setLoading(gs_stage, freeMenu, loadStage);
-		}
-		else if (pop->selected == 1)
-		{
-			//printf("게임설명\n");
-			indexCloseMenu = 0;
-			showPopMenu(false);
-		}
-		else if (pop->selected == 2)
-		{
-			//printf("옵션\n");
-			indexCloseMenu = 1;
-			showPopMenu(false);
-		}
 
-		else //if(pop->selected == 3)
-		{
-			//printf("게임종료\n");
-			indexCloseMenu = 2;
-			showPopMenu(false);
-		}
-#endif
 		break;
 
 	case iKeyStatMoved:
-#if (OS==OS_WINDOW)
 		for (i = 0; i < 5; i++)
 		{
 			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
@@ -470,22 +401,11 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 				break;
 			}
 		}
-#elif (OS==OS_ANDROID)
-		for (i = 0; i < 4; i++)
-		{
-			if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))
-			{
-				j = i;
-				break;
-			}
-		}
-#endif
+
 		if (pop->selected != j)
 		{
-#if (OS==OS_WINDOW) //#openAL
+#if 0 //#openAL
 			audioPlay(0);
-#elif (OS==OS_ANDROID)
-			//audio
 #endif
 			pop->selected = j;
 		}
@@ -680,10 +600,10 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	if (pop->bShow == false)
 		return false;
 
-#if 1 // 화면에서 벗어난 경우
+#if 1 // 화면에서 벗어난 경우 ////////////////////////////////////////////////////////////////////////////////////
 	if (containPoint(point, iRectMake(devSize.width / 2 - 450, devSize.height / 2 - 350, 900, 700)) == false)
 		return false;
-#endif ///////////////////
+#endif /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	if (pop->stat != iPopupProc)
 		return true;
@@ -775,8 +695,9 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		if (pop->selected == -1)
 			break;
+#if 0 //#openAL
 		audioPlay(0);
-		
+#endif
 		if (pop->selected == 0)
 		{
 			showPopHow(false);
@@ -808,8 +729,9 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 		}
 		if (pop->selected != j)
 		{
+#if 0 //#openAL
 			audioPlay(0);
-		
+#endif
 			pop->selected = j;
 			printf("popHow : %d\n", pop->selected);
 		}
@@ -822,7 +744,6 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	return true;
 }
 #endif //keyPopHow
-
 //===========================================================
 //popOption
 //===========================================================
@@ -1492,14 +1413,15 @@ void showPopExit(bool show)
 	}
 
 }
-
 //for Window
 #if (OS==OS_WINDOW)
 bool keyPopExit(iKeyStat stat, iPoint point)
 {
-	if (popExit->bShow == false)
+	iPopup* pop = popExit;
+
+	if (pop->bShow == false)
 		return false;
-	if (popExit->stat != iPopupProc)
+	if (pop->stat != iPopupProc)
 		return true;
 
 	int i, j = -1;
@@ -1507,10 +1429,10 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 	switch (stat)
 	{
 	case iKeyStatBegan:
-		if (popExit->selected == -1)
+		if (pop->selected == -1)
 			break;
 
-		if (popExit->selected == 0)
+		if (pop->selected == 0)
 		{
 			printf("예\n");
 #if (OS==OS_WINDOW)
@@ -1519,7 +1441,7 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 #elif(OS==OS_ANDROID)
 #endif
 		}
-		else// if (popExit->selected == 1)
+		else// if (pop->selected == 1)
 		{
 			printf("아니오\n");
 			showPopExit(false);
@@ -1529,20 +1451,20 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 	case iKeyStatMoved:
 		for (i = 0; i < 2; i++)
 		{
-			if (containPoint(point, imgExitBtn[i]->touchRect(popExit->closePoint)))
+			if (containPoint(point, imgExitBtn[i]->touchRect(pop->closePoint)))
 			{
 				j = i;
 				break;
 			}
 		}
-		if (popExit->selected != j)
+		if (pop->selected != j)
 		{
 #if (OS==OS_WINDOW)
 			printf("audio play\n");
 #elif (OS==OS_ANDROID)
 
 #endif
-			popExit->selected = j;
+			pop->selected = j;
 		}
 		break;
 
@@ -1552,19 +1474,17 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 
 	return true;
 }
-
-// for Android
 #elif (OS==OS_ANDROID)
 bool keyPopExit(iKeyStat stat, iPoint point)
 {
 	iPopup* pop = popExit;
 
-	if (popExit->bShow == false)
+	if (pop->bShow == false)
 		return false;
 
-#if 1 //화면에서 벗어나면 false /////////////////////////////////////////
+#if 1 //화면에서 벗어나면 false ////////////////////////////////////////////////////
 
-#endif ////////////////////////////////////////////////////////////////
+#endif ///////////////////////////////////////////////////////////////////////////
 
 	if (pop->stat != iPopupProc)
 		return true;
@@ -1576,7 +1496,7 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		for (i = 0; i < 2; i++)
 		{
-			if (containPoint(point, imgExitBtn[i]->touchRect(popExit->closePoint)))
+			if (containPoint(point, imgExitBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))))
 			{
 				j = i;
 				break;
@@ -1584,6 +1504,11 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		}
 		if (pop->selected != j)
 		{
+#if (OS==OS_WINDOW)
+			printf("audio play\n");
+#elif (OS==OS_ANDROID)
+
+#endif
 			pop->selected = j;
 		}
 		break;
@@ -1591,8 +1516,11 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 	case iKeyStatMoved:
 		i = pop->selected;
 		if (i == -1) break;
-		if (containPoint(point, imgExitBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30))) == false)
+		if (containPoint(point, imgExitBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
 		{
+#if 0 //#openAL
+			audioPlay(0);
+#endif
 			pop->selected = -1;
 		}
 		break;
@@ -1600,15 +1528,20 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 	case iKeyStatEnded:
 		i = pop->selected;
 		if (i == -1) break;
+		pop->selected = -1;
 
 		if (i == 0)
 		{
-			loge("예");
-			//#need update 프로그램 종료 필요!
+			printf("예\n");
+#if (OS==OS_WINDOW)
+			//프로그램 종료
+			runWnd = false;
+#elif(OS==OS_ANDROID)
+#endif
 		}
-		else// if (popExit->selected == 1)
+		else// if (i == 1)
 		{
-			loge("아니오");
+			printf("아니오\n");
 			showPopExit(false);
 		}
 		break;
@@ -1616,7 +1549,6 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 
 	return true;
 }
-#endif //keyPopExit
-
+#endif
 
 

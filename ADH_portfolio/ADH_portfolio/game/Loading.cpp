@@ -89,10 +89,10 @@ void drawLoading(float dt)
 		a = 1.0f - (loadingDt - _loadingDt - 1.0f) / _loadingDt; //점점 밝아진다.
 	}
 #else
-	else if (loadingDt < _loadingDt + DELAY_TIME + 0.0001f)
+	else if (loadingDt < _loadingDt + DELAY_TIME + 1.0f)
 	{
 		loadingDt += dt;
-		if (loadingDt > _loadingDt + DELAY_TIME + 0.0001f)
+		if (loadingDt > _loadingDt + DELAY_TIME + 1.0f)
 		{
 			loadingDt = 0.0f;
 			freeProgress();

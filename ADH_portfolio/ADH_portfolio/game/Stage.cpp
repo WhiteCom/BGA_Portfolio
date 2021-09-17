@@ -1,17 +1,20 @@
 #include "Stage.h"
 #include "StageUI.h"
 
+#define INIT_STEP 50
 #include "TileType.h"
 #include "Map.h"
 #include "Character.h"
 #include "Loading.h"
-#include "Ending.h"
 #include "Menu.h"
+#include "Ending.h"
 #include "Battle.h"
 
-#include "Common.h"
-
+#if (OS==OS_WINDOW)
 #include "App.h"
+#endif
+
+#include "Common.h"
 
 #define INIT_STEP 50
 
@@ -20,7 +23,7 @@ struct StageInfo
     const char* strPathTile;
     const char* strPathData;
 };
-
+#if (OS==OS_WINDOW)
 StageInfo stageInfo[10] =
 {
    {
@@ -73,6 +76,60 @@ StageInfo stageInfo[10] =
         "map/map9.tile",
     },
 };
+#elif (OS==OS_ANDROID)
+StageInfo stageInfo[10] =
+{
+        {
+                "Image/Tile1.bmp",
+                "map/map0.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map1.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map2.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map3.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map4.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map5.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map6.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map7.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map8.tile",
+        },
+
+        {
+                "Image/Tile1.bmp",
+                "map/map9.tile",
+        },
+};
+#endif
 
 Texture** texs;
 Map* tEditor;
@@ -84,73 +141,44 @@ int lastHeroIndex;
 int stageNum = 1;
 int step = INIT_STEP; //총 발걸음 수
 
-#if 1
-const char* str = "_copy";
-#endif
-
-char gameFile[2048];
-
-void copyFile(const char* szFormat, ...)
-{
-    char szText[1024];
-    va_start_end(szText, szFormat);
-
-    FILE* pfr = fopen(szText, "rb");
-    if (pfr != NULL) //해당 이름의 파일이 있는 경우
-    {
-        fclose(pfr);
-        return;
-    }
-
-    StageInfo* si = &stageInfo[stageFrom];
-    pfr = fopen(si->strPathData, "rb");
-
-    FILE* pfw = fopen(szText, "wb");
-
-    char fileContent;
-    while (feof(pfr) == 0)
-    {
-        fread(&fileContent, sizeof(char), 1, pfr);
-        fwrite(&fileContent, sizeof(char), 1, pfw);
-    }
-
-    fclose(pfr);
-    fclose(pfw);
-}
-
 //#issue! tileWeight 가 현재 다 바뀌었음. 가중치가 00,00,00 이런식으로 쪼개져서 
 //타일, 적, 오브젝트 관계로 지어주고 있기에, 이에 따라 캐릭터 및 전투 이벤트를 바꿔줘야 함.
 void loadStage()
 {
     callMapData();
-
+#if 0 //#openAL
     for (int i = 0; i < SOUND_NUM; i++)
     {
         audioStop(i);
     }
     audioPlay(2);
+#endif
 
-//===============================================
-//맵 타일 & 캐릭터 위치 세팅
-//===============================================
+    //===============================================
+    //맵 타일 & 캐릭터 위치 세팅
+    //===============================================
     bool fromMenu = (stageFrom == stageTo && stageFrom == 10 && stageTo == 10);
     stageFrom = stageTo %= 10;
     StageInfo* si = &stageInfo[stageFrom];
-
     texs = createImageDivide(8, 32, si->strPathTile);
 
     tEditor = new Map();
     tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
 
-
     tEditor->loadA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
 
+#if 1 //#test
     //map info
     for (int i = 0; i < TILE_W * TILE_H; i++)
     {
         if (i % TILE_W == 0) printf("\n");
-        printf("%d ",tEditor->tileWeight[i]);
+#if (OS==OS_WINDOW)
+        printf("%d ", tEditor->tileWeight[i]);
+#elif (OS==OS_ANDROID)
+        //loge("%d ",tEditor->tileWeight[i]);
+#endif
     }
+#endif
 
     int x = devSize.width / 2 - TILE_WSIZE * TILE_W / 2;
     int y = devSize.height / 2 - TILE_HSIZE * TILE_H / 2;
@@ -173,7 +201,7 @@ void loadStage()
             //우측
             for (int i = 0; i < TILE_H; i++)
             {
-                if (tEditor->tileWeight[TILE_W * i + TILE_W -1] > 9)
+                if (tEditor->tileWeight[TILE_W * i + TILE_W - 1] > 9)
                 {
                     //워프 포인트보다 한블럭 앞에위치
                     newX = TILE_W - 2;
@@ -227,20 +255,20 @@ void loadStage()
         }
         else
         {
+#if(OS==OS_WINDOW)
             //배틀에서 다시 왔을때
             printf("critical error.....+ exception cave\n");
+#elif(OS==OS_ANDROID)
+            loge("critical error..... + exception cave\n");
+#endif
             off = iPointMake(x + lastX * TILE_WSIZE, y + lastY * TILE_HSIZE);
         }
     }
-
     loadCharacter(off, si->strPathData);
-
-
-//===============================================
-// popUp
-//===============================================
+    //===============================================
+    // popUp
+    //===============================================
     setStringName("assets/font/DungGeunMo.ttf");
-
     //TopUI
     createPopTopUI();
     createPopSetting();
@@ -280,15 +308,16 @@ void freeStage()
 
     freeCharacter();
 
-//===============================================
-// popUp
-//===============================================
+    //===============================================
+    // popUp
+    //===============================================
 
-    //TopUI
+        //TopUI
     freePopTopUI();
     freePopSetting();
-    freePopStageExit();
     freePopStageHow();
+    freePopStageExit();
+    freePopStageOption();
     freePopInven();
 
     //BottomUI
@@ -313,12 +342,12 @@ int heroIndex()
 extern iPopup* popOverStep;
 void drawStage(float dt)
 {
-    
-//=========================================================
-// draw Stage
-//=========================================================
 
-//BackGround
+    //=========================================================
+    // draw Stage
+    //=========================================================
+
+    //BackGround
     setRGBA(0, 0, 0, 1);
     clearRect();
     setRGBA(1, 1, 1, 1);
@@ -358,7 +387,7 @@ void drawStage(float dt)
         {
             step = 0;
             showPopOverStep(true);
-            
+
             //to do... 게임 멈추기
         }
         lastHeroIndex = newHeroIndex;
@@ -384,12 +413,14 @@ void drawStage(float dt)
     {
         tEditor->tileWeight[newHeroIndex] = 1;
         tEditor->saveA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
+#if 0 //#loadBattle
         setLoading(gs_battle, freeStage, loadBattle);
+#endif
     }
-    
-//=========================================================
-// draw Popup
-//=========================================================
+
+    //=========================================================
+    // draw Popup
+    //=========================================================
     drawPopStageStr(dt);
     drawPopStepStr(dt);
 
@@ -402,6 +433,8 @@ void drawStage(float dt)
     drawPopOverStep(dt);
 }
 
+iPoint first;
+//#issue! keyInput Problem!!!
 void keyStage(iKeyStat stat, iPoint point)
 {
     if (keyPopOverStep(stat, point))
@@ -413,15 +446,40 @@ void keyStage(iKeyStat stat, iPoint point)
     if (keyPopBottomUI(stat, point))
         return;
 
+    float speed = 0;
     switch (stat) {
 
     case iKeyStatBegan:
+        first = point;
         break;
 
     case iKeyStatMoved:
+
         break;
 
     case iKeyStatEnded:
-        break;
+#if 0//(OS==OS_ANDROID)
+    {
+        loge("?????");
+        iPoint dp = point - first;
+        if (fabsf(dp.x) > fabsf(dp.y))
+        {
+            if (dp.x > 0)
+                charDir = 1;
+            else
+                charDir = 0;
+        }
+        else
+        {
+            if (dp.y > 0)
+                charDir = 2;
+            else
+                charDir = 3;
+        }
+    }
+
+#endif
+    break;
     }
 }
+

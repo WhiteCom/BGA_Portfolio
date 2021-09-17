@@ -46,6 +46,8 @@ void loadBattle()
 void freeBattle()
 {
 	delete bm;
+	freeBattlePopTopUI();
+	freeBattlePopBottomUI();
 }
 
 void drawBattle(float dt)

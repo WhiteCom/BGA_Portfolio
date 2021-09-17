@@ -41,6 +41,7 @@ public:
 extern Character* mainCharacter;
 extern Map* map;
 extern int step;
+extern int charDir;
 
 //void loadCharacter(iPoint off);
 //void drawCharacter(float dt, MapTile* currMap);
