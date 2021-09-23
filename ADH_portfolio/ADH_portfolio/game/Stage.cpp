@@ -132,6 +132,7 @@ StageInfo stageInfo[10] =
 #endif
 
 Texture** texs;
+Texture* texStage;
 Map* tEditor;
 iPoint off;
 iPoint tileOff;
@@ -141,7 +142,40 @@ int lastHeroIndex;
 int stageNum = 1;
 int step = INIT_STEP; //총 발걸음 수
 
-//#issue! tileWeight 가 현재 다 바뀌었음. 가중치가 00,00,00 이런식으로 쪼개져서 
+//Android 에서 drawStage 부분을 고쳐야 해서 이렇게 해봄
+Texture* createTexStage()
+{
+    iGraphics* g = iGraphics::share();
+    iSize size = iSizeMake(devSize.width, devSize.height);
+    g->init(size);
+
+    int x = tEditor->tileX;
+    int y = tEditor->tileY;
+    int tx = 8;
+
+#if (OS==OS_WINDOW)
+    igImage* img = g->createIgImage("assets/Image/Tile1.bmp");
+#elif (OS==OS_ANDROID)
+    igImage* img = g->createIgImage("Image/Tile1.bmp");
+#endif
+
+    for (int i = 0; i < x * y; i++)
+    {
+        //g->drawigImage(texs[tEditor->tileIndex[i]], (tileOff.x) + i % x * TILE_WSIZE, (tileOff.y) + i / x * TILE_HSIZE, TOP | LEFT);
+        //g->drawigImage(img, (tileOff.x) + (i % x) * TILE_WSIZE, (tileOff.y) + (i / x) * TILE_HSIZE, TOP | LEFT,
+        //               (tEditor->tileIndex[i] % tx) * TILE_WSIZE, (tEditor->tileIndex[i] / tx) * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE,
+        //               1.0f, 1.0f, 2, 0);
+        g->drawigImage(img, (tileOff.x) + i % x * TILE_WSIZE, tileOff.y + i / x * TILE_HSIZE, TOP | LEFT,
+            (tEditor->tileIndex[i] % tx) * TILE_WSIZE, (tEditor->tileIndex[i] / tx) * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE,
+            1.0f, 1.0f, 2, 0);
+        //g->fillRect((tileOff.x) + i % x * TILE_WSIZE, (tileOff.y) + i / x * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE, 4);
+    }
+
+    return g->getTexture();
+}
+
+
+//#issue! tileWeight 가 현재 다 바뀌었음. 가중치가 00,00,00 이런식으로 쪼개져서
 //타일, 적, 오브젝트 관계로 지어주고 있기에, 이에 따라 캐릭터 및 전투 이벤트를 바꿔줘야 함.
 void loadStage()
 {
@@ -166,7 +200,6 @@ void loadStage()
     tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
 
     tEditor->loadA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
-
 #if 1 //#test
     //map info
     for (int i = 0; i < TILE_W * TILE_H; i++)
@@ -183,6 +216,11 @@ void loadStage()
     int x = devSize.width / 2 - TILE_WSIZE * TILE_W / 2;
     int y = devSize.height / 2 - TILE_HSIZE * TILE_H / 2;
     tileOff = iPointMake(x, y);
+
+    //
+    // createTexStage
+    //
+    texStage = createTexStage();
 
     //메뉴에서 왔을 때
     if (fromMenu)
@@ -306,6 +344,8 @@ void freeStage()
 
     delete tEditor;
 
+    delete texStage;
+
     freeCharacter();
 
     //===============================================
@@ -356,17 +396,7 @@ void drawStage(float dt)
     int y = tEditor->tileY;
     lastHeroIndex = heroIndex();
 
-    for (int i = 0; i < x * y; i++)
-    {
-        if (tEditor->tileIndex[i] > -1)
-            drawImage(texs[tEditor->tileIndex[i]], (tileOff.x) + i % x * TILE_WSIZE, (tileOff.y) + i / x * TILE_HSIZE, TOP | LEFT);
-        else
-        {
-            setRGBA(1, 1, 1, 0.5f);
-            drawImage(texs[tEditor->tileIndex[i]], (tileOff.x) + i % x * TILE_WSIZE, (tileOff.y) + i / x * TILE_HSIZE, TOP | LEFT);
-            setRGBA(1, 1, 1, 1);
-        }
-    }
+    drawImage(texStage, 0, 0, TOP | LEFT);
 
     drawCharacter(dt, tileOff);
 
@@ -433,7 +463,7 @@ void drawStage(float dt)
     drawPopOverStep(dt);
 }
 
-iPoint first;
+iPoint first = iPointZero;
 //#issue! keyInput Problem!!!
 void keyStage(iKeyStat stat, iPoint point)
 {
@@ -458,26 +488,25 @@ void keyStage(iKeyStat stat, iPoint point)
         break;
 
     case iKeyStatEnded:
-#if 0//(OS==OS_ANDROID)
+#if (OS==OS_ANDROID)
     {
-        loge("?????");
         iPoint dp = point - first;
-        if (fabsf(dp.x) > fabsf(dp.y))
+
+        if (fabs(dp.x) > fabs(dp.y))
         {
             if (dp.x > 0)
-                charDir = 1;
+                charDir = 1; //right
             else
-                charDir = 0;
+                charDir = 0; //left
         }
         else
         {
             if (dp.y > 0)
-                charDir = 2;
+                charDir = 3; //up
             else
-                charDir = 3;
+                charDir = 2; //down
         }
     }
-
 #endif
     break;
     }

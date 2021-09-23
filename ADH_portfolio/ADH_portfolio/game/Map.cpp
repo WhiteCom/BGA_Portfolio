@@ -1,10 +1,10 @@
 #include "Map.h"
 
 #include "iStd.h"
-#include "iWindow.h"
+//#include "iWindow.h"
 #include "TileType.h"
 
-#include "Common.h"
+//#include "Common.h"
 
 Map::Map()
 {
@@ -48,7 +48,7 @@ void Map::clean()
 {
     if (tileIndex == NULL)
         return;
-    
+
     delete tileIndex;
     delete tileWeight;
 
@@ -57,7 +57,7 @@ void Map::clean()
 
 #if 1 //#issue!
     for (int i = 0; i < tileEnemy->eTypeNum; i++)
-        if(tileEnemy[i].eType)
+        if (tileEnemy[i].eType)
             delete tileEnemy[i].eType;
 #endif
     delete tileEnemy;
@@ -89,9 +89,9 @@ void Map::init(int x, int y, int w, int h)
     int i;
 
     tileIndex = new int[tileXY];
-    tileWeight = new int[tileXY]; 
+    tileWeight = new int[tileXY];
     tileEnemy = new enemyInfo[tileXY];
-    
+
 
     for (i = 0; i < tileXY; i++)
     {
@@ -122,6 +122,7 @@ void Map::load(const char* szFormat, ...)
     char szText[1024];
     va_start_end(szText, szFormat);
 
+#if (OS==OS_WINDOW)
     FILE* pf = fopen(szText, "rb");
     if (pf == NULL)
     {
@@ -136,7 +137,6 @@ void Map::load(const char* szFormat, ...)
     fread(&tileHeight, sizeof(int), 1, pf);
 
     int xy = tileX * tileY;
-    int i;
 
     tileIndex = new int[xy];
     fread(tileIndex, sizeof(int), xy, pf);
@@ -145,8 +145,38 @@ void Map::load(const char* szFormat, ...)
     tileEnemy = new enemyInfo[xy];
     fread(tileEnemy, sizeof(enemyInfo), xy, pf);
 
-
     fclose(pf);
+#elif (OS==OS_ANDROID)
+    int length, off = 0;
+
+    char* mapFile = loadFile(szText, length);
+
+    loge("Map Load : %s", mapFile);
+    //tileInfo
+    memcpy(&tileX, &mapFile[off], sizeof(int));
+    off += sizeof(int);
+    loge("off : %d", off);
+    memcpy(&tileY, &mapFile[off], sizeof(int));
+    off += sizeof(int);
+    memcpy(&tileWidth, &mapFile[off], sizeof(int));
+    off += sizeof(int);
+    memcpy(&tileHeight, &mapFile[off], sizeof(int));
+    off += sizeof(int);
+
+    int xy = tileX * tileY;
+
+    tileIndex = new int[xy];
+    memcpy(tileIndex, &mapFile[off], sizeof(int) * xy);
+    off += sizeof(int) * xy;
+    tileWeight = new int[xy];
+    memcpy(tileWeight, &mapFile[off], sizeof(int) * xy);
+    off += sizeof(int) * xy;
+    tileEnemy = new enemyInfo[xy];
+    memcpy(tileEnemy, &mapFile[off], sizeof(enemyInfo) * xy);
+    off += sizeof(enemyInfo) * xy;
+
+#endif
+
 }
 
 void Map::save(const char* str, ...)
@@ -217,8 +247,8 @@ void Map::saveA(char* buf)
     off += sizeof(int) * xy;
     memcpy(&buf[off], tileEnemy, sizeof(enemyInfo) * xy);
 
-//#issue! AppData    
-    //saveAppData();
+    //#issue! AppData    
+        //saveAppData();
 }
 #endif
 
@@ -232,9 +262,9 @@ void Map::insert(iPoint point, int type)
         tileIndex[xy] = selectedTile;
     if (selectedWeight > -1)
         tileWeight[xy] = selectedWeight;
-    
+
     //EnemyType
-    
+
     //#need update!
     if (tileEnemy)
     {
@@ -252,7 +282,7 @@ void Map::insert(iPoint point, int type)
             }
         }
     }
-    
+
 }
 
 void Map::remove(iPoint point)

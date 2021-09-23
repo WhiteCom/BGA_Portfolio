@@ -43,8 +43,6 @@ extern Map* map;
 extern int step;
 extern int charDir;
 
-//void loadCharacter(iPoint off);
-//void drawCharacter(float dt, MapTile* currMap);
 void loadCharacter(iPoint off, const char* str);
 void drawCharacter(float dt, iPoint off);
 void freeCharacter();

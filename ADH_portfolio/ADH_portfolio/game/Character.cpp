@@ -13,16 +13,11 @@ Character::Character()
 	iPoint startP = iPointMake(0, -20);
 
 	//24 * 32 imgs
-#if 0 //to do...
-	//Texture** texs = createImageAlphaDivide(12, 8, "assets/Image/CharSet/[瑛] 마리사 모션 (1).bmp");
-#else
-
 #if (OS==OS_WINDOW)
-	Texture** texs = createImageDivide(12, 8, "assets/Image/CharSet/Marisa1.bmp");
+	Texture** texs = createImageAlphaDivide(12, 8, "assets/Image/CharSet/[瑛] 마리사 모션 (1).bmp");
 #elif (OS==OS_ANDROID)
 	Texture** texs = createImageAlphaDivide(12, 8, "Image/CharSet/[瑛] 마리사 모션 (1).bmp");
 #endif //OS
-#endif
 
 	Texture* hero[24];
 
@@ -43,7 +38,7 @@ Character::Character()
 
 	//
 	//BehavWait
-	// 
+	//
 
 	imgs = new iImage * [BehaveMax];
 
@@ -129,12 +124,7 @@ void Character::paint(float dt, iPoint pos)
 
 	}
 
-#if 0 //적당한 사이즈의 이미지를 찾았을 경우
-	imgCurr->paint(dt, p - iPointMake(0, TILE_HSIZE / 2 - 6), iPointOne);
-#else
 	imgCurr->paint(dt, p - iPointMake(0, 0), iPointMake(1.3f, 1.3f));
-#endif
-
 }
 
 Character* mainCharacter;
@@ -155,12 +145,11 @@ int charDir = -1;
 void drawCharacter(float dt, iPoint off)
 {
 	//Step Over
-
 	iPoint v = iPointZero;
-	int x = mainCharacter->position.x; x /= TILE_WSIZE;
-	int y = mainCharacter->position.y; y /= TILE_HSIZE;
-	int _x = off.x; _x /= TILE_WSIZE;
-	int _y = off.y; _y /= TILE_HSIZE;
+	int x = (int)mainCharacter->position.x; x /= TILE_WSIZE;
+	int y = (int)mainCharacter->position.y; y /= TILE_HSIZE;
+	int _x = (int)off.x; _x /= TILE_WSIZE;
+	int _y = (int)off.y; _y /= TILE_HSIZE;
 	int xy = TILE_W * (y - _y) + (x - _x); //타일의 인덱스 값
 
 	int check;
@@ -198,7 +187,7 @@ void drawCharacter(float dt, iPoint off)
 	{
 		mainCharacter->moveDt = 0.0f;
 		mainCharacter->_moveDt = MOVE_TIME;
-		check = map->tileWeight[xy - 1];
+		check = (int)map->tileWeight[xy - 1];
 
 		if (x > 0 + _x && check != 9)
 		{
@@ -213,7 +202,7 @@ void drawCharacter(float dt, iPoint off)
 	{
 		mainCharacter->moveDt = 0.0f;
 		mainCharacter->_moveDt = MOVE_TIME;
-		check = map->tileWeight[xy + 1];
+		check = (int)map->tileWeight[xy + 1];
 
 		if (x < TILE_W - 1 + _x && check != 9)
 		{
@@ -228,7 +217,7 @@ void drawCharacter(float dt, iPoint off)
 	{
 		mainCharacter->moveDt = 0.0f;
 		mainCharacter->_moveDt = MOVE_TIME;
-		check = map->tileWeight[xy - TILE_W];
+		check = (int)map->tileWeight[xy - TILE_W];
 
 		if (y > 0 + _y && check != 9)
 		{
@@ -242,7 +231,7 @@ void drawCharacter(float dt, iPoint off)
 	{
 		mainCharacter->moveDt = 0.0f;
 		mainCharacter->_moveDt = MOVE_TIME;
-		check = map->tileWeight[xy + TILE_W];
+		check = (int)map->tileWeight[xy + TILE_W];
 
 		if (y < TILE_H - 1 + _y && check != 9)
 		{
@@ -251,6 +240,8 @@ void drawCharacter(float dt, iPoint off)
 			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkDown];
 		}
 	}
+	if (charDir != -1)
+		charDir = -1;
 
 	float mDt = mainCharacter->moveDt;
 	float _mDt = mainCharacter->_moveDt;
@@ -260,11 +251,6 @@ void drawCharacter(float dt, iPoint off)
 		{
 			v /= iPointLength(v);
 			mainCharacter->tPosition += v * 32; //타일크기만큼 움직이므로 dt 영향 x
-#if (OS==OS_WINDOW)
-			printf("now charcter pos : %.2f %.2f\n", mainCharacter->position.x, mainCharacter->position.y);
-#elif(OS==OS_ANDROID)
-			loge("now charcter pos : %.2f %.2f\n", mainCharacter->position.x, mainCharacter->position.y);
-#endif
 		}
 		mainCharacter->paint(dt, off);
 	}
@@ -275,7 +261,6 @@ void drawCharacter(float dt, iPoint off)
 		mainCharacter->imgCurr = mainCharacter->imgs[BehaveWait];
 		mainCharacter->paint(dt, off);
 	}
-
 }
 
 void freeCharacter()
