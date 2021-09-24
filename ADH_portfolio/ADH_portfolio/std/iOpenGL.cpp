@@ -23,13 +23,13 @@ void loadOpenGL(HDC hDC)
     hRC = wglCreateContext(hDC);
     wglMakeCurrent(hDC, hRC);
 
-    printf("Status: Using GL %s, GLEW %s\n",
+    xprint("Status: Using GL %s, GLEW %s\n",
         glGetString(GL_VERSION), glewGetString(GLEW_VERSION));
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
     if (GLEW_OK != err)
     {
-        printf("Error: %s\n", glewGetErrorString(err));
+        xprint("Error: %s\n", glewGetErrorString(err));
         return;
     }
 #if 1 // #add

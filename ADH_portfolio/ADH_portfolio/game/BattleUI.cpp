@@ -4,6 +4,9 @@
 #include "Loading.h"
 #include "Stage.h"
 #include "Ending.h"
+#if (OS==OS_ANDROID)
+#include "iNDK.h"
+#endif
 
 //========================================================
 // popTopUI : playTime, Btn(Menu, Inven, Option)
@@ -348,22 +351,41 @@ void BattleUnit::attack()
 
 BUMonster::BUMonster(int index) : BattleUnit(index)
 {
+#if (OS==OS_WINDOW)
 	const char* path[2][5] = {
 		{
 			"assets/Image/Monster/[Z] (異) 요우무.bmp",
 			"assets/Image/Monster/[Z] (異) 요우무 Ct.bmp",
 			"assets/Image/Monster/[Z] (異) 요우무 Ct.2.bmp",
-			"assets/Image/Monster/[Z] (異) 요우무 M.Sl(4).bmp",
+			"assets/Image/Monster/[Z] (異) 요우무 M.Sl (4).bmp",
 			"assets/Image/Monster/[Z] (異) 요우무.bmp"
 		},
 		{
 			"assets/Image/Monster/[Z] (異) 요우무.bmp",
 			"assets/Image/Monster/[Z] (異) 요우무 Ct.bmp",
 			"assets/Image/Monster/[Z] (異) 요우무 Ct.2.bmp",
-			"assets/Image/Monster/[Z] (異) 요우무 M.Sl(4).bmp",
+			"assets/Image/Monster/[Z] (異) 요우무 M.Sl (4).bmp",
 			"assets/Image/Monster/[Z] (異) 요우무.bmp"
 		},
 	};
+#elif (OS==OS_ANDROID)
+	const char* path[2][5] = {
+			{
+					"Image/Monster/[Z] (異) 요우무.bmp",
+					"Image/Monster/[Z] (異) 요우무 Ct.bmp",
+					"Image/Monster/[Z] (異) 요우무 Ct.2.bmp",
+					"Image/Monster/[Z] (異) 요우무 M.Sl (4).bmp",
+					"Image/Monster/[Z] (異) 요우무.bmp"
+			},
+			{
+					"Image/Monster/[Z] (異) 요우무.bmp",
+					"Image/Monster/[Z] (異) 요우무 Ct.bmp",
+					"Image/Monster/[Z] (異) 요우무 Ct.2.bmp",
+					"Image/Monster/[Z] (異) 요우무 M.Sl (4).bmp",
+					"Image/Monster/[Z] (異) 요우무.bmp"
+			},
+	};
+#endif
 	imgs = new iImage * [BehaveNum];
 	for (int i = 0; i < BehaveNum; i++)
 	{
@@ -547,13 +569,21 @@ BUHero::BUHero(int index) : BattleUnit(index)
 {
 	//#need update! add index & use index = char* => char** 
 	//24 * 32 img wc : 12, hc : 8
+#if (OS==OS_WINDOW)
 	const char* path[4] = {
 		"assets/Image/CharSet/마리사 공격모션 (1).bmp",
-		"assets/Image/CharSet/마을 주민(1).bmp",
+		"assets/Image/CharSet/마을 주민 (1).bmp",
 		"assets/Image/CharSet/메이라 공격모션 (1).bmp",
 		"assets/Image/CharSet/모코우 공격모션 (1).bmp",
 	};
-
+#elif (OS==OS_ANDROID)
+	const char* path[4] = {
+			"Image/CharSet/마리사 공격모션 (1).bmp",
+			"Image/CharSet/마을 주민 (1).bmp",
+			"Image/CharSet/메이라 공격모션 (1).bmp",
+			"Image/CharSet/모코우 공격모션 (1).bmp",
+	};
+#endif
 	imgs = new iImage * [BehaveNum];
 
 	Texture** texs = createImageAlphaDivide(12, 8, path[0]);
@@ -599,21 +629,15 @@ BUHero::BUHero(int index) : BattleUnit(index)
 	atk = MAX_AP;
 
 	enemyIndex = -1;
-
-	bp = new BattlePop();
-
-	bp->showPopBattle(false);
 }
 
 BUHero::~BUHero()
 {
-	delete bp;
 }
 
 float BUHero::update(float dt)
 {
 	//to do...
-	//printf("Hero Time\n");
 	return BattleUnit::update(dt);
 }
 
@@ -629,30 +653,34 @@ bool BUHero::paint(float dt, iPoint off, iPoint rate)
 
 bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 {
+	xprint("BUHero paint 000");
 	float atkTime = 0.0f;
 
 	iPoint tp = iPointZero;
 
 	bool dead = false; //default;
 
+	xprint("BUHero imgCurr : %d", imgCurr->tex);
+	xprint("BUHero imgCurr->width : %f", imgCurr->tex->width);
 	float imgW = imgCurr->tex->width;
 	float imgH = imgCurr->tex->height;
-
+	xprint("BUHero paint imgW, imgH : %f, %f", imgW, imgH);
 	iPoint center = off + iPointMake(-imgW / 2, -imgH / 2) * HERO_RATE;
 
-
+	xprint("BUHero paint 0011");
 	if (target && attacking)
 	{
 		iPoint tmpP = iPointZero;
 
-
 		//move
 		if (state == 0)
 		{
+			xprint("BUHero paint 1-1");
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = easeIn(attAniDt / HERO_MOVE_TIME, position, tmpP);
+			xprint("BUHero paint 1-2");
 
 			if (attAniDt >= HERO_MOVE_TIME)
 			{
@@ -667,11 +695,12 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 		//attack
 		else if (state == 1)
 		{
+			xprint("BUHero paint 2-1");
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = tmpP;
-
+			xprint("BUHero paint 2-2");
 
 			if (attAniDt >= HERO_ATK_TIME)
 			{
@@ -696,10 +725,12 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 		//back
 		else if (state == 2)
 		{
+			xprint("BUHero paint 3-1");
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = easeOut(attAniDt / (HERO_BACK_TIME), tmpP, _position);
+			xprint("BUHero paint 3-2");
 
 			if (attAniDt >= HERO_BACK_TIME)
 			{
@@ -714,26 +745,25 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 
 		}
 
+		xprint("BUHero paint 4-1");
 		imgCurr->paint(dt, tp + center, iPointMake(rx, ry));
+		xprint("BUHero paint 4-2");
 	}
 
 	else
 	{
 		state = 0;
 		attAniDt = 0.0f;
-
+		xprint("BUHero paint 5-1");
 		imgCurr->paint(dt, position + center, iPointMake(rx, ry));
+		xprint("BUHero paint 5-2");
 	}
+
+	xprint("BUHero paint 111");
 
 	//그려줄거 다 그려준 후
 
 	//overlay...drawing;;;
-	//if(enemyIndex == -1)
-	//{
-	// 화살표
-	//}
-	bp->paint(dt, position + iPointMake(0, -65));
-
 	if (hp == 0)
 		return true;
 	else
@@ -762,19 +792,10 @@ bool BUHero::keyHero(iKeyStat stat, iPoint point)
 {
 	bool result = false;
 
-	//#issue! 문제있는 코드!
-		//result = bp->keyPopBattle(stat, point);
-
 	switch (stat)
 	{
 	case iKeyStatBegan:
-	{
-		iSize imgSize = iSizeMake(imgCurr->tex->width, imgCurr->tex->height);
-		if (containPoint(point, imgCurr->touchRect(position, imgSize)))
-			result = bp->keyPopBattle(stat, point);
-	}
-
-	break;
+		break;
 	case iKeyStatMoved:
 		break;
 	case iKeyStatEnded:
@@ -799,6 +820,7 @@ BattleManager::BattleManager()
 #if 1
 	int enemyType = 0;
 	int heroType = 0;
+
 	enemy = new BUMonster * [enemyNum];
 	for (int i = 0; i < enemyNum; i++)
 	{
@@ -812,7 +834,6 @@ BattleManager::BattleManager()
 		int type = 0;
 		hero[i] = new BUHero(type);
 	}
-
 #endif
 
 	attacking = false;
@@ -831,6 +852,7 @@ BattleManager::~BattleManager()
 
 void BattleManager::paint(float dt)
 {
+	xprint("BattleManager paint 000");
 	iPoint off = iPointMake(devSize.width / 2, devSize.height / 2 - 120);
 
 	int i;
@@ -838,9 +860,9 @@ void BattleManager::paint(float dt)
 	//
 	//Enemy
 	//
+	iPoint enemP = iPointZero;
 	for (i = 0; i < enemyNum; i++)
 	{
-		iPoint enemP;
 		int offWidth = -250;
 		if (enemyNum == 1)
 			enemP = iPointMake(-250, 0);
@@ -874,7 +896,7 @@ void BattleManager::paint(float dt)
 			i--;
 		}
 	}
-
+	xprint("BattleManager paint 111");
 	//
 	//Hero
 	//
@@ -906,21 +928,24 @@ void BattleManager::paint(float dt)
 		else
 			heroP = iPointZero;
 
+		xprint("BattleManager paint 1-1");
 		hero[i]->position = off + heroP;
 		hero[i]->_position = off + heroP;
+		xprint("BattleManager paint 1-2");
 		if (hero[i]->paint(dt, iPointZero, HERO_RATE))
 		{
 			heroNum--;
 			hero[i] = hero[heroNum];
 			i--;
 		}
+		xprint("BattleManager paint 1-3");
 	}
-
+	xprint("BattleManager paint 222");
 
 	if (enemyNum == 0)
 	{
 		//win
-		printf("전투승리!\n");
+		xprint("전투승리!\n");
 
 		//to do... 승리 팝업
 		setLoading(gs_stage, freeBattle, loadStage);
@@ -929,7 +954,7 @@ void BattleManager::paint(float dt)
 	else if (heroNum == 0)
 	{
 		//lose
-		printf("전투패배!\n");
+		xprint("전투패배!\n");
 
 		//to do... 패배 팝업
 #if (OS==OS_WINDOW) //openAL
@@ -943,6 +968,7 @@ void BattleManager::paint(float dt)
 	float attRate = 0.0f;
 	float t = 0.0f;
 
+	xprint("BattleManager paint 333");
 	//key 처리
 #if 1
 	for (i = 0; i < heroNum; i++)
@@ -955,6 +981,7 @@ void BattleManager::paint(float dt)
 		}
 	}
 #endif
+	xprint("BattleManager paint 444");
 	for (i = 0; i < enemyNum; i++)
 	{
 		t = enemy[i]->update(dt);
@@ -964,7 +991,7 @@ void BattleManager::paint(float dt)
 			attRate = t;
 		}
 	}
-
+	xprint("BattleManager paint 555");
 	if (attacking)
 		return;
 
@@ -1035,225 +1062,4 @@ void TimeRate::paint(float dt, iPoint off, float attDt, float _attDt)
 		num = 10;
 
 	paint(dt, off, num);
-}
-
-// =============================================================
-// BattlePop
-// =============================================================
-
-void drawPopBeforeMethod(iPopup* pop, float dt, float rate);
-
-BattlePop::BattlePop()
-{
-	popNum = 1; //화살표, 팝업(공격, 방어)
-	show = false;
-	popBattle = new iPopup * [popNum];
-
-	iPopup* pop = new iPopup();
-
-	Texture* tex;
-	iImage* img;
-
-	//----------------------------------------------------------
-	// 화살표
-	//----------------------------------------------------------
-
-	iGraphics* g = iGraphics::share();
-	iSize size = iSizeMake(20, 20);
-	g->init(size);
-
-	igImage* igImg = g->createIgImage("assets/Image/arrow1.png");
-	for (int i = 0; i < 2; i++)
-	{
-		if (i == 0)
-		{
-			setRGBA(1, 1, 1, 0);
-			g->fillRect(0, 0, size.width, size.height);
-		}
-		else
-#if (OS==OS_WINDOW)
-			g->drawigImage(igImg, size.width / 2, size.height / 2, VCENTER | HCENTER,
-				0, 0, igImg->GetWidth(), igImg->GetHeight(), 0.5f, 0.5f, 2.0f, 0);
-#elif(OS==OS_ANDROID)
-			//#issue!
-			;
-#endif
-	}
-
-	tex = g->getTexture();
-	img = new iImage();
-	img->addObject(tex);
-	freeImage(tex);
-	img->position = iPointMake(-10, 0);
-	pop->addObject(img);
-
-	//----------------------------------------------------------
-	// 공격, 방어
-	//----------------------------------------------------------
-	imgBtns = new iImage * [4];
-
-	//
-	//Bg
-	//
-
-	size = iSizeMake(125, 50);
-	g->init(size);
-
-	setRGBA(0, 0, 0, 0.8);
-	g->fillRect(0, 0, size.width, size.height, 10);
-	setRGBA(1, 1, 1, 1);
-	g->drawRect(0, 0, size.width, size.height, 10);
-
-	iPoint btnBgP = iPointMake(-125 / 2, -50);
-
-	img = new iImage();
-	tex = g->getTexture();
-	img->addObject(tex);
-	freeImage(tex);
-	img->position = btnBgP; //화살표보단 조금 위에
-	pop->addObject(img);
-
-	//
-	//Btn
-	//
-
-	const char* icoPath[4] = {
-		"assets/Image/무기 아이콘1-2.png",
-		"assets/Image/방패 아이콘1-2.png",
-		"assets/Image/신발아이콘1-2.png",
-		"assets/Image/아이템 아이콘1-2.png",
-	};
-
-	for (int i = 0; i < 4; i++)
-	{
-		size = iSizeMake(22, 22);
-
-		for (int j = 0; j < 2; j++)
-		{
-			g->init(size);
-			img = new iImage();
-			if (j == 0)
-			{
-				setRGBA(0.5f, 0.5f, 0.5f, 1);
-				g->fillRect(0, 0, size.width, size.height, 3);
-			}
-			else
-			{
-				setRGBA(1, 1, 0, 1);
-				g->fillRect(0, 0, size.width, size.height, 3);
-			}
-			igImage* icoImg = g->createIgImage(icoPath[i]);
-			g->drawigImage(icoImg, size.width / 2, size.height / 2, VCENTER | HCENTER);
-			setRGBA(1, 1, 1, 1);
-
-			tex = g->getTexture();
-			img->addObject(tex);
-			freeImage(tex);
-		}
-		img->position = iPointMake(5 + (5 + 27 * i), 11) + btnBgP;
-		pop->addObject(img);
-
-		imgBtns[i] = img;
-	}
-
-	//#issue! 타입 캐스팅
-		//pop->methodBefore = (Pop_Draw_Method*)(popBeforeMethod);
-	pop->methodBefore = drawPopBeforeMethod;
-
-	popBattle[0] = pop;
-	//----------------------------------------------------------
-	// 적에게 활성화 되는 화살표 (공격버튼 눌렀을때 적용)
-	//----------------------------------------------------------
-
-
-}
-
-BattlePop::~BattlePop()
-{
-	for (int i = 0; i < popNum; i++)
-		delete popBattle[i];
-	delete popBattle;
-}
-
-static int selectBtn = -1; //imgBtns
-void BattlePop::paint(float dt, iPoint off)
-{
-	for (int i = 0; i < popNum; i++)
-	{
-		popBattle[i]->openPoint = off;
-		popBattle[i]->closePoint = off;
-
-		popBattle[i]->paint(dt);
-	}
-
-}
-
-
-void drawPopBeforeMethod(iPopup* pop, float dt, float rate)
-{
-	BattlePop* tmpPop;
-	for (int i = 0; i < bm->heroNum; i++)
-	{
-		tmpPop = bm->hero[i]->bp;
-
-		for (int j = 0; j < 4; j++)
-		{
-			int chk = j == tmpPop->popBattle[0]->selected ? 1 : 0;
-			tmpPop->imgBtns[j]->setTexObject(chk);
-		}
-	}
-}
-void BattlePop::popBeforeMethod(iPopup* pop, float dt, float rate)
-{
-
-}
-
-void BattlePop::popAfterMethod(iPopup* pop, float dt, float rate)
-{
-
-}
-
-void BattlePop::showPopBattle(bool check)
-{
-	for (int i = 0; i < popNum; i++)
-		popBattle[i]->show(check);
-}
-
-bool BattlePop::keyPopBattle(iKeyStat stat, iPoint point)
-{
-	int j = -1;
-
-	switch (stat)
-	{
-
-	case iKeyStatBegan:
-	{
-		//#need update! 공격상태창까지 고려하면 이렇게 짜면 안됨.
-		show = !show;
-		popBattle[0]->bShow = show;
-		showPopBattle(show);
-		return true;
-	}
-	break;
-
-	case iKeyStatMoved:
-
-		for (int i = 0; i < 4; i++)
-		{
-			if (containPoint(point, imgBtns[i]->touchRect(popBattle[0]->closePoint)))
-			{
-				j = i;
-				break;
-			}
-		}
-		if (popBattle[0]->selected != j)
-		{
-			popBattle[0]->selected = j;
-		}
-		break;
-
-	case iKeyStatEnded:
-		break;
-	}
-	return true;
 }

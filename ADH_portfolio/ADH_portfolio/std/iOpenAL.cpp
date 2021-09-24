@@ -26,14 +26,14 @@ iOpenAL::iOpenAL(int audioNum)
 			alGenBuffers(bufCount, gBuffer);
 			if ((error = alGetError()) != AL_NO_ERROR)
 			{
-				printf("Error alGenBuffers %d\n", error);
+				xprint("Error alGenBuffers %d\n", error);
 				return;
 			}
 
 			alGenSources(bufCount, gSource);
 			if ((error = alGetError()) != AL_NO_ERROR)
 			{
-				printf("Error alGenSources %d\n", error);
+				xprint("Error alGenSources %d\n", error);
 				return;
 			}
 		}
@@ -41,7 +41,7 @@ iOpenAL::iOpenAL(int audioNum)
 
 	// clean any errors
 #ifdef _DEBUG
-	printf("Clean any errors %d\n", alGetError());
+	xprint("Clean any errors %d\n", alGetError());
 #else
 	alGetError();
 #endif // _DEBUG
@@ -97,7 +97,7 @@ void iOpenAL::initBuffer(int idx, const char* szFormat, ...)
 	//	memcmp("WAVE", head0->wave, 4) ||
 	//	memcmp("fmt", head0->fmt, 4))// strcmp("fmt", head0->fmt)
 	//{
-	//	printf("Not wave file!!\n");
+	//	xprint("Not wave file!!\n");
 	//	return;
 	//}
 	WaveHeader1* head1 = (WaveHeader1*)&buf[sizeof(WaveHeader0) + (head0->fmtSize - 16)];
@@ -120,7 +120,7 @@ void iOpenAL::initBuffer(int idx, const char* szFormat, ...)
 	delete buf;
 	ALenum error;
 	if ((error = alGetError()) != AL_NO_ERROR)
-		printf("Error attaching audio to buffer: [%s] %x\n", szText, error);
+		xprint("Error attaching audio to buffer: [%s] %x\n", szText, error);
 }
 
 void iOpenAL::initSource(int idx, bool repeat)
@@ -138,7 +138,7 @@ void iOpenAL::initSource(int idx, bool repeat)
 	alSourcei(gSource[idx], AL_BUFFER, gBuffer[idx]);
 
 	if ((error = alGetError()) != AL_NO_ERROR)
-		printf("Error attaching buffer to source %x\n", error);
+		xprint("Error attaching buffer to source %x\n", error);
 }
 
 void iOpenAL::play(int idx, bool repeat)
@@ -148,7 +148,7 @@ void iOpenAL::play(int idx, bool repeat)
 	ALenum error;
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		printf("Error starting source: %x\n", error);
+		xprint("Error starting source: %x\n", error);
 	}
 }
 
@@ -159,7 +159,7 @@ void iOpenAL::pause(int idx)
 	ALenum error;
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		printf("Error Pause source: %x\n", error);
+		xprint("Error Pause source: %x\n", error);
 	}
 }
 
@@ -170,7 +170,7 @@ void iOpenAL::stop(int idx)
 	ALenum error;
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		printf("Error Stop source: %x\n", error);
+		xprint("Error Stop source: %x\n", error);
 	}
 }
 

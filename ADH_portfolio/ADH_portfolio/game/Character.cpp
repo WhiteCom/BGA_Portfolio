@@ -153,93 +153,95 @@ void drawCharacter(float dt, iPoint off)
 	int xy = TILE_W * (y - _y) + (x - _x); //타일의 인덱스 값
 
 	int check;
-
-#if (OS==OS_WINDOW)
-	if (loadingDt == 0.0f &&
-		mainCharacter->moveDt == MOVE_TIME &&
-		step > 0)
+	if (loadingDt == 0.0f)
 	{
+#if (OS==OS_WINDOW)
+		if (mainCharacter->moveDt == MOVE_TIME &&
+			step > 0)
+		{
 		if (keyDown & keysA || keyDown & keysLeft)
 		{
-			printf("left\n");
+			xprint("left\n");
 			charDir = 0;
 		}
 		else if (keyDown & keysD || keyDown & keysRight)
 		{
-			printf("right\n");
+			xprint("right\n");
 			charDir = 1;
 		}
 		else if (keyDown & keysW || keyDown & keysUp)
 		{
-			printf("Up\n");
+			xprint("Up\n");
 			charDir = 2;
 		}
 		else if (keyDown & keysS || keyDown & keysDown)
 		{
-			printf("Down\n");
+			xprint("Down\n");
 			charDir = 3;
 		}
-	}
+		}
 #elif (OS==OS_ANDROID)
-	// keyStage에서 처리
+		// keyStage에서 처리
 #endif
-	if (charDir == 0)
-	{
-		mainCharacter->moveDt = 0.0f;
-		mainCharacter->_moveDt = MOVE_TIME;
-		check = (int)map->tileWeight[xy - 1];
-
-		if (x > 0 + _x && check != 9)
+		if (charDir == 0)
 		{
-			v.x = -1;
-			mainCharacter->be = BehaveWalkLeft;
-			mainCharacter->leftRight = 0;
-			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkLeft];
+			mainCharacter->moveDt = 0.0f;
+			mainCharacter->_moveDt = MOVE_TIME;
+			check = (int)map->tileWeight[xy - 1];
+
+			if (x > 0 + _x && check != 9)
+			{
+				v.x = -1;
+				mainCharacter->be = BehaveWalkLeft;
+				mainCharacter->leftRight = 0;
+				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkLeft];
+			}
 		}
-	}
 
-	else if (charDir == 1)
-	{
-		mainCharacter->moveDt = 0.0f;
-		mainCharacter->_moveDt = MOVE_TIME;
-		check = (int)map->tileWeight[xy + 1];
-
-		if (x < TILE_W - 1 + _x && check != 9)
+		else if (charDir == 1)
 		{
-			v.x = 1;
-			mainCharacter->be = BehaveWalkRight;
-			mainCharacter->leftRight = 1;
-			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkRight];
+			mainCharacter->moveDt = 0.0f;
+			mainCharacter->_moveDt = MOVE_TIME;
+			check = (int)map->tileWeight[xy + 1];
+
+			if (x < TILE_W - 1 + _x && check != 9)
+			{
+				v.x = 1;
+				mainCharacter->be = BehaveWalkRight;
+				mainCharacter->leftRight = 1;
+				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkRight];
+			}
 		}
-	}
 
-	else if (charDir == 2)
-	{
-		mainCharacter->moveDt = 0.0f;
-		mainCharacter->_moveDt = MOVE_TIME;
-		check = (int)map->tileWeight[xy - TILE_W];
-
-		if (y > 0 + _y && check != 9)
+		else if (charDir == 2)
 		{
-			v.y = -1;
-			mainCharacter->be = BehaveWalkUp;
-			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkUp];
+			mainCharacter->moveDt = 0.0f;
+			mainCharacter->_moveDt = MOVE_TIME;
+			check = (int)map->tileWeight[xy - TILE_W];
+
+			if (y > 0 + _y && check != 9)
+			{
+				v.y = -1;
+				mainCharacter->be = BehaveWalkUp;
+				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkUp];
+			}
 		}
-	}
 
-	else if (charDir == 3)
-	{
-		mainCharacter->moveDt = 0.0f;
-		mainCharacter->_moveDt = MOVE_TIME;
-		check = (int)map->tileWeight[xy + TILE_W];
-
-		if (y < TILE_H - 1 + _y && check != 9)
+		else if (charDir == 3)
 		{
-			v.y = 1;
-			mainCharacter->be = BehaveWalkDown;
-			mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkDown];
+			mainCharacter->moveDt = 0.0f;
+			mainCharacter->_moveDt = MOVE_TIME;
+			check = (int)map->tileWeight[xy + TILE_W];
+
+			if (y < TILE_H - 1 + _y && check != 9)
+			{
+				v.y = 1;
+				mainCharacter->be = BehaveWalkDown;
+				mainCharacter->imgCurr = mainCharacter->imgs[BehaveWalkDown];
+			}
 		}
-	}
+	} // if(loadingDt == 0)
+
 	if (charDir != -1)
 		charDir = -1;
 

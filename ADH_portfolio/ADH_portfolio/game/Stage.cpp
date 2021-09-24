@@ -204,12 +204,8 @@ void loadStage()
     //map info
     for (int i = 0; i < TILE_W * TILE_H; i++)
     {
-        if (i % TILE_W == 0) printf("\n");
-#if (OS==OS_WINDOW)
-        printf("%d ", tEditor->tileWeight[i]);
-#elif (OS==OS_ANDROID)
-        //loge("%d ",tEditor->tileWeight[i]);
-#endif
+        if (i % TILE_W == 0) xprint("\n");
+        xprint("%d ", tEditor->tileWeight[i]);
     }
 #endif
 
@@ -293,12 +289,9 @@ void loadStage()
         }
         else
         {
-#if(OS==OS_WINDOW)
             //배틀에서 다시 왔을때
-            printf("critical error.....+ exception cave\n");
-#elif(OS==OS_ANDROID)
-            loge("critical error..... + exception cave\n");
-#endif
+            xprint("critical error.....+ exception cave\n");
+
             off = iPointMake(x + lastX * TILE_WSIZE, y + lastY * TILE_HSIZE);
         }
     }
@@ -443,7 +436,7 @@ void drawStage(float dt)
     {
         tEditor->tileWeight[newHeroIndex] = 1;
         tEditor->saveA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
-#if 0 //#loadBattle
+#if 1 //#loadBattle
         setLoading(gs_battle, freeStage, loadBattle);
 #endif
     }
@@ -464,7 +457,6 @@ void drawStage(float dt)
 }
 
 iPoint first = iPointZero;
-//#issue! keyInput Problem!!!
 void keyStage(iKeyStat stat, iPoint point)
 {
     if (keyPopOverStep(stat, point))
@@ -476,7 +468,6 @@ void keyStage(iKeyStat stat, iPoint point)
     if (keyPopBottomUI(stat, point))
         return;
 
-    float speed = 0;
     switch (stat) {
 
     case iKeyStatBegan:

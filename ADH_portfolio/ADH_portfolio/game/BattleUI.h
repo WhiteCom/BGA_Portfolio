@@ -56,13 +56,13 @@ struct BattleUnit
 {
 	BattleUnit(int index);
 	virtual ~BattleUnit();
-	
+
 	virtual float update(float dt);
 	virtual bool paint(float dt, iPoint off) = 0;
 	virtual bool paint(float dt, iPoint off, iPoint rate) = 0;
 	virtual bool paint(float dt, iPoint off, float rx, float ry) = 0;
 	virtual void attack();
-	
+
 
 	int index;
 	iImage** imgs;
@@ -102,9 +102,9 @@ struct BUHero : BattleUnit
 	virtual bool paint(float dt, iPoint off, float rx, float ry);
 	virtual void attack();
 	virtual bool keyHero(iKeyStat stat, iPoint p);
-	
+
 	int enemyIndex;// default -1
-	
+
 	BattlePop* bp;
 };
 
@@ -118,7 +118,7 @@ struct BattleManager
 
 	void paint(float dt);
 
-	BUMonster** enemy, *_enemy;
+	BUMonster** enemy, * _enemy;
 	int enemyNum, _enemyNum;
 	BUHero** hero, * _hero;
 	int heroNum, _heroNum;
@@ -147,25 +147,3 @@ public:
 	Texture** texTick;
 };
 
-//=============================================
-// BattlePop
-//=============================================
-
-class BattlePop
-{
-public:
-	BattlePop();
-	virtual ~BattlePop();
-
-	void paint(float dt, iPoint off);
-	void popBeforeMethod(iPopup* pop, float dt, float rate);
-	void popAfterMethod(iPopup* pop, float dt, float rate);
-	void showPopBattle(bool check);
-	bool keyPopBattle(iKeyStat stat, iPoint p);
-	
-public:
-	iPopup** popBattle;
-	iImage** imgBtns;
-	int popNum;
-	bool show;
-};

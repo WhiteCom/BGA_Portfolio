@@ -152,29 +152,29 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
     float right = 0.0;
     float top = devSize.height;
     float bottom = 0.0;
-    loge("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
+    xprint("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
 
     for (int i = 0; i < pop->arrayImg->count; i++)
     {
-        loge("i : %d", i);
+        xprint("i : %d", i);
         iImage* img = (iImage*)pop->arrayImg->objectAtIndex(i);
-        loge("keyTopUI img : %d", img);
+        xprint("keyTopUI img : %d", img);
         if (img == NULL)
         {
             continue;
         }
         Texture* tex = img->tex;
-        loge("keyTopUI tex : %d", tex);
+        xprint("keyTopUI tex : %d", tex);
         if (tex == NULL)
         {
             continue;
         }
-        loge("img position, tex->width : %f %f", img->position.x, tex->width);
+        xprint("img position, tex->width : %f %f", img->position.x, tex->width);
         if (left > img->position.x)
         {
             left = img->position.x;
         }
-        loge("img position, tex->width : %f %f", img->position.x, tex->width);
+        xprint("img position, tex->width : %f %f", img->position.x, tex->width);
         if (right < img->position.x + tex->width)
         {
             right = img->position.x + tex->width;
@@ -187,10 +187,10 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         {
             bottom = img->position.x + tex->height;
         }
-        loge("l r t b : %f %f %f %f", left, right, top, bottom);
+        xprint("l r t b : %f %f %f %f", left, right, top, bottom);
     }
     iRect rt = iRectMake(left, top, right - left, bottom - top);
-    loge("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
+    xprint("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
     if (containPoint(point, rt) == false)
         return false;
 #else
@@ -198,8 +198,9 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
     //    return false;
 #endif
     if (pop->stat != iPopupProc)
+    {
         return true;
-
+    }
     int i, j = -1;
 
     switch (stat)
@@ -241,35 +242,25 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         if (i == 0)
         {
-            loge("Setting");
-            //showPopOverStep(false);
+            xprint("Setting");
 
             showPopSetting(true);
-            //showPopStageHow(false);
-            //showPopInven(false);
         }
         else if (i == 1)
         {
 
-            loge("How");
-            //showPopOverStep(false);
+            xprint("How");
 
-            //showPopSetting(false);
             showPopStageHow(true);
-            //showPopInven(false);
         }
         else //if (i == 2)
         {
-            loge("Inven");
-            //showPopOverStep(false);
+            xprint("Inven");
 
-            //showPopSetting(false);
-            //showPopStageHow(false);
             showPopInven(true);
         }
         break;
     }
-
     return false;
 }
 
@@ -305,35 +296,23 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         if (pop->selected == 0)
         {
-            printf("Setting\n");
+            xprint("Setting\n");
             pop->selected = -1;
 
-            //showPopOverStep(false);
-
             showPopSetting(true);
-            //showPopStageHow(false);
-            //showPopInven(false);
         }
         else if (pop->selected == 1)
         {
-            printf("How\n");
+            xprint("How\n");
             pop->selected = -1;
 
-            //showPopOverStep(false);
-
-            //showPopSetting(false);
             showPopStageHow(true);
-            //showPopInven(false);
         }
         else //if (pop->selected == 2)
         {
-            printf("Inven\n");
+            xprint("Inven\n");
             pop->selected = -1;
 
-            //showPopOverStep(false);
-
-            //showPopSetting(false);
-            //showPopStageHow(false);
             showPopInven(true);
         }
         break;
@@ -360,7 +339,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         break;
     }
 
-    return false;
+    return true;
 }
 #endif
 
@@ -528,22 +507,18 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
 
         else if (pop->selected == 0) //Resume
         {
-            //printf("Stage Resume\n");
             showPopSetting(false);
         }
         else if (pop->selected == 1) //Menu
         {
-            //printf("Stage Menu\n");
             setLoading(gs_menu, freeStage, loadMenu);
         }
         else if (pop->selected == 2) //Option
         {
-            //printf("Stage Option\n");
             showPopSetting(false);
         }
         else if (pop->selected == 3) //Exit
         {
-            //printf("Stage Exit\n");
             showPopSetting(false);
         }
 
@@ -655,7 +630,7 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         }
         break;
     }
-    return false;
+    return true;
 }
 #endif
 
@@ -1334,7 +1309,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
 
         if (pop->selected == 0)
         {
-            //printf("예\n");
+            //xprint("예\n");
 #if (OS==OS_WINDOW)
             //프로그램 종료
             runWnd = false;
@@ -1344,7 +1319,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         }
         else //if (pop->selected == 1)
         {
-            //printf("아니요\n");
+            //xprint("아니요\n");
             showPopStageExit(false);
         }
         break;

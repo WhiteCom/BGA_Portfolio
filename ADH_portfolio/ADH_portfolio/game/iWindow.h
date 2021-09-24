@@ -11,6 +11,7 @@
 //#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 #endif
 
+
 extern Graphics* graphics;
 
 void startApp(HDC hdc, VOID_METHOD m);

@@ -126,7 +126,7 @@ void Map::load(const char* szFormat, ...)
     FILE* pf = fopen(szText, "rb");
     if (pf == NULL)
     {
-        printf("No File!");
+        xprint("No File!");
         return;
     }
 
@@ -151,11 +151,9 @@ void Map::load(const char* szFormat, ...)
 
     char* mapFile = loadFile(szText, length);
 
-    loge("Map Load : %s", mapFile);
     //tileInfo
     memcpy(&tileX, &mapFile[off], sizeof(int));
     off += sizeof(int);
-    loge("off : %d", off);
     memcpy(&tileY, &mapFile[off], sizeof(int));
     off += sizeof(int);
     memcpy(&tileWidth, &mapFile[off], sizeof(int));

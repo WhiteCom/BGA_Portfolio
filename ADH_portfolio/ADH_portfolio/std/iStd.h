@@ -43,6 +43,13 @@
 //for openAL
 #define SOUND_NUM 7
 
+//OS : Android / Window
+#ifdef loge
+#define xprint loge
+#else
+#define xprint printf
+#endif
+
 extern iSize devSize;
 extern iRect viewport;
 

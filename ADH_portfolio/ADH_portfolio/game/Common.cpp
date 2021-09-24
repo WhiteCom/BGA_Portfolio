@@ -30,7 +30,7 @@ void loadMapData()
 	{
 		char strMap[128];
 		sprintf(strMap, "map/map%d.tile", i);
-		
+
 		int tmpLen;
 		char* tmpBuf = loadFile(strMap, tmpLen);
 
@@ -51,8 +51,10 @@ void callAppData()
 {
 	AppData* ad = new AppData();
 
+#if 0 //#openAL
 	ad->eff = 1.0f;
 	ad->bgm = 1.0f;
+#endif
 
 	appData = ad;
 }
@@ -61,10 +63,11 @@ void callMapData()
 {
 	AppData* ad = new AppData();
 
+#if 0 //#openAL
 	ad->eff = appData->eff;
 	ad->bgm = appData->bgm;
+#endif
 	memset(ad->mapData, 0x00, sizeof(MAP_FILE_SIZE * MAP_NUM));
-
 	int bufOff = 0;
 	// 3088 + dummy = MAP_FILE_SIZE
 	for (int i = 0; i < MAP_NUM; i++)
@@ -74,17 +77,22 @@ void callMapData()
 
 		char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
 		int len;
+#if (OS==OS_WINDOW)
 		char* b = loadFile(s, len);
+#elif (OS==OS_ANDROID)
+		//char* b = getStream(s, len);
+		char* b = loadFile(s, len);
+#endif
 		memcpy(a, b, len);
 		a[len] = 0;
 
 		bufOff += MAP_FILE_SIZE;
-		printf("a : %s\n", a);
+		xprint("a : %s\n", a);
+
 		delete b;
 	}
 	appData = ad;
-
-	printf("Appdata->mapdata : %s\n", appData->mapData);
+	xprint("Appdata->mapdata : %s\n", appData->mapData);
 }
 
 void saveAppData()
@@ -97,3 +105,38 @@ void freeAppData()
 {
 	delete appData;
 }
+
+#if 0 //Test File I/O
+struct AAA
+{
+	int len;
+	char* buf;
+};
+void prevCode(const char* fileName)
+{
+	AAA a;
+
+	FILE* pf = fopen(fileName, "rb");
+	fread(&a.len, 1, sizeof(int), pf);
+	a.buf = new char[a.len];
+	fread(a.buf, 1, sizeof(char) * a.len, pf);
+	fclose(pf);
+}
+
+void currCode(const char* fileName)
+{
+	int len;
+	char* buf = getStream(fileName, len);
+	int off = 0;
+
+	AAA a;
+	memcpy(&a.len, &buf[off], sizeof(int)); off += sizeof(int);
+	a.buf = new char[a.len];
+	memcpy(a.buf, &buf[off], sizeof(char) * a.len); off += sizeof(char) * a.len;
+
+}
+#endif
+
+
+
+

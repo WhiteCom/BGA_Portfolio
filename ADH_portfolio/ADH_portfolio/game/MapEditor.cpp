@@ -567,7 +567,7 @@ char* openFile(bool open, LPCWSTR filter)
         wsprintf(szFile, TEXT("%s"), ofn.lpstrFile);
         path = utf16_to_utf8(ofn.lpstrFile);
 #ifdef _DEBUG
-        printf("path[%s]\n", path);
+        xprint("path[%s]\n", path);
 #endif
 
         SetCurrentDirectory(currPath);
@@ -701,7 +701,7 @@ void keyMapEditor(iKeyStat stat, iPoint point)
             for (int i = 0; i < TILE_W * TILE_H; i++)
             {
                 if (i % TILE_W == 0) printf("\n");
-                printf("%d ", tEditor->tileWeight[i]);
+                xprint("%d ", tEditor->tileWeight[i]);
             }
 
             //편집영역에 로드 파일을 옮기는 용도

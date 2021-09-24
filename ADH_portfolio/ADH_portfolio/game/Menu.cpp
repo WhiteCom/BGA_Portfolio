@@ -56,7 +56,7 @@ void keyMenu(iKeyStat stat, iPoint point)
 	switch (stat)
 	{
 	case iKeyStatBegan :
-		printf("menu began (%f, %f)\n", point.x, point.y);
+		xprint("menu began (%f, %f)\n", point.x, point.y);
 		break;
 	case iKeyStatMoved:
 		break;

@@ -141,12 +141,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         sizeMonitor = iSizeMake(GetSystemMetrics(SM_CXSCREEN),
                                 GetSystemMetrics(SM_CYSCREEN));
-        printf("monitor : %.f %.f\n", sizeMonitor.width, sizeMonitor.height);
+        xprint("monitor : %.f %.f\n", sizeMonitor.width, sizeMonitor.height);
 
         RECT rt;
-        GetWindowRect(hwnd, &rt); printf("wrt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
+        GetWindowRect(hwnd, &rt); xprint("wrt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
         RECT rtWnd = rt;
-        GetClientRect(hwnd, &rt); printf("crt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
+        GetClientRect(hwnd, &rt); xprint("crt : %d %d %d %d\n", rt.left, rt.top, rt.right, rt.bottom);
         win_border_width = (rtWnd.right - rtWnd.left) - (rt.right - rt.left);
         win_border_height = (rtWnd.bottom - rtWnd.top) - (rt.bottom - rt.top);
         //GetSystemMetrics(SM_CXFRAME) * 2;
