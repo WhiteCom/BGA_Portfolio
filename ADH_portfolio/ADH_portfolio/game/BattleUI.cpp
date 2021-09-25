@@ -653,21 +653,16 @@ bool BUHero::paint(float dt, iPoint off, iPoint rate)
 
 bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 {
-	xprint("BUHero paint 000");
 	float atkTime = 0.0f;
 
 	iPoint tp = iPointZero;
 
 	bool dead = false; //default;
 
-	xprint("BUHero imgCurr : %d", imgCurr->tex);
-	xprint("BUHero imgCurr->width : %f", imgCurr->tex->width);
 	float imgW = imgCurr->tex->width;
 	float imgH = imgCurr->tex->height;
-	xprint("BUHero paint imgW, imgH : %f, %f", imgW, imgH);
 	iPoint center = off + iPointMake(-imgW / 2, -imgH / 2) * HERO_RATE;
 
-	xprint("BUHero paint 0011");
 	if (target && attacking)
 	{
 		iPoint tmpP = iPointZero;
@@ -675,12 +670,10 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 		//move
 		if (state == 0)
 		{
-			xprint("BUHero paint 1-1");
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = easeIn(attAniDt / HERO_MOVE_TIME, position, tmpP);
-			xprint("BUHero paint 1-2");
 
 			if (attAniDt >= HERO_MOVE_TIME)
 			{
@@ -695,12 +688,10 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 		//attack
 		else if (state == 1)
 		{
-			xprint("BUHero paint 2-1");
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = tmpP;
-			xprint("BUHero paint 2-2");
 
 			if (attAniDt >= HERO_ATK_TIME)
 			{
@@ -725,12 +716,10 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 		//back
 		else if (state == 2)
 		{
-			xprint("BUHero paint 3-1");
 			attAniDt += dt;
 
 			tmpP = target->position - iPointMake(-50, 0);
 			tp = easeOut(attAniDt / (HERO_BACK_TIME), tmpP, _position);
-			xprint("BUHero paint 3-2");
 
 			if (attAniDt >= HERO_BACK_TIME)
 			{
@@ -745,21 +734,15 @@ bool BUHero::paint(float dt, iPoint off, float rx, float ry)
 
 		}
 
-		xprint("BUHero paint 4-1");
 		imgCurr->paint(dt, tp + center, iPointMake(rx, ry));
-		xprint("BUHero paint 4-2");
 	}
 
 	else
 	{
 		state = 0;
 		attAniDt = 0.0f;
-		xprint("BUHero paint 5-1");
 		imgCurr->paint(dt, position + center, iPointMake(rx, ry));
-		xprint("BUHero paint 5-2");
 	}
-
-	xprint("BUHero paint 111");
 
 	//그려줄거 다 그려준 후
 
@@ -852,7 +835,6 @@ BattleManager::~BattleManager()
 
 void BattleManager::paint(float dt)
 {
-	xprint("BattleManager paint 000");
 	iPoint off = iPointMake(devSize.width / 2, devSize.height / 2 - 120);
 
 	int i;
@@ -896,7 +878,6 @@ void BattleManager::paint(float dt)
 			i--;
 		}
 	}
-	xprint("BattleManager paint 111");
 	//
 	//Hero
 	//
@@ -928,19 +909,15 @@ void BattleManager::paint(float dt)
 		else
 			heroP = iPointZero;
 
-		xprint("BattleManager paint 1-1");
 		hero[i]->position = off + heroP;
 		hero[i]->_position = off + heroP;
-		xprint("BattleManager paint 1-2");
 		if (hero[i]->paint(dt, iPointZero, HERO_RATE))
 		{
 			heroNum--;
 			hero[i] = hero[heroNum];
 			i--;
 		}
-		xprint("BattleManager paint 1-3");
 	}
-	xprint("BattleManager paint 222");
 
 	if (enemyNum == 0)
 	{
@@ -968,7 +945,6 @@ void BattleManager::paint(float dt)
 	float attRate = 0.0f;
 	float t = 0.0f;
 
-	xprint("BattleManager paint 333");
 	//key 처리
 #if 1
 	for (i = 0; i < heroNum; i++)
@@ -981,7 +957,6 @@ void BattleManager::paint(float dt)
 		}
 	}
 #endif
-	xprint("BattleManager paint 444");
 	for (i = 0; i < enemyNum; i++)
 	{
 		t = enemy[i]->update(dt);
@@ -991,7 +966,6 @@ void BattleManager::paint(float dt)
 			attRate = t;
 		}
 	}
-	xprint("BattleManager paint 555");
 	if (attacking)
 		return;
 

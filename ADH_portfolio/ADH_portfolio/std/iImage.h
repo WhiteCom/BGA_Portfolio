@@ -3,10 +3,9 @@
 #include "iType.h"
 #include "iArray.h"
 #include "iPoint.h"
-#include "iSize.h"
-#include "iRect.h"
 
-#include <stdio.h>
+#include "iRect.h"
+#include "iSize.h"
 
 typedef void (*ANIMATION_METHOD)(void* parm);
 
@@ -26,23 +25,26 @@ public:
 	void stopAnimation();
 
 	void paint(float dt, iPoint off, iPoint rate);
-	void paint(float dt, iPoint off, float rx, float ry);
 	void paint(float dt, float x, float y, float sx, float sy);
 
 	iImage* copy();
+
 public:
 	iArray* arrayTex;
 	Texture* tex;
 
 	bool ani;
-	uint8 repeatNum, repeatIdx;
-	uint8 frame, lastframe;
+	uint8 repeatNum, repeatIdx;// 0-: inf
+	uint8 frame, lastFrame;
 	float _delta, delta;
 
 	iPoint position;
 	int anc;
 	int8 reverse;
+	float alpha;
+	float degree;
 
 	ANIMATION_METHOD method;
 	void* parm;
 };
+
