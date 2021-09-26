@@ -77,12 +77,7 @@ void callMapData()
 
 		char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
 		int len;
-#if (OS==OS_WINDOW)
 		char* b = loadFile(s, len);
-#elif (OS==OS_ANDROID)
-		//char* b = getStream(s, len);
-		char* b = loadFile(s, len);
-#endif
 		memcpy(a, b, len);
 		a[len] = 0;
 
