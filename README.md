@@ -1,4 +1,4 @@
-# WINAPI_Portfolio -> BGA_Game_portfolio(21.7.12)
+# BGA_Game_portfolio
 
 #If you uese this Proejct, First Change Directory Setting 
 
