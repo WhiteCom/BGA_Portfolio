@@ -75,3 +75,6 @@
 
 #2021-09-24
 - update MenuUI, StageUI, BattleUI, Character Files
+
+#2021-09-26
+- add Android project (in ADH_Android directory)
