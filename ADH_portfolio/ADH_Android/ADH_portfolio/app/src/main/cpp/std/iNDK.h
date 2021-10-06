@@ -98,3 +98,8 @@ jobject ndkCreateRect();
 iRect ndkGetRect(jobject rt);
 iRect ndkRectOfString(jobject paint, const char* str);
 void ndkDrawChar(jobject canvas, const char* szText, float x, float y, jobject paint);
+
+// ----------------------------------------------------
+// Activity method
+// ----------------------------------------------------
+void ndkShutDownApp();

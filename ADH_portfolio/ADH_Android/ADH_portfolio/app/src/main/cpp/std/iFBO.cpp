@@ -32,7 +32,7 @@ iFBO::iFBO(int width, int height)
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (status != GL_FRAMEBUFFER_COMPLETE)
-		xprint("glCheckFramebufferStatus %d, %d\n", GL_FRAMEBUFFER_COMPLETE, status);
+		//xprint("glCheckFramebufferStatus %d, %d\n", GL_FRAMEBUFFER_COMPLETE, status);
 	clear(0, 0, 0, 0);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

@@ -190,7 +190,7 @@ bool iPage::key(iKeyStat stat, iPoint point)
 		touching = false;
 		if (moved == false)
 		{
-			xprint("click\n");
+			//xprint("click\n");
 		}
 		moved = false;
 		break;

@@ -53,7 +53,6 @@ void loadIntro()
 	texIntro = g->getTexture();
 #endif
 	viewDt = 0.0f;
-
 }
 
 void freeIntro()

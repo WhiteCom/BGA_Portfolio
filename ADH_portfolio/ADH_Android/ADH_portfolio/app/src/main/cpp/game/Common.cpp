@@ -51,7 +51,7 @@ void callAppData()
 {
 	AppData* ad = new AppData();
 
-#if 0 //#openAL
+#if 1 //#openAL
 	ad->eff = 1.0f;
 	ad->bgm = 1.0f;
 #endif
@@ -63,7 +63,7 @@ void callMapData()
 {
 	AppData* ad = new AppData();
 
-#if 0 //#openAL
+#if 1 //#openAL
 	ad->eff = appData->eff;
 	ad->bgm = appData->bgm;
 #endif
@@ -77,29 +77,24 @@ void callMapData()
 
 		char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
 		int len;
-#if (OS==OS_WINDOW)
-		char* b = loadFile(s, len);
-#elif (OS==OS_ANDROID)
-        //char* b = getStream(s, len);
         char* b = loadFile(s, len);
-#endif
 		memcpy(a, b, len);
 		a[len] = 0;
 
 		bufOff += MAP_FILE_SIZE;
-		xprint("a : %s\n", a);
+		//xprint("a : %s\n", a);
 
 		delete b;
 	}
 	appData = ad;
-	xprint("Appdata->mapdata : %s\n", appData->mapData);
+	//xprint("Appdata->mapdata : %s\n", appData->mapData);
 }
 
 void saveAppData()
 {
 	saveFile(APP_DATA_PATH, (char*)appData, sizeof(AppData));
 }
-#endif
+#endif //#need update! chanage file format no use save.dat
 
 void freeAppData()
 {

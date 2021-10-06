@@ -152,29 +152,29 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
     float right = 0.0;
     float top = devSize.height;
     float bottom = 0.0;
-    xprint("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
+    //xprint("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
 
     for(int i=0; i<pop->arrayImg->count; i++)
     {
-        xprint("i : %d", i);
+        //xprint("i : %d", i);
         iImage* img = (iImage*)pop->arrayImg->objectAtIndex(i);
-        xprint("keyTopUI img : %d", img);
+        //xprint("keyTopUI img : %d", img);
         if( img==NULL )
         {
             continue;
         }
         Texture* tex = img->tex;
-        xprint("keyTopUI tex : %d", tex);
+        //xprint("keyTopUI tex : %d", tex);
         if( tex==NULL )
         {
             continue;
         }
-        xprint("img position, tex->width : %f %f", img->position.x, tex->width);
+        //xprint("img position, tex->width : %f %f", img->position.x, tex->width);
         if( left > img->position.x )
         {
             left = img->position.x;
         }
-        xprint("img position, tex->width : %f %f", img->position.x, tex->width);
+        //xprint("img position, tex->width : %f %f", img->position.x, tex->width);
         if( right < img->position.x + tex->width )
         {
             right = img->position.x + tex->width;
@@ -187,10 +187,10 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         {
             bottom = img->position.x + tex->height;
         }
-        xprint("l r t b : %f %f %f %f", left, right, top, bottom);
+        //xprint("l r t b : %f %f %f %f", left, right, top, bottom);
     }
     iRect rt = iRectMake(left, top, right-left, bottom-top);
-    xprint("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
+    //xprint("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
     if( containPoint(point, rt)==false )
         return false;
 #else
@@ -242,20 +242,20 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
             if (i == 0)
             {
-                xprint("Setting");
+                //xprint("Setting");
 
                 showPopSetting(true);
             }
             else if (i == 1)
             {
 
-                xprint("How");
+                //xprint("How");
 
                 showPopStageHow(true);
             }
             else //if (i == 2)
             {
-                xprint("Inven");
+                //xprint("Inven");
 
                 showPopInven(true);
             }
@@ -296,21 +296,21 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         if (pop->selected == 0)
         {
-            xprint("Setting\n");
+            //xprint("Setting\n");
             pop->selected = -1;
 
             showPopSetting(true);
         }
         else if (pop->selected == 1)
         {
-            xprint("How\n");
+            //xprint("How\n");
             pop->selected = -1;
 
             showPopStageHow(true);
         }
         else //if (pop->selected == 2)
         {
-            xprint("Inven\n");
+            //xprint("Inven\n");
             pop->selected = -1;
 
             showPopInven(true);
@@ -1406,7 +1406,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
                 //프로그램 종료
                 runWnd = false;
 #elif(OS==OS_ANDROID)
-
+                ndkShutDownApp();
 #endif
             }
             else //if (i == 1)

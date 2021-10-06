@@ -218,7 +218,7 @@ bool iTable::key(iKeyStat stat, iPoint point)
 		}
 		if (selectedBtn != j)
 		{
-			xprint("audioPlay\n");
+			//xprint("audioPlay\n");
 			imgBtn[i]->setTexObject(1);
 			selectedBtn = j;
 		}
@@ -265,7 +265,7 @@ bool iTable::key(iKeyStat stat, iPoint point)
 	case iKeyStatEnded:
 		if (selectedBtn != -1)
 		{
-			xprint("selectedBtn = %d\n", selectedBtn);
+			//xprint("selectedBtn = %d\n", selectedBtn);
 			if (methodSelect)
 				methodSelect(selectedBtn);
 

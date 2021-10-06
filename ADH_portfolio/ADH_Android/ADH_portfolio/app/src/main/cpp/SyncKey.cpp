@@ -53,7 +53,7 @@ void SyncKey::updateKey() // thread 111
     {
         qkInsertNum = _qkNum - qkNum;
         // #issue! 프레임이 굉장히 안좋게 나오는 경우 간헐적으로 발생
-        xprint("키값이 씹힘...");
+        //xprint("키값이 씹힘...");
     }
 
     memcpy(&qk[qkNum], qkInsert, sizeof(SyncKey)*qkInsertNum);

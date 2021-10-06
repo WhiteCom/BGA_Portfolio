@@ -355,31 +355,31 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
                 break;
             if (pop->selected == 0)
 		{
-			xprint("게임시작\n");
+			//xprint("게임시작\n");
 			stageFrom = stageTo = 10;
 			setLoading(gs_stage, freeMenu, loadStage);
 		}
 		else if (pop->selected == 1)
 		{
-			xprint("에디터\n");
+			//xprint("에디터\n");
 			setLoading(gs_map, freeMenu, loadMapEditor);
 		}
 		else if (pop->selected == 2)
 		{
-			xprint("게임설명\n");
+			//xprint("게임설명\n");
 			indexCloseMenu = 0;
 			showPopMenu(false);
 		}
 		else if (pop->selected == 3)
 		{
-			xprint("옵션\n");
+			//xprint("옵션\n");
 			indexCloseMenu = 1;
 			showPopMenu(false);
 		}
 
 		else //if(pop->selected == 4)
 		{
-			xprint("게임종료\n");
+			//xprint("게임종료\n");
 			indexCloseMenu = 2;
 			showPopMenu(false);
 		}
@@ -621,7 +621,7 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 				audioPlay(0);
 #endif
 				pop->selected = j;
-				xprint("popHow : %d", pop->selected);
+				//xprint("popHow : %d", pop->selected);
 			}
 			break;
 
@@ -727,7 +727,7 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 			audioPlay(0);
 #endif
 			pop->selected = j;
-			xprint("popHow : %d\n", pop->selected);
+			//xprint("popHow : %d\n", pop->selected);
 		}
 		break;
 
@@ -1126,7 +1126,7 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 				audioPlay(0);
 #endif
 				pop->selected = j;
-				xprint("popOption : %d", pop->selected);
+				//xprint("popOption : %d", pop->selected);
 			}
 			break;
 
@@ -1272,7 +1272,7 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		{
 			audioPlay(0);
 			pop->selected = j;
-			xprint("popOption : %d\n", pop->selected);
+			//xprint("popOption : %d\n", pop->selected);
 		}
 		break;
 
@@ -1428,7 +1428,7 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 
 		if (pop->selected == 0)
 		{
-			xprint("예\n");
+			//xprint("예\n");
 #if (OS==OS_WINDOW)
 			//프로그램 종료
 			runWnd = false;
@@ -1437,7 +1437,7 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		}
 		else// if (pop->selected == 1)
 		{
-			xprint("아니오\n");
+			//xprint("아니오\n");
 			showPopExit(false);
 		}
 		break;
@@ -1453,7 +1453,7 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		}
 		if (pop->selected != j)
 		{
-			xprint("audio play\n");
+			//xprint("audio play\n");
 			pop->selected = j;
 		}
 		break;
@@ -1494,7 +1494,7 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 			}
 			if (pop->selected != j)
 			{
-				xprint("audio play\n");
+				//xprint("audio play\n");
 				pop->selected = j;
 			}
 			break;
@@ -1518,16 +1518,18 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 
 			if (i == 0)
 			{
-				xprint("예\n");
+				//xprint("예\n");
 #if (OS==OS_WINDOW)
 				//프로그램 종료
 			runWnd = false;
 #elif(OS==OS_ANDROID)
+				//onDestroy();
+				ndkShutDownApp();
 #endif
 			}
 			else// if (i == 1)
 			{
-				xprint("아니오\n");
+				//xprint("아니오\n");
 				showPopExit(false);
 			}
 			break;

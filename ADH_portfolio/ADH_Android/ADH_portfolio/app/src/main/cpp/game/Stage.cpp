@@ -205,7 +205,7 @@ void loadStage()
     for (int i = 0; i < TILE_W * TILE_H; i++)
     {
         if (i % TILE_W == 0) xprint("\n");
-        xprint("%d ",tEditor->tileWeight[i]);
+        //xprint("%d ",tEditor->tileWeight[i]);
     }
 #endif
 
@@ -290,7 +290,7 @@ void loadStage()
         else
         {
             //배틀에서 다시 왔을때
-            xprint("critical error.....+ exception cave\n");
+            //xprint("critical error.....+ exception cave\n");
 
             off = iPointMake(x + lastX * TILE_WSIZE, y + lastY * TILE_HSIZE);
         }

@@ -23,48 +23,48 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
     JNINativeMethod* m = &method[0];
     m->name = "loadGame";// public static native void loadGame(String apkPath, String ioPath);
     m->signature = "(Ljava/lang/String;Ljava/lang/String;)V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_loadGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_loadGame;
     m = &method[1];
     m->name = "freeGame";// public static native void freeGame();
     m->signature = "()V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_freeGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_freeGame;
     m = &method[2];
     m->name = "drawGame";// public static native void freeGame();
     m->signature = "()V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_drawGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_drawGame;
     m = &method[3];
     m->name = "keyGame";// public static native void keyGame(int state, float x, float y);
     m->signature = "(IFF)V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_keyGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_keyGame;
     m = &method[4];
     m->name = "multiKeyGame";// public static native void multiKeyGame(int state, int num, float[] x, float[] y);
     m->signature = "(II[F[F)V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_multiKeyGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_multiKeyGame;
     m = &method[5];
     m->name = "resizeGame";// public static native void resizeGame(int width, int height);
     m->signature = "(II)V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_resizeGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_resizeGame;
     m = &method[6];
     m->name = "pauseGame";// public static native void pauseGame(boolean pause);
     m->signature = "(Z)V";
-    m->fnPtr = (void*)Java_or_kr_busanit_lib_Native_pauseGame;
+    m->fnPtr = (void*)Java_com_adh_lib_Native_pauseGame;
 
-    jclass cls = env->FindClass("or/kr/busanit/lib/Native");
+    jclass cls = env->FindClass("com/adh/lib/Native");
     r = env->RegisterNatives(cls, method, num);
     env->DeleteLocalRef(cls);
 
     delete method;
-    xprint("JNI_OnLoad");
+    //xprint("JNI_OnLoad");
 
     return JNI_VERSION_1_4;
 }
 
 void JNI_OnUnload(JavaVM* vm, void* reserved)
 {
-    xprint("JNI_OnUnload");
+    //xprint("JNI_OnUnload");
     JNIEnv* env;
     jint r = vm->GetEnv((void**)&env, JNI_VERSION_1_4);
-    jclass cls = env->FindClass("or/kr/busanit/lib/Native");
+    jclass cls = env->FindClass("com/adh/lib/Native");
 
     env->UnregisterNatives(cls);
     env->DeleteLocalRef(cls);
@@ -85,8 +85,8 @@ jobject getMain()
     if( app==NULL )
     {
         JNIEnv* env = getEnv();
-        jclass cls = env->FindClass("or/kr/busanit/game/App");
-        jfieldID fid = env->GetStaticFieldID(cls, "app", "Lor/kr/busanit/game/App;");
+        jclass cls = env->FindClass("com/adh/portfolio/App");
+        jfieldID fid = env->GetStaticFieldID(cls, "app", "Lcom/adh/portfolio/App;");
         app = (jobject)env->GetStaticObjectField(cls, fid);
         env->DeleteLocalRef(cls);
     }
@@ -200,8 +200,8 @@ char* getStream(const char* fileName, int& length)
         JNIEnv* env = getEnv();
 
         // App.app
-        jclass cls = env->FindClass("or/kr/busanit/game/App");
-        jfieldID fid = env->GetStaticFieldID(cls, "app", "Lor/kr/busanit/game/App;");
+        jclass cls = env->FindClass("com/adh/game/App");
+        jfieldID fid = env->GetStaticFieldID(cls, "app", "Lcom/adh/game/App;");
         jobject app = (jobject)env->GetStaticObjectField(cls, fid);
 
         // am = App.app.getAsssets();
@@ -229,6 +229,7 @@ void setDevicePath(jstring path)
 {
     if( strDevicePath )
         delete strDevicePath;
+    xprint("path : %s", path);
     strDevicePath = jstring2cstr(getEnv(), path);
 }
 const char* getDevicePath()
@@ -243,13 +244,13 @@ void appPrint()
     // App.appPrint(null);
     JNIEnv* env_ = getEnv();
 
-    jclass cls = env_->FindClass("or/kr/busanit/game/App");
+    jclass cls = env_->FindClass("com/adh/game/App");
 
     jmethodID mid = env_->GetStaticMethodID(cls, "appPrint", "(Ljava/lang/String;)Ljava/lang/String;");
     jstring s = (jstring)env_->CallStaticObjectMethod(cls, mid, (jobject)nullptr);
 
     //app.appPrint2();
-    jfieldID fid = env_->GetStaticFieldID(cls, "app", "Lor/kr/busanit/game/App;");
+    jfieldID fid = env_->GetStaticFieldID(cls, "app", "Lcom/adh/game/App;");
     jobject app = (jobject)env_->GetStaticObjectField(cls, fid);
     mid = env_->GetMethodID(cls, "appPrint2", "()V");
     //__android_log_print(ANDROID_LOG_ERROR, "csm", "mid = %d", (unsigned int)mid);
@@ -620,8 +621,8 @@ jobject ndkCreateTypeface(const char* fileName)
     else
     {
         // App.app
-        jclass cls = env->FindClass("or/kr/busanit/game/App");
-        jfieldID fid = env->GetStaticFieldID(cls, "app", "Lor/kr/busanit/game/App;");
+        jclass cls = env->FindClass("com/adh/game/App");
+        jfieldID fid = env->GetStaticFieldID(cls, "app", "Lcom/adh/game/App;");
         jobject app = env->GetStaticObjectField(cls, fid);
         //app.getAssets
         jmethodID mid = env->GetMethodID(cls, "getAssets", "()Landroid/content/res/AssetManager;");
@@ -940,4 +941,14 @@ void ndkDrawChar(jobject canvas, const char* szText, float x, float y, jobject p
     jstring s = javaNewStringChar(env, szText);
     ndkDrawText(canvas, s, x, y, paint);
     env->DeleteLocalRef(s);
+}
+
+// ----------------------------------------------------
+// Activity method
+// ----------------------------------------------------
+
+void ndkShutDownApp()
+{
+    exit(0);
+    return;
 }

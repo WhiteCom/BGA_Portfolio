@@ -161,22 +161,22 @@ void drawCharacter(float dt, iPoint off)
         {
             if (keyDown & keysA || keyDown & keysLeft)
             {
-                xprint("left\n");
+                //xprint("left\n");
                 charDir = 0;
             }
             else if (keyDown & keysD || keyDown & keysRight)
             {
-                xprint("right\n");
+                //xprint("right\n");
                 charDir = 1;
             }
             else if (keyDown & keysW || keyDown & keysUp)
             {
-                xprint("Up\n");
+                //xprint("Up\n");
                 charDir = 2;
             }
             else if (keyDown & keysS || keyDown & keysDown)
             {
-                xprint("Down\n");
+                //xprint("Down\n");
                 charDir = 3;
             }
 		}

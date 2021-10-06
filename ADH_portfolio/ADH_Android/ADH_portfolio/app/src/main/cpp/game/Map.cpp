@@ -51,22 +51,22 @@ void Map::clean()
 
     delete tileIndex;
     delete tileWeight;
-    xprint("~Map 222");
+    //xprint("~Map 222");
     if (tileEnemy == NULL)
         return;
 
 #if (OS==OS_WINDOW) //#issue! ///////////////////////////////////////////////////
     for (int i = 0; i < tileEnemy[i].eTypeNum; i++)
     {
-        xprint("~Map num : %d", tileEnemy[i].eTypeNum);
+        //xprint("~Map num : %d", tileEnemy[i].eTypeNum);
         if(tileEnemy[i].eType)
             delete tileEnemy[i].eType;
     }
 
-    xprint("~Map 333");
+    //xprint("~Map 333");
 #endif //////////////////////////////////////////////////////////////////////////
     delete tileEnemy;
-    xprint("~Map 444");
+    //xprint("~Map 444");
 }
 
 void Map::draw(iPoint off, Texture** texs)
@@ -133,7 +133,7 @@ void Map::load(const char* szFormat, ...)
     FILE* pf = fopen(szText, "rb");
     if (pf == NULL)
     {
-        xprint("No File!");
+        //xprint("No File!");
         return;
     }
 

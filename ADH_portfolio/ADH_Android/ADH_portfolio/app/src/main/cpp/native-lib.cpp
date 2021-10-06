@@ -7,7 +7,7 @@
 
 SyncKey* sk;
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_loadGame(JNIEnv* env, jobject obj,
+Java_com_adh_lib_Native_loadGame(JNIEnv* env, jobject obj,
                                     jobject ipkFilePath, jobject ioPath){
     xprint("loadGame");
     sk = new SyncKey;
@@ -28,19 +28,19 @@ Java_or_kr_busanit_lib_Native_loadGame(JNIEnv* env, jobject obj,
     loadGame();
 }
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_freeGame(JNIEnv* env, jobject obj){
-    xprint("freeGame");
+Java_com_adh_lib_Native_freeGame(JNIEnv* env, jobject obj){
+    //xprint("freeGame");
     sk->freeKey();
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_drawGame(JNIEnv* env, jobject obj){
-    //xprint("mainLoop");
+Java_com_adh_lib_Native_drawGame(JNIEnv* env, jobject obj){
+    xprint("mainLoop");
     sk->updateKey();
     mainLoop();
 }
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_keyGame(JNIEnv* env, jobject obj,
+Java_com_adh_lib_Native_keyGame(JNIEnv* env, jobject obj,
                                       jint state, jfloat x, jfloat y){
     //xprint("keyGame(%.2f, %.2f)", x, y);
     float keyX = x, keyY = y;
@@ -54,13 +54,13 @@ Java_or_kr_busanit_lib_Native_keyGame(JNIEnv* env, jobject obj,
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_multiKeyGame(JNIEnv* env, jobject obj,
+Java_com_adh_lib_Native_multiKeyGame(JNIEnv* env, jobject obj,
                                       jint state, jint num, jobject mx, jobject my){
-    xprint("Multi keyGame");
+    //xprint("Multi keyGame");
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_resizeGame(JNIEnv* env, jobject obj,
+Java_com_adh_lib_Native_resizeGame(JNIEnv* env, jobject obj,
                                       jint width, jint height){
     resizeApp(width, height);
     readyOpenGL();
@@ -69,9 +69,9 @@ Java_or_kr_busanit_lib_Native_resizeGame(JNIEnv* env, jobject obj,
 
 
 extern "C" JNIEXPORT void JNICALL
-Java_or_kr_busanit_lib_Native_pauseGame(JNIEnv* env, jobject obj,
+Java_com_adh_lib_Native_pauseGame(JNIEnv* env, jobject obj,
                                          jboolean pause){
-    xprint(pause==0 ? "pause" : "resume");
+    //xprint(pause==0 ? "pause" : "resume");
 }
 
 int real_w = 0, real_h = 0;
@@ -104,10 +104,12 @@ void resizeApp(int width, int height)
     viewport.origin = iPointZero;
     viewport.size = iSizeMake(width, height);
 #endif
+#if 0
     xprint("한글 devSize(%.f,%.f), real(%d, %d), viewport(%.f,%.f,%.f,%.f)\n",
             devSize.width, devSize.height,
             width, height,
             viewport.origin.x, viewport.origin.y, viewport.size.width, viewport.size.height);
+#endif
 }
 
 void drawApp(FLOAT_METHOD methodDraw)

@@ -188,7 +188,7 @@ void addDropItem(int index, int num, iPoint position)
 			return;
 		}
 	}
-	xprint("Not Enough DropItem\n");
+	//xprint("Not Enough DropItem\n");
 }
 
 bool containDropItem(iPoint position)

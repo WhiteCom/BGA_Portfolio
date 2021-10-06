@@ -922,7 +922,7 @@ void BattleManager::paint(float dt)
 	if (enemyNum == 0)
 	{
 		//win
-		xprint("전투승리!\n");
+		//xprint("전투승리!\n");
 
 		//to do... 승리 팝업
 		setLoading(gs_stage, freeBattle, loadStage);
@@ -931,7 +931,7 @@ void BattleManager::paint(float dt)
 	else if (heroNum == 0)
 	{
 		//lose
-		xprint("전투패배!\n");
+		//xprint("전투패배!\n");
 
 		//to do... 패배 팝업
 #if (OS==OS_WINDOW) //openAL

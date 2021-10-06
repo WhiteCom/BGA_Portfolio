@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "or.kr.busanit.helloc"
+        applicationId "com.adh.portfolio"
         minSdkVersion 18
         targetSdkVersion 30
 
@@ -57,6 +57,16 @@ android {
     buildFeatures {
         viewBinding true
     }
+/*
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+ */
+
 }
 
 dependencies {

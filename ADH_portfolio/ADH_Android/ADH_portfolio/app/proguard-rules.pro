@@ -12,8 +12,19 @@
 #   public *;
 #}
 
--keepclassmembers class or.kr.busanit.lib.Native {
-   public *;
+-keep public class * extends android.app.Activity
+
+-keepclassmembers class com.adh.game.App {
+    com.adh.game.App app;
+    public void sendMessage*(...);
+}
+
+#-keepclassmembers class com.adh.lib.Audio {
+#   *;
+#}
+
+-keepclassmembers class com.adh.lib.Native {
+   public native *(...);
 }
 
 
