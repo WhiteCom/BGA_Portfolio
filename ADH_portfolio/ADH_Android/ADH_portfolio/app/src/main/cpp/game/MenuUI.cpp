@@ -503,6 +503,7 @@ Texture* methodStHow(const char* str)
 	setStringRGBA(0, 0, 0, 1);
 	setStringBorder(1);
 	setStringBorderRGBA(1, 1, 0.5f, 1);
+#if (OS==OS_WINDOW)
 	const char** content = new const char* [6];
 
 	content[0] = "<게임방법>";
@@ -511,7 +512,16 @@ Texture* methodStHow(const char* str)
 	content[3] = "2.걸어다니면 Step이 깍임.\n";
 	content[4] = "3.맵 마다 적이 있다. 적을 만나면 싸워야 한다.\n";
 	content[5] = "(ESC 키를 누르면 전체화면 On/Off이 됩니다.)\n";
+#elif (OS==OS_ANDROID)
+    const char** content = new const char* [6];
 
+    content[0] = "<게임방법>";
+    content[1] = "1.맵을 돌아다닌다.\n";
+    content[2] = "(이동 : 손가락으로 화면을 상하좌우 스와이프(밀기))\n";
+    content[3] = "2.걸어다니면 Step이 깍임.\n";
+    content[4] = "3.맵 마다 적이 있다. 적을 만나면 싸워야 한다.\n";
+    content[5] = "(ESC 키를 누르면 전체화면 On/Off이 됩니다.)\n";
+#endif
 	const char** content2 = new const char* [4];
 
 	content2[0] = "<승리조건>";

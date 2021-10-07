@@ -78,3 +78,9 @@
 
 #2021-09-26
 - add Android project (in ADH_Android directory)
+
+#2021-10-06
+- made signing key for Release to Apk
+
+#2021-10-07
+- update MenuUI (adjust for Android)
