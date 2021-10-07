@@ -1,7 +1,6 @@
 #pragma once
 #include "std/iType.h"
 #include "std/iPoint.h"
-//#include "../../../../../../../../../AppData/Local/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/linux/time.h"
 
 
 #define _qkNum 1000

@@ -64,7 +64,6 @@ Java_com_adh_lib_Native_resizeGame(JNIEnv* env, jobject obj,
                                       jint width, jint height){
     resizeApp(width, height);
     readyOpenGL();
-    //mainLoop();
 }
 
 
@@ -78,32 +77,11 @@ int real_w = 0, real_h = 0;
 void resizeApp(int width, int height)
 {
     xprint("resizeGame %d, %d", width, height);
-#if 0
-    float rx = width / devSize.width;
-    float ry = height / devSize.height;
-    if (rx < ry)
-    {
-        viewport.origin.x = 0;
-        viewport.size.width = width;
-
-        viewport.size.height = devSize.height * rx;
-        viewport.origin.y = (height - viewport.size.height) / 2;
-    }
-    else
-    {
-        viewport.origin.y = 0;
-        viewport.size.height = height;
-
-        viewport.size.width = devSize.width * ry;
-        viewport.origin.x = (width - viewport.size.width) / 2;
-    }
-#else
     real_w = width;
     real_h = height;
 
     viewport.origin = iPointZero;
     viewport.size = iSizeMake(width, height);
-#endif
 #if 0
     xprint("한글 devSize(%.f,%.f), real(%d, %d), viewport(%.f,%.f,%.f,%.f)\n",
             devSize.width, devSize.height,
@@ -143,17 +121,15 @@ void mainLoop()
 #if 0// None-FBO
     readyOpenGL();
     drawApp(drawGame);
-    //glFlush();// glFinish()
+
     SwapBuffers(hDC);
 #else
-    //readyOpenGL();
+
 fbo->bind();
     glViewport(0, 0, devSize.width, devSize.height);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     drawApp(drawGame);
-    // 원래는 여기 있는게 맞음.
-    //drawCursor(iFPS::instance()->lastDt);
 fbo->unbind();
     glViewport(viewport.origin.x, viewport.origin.y,
                viewport.size.width, viewport.size.height);
@@ -166,14 +142,10 @@ fbo->unbind();
     iPoint p = iPointZero;
     float s = updateZoom(iFPS::instance()->lastDt, p);
 
-//drawImage(fbo->tex, 0, 0, TOP | LEFT);
     Texture* t = fbo->tex;
     drawImage(t, p.x, p.y, TOP | LEFT,
               0, 0, t->width, t->height, s, s, 2, 0, REVERSE_HEIGHT);
-//drawImage(t, devSize.width, devSize.height, BOTTOM | RIGHT,
-//    0, 0, t->width, t->height, 0.3f, 0.3f, 2, 0, REVERSE_HEIGHT);
     setGLBlend(GLBlendAlpha);
-    //glFlush();// glFinish()
 
 #if (OS==OS_WINDOW)
     SwapBuffers(hDC);
