@@ -11,6 +11,7 @@ struct AppData
 	
 	// item info
 
+
 	//char mapData[MAP_FILE_SIZE * 10];
 	char* mapData;
 

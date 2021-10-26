@@ -51,10 +51,9 @@ void callAppData()
 {
 	AppData* ad = new AppData();
 
-#if 0 //#openAL
+//#openAL
 	ad->eff = 1.0f;
 	ad->bgm = 1.0f;
-#endif
 
 	appData = ad;
 }
@@ -63,10 +62,10 @@ void callMapData()
 {
 	AppData* ad = new AppData();
 
-#if 0 //#openAL
+//#openAL
 	ad->eff = appData->eff;
 	ad->bgm = appData->bgm;
-#endif
+
 	memset(ad->mapData, 0x00, sizeof(MAP_FILE_SIZE * MAP_NUM));
 	int bufOff = 0;
 	// 3088 + dummy = MAP_FILE_SIZE
@@ -100,38 +99,5 @@ void freeAppData()
 {
 	delete appData;
 }
-
-#if 0 //Test File I/O
-struct AAA
-{
-	int len;
-	char* buf;
-};
-void prevCode(const char* fileName)
-{
-	AAA a;
-
-	FILE* pf = fopen(fileName, "rb");
-	fread(&a.len, 1, sizeof(int), pf);
-	a.buf = new char[a.len];
-	fread(a.buf, 1, sizeof(char) * a.len, pf);
-	fclose(pf);
-}
-
-void currCode(const char* fileName)
-{
-	int len;
-	char* buf = getStream(fileName, len);
-	int off = 0;
-
-	AAA a;
-	memcpy(&a.len, &buf[off], sizeof(int)); off += sizeof(int);
-	a.buf = new char[a.len];
-	memcpy(a.buf, &buf[off], sizeof(char) * a.len); off += sizeof(char) * a.len;
-
-}
-#endif
-
-
 
 

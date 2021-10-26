@@ -64,9 +64,9 @@ void createPopTopUI()
                     2, 0);
 #elif (OS==OS_ANDROID)
                 g->drawigImage(btnImg, size.width / 2, size.height / 2, VCENTER | HCENTER,
-                    0, 0, g->igImageGetWidth(btnImg), g->igImageGetHeight(btnImg),
-                    (float)50 / 512, (float)50 / 512,
-                    2, 0);
+                               0, 0, g->igImageGetWidth(btnImg), g->igImageGetHeight(btnImg),
+                               (float)50 / 512, (float)50 / 512,
+                               2, 0);
 #endif
             }
             else
@@ -82,9 +82,9 @@ void createPopTopUI()
                     2, 0);
 #elif (OS==OS_ANDROID)
                 g->drawigImage(btnImg, 0, 0, TOP | LEFT,
-                    0, 0, (float)g->igImageGetWidth(btnImg), (float)g->igImageGetHeight(btnImg),
-                    (float)50 / 512, (float)50 / 512,
-                    2, 0);
+                               0, 0, (float)g->igImageGetWidth(btnImg), (float)g->igImageGetHeight(btnImg),
+                               (float)50 / 512, (float)50 / 512,
+                               2, 0);
 #endif
             }
             tex = g->getTexture();
@@ -152,46 +152,46 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
     float right = 0.0;
     float top = devSize.height;
     float bottom = 0.0;
-    //xprint("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
+    xprint("keyTopUI l r t b : %.1f %.1f %.1f %.1f", left, right, top, bottom);
 
-    for(int i=0; i<pop->arrayImg->count; i++)
+    for (int i = 0; i < pop->arrayImg->count; i++)
     {
-        //xprint("i : %d", i);
+        xprint("i : %d", i);
         iImage* img = (iImage*)pop->arrayImg->objectAtIndex(i);
-        //xprint("keyTopUI img : %d", img);
-        if( img==NULL )
+        xprint("keyTopUI img : %d", img);
+        if (img == NULL)
         {
             continue;
         }
         Texture* tex = img->tex;
-        //xprint("keyTopUI tex : %d", tex);
-        if( tex==NULL )
+        xprint("keyTopUI tex : %d", tex);
+        if (tex == NULL)
         {
             continue;
         }
-        //xprint("img position, tex->width : %f %f", img->position.x, tex->width);
-        if( left > img->position.x )
+        xprint("img position, tex->width : %f %f", img->position.x, tex->width);
+        if (left > img->position.x)
         {
             left = img->position.x;
         }
-        //xprint("img position, tex->width : %f %f", img->position.x, tex->width);
-        if( right < img->position.x + tex->width )
+        xprint("img position, tex->width : %f %f", img->position.x, tex->width);
+        if (right < img->position.x + tex->width)
         {
             right = img->position.x + tex->width;
         }
-        if( top > img->position.y )
+        if (top > img->position.y)
         {
             top = img->position.y;
         }
-        if( bottom < img->position.x + tex->height )
+        if (bottom < img->position.x + tex->height)
         {
             bottom = img->position.x + tex->height;
         }
-        //xprint("l r t b : %f %f %f %f", left, right, top, bottom);
+        xprint("l r t b : %f %f %f %f", left, right, top, bottom);
     }
-    iRect rt = iRectMake(left, top, right-left, bottom-top);
-    //xprint("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
-    if( containPoint(point, rt)==false )
+    iRect rt = iRectMake(left, top, right - left, bottom - top);
+    xprint("keyTopUI rt l t w h : %.1f %.1f %.1f %.1f", rt.origin.x, rt.origin.y, rt.size.width, rt.size.height);
+    if (containPoint(point, rt) == false)
         return false;
 #else
     //if( containPoint(point, iRectMake(0, 0, 200, 80))==false )
@@ -225,8 +225,8 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if( i==-1 ) break;
-            if (containPoint(point, imgTopBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30)))==false)
+            if (i == -1) break;
+            if (containPoint(point, imgTopBtn[i]->touchRect(pop->closePoint, iSizeMake(30, 30))) == false)
             {
 #if 0 //#openAL
                 audioPlay(0);
@@ -237,25 +237,25 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if( i==-1 ) break;
+            if (i == -1) break;
             pop->selected = -1;
 
             if (i == 0)
             {
-                //xprint("Setting");
+                xprint("Setting");
 
                 showPopSetting(true);
             }
             else if (i == 1)
             {
 
-                //xprint("How");
+                xprint("How");
 
                 showPopStageHow(true);
             }
             else //if (i == 2)
             {
-                //xprint("Inven");
+                xprint("Inven");
 
                 showPopInven(true);
             }
@@ -296,21 +296,21 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
 
         if (pop->selected == 0)
         {
-            //xprint("Setting\n");
+            xprint("Setting\n");
             pop->selected = -1;
 
             showPopSetting(true);
         }
         else if (pop->selected == 1)
         {
-            //xprint("How\n");
+            xprint("How\n");
             pop->selected = -1;
 
             showPopStageHow(true);
         }
         else //if (pop->selected == 2)
         {
-            //xprint("Inven\n");
+            xprint("Inven\n");
             pop->selected = -1;
 
             showPopInven(true);
@@ -328,9 +328,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -389,10 +387,10 @@ void createPopSetting()
     imgSetBtn = new iImage * [4]; //Resume, Menu, Option, Exit
 
     const char* strBtn[4] = {
-        "Resume",
-        "Menu",
-        "Option",
-        "Exit"
+            "Resume",
+            "Menu",
+            "Option",
+            "Exit"
     };
 
     size = iSizeMake(200, 40);
@@ -535,9 +533,7 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -590,9 +586,9 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
 
-            if(containPoint(point, imgSetBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20)))== false)
+            if (containPoint(point, imgSetBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
             {
 #if 0 //openAL
                 audioPlay(0);
@@ -604,10 +600,10 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
 #if 0
             pop->selected = -1;
-            //closeMethod 영향으로 해당함수에 있음.
+        //closeMethod 영향으로 해당함수에 있음.
 #endif
             if (i == -1)
                 break;
@@ -801,7 +797,7 @@ void createPopStageOption()
     //음량 str
 
     iStrTex* st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->bgm * 10);
+    st->setString("%d", (int)(appData->bgm * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[3]->position + iPointMake(60, 0);
@@ -811,7 +807,7 @@ void createPopStageOption()
     //eff str
 
     st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->eff * 10);
+    st->setString("%d", (int)(appData->eff * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[5]->position + iPointMake(60, 0);
@@ -890,7 +886,7 @@ void createPopStageOption()
             img->addObject(tex);
             freeImage(tex);
         }
-        img->position =  iPointMake(170, 65) + iPointMake(140 * (!(i % 2)), 50 + (i / 3) * 70);
+        img->position = iPointMake(170, 65) + iPointMake(140 * (!(i % 2)), 50 + (i / 3) * 70);
         pop->addObject(img);
         imgStageOptionBtn[i] = img;
     }
@@ -898,7 +894,7 @@ void createPopStageOption()
     //음량 str
 
     iStrTex* st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->bgm * 10);
+    st->setString("%d", (int)(appData->bgm * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[1]->position + iPointMake(60, 0);
@@ -908,7 +904,7 @@ void createPopStageOption()
     //eff str
 
     st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->eff * 10);
+    st->setString("%d", (int)(appData->eff * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[3]->position + iPointMake(60, 0);
@@ -998,53 +994,49 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         }
         else if (popStageOption->selected == 1)
         {
-#if (OS==OS_WINDOW)
             if (!isFullscreen)
                 goFullscreen();
-#endif
         }
         else if (popStageOption->selected == 2)
         {
-#if (OS==OS_WINDOW)
             if (isFullscreen)
                 goFullscreen();
-#endif
         }
         else if (popStageOption->selected == 3)
         {
             if (appData->bgm * 10 > 0)
-                appData->bgm -= 0.1;
-            stStageSound->setString("%f", appData->bgm * 10);
-#if 0 //#openAL
+                appData->bgm -= 0.1f;
+
+            stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+            appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         else if (popStageOption->selected == 4)
         {
             if (appData->bgm * 10 < 10)
-                appData->bgm += 0.1;
-            stStageSound->setString("%f", appData->bgm * 10);
-#if 0 //#openAL
+                appData->bgm += 0.1f;
+
+            stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+            appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         else if (popStageOption->selected == 5)
         {
             if (appData->eff * 10 > 0)
-                appData->eff -= 0.1;
-            stStageEff->setString("%f", appData->eff * 10);
-#if 0 //#openAL
+                appData->eff -= 0.1f;
+
+            stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+            appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         else if (popStageOption->selected == 6)
         {
             if (appData->eff * 10 < 10)
-                appData->eff += 0.1;
-            stStageEff->setString("%f", appData->eff * 10);
-#if 0 //#openAL
+                appData->eff += 0.1f;
+
+            stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+            appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         break;
 
@@ -1060,9 +1052,7 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         }
         if (popStageOption->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             popStageOption->selected = j;
         }
         break;
@@ -1111,8 +1101,8 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if(i == -1) break;
-            if(containPoint(point, imgStageOptionBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20)))==false)
+            if (i == -1) break;
+            if (containPoint(point, imgStageOptionBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
             {
 #if 0 //openAL
                 audioPlay(0);
@@ -1123,7 +1113,7 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
             pop->selected = -1;
 
             if (i == 0)
@@ -1133,8 +1123,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
             else if (i == 1)
             {
                 if (appData->bgm * 10 > 0)
-                    appData->bgm -= 0.1;
-                stStageSound->setString("%f", appData->bgm * 10);
+                    appData->bgm -= 0.1f;
+
+                stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+                appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
                 audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1142,8 +1134,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
             else if (i == 2)
             {
                 if (appData->bgm * 10 < 10)
-                    appData->bgm += 0.1;
-                stStageSound->setString("%f", appData->bgm * 10);
+                    appData->bgm += 0.1f;
+
+                stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+                appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
                 audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1151,8 +1145,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
             else if (i == 3)
             {
                 if (appData->eff * 10 > 0)
-                    appData->eff -= 0.1;
-                stStageEff->setString("%f", appData->eff * 10);
+                    appData->eff -= 0.1f;
+
+                stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+                appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
                 audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1160,8 +1156,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
             else if (i == 4)
             {
                 if (appData->eff * 10 < 10)
-                    appData->eff += 0.1;
-                stStageEff->setString("%f", appData->eff * 10);
+                    appData->eff += 0.1f;
+
+                stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+                appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
                 audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1217,10 +1215,10 @@ void createPopStageExit()
 
     //Btn
 
-  //Btn
+    //Btn
 
     const char* strBtn[2] = {
-        "예", "아니요"
+            "예", "아니요"
     };
     imgStageExitBtn = new iImage * [2];
 
@@ -1310,12 +1308,9 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         if (pop->selected == 0)
         {
             //xprint("예\n");
-#if (OS==OS_WINDOW)
             //프로그램 종료
             runWnd = false;
-#elif(OS==OS_ANDROID)
 
-#endif
         }
         else //if (pop->selected == 1)
         {
@@ -1335,9 +1330,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -1385,8 +1378,8 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if(i == -1) break;
-            if(containPoint(point, imgStageExitBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20)))==false)
+            if (i == -1) break;
+            if (containPoint(point, imgStageExitBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
             {
 #if 0 //openAL
                 audioPlay(0);
@@ -1397,17 +1390,13 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
             pop->selected = -1;
 
             if (i == 0)
             {
-#if (OS==OS_WINDOW)
                 //프로그램 종료
-                runWnd = false;
-#elif(OS==OS_ANDROID)
                 ndkShutDownApp();
-#endif
             }
             else //if (i == 1)
             {
@@ -1457,9 +1446,9 @@ void createPopStageHow()
 
     const char* strBtn[3] = { "X", "◀", "▶" };
     iPoint positionBtn[3] = {
-        {800 - 25, -25},
-        {400 - 25 - 100, 540 - 25},
-        {400 - 25 + 100, 540 - 25},
+            {800 - 25, -25},
+            {400 - 25 - 100, 540 - 25},
+            {400 - 25 + 100, 540 - 25},
     };
     imgHowBtns = new iImage * [3];
 
@@ -1696,8 +1685,8 @@ bool keyPopStageHow(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if(i == -1) break;
-            if(containPoint(point, imgHowBtns[i]->touchRect(pop->closePoint, iSizeMake(20, 20)))== false)
+            if (i == -1) break;
+            if (containPoint(point, imgHowBtns[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
             {
 #if 0 //openAL
                 audioPlay(0);
@@ -1708,7 +1697,7 @@ bool keyPopStageHow(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
             pop->selected = -1;
 #if 0 //#openAL
             audioPlay(0);
@@ -1908,7 +1897,7 @@ void createPopInven()
         }
         img->position = partsP[i];
         pop->addObject(img);
-        imgInvenBtn[i+1] = img;
+        imgInvenBtn[i + 1] = img;
     }
 
     //
@@ -1987,9 +1976,9 @@ Texture* stMethodPopInven(const char* str)
     setStringBorder(0);
 
     const char* content[3] = {
-        "이름",
-        "HP",
-        "ATK",
+            "이름",
+            "HP",
+            "ATK",
     };
 
     char HeroStr[3][64];
@@ -2011,9 +2000,9 @@ Texture* stMethodPopInven(const char* str)
     {
         switch (i)
         {
-        case 0: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
-        case 1: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
-        case 2: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+            case 0: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+            case 1: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
+            case 2: g->drawString(size.width - 400, 32 * (i + 1), TOP | LEFT, "[%s] : %s", content[i], HeroStr[i]); break;
         }
     }
 
@@ -2023,7 +2012,8 @@ void freePopInven()
 {
     delete popInven;
     delete stPopInven;
-    delete imgInvenBtn;}
+    delete imgInvenBtn;
+}
 
 void drawBeforePopInven(iPopup* pop, float dt, float rate)
 {
@@ -2136,8 +2126,8 @@ bool keyPopInven(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if(i == -1) break;
-            if(containPoint(point, imgInvenBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20)))==false)
+            if (i == -1) break;
+            if (containPoint(point, imgInvenBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
             {
 #if 0 //openAL
                 //audioPlay(0);
@@ -2148,7 +2138,7 @@ bool keyPopInven(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
             pop->selected = -1;
 
             if (i == 0)
@@ -2234,10 +2224,10 @@ void createPopOverStep()
     // btn
     //
     const char* strBtn[1] = {
-        "확인"
+            "확인"
     };
     iPoint posBtn[1] = {
-        {(640 - 200) / 2, 240 + 52}
+            {(640 - 200) / 2, 240 + 52}
     };
     imgOverStepBtn = new iImage * [1];
 
@@ -2319,7 +2309,7 @@ void drawPopOverStep(float dt)
 #if (OS==OS_WINDOW)
 bool keyPopOverStep(iKeyStat stat, iPoint point)
 {
-   iPopup* pop = popOverStep;
+    iPopup* pop = popOverStep;
 
     if (pop->bShow == false)
         return false;
@@ -2353,9 +2343,7 @@ bool keyPopOverStep(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -2405,8 +2393,8 @@ bool keyPopOverStep(iKeyStat stat, iPoint point)
 
         case iKeyStatMoved:
             i = pop->selected;
-            if(i == -1) break;
-            if(containPoint(point, imgOverStepBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
+            if (i == -1) break;
+            if (containPoint(point, imgOverStepBtn[i]->touchRect(pop->closePoint, iSizeMake(20, 20))) == false)
             {
 #if 0 //openAL
                 audioPlay(0);
@@ -2417,7 +2405,7 @@ bool keyPopOverStep(iKeyStat stat, iPoint point)
 
         case iKeyStatEnded:
             i = pop->selected;
-            if(i == -1) break;
+            if (i == -1) break;
             pop->selected = -1;
 
             if (i == 0)
@@ -2547,7 +2535,7 @@ void freePopStepStr()
     delete popStepStr;
 #if 0
     delete stepStr;
-#endif 
+#endif
 }
 void showPopStepStr(bool show)
 {

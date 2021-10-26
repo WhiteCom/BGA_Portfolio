@@ -30,7 +30,7 @@ void loadMapData()
 	{
 		char strMap[128];
 		sprintf(strMap, "map/map%d.tile", i);
-		
+
 		int tmpLen;
 		char* tmpBuf = loadFile(strMap, tmpLen);
 
@@ -51,10 +51,9 @@ void callAppData()
 {
 	AppData* ad = new AppData();
 
-#if 1 //#openAL
+//#openAL
 	ad->eff = 1.0f;
 	ad->bgm = 1.0f;
-#endif
 
 	appData = ad;
 }
@@ -63,10 +62,10 @@ void callMapData()
 {
 	AppData* ad = new AppData();
 
-#if 1 //#openAL
+//#openAL
 	ad->eff = appData->eff;
 	ad->bgm = appData->bgm;
-#endif
+
 	memset(ad->mapData, 0x00, sizeof(MAP_FILE_SIZE * MAP_NUM));
 	int bufOff = 0;
 	// 3088 + dummy = MAP_FILE_SIZE
@@ -77,30 +76,28 @@ void callMapData()
 
 		char s[MAP_FILE_SIZE]; sprintf(s, "map/map%d.tile", i);
 		int len;
-        char* b = loadFile(s, len);
+		char* b = loadFile(s, len);
 		memcpy(a, b, len);
 		a[len] = 0;
 
 		bufOff += MAP_FILE_SIZE;
-		//xprint("a : %s\n", a);
+		xprint("a : %s\n", a);
 
 		delete b;
 	}
 	appData = ad;
-	//xprint("Appdata->mapdata : %s\n", appData->mapData);
+	xprint("Appdata->mapdata : %s\n", appData->mapData);
 }
 
 void saveAppData()
 {
 	saveFile(APP_DATA_PATH, (char*)appData, sizeof(AppData));
 }
-#endif //#need update! chanage file format no use save.dat
+#endif
 
 void freeAppData()
 {
 	delete appData;
 }
-
-
 
 

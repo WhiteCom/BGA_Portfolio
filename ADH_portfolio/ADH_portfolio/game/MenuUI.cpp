@@ -398,9 +398,7 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 
 		if (pop->selected != j)
 		{
-#if 0 //#openAL
 			audioPlay(0);
-#endif
 			pop->selected = j;
 		}
 		break;
@@ -503,6 +501,7 @@ Texture* methodStHow(const char* str)
 	setStringRGBA(0, 0, 0, 1);
 	setStringBorder(1);
 	setStringBorderRGBA(1, 1, 0.5f, 1);
+#if (OS==OS_WINDOW)
 	const char** content = new const char* [6];
 
 	content[0] = "<게임방법>";
@@ -511,7 +510,16 @@ Texture* methodStHow(const char* str)
 	content[3] = "2.걸어다니면 Step이 깍임.\n";
 	content[4] = "3.맵 마다 적이 있다. 적을 만나면 싸워야 한다.\n";
 	content[5] = "(ESC 키를 누르면 전체화면 On/Off이 됩니다.)\n";
+#elif (OS==OS_ANDROID)
+	const char** content = new const char* [6];
 
+	content[0] = "<게임방법>";
+	content[1] = "1.맵을 돌아다닌다.\n";
+	content[2] = "(이동 : 손가락으로 화면을 상하좌우 스와이프(밀기))\n";
+	content[3] = "2.걸어다니면 Step이 깍임.\n";
+	content[4] = "3.맵 마다 적이 있다. 적을 만나면 싸워야 한다.\n";
+	content[5] = "(ESC 키를 누르면 전체화면 On/Off이 됩니다.)\n";
+#endif
 	const char** content2 = new const char* [4];
 
 	content2[0] = "<승리조건>";
@@ -689,9 +697,7 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 	case iKeyStatBegan:
 		if (pop->selected == -1)
 			break;
-#if 0 //#openAL
 		audioPlay(0);
-#endif
 		if (pop->selected == 0)
 		{
 			showPopHow(false);
@@ -723,9 +729,7 @@ bool keyPopHow(iKeyStat stat, iPoint point)
 		}
 		if (pop->selected != j)
 		{
-#if 0 //#openAL
 			audioPlay(0);
-#endif
 			pop->selected = j;
 			xprint("popHow : %d\n", pop->selected);
 		}
@@ -861,7 +865,7 @@ void createPopOption()
 
 	// 사운드
 
-	//음량 btn
+	// 음량 btn
 
 	size = iSizeMake(40, 40);
 	for (int i = 3; i < 7; i++)
@@ -907,7 +911,7 @@ void createPopOption()
 	// 음량 str
 
 	iStrTex* st = new iStrTex(stSoundMethod);
-	st->setString("%f", appData->bgm * 10);
+	st->setString("%d", (int)(appData->bgm * 10));
 	img = new iImage();
 	img->addObject(st->tex);
 	img->position = imgOptionBtn[3]->position + iPointMake(65, 0);
@@ -917,7 +921,8 @@ void createPopOption()
 	// eff str
 
 	st = new iStrTex(stSoundMethod);
-	st->setString("%f", appData->eff * 10);
+	
+	st->setString("%d", (int)(appData->eff * 10));
 	img = new iImage();
 	img->addObject(st->tex);
 	img->position = imgOptionBtn[5]->position + iPointMake(65, 0);
@@ -1007,7 +1012,7 @@ void createPopOption()
 	// 음량 str
 
 	iStrTex* st = new iStrTex(stSoundMethod);
-	st->setString("%f", appData->bgm * 10);
+	st->setString("%d", (int)(appData->bgm * 10));
 	img = new iImage();
 	img->addObject(st->tex);
 	img->position = imgOptionBtn[1]->position + iPointMake(65, 0);
@@ -1017,7 +1022,7 @@ void createPopOption()
 	// eff str
 
 	st = new iStrTex(stSoundMethod);
-	st->setString("%f", appData->eff * 10);
+	st->setString("%d", (int)(appData->eff * 10));
 	img = new iImage();
 	img->addObject(st->tex);
 	img->position = imgOptionBtn[3]->position + iPointMake(65, 0);
@@ -1156,8 +1161,10 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		else if (i == 1)
 		{
 			if (appData->bgm * 10 > 0.0)
-				appData->bgm -= 0.1;
-			stSound->setString("%f", appData->bgm * 10);
+				appData->bgm -= 0.1f;
+
+			stSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+			appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1165,8 +1172,9 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		else if (i == 2)
 		{
 			if (appData->bgm * 10 < 10.0)
-				appData->bgm += 0.1;
-			stSound->setString("%f", appData->bgm * 10);
+				appData->bgm += 0.1f;
+			stSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+			appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1174,8 +1182,9 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		else if (i == 3)
 		{
 			if (appData->eff * 10 > 0.0)
-				appData->eff -= 0.1;
-			stEff->setString("%f", appData->eff * 10);
+				appData->eff -= 0.1f;
+			stEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+			appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1183,8 +1192,9 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		else if (i == 4)
 		{
 			if (appData->eff * 10 < 10.0)
-				appData->eff += 0.1;
-			stEff->setString("%f", appData->eff * 10);
+				appData->eff += 0.1f;
+			stEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+			appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
 			audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1232,29 +1242,36 @@ bool keyPopOption(iKeyStat stat, iPoint point)
 		else if (pop->selected == 3)
 		{
 			if (appData->bgm * 10 > 0.0)
-				appData->bgm -= 0.1;
-			stSound->setString("%f", appData->bgm * 10);
+				appData->bgm -= 0.1f;
+
+			stSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+			appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 			audioVolume(appData->bgm, appData->eff, 1);
 		}
 		else if (pop->selected == 4)
 		{
 			if (appData->bgm * 10 < 10.0)
-				appData->bgm += 0.1;
-			stSound->setString("%f", appData->bgm * 10);
+				appData->bgm += 0.1f;
+
+			stSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+			appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 			audioVolume(appData->bgm, appData->eff, 1);
 		}
 		else if (pop->selected == 5)
 		{
 			if (appData->eff * 10 > 0.0)
-				appData->eff -= 0.1;
-			stEff->setString("%f", appData->eff * 10);
+				appData->eff -= 0.1f;
+			
+			stEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+			appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 			audioVolume(appData->bgm, appData->eff, 1);
 		}
 		else if (pop->selected == 6)
 		{
 			if (appData->eff * 10 < 10.0)
-				appData->eff += 0.1;
-			stEff->setString("%f", appData->eff * 10);
+				appData->eff += 0.1f;
+			stEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+			appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 			audioVolume(appData->bgm, appData->eff, 1);
 		}
 		break;
@@ -1429,11 +1446,8 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		if (pop->selected == 0)
 		{
 			xprint("예\n");
-#if (OS==OS_WINDOW)
 			//프로그램 종료
 			runWnd = false;
-#elif(OS==OS_ANDROID)
-#endif
 		}
 		else// if (pop->selected == 1)
 		{
@@ -1519,11 +1533,8 @@ bool keyPopExit(iKeyStat stat, iPoint point)
 		if (i == 0)
 		{
 			xprint("예\n");
-#if (OS==OS_WINDOW)
 			//프로그램 종료
-			runWnd = false;
-#elif(OS==OS_ANDROID)
-#endif
+			ndkShutDownApp();
 		}
 		else// if (i == 1)
 		{

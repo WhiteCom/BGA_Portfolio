@@ -165,9 +165,9 @@ Texture* createTexStage()
         //g->drawigImage(img, (tileOff.x) + (i % x) * TILE_WSIZE, (tileOff.y) + (i / x) * TILE_HSIZE, TOP | LEFT,
         //               (tEditor->tileIndex[i] % tx) * TILE_WSIZE, (tEditor->tileIndex[i] / tx) * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE,
         //               1.0f, 1.0f, 2, 0);
-        g->drawigImage(img, (tileOff.x) + i%x*TILE_WSIZE, tileOff.y + i/x * TILE_HSIZE, TOP|LEFT,
+        g->drawigImage(img, (tileOff.x) + i % x * TILE_WSIZE, tileOff.y + i / x * TILE_HSIZE, TOP | LEFT,
                        (tEditor->tileIndex[i] % tx) * TILE_WSIZE, (tEditor->tileIndex[i] / tx) * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE,
-                        1.0f, 1.0f, 2, 0);
+                       1.0f, 1.0f, 2, 0);
         //g->fillRect((tileOff.x) + i % x * TILE_WSIZE, (tileOff.y) + i / x * TILE_HSIZE, TILE_WSIZE, TILE_HSIZE, 4);
     }
 
@@ -180,7 +180,7 @@ Texture* createTexStage()
 void loadStage()
 {
     callMapData();
-#if 0 //#openAL
+#if (OS==OS_WINDOW) //#openAL
     for (int i = 0; i < SOUND_NUM; i++)
     {
         audioStop(i);
@@ -188,9 +188,9 @@ void loadStage()
     audioPlay(2);
 #endif
 
-//===============================================
-//맵 타일 & 캐릭터 위치 세팅
-//===============================================
+    //===============================================
+    //맵 타일 & 캐릭터 위치 세팅
+    //===============================================
     bool fromMenu = (stageFrom == stageTo && stageFrom == 10 && stageTo == 10);
     stageFrom = stageTo %= 10;
     StageInfo* si = &stageInfo[stageFrom];
@@ -200,12 +200,12 @@ void loadStage()
     tEditor->init(TILE_W, TILE_H, TILE_WSIZE, TILE_HSIZE);
 
     tEditor->loadA(&appData->mapData[MAP_FILE_SIZE * stageFrom]);
-#if (OS==OS_WINDOW) //#stage info test
+#if 1 //#test
     //map info
     for (int i = 0; i < TILE_W * TILE_H; i++)
     {
         if (i % TILE_W == 0) xprint("\n");
-        //xprint("%d ",tEditor->tileWeight[i]);
+        xprint("%d ", tEditor->tileWeight[i]);
     }
 #endif
 
@@ -235,7 +235,7 @@ void loadStage()
             //우측
             for (int i = 0; i < TILE_H; i++)
             {
-                if (tEditor->tileWeight[TILE_W * i + TILE_W -1] > 9)
+                if (tEditor->tileWeight[TILE_W * i + TILE_W - 1] > 9)
                 {
                     //워프 포인트보다 한블럭 앞에위치
                     newX = TILE_W - 2;
@@ -290,15 +290,15 @@ void loadStage()
         else
         {
             //배틀에서 다시 왔을때
-            //xprint("critical error.....+ exception cave\n");
+            xprint("critical error.....+ exception cave\n");
 
             off = iPointMake(x + lastX * TILE_WSIZE, y + lastY * TILE_HSIZE);
         }
     }
     loadCharacter(off, si->strPathData);
-//===============================================
-// popUp
-//===============================================
+    //===============================================
+    // popUp
+    //===============================================
     setStringName("assets/font/DungGeunMo.ttf");
     //TopUI
     createPopTopUI();
@@ -341,9 +341,9 @@ void freeStage()
 
     freeCharacter();
 
-//===============================================
-// popUp
-//===============================================
+    //===============================================
+    // popUp
+    //===============================================
 
     //TopUI
     freePopTopUI();
@@ -375,12 +375,12 @@ int heroIndex()
 extern iPopup* popOverStep;
 void drawStage(float dt)
 {
-    
-//=========================================================
-// draw Stage
-//=========================================================
 
-//BackGround
+    //=========================================================
+    // draw Stage
+    //=========================================================
+
+    //BackGround
     setRGBA(0, 0, 0, 1);
     clearRect();
     setRGBA(1, 1, 1, 1);
@@ -389,7 +389,7 @@ void drawStage(float dt)
     int y = tEditor->tileY;
     lastHeroIndex = heroIndex();
 
-    drawImage(texStage, 0, 0, TOP|LEFT);
+    drawImage(texStage, 0, 0, TOP | LEFT);
 
     drawCharacter(dt, tileOff);
 
@@ -410,14 +410,14 @@ void drawStage(float dt)
         {
             step = 0;
             showPopOverStep(true);
-            
+
             //to do... 게임 멈추기
         }
         lastHeroIndex = newHeroIndex;
     }
 
     //===================
-    // 워프 
+    // 워프
     //===================
 
     int locationWarp = tEditor->tileWeight[newHeroIndex];
@@ -440,10 +440,10 @@ void drawStage(float dt)
         setLoading(gs_battle, freeStage, loadBattle);
 #endif
     }
-    
-//=========================================================
-// draw Popup
-//=========================================================
+
+    //=========================================================
+    // draw Popup
+    //=========================================================
     drawPopStageStr(dt);
     drawPopStepStr(dt);
 
@@ -470,20 +470,20 @@ void keyStage(iKeyStat stat, iPoint point)
 
     switch (stat) {
 
-    case iKeyStatBegan:
-        first = point;
-        break;
+        case iKeyStatBegan:
+            first = point;
+            break;
 
-    case iKeyStatMoved:
+        case iKeyStatMoved:
 
-        break;
+            break;
 
-    case iKeyStatEnded:
+        case iKeyStatEnded:
 #if (OS==OS_ANDROID)
-       {
+        {
             iPoint dp = point - first;
 
-            if( fabs(dp.x) > fabs(dp.y) )
+            if (fabs(dp.x) > fabs(dp.y))
             {
                 if (dp.x > 0)
                     charDir = 1; //right
@@ -492,14 +492,14 @@ void keyStage(iKeyStat stat, iPoint point)
             }
             else
             {
-                if( dp.y > 0 )
+                if (dp.y > 0)
                     charDir = 3; //up
                 else
                     charDir = 2; //down
             }
         }
 #endif
-        break;
+            break;
     }
 }
 

@@ -368,6 +368,7 @@ BUMonster::BUMonster(int index) : BattleUnit(index)
 			"assets/Image/Monster/[Z] (異) 요우무.bmp"
 		},
 	};
+
 #elif (OS==OS_ANDROID)
 	const char* path[2][5] = {
 			{

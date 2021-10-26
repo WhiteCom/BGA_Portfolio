@@ -328,9 +328,7 @@ bool keyPopTopUI(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -535,9 +533,7 @@ bool keyPopSetting(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -801,7 +797,7 @@ void createPopStageOption()
     //음량 str
 
     iStrTex* st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->bgm * 10);
+    st->setString("%d", (int)(appData->bgm * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[3]->position + iPointMake(60, 0);
@@ -811,7 +807,7 @@ void createPopStageOption()
     //eff str
 
     st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->eff * 10);
+    st->setString("%d", (int)(appData->eff * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[5]->position + iPointMake(60, 0);
@@ -898,7 +894,7 @@ void createPopStageOption()
     //음량 str
 
     iStrTex* st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->bgm * 10);
+    st->setString("%d", (int)(appData->bgm * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[1]->position + iPointMake(60, 0);
@@ -908,7 +904,7 @@ void createPopStageOption()
     //eff str
 
     st = new iStrTex(stStageSoundMethod);
-    st->setString("%f", appData->eff * 10);
+    st->setString("%d", (int)(appData->eff * 10));
     img = new iImage();
     img->addObject(st->tex);
     img->position = imgStageOptionBtn[3]->position + iPointMake(60, 0);
@@ -998,53 +994,49 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         }
         else if (popStageOption->selected == 1)
         {
-#if (OS==OS_WINDOW)
             if (!isFullscreen)
                 goFullscreen();
-#endif
         }
         else if (popStageOption->selected == 2)
         {
-#if (OS==OS_WINDOW)
             if (isFullscreen)
                 goFullscreen();
-#endif
         }
         else if (popStageOption->selected == 3)
         {
             if (appData->bgm * 10 > 0)
-                appData->bgm -= 0.1;
-            stStageSound->setString("%f", appData->bgm * 10);
-#if 0 //#openAL
+                appData->bgm -= 0.1f;
+            
+            stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+            appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         else if (popStageOption->selected == 4)
         {
             if (appData->bgm * 10 < 10)
-                appData->bgm += 0.1;
-            stStageSound->setString("%f", appData->bgm * 10);
-#if 0 //#openAL
+                appData->bgm += 0.1f;
+
+            stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+            appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         else if (popStageOption->selected == 5)
         {
             if (appData->eff * 10 > 0)
-                appData->eff -= 0.1;
-            stStageEff->setString("%f", appData->eff * 10);
-#if 0 //#openAL
+                appData->eff -= 0.1f;
+
+            stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+            appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         else if (popStageOption->selected == 6)
         {
             if (appData->eff * 10 < 10)
-                appData->eff += 0.1;
-            stStageEff->setString("%f", appData->eff * 10);
-#if 0 //#openAL
+                appData->eff += 0.1f;
+
+            stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+            appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
             audioVolume(appData->bgm, appData->eff, 1);
-#endif
         }
         break;
 
@@ -1060,9 +1052,7 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         }
         if (popStageOption->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             popStageOption->selected = j;
         }
         break;
@@ -1133,8 +1123,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         else if (i == 1)
         {
             if (appData->bgm * 10 > 0)
-                appData->bgm -= 0.1;
-            stStageSound->setString("%f", appData->bgm * 10);
+                appData->bgm -= 0.1f;
+
+            stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+            appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
             audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1142,8 +1134,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         else if (i == 2)
         {
             if (appData->bgm * 10 < 10)
-                appData->bgm += 0.1;
-            stStageSound->setString("%f", appData->bgm * 10);
+                appData->bgm += 0.1f;
+
+            stStageSound->setString("%d", (int)(appData->bgm * 10 + 0.5f));
+            appData->bgm = (int)(appData->bgm * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
             audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1151,8 +1145,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         else if (i == 3)
         {
             if (appData->eff * 10 > 0)
-                appData->eff -= 0.1;
-            stStageEff->setString("%f", appData->eff * 10);
+                appData->eff -= 0.1f;
+            
+            stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+            appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
             audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1160,8 +1156,10 @@ bool keyPopStageOption(iKeyStat stat, iPoint point)
         else if (i == 4)
         {
             if (appData->eff * 10 < 10)
-                appData->eff += 0.1;
-            stStageEff->setString("%f", appData->eff * 10);
+                appData->eff += 0.1f;
+
+            stStageEff->setString("%d", (int)(appData->eff * 10 + 0.5f));
+            appData->eff = (int)(appData->eff * 10 + 0.5f) * 0.1f;
 #if 0 //#openAL
             audioVolume(appData->bgm, appData->eff, 1);
 #endif
@@ -1310,12 +1308,9 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         if (pop->selected == 0)
         {
             //xprint("예\n");
-#if (OS==OS_WINDOW)
             //프로그램 종료
             runWnd = false;
-#elif(OS==OS_ANDROID)
 
-#endif
         }
         else //if (pop->selected == 1)
         {
@@ -1335,9 +1330,7 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;
@@ -1402,12 +1395,8 @@ bool keyPopStageExit(iKeyStat stat, iPoint point)
 
         if (i == 0)
         {
-#if (OS==OS_WINDOW)
             //프로그램 종료
-            runWnd = false;
-#elif(OS==OS_ANDROID)
-
-#endif
+            ndkShutDownApp();
         }
         else //if (i == 1)
         {
@@ -1514,12 +1503,13 @@ Texture* methodStPopHow(const char* str)
     setStringBorder(1);
     setStringBorderRGBA(0, 0.7f, 0.5f, 1);
 
-    const char** content = new const char* [4];
+    const char** content = new const char* [5];
 
     content[0] = "<개발일지 - 기획>";
-    content[1] = "- C++, WIN32, GDI+, OpenGL, OpenAL";
-    content[2] = "- 기획 : 턴제 RPG 형식 게임제작";
-    content[3] = "- 참고 : 헬테이커, 동방영강창(동인게임)";
+    content[1] = "- Window : C++, WIN32, GDI+, OpenGL, OpenAL";
+    content[2] = "- Android : C++, Java, OpenGL ES";
+    content[3] = "- 기획 : 턴제 RPG 형식 게임제작";
+    content[4] = "- 참고 : 헬테이커, 동방영강창(동인게임)";
 
     const char** content2 = new const char* [5];
 
@@ -1540,7 +1530,7 @@ Texture* methodStPopHow(const char* str)
 
     if (p == 0)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             g->drawString(20, (1 + i) * 45, TOP | LEFT, content[i]);
     }
     else if (p == 1)
@@ -2353,9 +2343,7 @@ bool keyPopOverStep(iKeyStat stat, iPoint point)
         }
         if (pop->selected != j)
         {
-#if 0 //#openAL
             audioPlay(0);
-#endif
             pop->selected = j;
         }
         break;

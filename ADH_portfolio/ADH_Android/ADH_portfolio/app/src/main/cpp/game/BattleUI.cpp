@@ -368,6 +368,7 @@ BUMonster::BUMonster(int index) : BattleUnit(index)
 			"assets/Image/Monster/[Z] (異) 요우무.bmp"
 		},
 	};
+
 #elif (OS==OS_ANDROID)
 	const char* path[2][5] = {
 			{
@@ -541,7 +542,7 @@ bool BUMonster::paint(float dt, iPoint off, float rx, float ry)
 void BUMonster::attack()
 {
 	//to do...
-	//맞는 놈 선택 
+	//맞는 놈 선택
 	if (index == 0)
 	{
 		//체력 가장 높은놈...
@@ -567,7 +568,7 @@ void BUMonster::attack()
 
 BUHero::BUHero(int index) : BattleUnit(index)
 {
-	//#need update! add index & use index = char* => char** 
+	//#need update! add index & use index = char* => char**
 	//24 * 32 img wc : 12, hc : 8
 #if (OS==OS_WINDOW)
 	const char* path[4] = {
@@ -922,7 +923,7 @@ void BattleManager::paint(float dt)
 	if (enemyNum == 0)
 	{
 		//win
-		//xprint("전투승리!\n");
+		xprint("전투승리!\n");
 
 		//to do... 승리 팝업
 		setLoading(gs_stage, freeBattle, loadStage);
@@ -931,7 +932,7 @@ void BattleManager::paint(float dt)
 	else if (heroNum == 0)
 	{
 		//lose
-		//xprint("전투패배!\n");
+		xprint("전투패배!\n");
 
 		//to do... 패배 팝업
 #if (OS==OS_WINDOW) //openAL

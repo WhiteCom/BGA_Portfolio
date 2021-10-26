@@ -180,7 +180,7 @@ Texture* createTexStage()
 void loadStage()
 {
     callMapData();
-#if 0 //#openAL
+#if (OS==OS_WINDOW) //#openAL
     for (int i = 0; i < SOUND_NUM; i++)
     {
         audioStop(i);

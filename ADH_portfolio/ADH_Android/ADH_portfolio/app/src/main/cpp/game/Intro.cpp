@@ -28,8 +28,8 @@ void loadIntro()
 	g->drawString(size.width / 2, 50, VCENTER | HCENTER, "안녕하세요~!");
 	g->drawString(size.width / 2, 100, VCENTER | HCENTER, "안다흡의 포트폴리오입니다.");
 	g->drawString(size.width / 2, 150, VCENTER | HCENTER, "본 게임은 턴제 RPG 게임입니다.");
-	g->drawString(size.width / 2, 200, VCENTER | HCENTER, "마우스왼쪽버튼 또는");
-	g->drawString(size.width / 2, 250, VCENTER | HCENTER, "Space버튼을 누르면 화면이 넘어갑니다");
+	g->drawString(size.width / 2, 200, VCENTER | HCENTER, "상용엔진없이 네이티브하게 만들었습니다");
+	g->drawString(size.width / 2, 300, VCENTER | HCENTER, "<화면을 클릭하면 다음으로 넘어갑니다>");
 	texIntro = g->getTexture();
 #elif (OS==OS_ANDROID)
 	iSize size = iSizeMake(1024, 640);
