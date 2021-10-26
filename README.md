@@ -84,3 +84,6 @@
 
 #2021-10-07
 - update MenuUI (adjust for Android)
+
+#2021-10-26
+- update Files Window, Android (BattleUI, Common, Intro, MenuUI, Stage, StageUI)
