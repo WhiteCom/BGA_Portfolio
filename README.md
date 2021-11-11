@@ -1,5 +1,15 @@
 # BGA_Game_portfolio
 
+-----
+
+<2D 턴제 알피지 포트폴리오>
+쯔꾸르 알피지와 헬테이커에서 아이디어를 얻어 제작하였습니다.
+
+- 윈도우 환경 : Visual Studio 2019 Community (C++, Win32, GDI+, OpenGL, OpenAL)
+- 안드로이드 환경 : Android Studio (Java, NDK, OpenGL ES)
+
+-----
+
 #If you uese this Proejct, First Change Directory Setting 
 
 "checkout merge conflict with same file when another change it differently."
