@@ -14,10 +14,6 @@
 
 -----
 
-#If you uese this Proejct, First Change Directory Setting 
-
-"checkout merge conflict with same file when another change it differently."
-
 #2021-03-08
 - iString, iFPS, iWindow, WIN_TEST1 update
 - iString(getLine, freeLine), iWindow(drawApp, Encoding), iSort
