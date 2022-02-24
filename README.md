@@ -1,4 +1,4 @@
-# BGA_Game_portfolio
+# 마리사의 모험(2D 턴제 알피지)
 
 -----
 
