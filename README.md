@@ -10,7 +10,7 @@
 
 - 윈도우 환경 : Visual Studio 2019 Community (C++, Win32, GDI+, OpenGL, OpenAL)
 - 안드로이드 환경 : Android Studio (Java, NDK, OpenGL ES)
-- 구글 플레이 URL : https://play.google.com/store/apps/details?id=com.adh.portfolio1
+- PlayStore : https://play.google.com/store/apps/details?id=com.adh.portfolio1
 
 -----
 
