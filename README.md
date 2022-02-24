@@ -2,8 +2,11 @@
 
 -----
 
+![마리사의 모험](https://user-images.githubusercontent.com/42011665/155468972-4dacfa08-b2b5-46c1-902f-3d4c4b7a61bb.png)
+
 <2D 턴제 알피지 포트폴리오>
-쯔꾸르 알피지와 헬테이커에서 아이디어를 얻어 제작하였습니다.
+
+동방영강창(쯔꾸르 알피지)와 헬테이커에서 아이디어를 얻어 제작하였습니다.
 
 - 윈도우 환경 : Visual Studio 2019 Community (C++, Win32, GDI+, OpenGL, OpenAL)
 - 안드로이드 환경 : Android Studio (Java, NDK, OpenGL ES)
